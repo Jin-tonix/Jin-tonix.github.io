@@ -9,26 +9,25 @@ const SidebarMain = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh; /* 화면 높이 꽉 차게 설정 */
+  height: 100vh;
   background-color: #333;
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 20vw;
-  min-width: 160px;
-  max-width: 250px;
-
+  width: 250px; /* 고정된 너비 */
+  min-width: 120px; /* 화면이 줄어들어도 최소 너비 유지 */
+  
   .menu {
     display: flex;
     flex-direction: column;
-    align-items: center; /* 가운데 정렬 */
-    margin-top: 150px; /* 메뉴를 아래로 내림 */
+    align-items: center;
+    margin-top: 150px;
     gap: 30px;
 
     a {
       color: #fff;
-      font-size: 2em; /* 글씨 크기 증가 */
+      font-size: 1.8em;
       text-decoration: none;
       font-weight: bold;
       transition: color 0.3s ease;
@@ -42,14 +41,13 @@ const SidebarMain = styled.div`
   .social-links {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 50px; /* 소셜 링크를 위로 올림 */
-    align-items: center; /* 가운데 정렬 */
+    align-items: center;
+    margin-bottom: 50px;
     gap: 15px;
 
     a {
       color: #fff;
-      font-size: 1.2em;
+      font-size: 1.1em;
       text-decoration: none;
       transition: color 0.3s ease;
 
@@ -60,16 +58,7 @@ const SidebarMain = styled.div`
   }
 
   @media (max-width: 768px) {
-    width: 25vw;
-    min-width: 140px;
-
-    .menu a {
-      font-size: 1.3em;
-    }
-
-    .social-links a {
-      font-size: 1em;
-    }
+    width: 180px; /* 더 작은 화면에서는 고정된 최소 너비 */
   }
 `;
 
