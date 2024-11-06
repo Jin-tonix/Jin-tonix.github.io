@@ -1,6 +1,9 @@
+/* src/App.css */
 .App {
-  text-align: center;
+  display: flex;
+  font-family: Arial, sans-serif;
 }
+
 
 .App-logo {
   height: 40vmin;
