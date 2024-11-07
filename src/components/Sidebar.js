@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import styled from 'styled-components';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 const SidebarMain = styled.div`
   position: fixed;
@@ -66,9 +67,10 @@ export default function Sidebar() {
   return (
     <SidebarMain>
       <div className="menu">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/skills">Skills</Link>
+        <Link to="/projects">Projects</Link>
       </div>
       <div className="social-links">
         <a href="https://github.com/Jin-tonix" target="_blank" rel="noopener noreferrer">

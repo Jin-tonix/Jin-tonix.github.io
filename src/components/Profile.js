@@ -24,8 +24,6 @@ const ProfileContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
-  width: calc(100vw - 250px); /* 사이드바 너비 제외 */
-  margin-left: 250px; /* 사이드바 고정 너비만큼 공간 확보 */
   padding: 0 20px;
   overflow: hidden;
 
