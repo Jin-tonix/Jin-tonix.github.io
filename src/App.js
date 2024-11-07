@@ -1,3 +1,4 @@
+// src/App.js
 import React from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
@@ -10,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <Sidebar />
-      <div style={{ marginLeft: '250px', flex: 1 }}>
+      <div className="main-content">
         <Routes>
           <Route path="/" element={<Profile />} />
           <Route path="/about" element={<About />} />

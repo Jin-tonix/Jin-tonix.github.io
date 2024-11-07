@@ -17,7 +17,11 @@ const Container = styled.div`
   flex-direction: row;
   height: 100vh;
   overflow: hidden;
-  background-color: #222; /* 사이드바와 어울리게 어두운 배경색 추가 */
+  background-size: cover;
+  background-color: #222;
+  margin-left: 15vw; /* 사이드바의 너비만큼 왼쪽 여백 */
+  width: calc(100vw - 15vw); /* 사이드바 옆 나머지 화면 너비를 차지 */
+  max-width: calc(100vw - 200px); /* 사이드바의 최대 너비를 고려한 최대 너비 */
 `;
 
 const Content = styled.div`
@@ -25,7 +29,7 @@ const Content = styled.div`
   padding: 40px;
   overflow-y: auto;
   animation: ${fadeInUp} 1s ease;
-  color: #fff; /* 텍스트 색상을 흰색으로 변경 */
+  color: #fff;
   @media (max-width: 768px) {
     width: calc(100vw - 180px);
     margin-left: 180px;
@@ -36,7 +40,7 @@ const Content = styled.div`
 const LeftContent = styled(Content)`
   width: 35%;
   border-right: 1px solid #444;
-  padding-left: 40px;
+  padding-left: 50px;
   @media (max-width: 768px) {
     width: 100%;
     border-right: none;
@@ -58,7 +62,7 @@ const Section = styled.div`
 
   h2 {
     margin-bottom: 10px;
-    color: #ffd700; /* 제목을 강조하기 위해 황금색 사용 */
+    color: #ffd700;
     font-size: 1.5em;
     @media (max-width: 768px) {
       font-size: 1.2em;
@@ -86,7 +90,7 @@ const Section = styled.div`
 const About = () => (
   <Container>
     <LeftContent>
-    <Section id="resume">
+      <Section id="resume">
         <h2>Experience</h2><br/>
         <ul>
           <li><strong>하이미디어아카데미 </strong> (2024년 10월 – 2024년 12월)<br/>AI 심화 과정을 이수하고 팀 프로젝트로 AI 애플리케이션을 개발했습니다.</li><br/><br/>
@@ -99,7 +103,7 @@ const About = () => (
       </Section>
     </LeftContent>
     <RightContent>
-    <Section id="about">
+      <Section id="about">
         <h2>About Me</h2><br/>
         <img src="/images/img.jpg" alt="Jinhee Mok" style={{ width: '120px', height: '170px', marginBottom: '20px', float: 'right', marginTop: '10px', marginLeft: '20px' }} />
 

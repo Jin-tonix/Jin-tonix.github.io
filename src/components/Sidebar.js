@@ -1,5 +1,4 @@
-// src/components/Sidebar.js
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import styled from 'styled-components';
@@ -16,21 +15,41 @@ const SidebarMain = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 230px; /* 고정된 너비 */
-  min-width: 120px; /* 화면이 줄어들어도 최소 너비 유지 */
-  
+  width: 15vw;
+  max-width: 200px;
+  min-width: 80px;
+
   .menu {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 70px;
-    gap: 30px;
+    margin-top: 60px;
+    gap: 25px;
 
     a {
       color: #fff;
       font-size: 1.5em;
       text-decoration: none;
       font-weight: bold;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #ffd700;
+      }
+    }
+  }
+
+  .extra-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px; /* 메뉴 아이템 간의 간격을 더 좁힘 */
+    
+    a {
+      color: #aaa;
+      font-size: 1em;
+      text-decoration: none;
+      font-weight: normal;
       transition: color 0.3s ease;
 
       &:hover {
@@ -59,19 +78,41 @@ const SidebarMain = styled.div`
   }
 
   @media (max-width: 768px) {
-    width: 180px; /* 더 작은 화면에서는 고정된 최소 너비 */
+    width: 20vw;
+    max-width: 150px;
+  }
+
+  @media (max-width: 480px) {
+    width: 25vw;
+    max-width: 120px;
   }
 `;
 
 export default function Sidebar() {
+  const [showExtraMenu, setShowExtraMenu] = useState(false);
+
+  const handleProjectsClick = () => {
+    setShowExtraMenu(!showExtraMenu);
+  };
+
   return (
     <SidebarMain>
       <div className="menu">
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/skills">Skills</Link>
-        <Link to="/projects">Projects</Link>
+        <Link to="/" onClick={() => setShowExtraMenu(false)}>Intro</Link>
+        <Link to="/about" onClick={() => setShowExtraMenu(false)}>About</Link>
+        <Link to="/skills" onClick={() => setShowExtraMenu(false)}>Skills</Link>
+        <Link to="/projects" onClick={handleProjectsClick}>Projects</Link>
       </div>
+
+      {showExtraMenu && (
+        <div className="extra-menu">
+          <Link to="/projects/project1">Project 1</Link>
+          <Link to="/projects/project2">Project 2</Link>
+          <Link to="/projects/project3">Project 3</Link>
+          <Link to="/projects/project4">Project 4</Link>
+        </div>
+      )}
+
       <div className="social-links">
         <a href="https://github.com/Jin-tonix" target="_blank" rel="noopener noreferrer">
           <FontAwesomeIcon icon={faGithub} /> GitHub

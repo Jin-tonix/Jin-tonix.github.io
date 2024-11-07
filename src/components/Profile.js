@@ -1,4 +1,3 @@
-// src/components/Profile.js
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
@@ -24,7 +23,9 @@ const ProfileContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
-  padding: 0 20px;
+  margin-left: 15vw; /* 사이드바의 너비만큼 왼쪽 여백 설정 */
+  width: calc(100vw - 15vw); /* 나머지 화면 너비를 차지 */
+  max-width: calc(100vw - 200px); /* 사이드바의 최대 너비를 고려한 최대 너비 */
   overflow: hidden;
 
   .intro, .name-wrapper, .description {
@@ -32,7 +33,7 @@ const ProfileContainer = styled.div`
   }
 
   .intro {
-    font-size: 2em;
+    font-size: 1.8em;
     font-weight: 800;
     color: #ddd;
     margin-bottom: 10px;
@@ -42,7 +43,7 @@ const ProfileContainer = styled.div`
   }
 
   .name-wrapper {
-    font-size: 2.3em;
+    font-size: 2em;
     font-weight: 800;
     color: #ddd;
     animation: ${fadeInUp} 1s ease forwards;
@@ -50,7 +51,7 @@ const ProfileContainer = styled.div`
     opacity: 0;
 
     .name-highlight {
-      font-size: 2em;
+      font-size: 1.8em;
       font-weight: 900;
       position: relative;
       display: inline-block;
@@ -69,36 +70,30 @@ const ProfileContainer = styled.div`
   }
 
   .description {
-    margin-top: 40px;
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: 700;
     color: #ddd;
     max-width: 800px;
-    line-height: 1.6;
+    line-height: 1.5;
     text-shadow: 1px 1px 5px #333;
     animation: ${fadeInUp} 1s ease forwards;
     animation-delay: 2.5s;
     opacity: 0;
-    background-color: rgba(0, 0, 0, 0.6); /* 배경색 추가 */
-    padding: 10px; /* 텍스트와 배경 경계 사이 여백 추가 */
-    border-radius: 10px; /* 경계선 둥글게 처리 */
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 10px;
   }
 
   @media (max-width: 768px) {
-    width: calc(100vw - 180px); /* 작은 화면에서는 더 작은 사이드바 공간 제외 */
     margin-left: 180px;
-    padding: 10vh 20px;
+    width: calc(100vw - 180px);
 
     .intro {
-      font-size: 2em;
+      font-size: 1.5em;
     }
 
     .name-wrapper {
-      font-size: 1.2em;
-
-      .name-highlight {
-        font-size: 2em;
-      }
+      font-size: 1.5em;
     }
 
     .description {

@@ -19,7 +19,10 @@ const Container = styled.div`
   flex-direction: row;
   height: 100vh;
   overflow: hidden;
-  background-color: #222; /* 사이드바와 어울리게 어두운 배경색 추가 */
+  background-color: #222;
+  margin-left: 15vw; /* 사이드바의 너비만큼 왼쪽 여백 설정 */
+  width: calc(100vw - 15vw); /* 나머지 화면 너비를 차지 */
+  max-width: calc(100vw - 200px); /* 사이드바 최대 너비가 200px일 때 */
 `;
 
 const Content = styled.div`
@@ -27,7 +30,7 @@ const Content = styled.div`
   padding: 40px;
   overflow-y: auto;
   animation: ${fadeInUp} 1s ease;
-  color: #fff; /* 텍스트 색상을 흰색으로 변경 */
+  color: #fff;
   @media (max-width: 768px) {
     width: calc(100vw - 180px);
     margin-left: 180px;
