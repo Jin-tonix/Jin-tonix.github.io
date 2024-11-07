@@ -34,7 +34,7 @@ const ProfileContainer = styled.div`
   }
 
   .intro {
-    font-size: 3em;
+    font-size: 2em;
     font-weight: 800;
     color: #ddd;
     margin-bottom: 10px;
@@ -44,7 +44,7 @@ const ProfileContainer = styled.div`
   }
 
   .name-wrapper {
-    font-size: 1.5em;
+    font-size: 2.3em;
     font-weight: 800;
     color: #ddd;
     animation: ${fadeInUp} 1s ease forwards;
@@ -52,7 +52,7 @@ const ProfileContainer = styled.div`
     opacity: 0;
 
     .name-highlight {
-      font-size: 2.5em;
+      font-size: 2em;
       font-weight: 900;
       position: relative;
       display: inline-block;
@@ -81,6 +81,9 @@ const ProfileContainer = styled.div`
     animation: ${fadeInUp} 1s ease forwards;
     animation-delay: 2.5s;
     opacity: 0;
+    background-color: rgba(0, 0, 0, 0.6); /* 배경색 추가 */
+    padding: 10px; /* 텍스트와 배경 경계 사이 여백 추가 */
+    border-radius: 10px; /* 경계선 둥글게 처리 */
   }
 
   @media (max-width: 768px) {
@@ -114,9 +117,10 @@ export default function Profile() {
         <span className="name-highlight">목진희</span>입니다.
       </div>
       <div className="description">
-        법학을 전공하고 영어 강사로 활동하며 소통과 문제 해결에 대한 열정을 키워왔습니다. <br />
-        법학을 통해 얻은 분석력과 교육을 통해 다진 소통 능력은 복잡한 개발 문제 해결과 클라이언트 협업에서 큰 강점입니다. <br />
-        개발자로서 단순히 코딩에 그치지 않고, 문제를 구조적으로 해결하고 시스템 효율성을 높이며 가치를 창출하는 데 기여하고자 합니다.
+        법학을 공부하며 얻은 분석력과 영어교육을 하며 다진 소통 능력은<br/> 
+        복잡한 개발 문제 해결과 클라이언트 협업에서 큰 강점입니다. <br />
+        개발자로서 단순히 코딩에 그치지 않고, 문제를 구조적으로 해결하고<br/> 
+        시스템 효율성을 높이며 가치를 창출하는 데 기여하고자 합니다.
       </div>
     </ProfileContainer>
   );
