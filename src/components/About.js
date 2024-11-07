@@ -34,36 +34,52 @@ const Content = styled.div`
 `;
 
 const LeftContent = styled(Content)`
-  width: 50%;
+  width: 35%;
   border-right: 1px solid #444;
-  padding-right: 20px;
   padding-left: 40px;
-  margin-left: 20px;
+  @media (max-width: 768px) {
+    width: 100%;
+    border-right: none;
+    padding-left: 20px;
+  }
 `;
 
 const RightContent = styled(Content)`
-  image: url('/images/img.jpg');
-  width: 50%;
-  padding-left: 20px;
+  width: 65%;
+  padding-left: 40px;
+  @media (max-width: 768px) {
+    width: 100%;
+    padding-left: 20px;
+  }
 `;
 
 const Section = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 
   h2 {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     color: #ffd700; /* 제목을 강조하기 위해 황금색 사용 */
+    font-size: 1.5em;
+    @media (max-width: 768px) {
+      font-size: 1.2em;
+    }
   }
 
   p {
     line-height: 1.6;
-    font-size: 1.2em;
+    font-size: 0.8em;
+    @media (max-width: 768px) {
+      font-size: 0.7em;
+    }
   }
 
   ul {
     list-style-type: disc;
     padding-left: 20px;
-    font-size: 1.15em;
+    font-size: 0.8em;
+    @media (max-width: 768px) {
+      font-size: 0.7em;
+    }
   }
 `;
 
@@ -85,13 +101,13 @@ const About = () => (
     <RightContent>
     <Section id="about">
         <h2>About Me</h2><br/>
-        <img src="/images/img.jpg" alt="Jinhee Mok" style={{ width: '150px', height: '210px', marginBottom: '20px', float: 'right', marginTop: '10px', marginLeft: '20px' }} />
+        <img src="/images/img.jpg" alt="Jinhee Mok" style={{ width: '120px', height: '170px', marginBottom: '20px', float: 'right', marginTop: '10px', marginLeft: '20px' }} />
 
         <p>
           안녕하세요, 열정과 끈기로 도전을 두려워하지 않는 개발자 목진희입니다.<br/><br/>
           법학을 전공하며 쌓은 논리적 사고력과 문제 해결 능력은 저의 큰 자산입니다. 이 능력을 바탕으로 사람들과 소통하고 가르치는 일에 대한 열정을 느껴 영어 교육 현장에서 학생들의 성장을 도왔습니다. 이러한 경험은 저에게 소통의 중요성과 목표 달성을 위한 실행력을 길러주었습니다.<br/><br/>
           빠르게 변화하는 사회 속에서 저 역시 기술 분야로 새로운 도전에 나서고자 했고, 소프트웨어 개발에 깊은 흥미를 느끼게 되었습니다. 법학을 통해 체득한 분석력과 교육 경험에서 얻은 소통 능력은 복잡한 문제를 해결하고, 클라이언트와의 협업에서 큰 강점이 될 것이라 확신합니다.<br/><br/>
-          저는 단순히 코드를 작성하는 것에 그치지 않고, 문제를 구조적으로 해결하며 시스템의 효율성을 높이는 개발자가 되고자 합니다. 새로운 가치를 창출하고 더 나은 세상을 만드는 데 기여하기 위해 끊임없이 배우고 성장하겠습니다. 함께 일하며 긍정적인 변화를 만들어 나갈 준비가 되어 있습니다.
+          단순히 코드를 작성하는 것에 그치지 않고, 문제를 구조적으로 해결하며 시스템의 효율성을 높이는 개발자가 되고자 합니다. 새로운 가치를 창출하고 더 나은 세상을 만드는 데 기여하기 위해 끊임없이 배우고 성장하겠습니다. 함께 일하며 긍정적인 변화를 만들어 나갈 준비가 되어 있습니다.
         </p>
       </Section>
     </RightContent>

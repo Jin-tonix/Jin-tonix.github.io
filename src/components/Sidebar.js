@@ -16,19 +16,19 @@ const SidebarMain = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 250px; /* 고정된 너비 */
+  width: 230px; /* 고정된 너비 */
   min-width: 120px; /* 화면이 줄어들어도 최소 너비 유지 */
   
   .menu {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 150px;
+    margin-top: 70px;
     gap: 30px;
 
     a {
       color: #fff;
-      font-size: 1.8em;
+      font-size: 1.5em;
       text-decoration: none;
       font-weight: bold;
       transition: color 0.3s ease;
@@ -48,7 +48,7 @@ const SidebarMain = styled.div`
 
     a {
       color: #fff;
-      font-size: 1.1em;
+      font-size: 1em;
       text-decoration: none;
       transition: color 0.3s ease;
 
