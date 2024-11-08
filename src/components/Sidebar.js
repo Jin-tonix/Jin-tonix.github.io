@@ -20,6 +20,7 @@ const SidebarMain = styled.div`
   min-width: 80px;
 
   .menu {
+    position: relative; /* extra-menu가 이 위치를 기준으로 절대 위치하게 설정 */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,11 +41,15 @@ const SidebarMain = styled.div`
   }
 
   .extra-menu {
-    display: flex;
+    position: absolute;
+    top: 110%; /* 간격을 살짝 띄움 */
+    left: 0;
+    right: 0;
+    display: ${({ showExtraMenu }) => (showExtraMenu ? 'flex' : 'none')}; /* showExtraMenu 상태에 따라 표시 */
     flex-direction: column;
     align-items: center;
-    gap: 8px; /* 메뉴 아이템 간의 간격을 더 좁힘 */
-    
+    gap: 15px;
+
     a {
       color: #aaa;
       font-size: 1em;
@@ -88,6 +93,7 @@ const SidebarMain = styled.div`
   }
 `;
 
+
 export default function Sidebar() {
   const [showExtraMenu, setShowExtraMenu] = useState(false);
 
@@ -96,22 +102,22 @@ export default function Sidebar() {
   };
 
   return (
-    <SidebarMain>
+    <SidebarMain showExtraMenu={showExtraMenu}>
       <div className="menu">
         <Link to="/" onClick={() => setShowExtraMenu(false)}>Intro</Link>
         <Link to="/about" onClick={() => setShowExtraMenu(false)}>About</Link>
         <Link to="/skills" onClick={() => setShowExtraMenu(false)}>Skills</Link>
         <Link to="/projects" onClick={handleProjectsClick}>Projects</Link>
-      </div>
 
-      {showExtraMenu && (
-        <div className="extra-menu">
-          <Link to="/projects/project1">Project 1</Link>
-          <Link to="/projects/project2">Project 2</Link>
-          <Link to="/projects/project3">Project 3</Link>
-          <Link to="/projects/project4">Project 4</Link>
-        </div>
-      )}
+        {showExtraMenu && (
+          <div className="extra-menu">
+            <Link to="/projects/project1">Project 1</Link>
+            <Link to="/projects/project2">Project 2</Link>
+            <Link to="/projects/project3">Project 3</Link>
+            <Link to="/projects/project4">Project 4</Link>
+          </div>
+        )}
+      </div>
 
       <div className="social-links">
         <a href="https://github.com/Jin-tonix" target="_blank" rel="noopener noreferrer">

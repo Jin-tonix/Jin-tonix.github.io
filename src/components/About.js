@@ -14,7 +14,6 @@ const fadeInUp = keyframes`
 
 const Container = styled.div`
   display: flex;
-  flex-direction: row;
   height: 100vh;
   overflow: hidden;
   background-size: cover;
@@ -22,23 +21,20 @@ const Container = styled.div`
   margin-left: 15vw; /* 사이드바의 너비만큼 왼쪽 여백 */
   width: calc(100vw - 15vw); /* 사이드바 옆 나머지 화면 너비를 차지 */
   max-width: calc(100vw - 200px); /* 사이드바의 최대 너비를 고려한 최대 너비 */
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  padding: 20px;
 `;
 
 const Content = styled.div`
-  flex: 1;
   padding: 40px;
   overflow-y: auto;
   animation: ${fadeInUp} 1s ease;
   color: #fff;
-  @media (max-width: 768px) {
-    width: calc(100vw - 180px);
-    margin-left: 180px;
-    padding: 10vh 20px;
-  }
 `;
 
 const LeftContent = styled(Content)`
-  width: 35%;
+  width: 50%;
   border-right: 1px solid #444;
   padding-left: 50px;
   @media (max-width: 768px) {
@@ -49,7 +45,7 @@ const LeftContent = styled(Content)`
 `;
 
 const RightContent = styled(Content)`
-  width: 65%;
+  width: 50%;
   padding-left: 40px;
   @media (max-width: 768px) {
     width: 100%;

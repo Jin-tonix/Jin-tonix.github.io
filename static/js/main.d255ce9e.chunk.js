@@ -13,6 +13,7 @@
   min-width: 80px;
 
   .menu {
+    position: relative; /* extra-menu가 이 위치를 기준으로 절대 위치하게 설정 */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,11 +34,15 @@
   }
 
   .extra-menu {
-    display: flex;
+    position: absolute;
+    top: 110%; /* 간격을 살짝 띄움 */
+    left: 0;
+    right: 0;
+    display: ${e=>{let{showExtraMenu:t}=e;return t?"flex":"none"}}; /* showExtraMenu 상태에 따라 표시 */
     flex-direction: column;
     align-items: center;
-    gap: 8px; /* 메뉴 아이템 간의 간격을 더 좁힘 */
-    
+    gap: 15px;
+
     a {
       color: #aaa;
       font-size: 1em;
@@ -79,7 +84,7 @@
     width: 25vw;
     max-width: 120px;
   }
-`;function E(){const[e,t]=Object(l.useState)(!1);return n.a.createElement(f,null,n.a.createElement("div",{className:"menu"},n.a.createElement(p.b,{to:"/",onClick:()=>t(!1)},"Intro"),n.a.createElement(p.b,{to:"/about",onClick:()=>t(!1)},"About"),n.a.createElement(p.b,{to:"/skills",onClick:()=>t(!1)},"Skills"),n.a.createElement(p.b,{to:"/projects",onClick:()=>{t(!e)}},"Projects")),e&&n.a.createElement("div",{className:"extra-menu"},n.a.createElement(p.b,{to:"/projects/project1"},"Project 1"),n.a.createElement(p.b,{to:"/projects/project2"},"Project 2"),n.a.createElement(p.b,{to:"/projects/project3"},"Project 3"),n.a.createElement(p.b,{to:"/projects/project4"},"Project 4")),n.a.createElement("div",{className:"social-links"},n.a.createElement("a",{href:"https://github.com/Jin-tonix",target:"_blank",rel:"noopener noreferrer"},n.a.createElement(o.a,{icon:m.a})," GitHub"),n.a.createElement("a",{href:"https://www.linkedin.com/in/jin-tonix",target:"_blank",rel:"noopener noreferrer"},n.a.createElement(o.a,{icon:m.b})," LinkedIn"),n.a.createElement("a",{href:"mailto:jinheemok815@gmail.com"},n.a.createElement(o.a,{icon:d.a})," Email")))}const u=s.b`
+`;function E(){const[e,t]=Object(l.useState)(!1);return n.a.createElement(f,{showExtraMenu:e},n.a.createElement("div",{className:"menu"},n.a.createElement(p.b,{to:"/",onClick:()=>t(!1)},"Intro"),n.a.createElement(p.b,{to:"/about",onClick:()=>t(!1)},"About"),n.a.createElement(p.b,{to:"/skills",onClick:()=>t(!1)},"Skills"),n.a.createElement(p.b,{to:"/projects",onClick:()=>{t(!e)}},"Projects"),e&&n.a.createElement("div",{className:"extra-menu"},n.a.createElement(p.b,{to:"/projects/project1"},"Project 1"),n.a.createElement(p.b,{to:"/projects/project2"},"Project 2"),n.a.createElement(p.b,{to:"/projects/project3"},"Project 3"),n.a.createElement(p.b,{to:"/projects/project4"},"Project 4"))),n.a.createElement("div",{className:"social-links"},n.a.createElement("a",{href:"https://github.com/Jin-tonix",target:"_blank",rel:"noopener noreferrer"},n.a.createElement(o.a,{icon:m.a})," GitHub"),n.a.createElement("a",{href:"https://www.linkedin.com/in/jin-tonix",target:"_blank",rel:"noopener noreferrer"},n.a.createElement(o.a,{icon:m.b})," LinkedIn"),n.a.createElement("a",{href:"mailto:jinheemok815@gmail.com"},n.a.createElement(o.a,{icon:d.a})," Email")))}const u=s.b`
   0% {
     opacity: 0;
     transform: translateY(20px);
@@ -187,7 +192,6 @@
   }
 `,b=s.a.div`
   display: flex;
-  flex-direction: row;
   height: 100vh;
   overflow: hidden;
   background-size: cover;
@@ -195,19 +199,16 @@
   margin-left: 15vw; /* 사이드바의 너비만큼 왼쪽 여백 */
   width: calc(100vw - 15vw); /* 사이드바 옆 나머지 화면 너비를 차지 */
   max-width: calc(100vw - 200px); /* 사이드바의 최대 너비를 고려한 최대 너비 */
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  padding: 20px;
 `,w=s.a.div`
-  flex: 1;
   padding: 40px;
   overflow-y: auto;
   animation: ${g} 1s ease;
   color: #fff;
-  @media (max-width: 768px) {
-    width: calc(100vw - 180px);
-    margin-left: 180px;
-    padding: 10vh 20px;
-  }
 `,v=Object(s.a)(w)`
-  width: 35%;
+  width: 50%;
   border-right: 1px solid #444;
   padding-left: 50px;
   @media (max-width: 768px) {
@@ -216,7 +217,7 @@
     padding-left: 20px;
   }
 `,k=Object(s.a)(w)`
-  width: 65%;
+  width: 50%;
   padding-left: 40px;
   @media (max-width: 768px) {
     width: 100%;
@@ -268,8 +269,11 @@
   margin-left: 15vw; /* 사이드바의 너비만큼 왼쪽 여백 설정 */
   width: calc(100vw - 15vw); /* 나머지 화면 너비를 차지 */
   max-width: calc(100vw - 200px); /* 사이드바 최대 너비가 200px일 때 */
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
 `,S=s.a.div`
-  flex: 1;
+  width: 100%;
+  max-width: 800px; /* 적절한 최대 너비 설정 */
   padding: 40px;
   overflow-y: auto;
   animation: ${F} 1s ease;
@@ -320,5 +324,5 @@
     font-size: 2em;
     margin-bottom: 10px;
   }
-`;var B=()=>n.a.createElement(P,null,n.a.createElement(S,null,n.a.createElement(A,{id:"backend-skills"},n.a.createElement("h2",null,"Backend"),n.a.createElement("div",{className:"skills"},n.a.createElement("div",{className:"skill-item"},n.a.createElement(j.g,{className:"skill-icon",color:"#007396"}),n.a.createElement("span",{style:{color:"#fff"}},"Java")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(z.d,{className:"skill-icon",color:"#6DB33F"}),n.a.createElement("span",{style:{color:"#fff"}},"Spring")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(z.b,{className:"skill-icon",color:"#4479A1"}),n.a.createElement("span",{style:{color:"#fff"}},"MySQL")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(j.b,{className:"skill-icon",color:"#f29111"}),n.a.createElement("span",{style:{color:"#fff"}},"JPA")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(z.c,{className:"skill-icon",color:"#3776AB"}),n.a.createElement("span",{style:{color:"#fff"}},"Python")))),n.a.createElement("br",null),n.a.createElement("br",null),n.a.createElement(A,{id:"frontend-skills"},n.a.createElement("h2",null,"Frontend"),n.a.createElement("div",{className:"skills"},n.a.createElement("div",{className:"skill-item"},n.a.createElement(j.f,{className:"skill-icon",color:"#E34F26"}),n.a.createElement("span",{style:{color:"#fff"}},"HTML")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(j.a,{className:"skill-icon",color:"#1572B6"}),n.a.createElement("span",{style:{color:"#fff"}},"CSS")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(j.h,{className:"skill-icon",color:"#F7DF1E"}),n.a.createElement("span",{style:{color:"#fff"}},"JavaScript")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(z.e,{className:"skill-icon",color:"#4FC08D"}),n.a.createElement("span",{style:{color:"#fff"}},"Vue.js")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(j.i,{className:"skill-icon",color:"#61DAFB"}),n.a.createElement("span",{style:{color:"#fff"}},"React")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(z.a,{className:"skill-icon",color:"#02569B"}),n.a.createElement("span",{style:{color:"#fff"}},"Flutter")))),n.a.createElement("br",null),n.a.createElement("br",null),n.a.createElement(A,{id:"devops-skills"},n.a.createElement("h2",null,"DevOps"),n.a.createElement("div",{className:"skills"},n.a.createElement("div",{className:"skill-item"},n.a.createElement(j.c,{className:"skill-icon",color:"#2496ED"}),n.a.createElement("span",{style:{color:"#fff"}},"Docker")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(j.d,{className:"skill-icon",color:"#F05032"}),n.a.createElement("span",{style:{color:"#fff"}},"Git")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(j.e,{className:"skill-icon",color:"#181717"}),n.a.createElement("span",{style:{color:"#fff"}},"GitHub"))))));var C=function(){return n.a.createElement("div",{className:"App"},n.a.createElement(E,null),n.a.createElement("div",{className:"main-content"},n.a.createElement(c.c,null,n.a.createElement(c.a,{path:"/",element:n.a.createElement(h,null)}),n.a.createElement(c.a,{path:"/about",element:n.a.createElement(N,null)}),n.a.createElement(c.a,{path:"/skills",element:n.a.createElement(B,null)}))))};var D=e=>{e&&e instanceof Function&&a.e(3).then(a.bind(null,33)).then(t=>{let{getCLS:a,getFID:l,getFCP:n,getLCP:i,getTTFB:r}=t;a(e),l(e),n(e),i(e),r(e)})};r.a.createRoot(document.getElementById("root")).render(n.a.createElement(n.a.StrictMode,null,n.a.createElement(p.a,null,n.a.createElement(C,null)))),D()}},[[21,1,2]]]);
-//# sourceMappingURL=main.b7ab1df2.chunk.js.map
+`;var B=()=>n.a.createElement(P,null,n.a.createElement(S,null,n.a.createElement(A,{id:"backend-skills"},n.a.createElement("h2",null,"Backend"),n.a.createElement("div",{className:"skills"},n.a.createElement("div",{className:"skill-item"},n.a.createElement(j.g,{className:"skill-icon",color:"#007396"}),n.a.createElement("span",{style:{color:"#fff"}},"Java")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(z.d,{className:"skill-icon",color:"#6DB33F"}),n.a.createElement("span",{style:{color:"#fff"}},"Spring")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(z.b,{className:"skill-icon",color:"#4479A1"}),n.a.createElement("span",{style:{color:"#fff"}},"MySQL")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(j.b,{className:"skill-icon",color:"#f29111"}),n.a.createElement("span",{style:{color:"#fff"}},"JPA")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(z.c,{className:"skill-icon",color:"#3776AB"}),n.a.createElement("span",{style:{color:"#fff"}},"Python")))),n.a.createElement(A,{id:"frontend-skills"},n.a.createElement("h2",null,"Frontend"),n.a.createElement("div",{className:"skills"},n.a.createElement("div",{className:"skill-item"},n.a.createElement(j.f,{className:"skill-icon",color:"#E34F26"}),n.a.createElement("span",{style:{color:"#fff"}},"HTML")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(j.a,{className:"skill-icon",color:"#1572B6"}),n.a.createElement("span",{style:{color:"#fff"}},"CSS")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(j.h,{className:"skill-icon",color:"#F7DF1E"}),n.a.createElement("span",{style:{color:"#fff"}},"JavaScript")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(z.e,{className:"skill-icon",color:"#4FC08D"}),n.a.createElement("span",{style:{color:"#fff"}},"Vue.js")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(j.i,{className:"skill-icon",color:"#61DAFB"}),n.a.createElement("span",{style:{color:"#fff"}},"React")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(z.a,{className:"skill-icon",color:"#02569B"}),n.a.createElement("span",{style:{color:"#fff"}},"Flutter")))),n.a.createElement(A,{id:"devops-skills"},n.a.createElement("h2",null,"DevOps"),n.a.createElement("div",{className:"skills"},n.a.createElement("div",{className:"skill-item"},n.a.createElement(j.c,{className:"skill-icon",color:"#2496ED"}),n.a.createElement("span",{style:{color:"#fff"}},"Docker")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(j.d,{className:"skill-icon",color:"#F05032"}),n.a.createElement("span",{style:{color:"#fff"}},"Git")),n.a.createElement("div",{className:"skill-item"},n.a.createElement(j.e,{className:"skill-icon",color:"#181717"}),n.a.createElement("span",{style:{color:"#fff"}},"GitHub"))))));var C=function(){return n.a.createElement("div",{className:"App"},n.a.createElement(E,null),n.a.createElement("div",{className:"main-content"},n.a.createElement(c.c,null,n.a.createElement(c.a,{path:"/",element:n.a.createElement(h,null)}),n.a.createElement(c.a,{path:"/about",element:n.a.createElement(N,null)}),n.a.createElement(c.a,{path:"/skills",element:n.a.createElement(B,null)}))))};var M=e=>{e&&e instanceof Function&&a.e(3).then(a.bind(null,33)).then(t=>{let{getCLS:a,getFID:l,getFCP:n,getLCP:i,getTTFB:r}=t;a(e),l(e),n(e),i(e),r(e)})};r.a.createRoot(document.getElementById("root")).render(n.a.createElement(n.a.StrictMode,null,n.a.createElement(p.a,null,n.a.createElement(C,null)))),M()}},[[21,1,2]]]);
+//# sourceMappingURL=main.d255ce9e.chunk.js.map

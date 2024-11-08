@@ -23,10 +23,13 @@ const Container = styled.div`
   margin-left: 15vw; /* 사이드바의 너비만큼 왼쪽 여백 설정 */
   width: calc(100vw - 15vw); /* 나머지 화면 너비를 차지 */
   max-width: calc(100vw - 200px); /* 사이드바 최대 너비가 200px일 때 */
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
 `;
 
 const Content = styled.div`
-  flex: 1;
+  width: 100%;
+  max-width: 800px; /* 적절한 최대 너비 설정 */
   padding: 40px;
   overflow-y: auto;
   animation: ${fadeInUp} 1s ease;
@@ -108,7 +111,7 @@ const Skills = () => (
             <span style={{ color: '#fff' }}>Python</span>
           </div>
         </div>
-      </SkillSection><br/><br/>
+      </SkillSection>
 
       <SkillSection id="frontend-skills">
         <h2>Frontend</h2>
@@ -138,7 +141,7 @@ const Skills = () => (
             <span style={{ color: '#fff' }}>Flutter</span>
           </div>
         </div>
-      </SkillSection><br/><br/>
+      </SkillSection>
 
       <SkillSection id="devops-skills">
         <h2>DevOps</h2>
