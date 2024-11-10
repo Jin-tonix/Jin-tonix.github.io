@@ -189,15 +189,15 @@ const Footer = styled.footer`
   }
 `;
 
-const Project1 = () => {
+const Project3 = () => {
   return (
     <PageWrapper>
       <Container>
         <Header>
-          <img src="/images/logo1.png" alt="Project Logo" />
+          <img src="/images/logo3.png" alt="Project Logo" />
           <div>
-            <h1>자격증 기반 채용정보로 구직자의 취업 기회 발굴과 커리어 성장을 지원하는 웹/앱 서비스 개발</h1>
-            <SubHeader>- Team Project (2024.08.26 ~ 10.02): 관리자 페이지 (프론트엔드/백엔드) 및 Flutter 앱 구현</SubHeader>
+            <h1>Briefify - AI 기반 이미지 문서나 텍스트 문서의 번역 및 요약 웹 서비스 개발</h1>
+            <SubHeader>- Team Project (2024.10.25 ~ 11.04): 프론트 MyPage 및 AI 모델 검색</SubHeader>
           </div>
         </Header>
 
@@ -264,9 +264,9 @@ const Project1 = () => {
         </ContentSection>
 
         <Footer>
-          <a href="https://github.com/Omniscient-Job-Project" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/AI-X-min-projext-ITOWE" target="_blank" rel="noopener noreferrer">
             <FaLink style={{ marginRight: '5px' }} />
-            <FaGithub style={{ marginRight: '5px' }} /> 전직시 (전지적구직자시점) - GitHub Repository 
+            <FaGithub style={{ marginRight: '5px' }} /> Briefify - GitHub Repository 
           </a>
         </Footer>
       </Container>
@@ -274,4 +274,4 @@ const Project1 = () => {
   );
 };
 
-export default Project1;
+export default Project3;

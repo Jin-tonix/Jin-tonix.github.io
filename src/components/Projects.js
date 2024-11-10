@@ -147,9 +147,9 @@ const Projects = () => {
         </ProjectBoxWrapper>
         <ProjectBoxWrapper>
           <ProjectBox to="/projects/project3">
-            <img src="/path/to/image3.jpg" alt="Project 3" />
+            <img src="/images/logo3.png" alt="Project 3" />
           </ProjectBox>
-          <Description>Project 3</Description>
+          <Description>Briefify</Description>
         </ProjectBoxWrapper>
         <ProjectBoxWrapper>
           <ProjectBox to="/projects/project4">
