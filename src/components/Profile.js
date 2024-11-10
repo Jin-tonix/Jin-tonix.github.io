@@ -23,13 +23,15 @@ const ProfileContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
-  margin-left: 15vw; /* 사이드바의 너비만큼 왼쪽 여백 설정 */
-  width: calc(100vw - 15vw); /* 나머지 화면 너비를 차지 */
-  max-width: calc(100vw - 200px); /* 사이드바의 최대 너비를 고려한 최대 너비 */
+  margin-left: 15vw; /* 사이드바와의 간격 */
+  width: calc(100vw - 15vw); /* 화면 전체에서 사이드바 너비를 제외한 나머지 사용 */
   overflow: hidden;
+  padding: 10px 20px;
+  box-sizing: border-box;
 
   .intro, .name-wrapper, .description {
     max-width: 70%;
+    text-align: center;
   }
 
   .intro {
@@ -49,6 +51,7 @@ const ProfileContainer = styled.div`
     animation: ${fadeInUp} 1s ease forwards;
     animation-delay: 1.5s;
     opacity: 0;
+    margin-bottom: 20px;
 
     .name-highlight {
       font-size: 1.8em;
@@ -84,21 +87,72 @@ const ProfileContainer = styled.div`
     border-radius: 10px;
   }
 
-  @media (max-width: 768px) {
-    margin-left: 180px;
-    width: calc(100vw - 180px);
+  /* 반응형 조정 */
+  @media (max-width: 1024px) {
+    margin-left: 20vw;
+    width: calc(100vw - 20vw);
 
     .intro {
       font-size: 1.5em;
     }
 
     .name-wrapper {
-      font-size: 1.5em;
+      font-size: 1.7em;
+
+      .name-highlight {
+        font-size: 1.6em;
+      }
     }
 
     .description {
       font-size: 1em;
     }
+  }
+
+  @media (max-width: 768px) {
+    margin-left: 25vw;
+    width: calc(100vw - 25vw);
+
+    .intro {
+      font-size: 1.3em;
+    }
+
+    .name-wrapper {
+      font-size: 1.5em;
+
+      .name-highlight {
+        font-size: 1.4em;
+      }
+    }
+
+    .description {
+      font-size: 0.9em;
+    }
+  }
+
+  @media (max-width: 480px) {
+    margin-left: 30vw;
+    width: calc(100vw - 30vw);
+
+    .intro {
+      font-size: 1.1em;
+    }
+
+    .name-wrapper {
+      font-size: 1.5em;
+
+      .name-highlight {
+        font-size: 1.5em;
+      }
+    }
+
+    .description {
+      font-size: 1em;
+    }
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 `;
 

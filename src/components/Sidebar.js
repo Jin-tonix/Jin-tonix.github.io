@@ -85,11 +85,19 @@ const SidebarMain = styled.div`
   @media (max-width: 768px) {
     width: 20vw;
     max-width: 150px;
+    .menu a, .extra-menu a{
+      font-size: 1.5em; /* 화면 크기에 맞게 글씨 크기 조정 */
   }
 
   @media (max-width: 480px) {
     width: 25vw;
     max-width: 120px;
+  }
+    .menu a, .extra-menu a  {
+      font-size: 1em; /* 화면 크기에 맞게 글씨 크기 조정 */
+  }
+    .social-links a {
+      font-size: 0.5em;
   }
 `;
 

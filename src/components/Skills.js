@@ -16,49 +16,76 @@ const fadeInUp = keyframes`
 
 const Container = styled.div`
   display: flex;
-  flex-direction: row;
-  height: 100vh;
-  overflow: hidden;
+  justify-content: center;
+  align-items: center; // center 정렬을 위해 변경
+  min-height: 100vh;
   background-color: #222;
-  margin-left: 15vw; /* 사이드바의 너비만큼 왼쪽 여백 설정 */
-  width: calc(100vw - 15vw); /* 나머지 화면 너비를 차지 */
-  max-width: calc(100vw - 200px); /* 사이드바 최대 너비가 200px일 때 */
-  align-items: center; /* 수직 중앙 정렬 */
-  justify-content: center; /* 수평 중앙 정렬 */
+  margin-left: 15vw;
+  width: calc(100vw - 15vw);
+  padding: 20px;
+  box-sizing: border-box;
+  
+  @media (max-width: 1024px) {
+    margin-left: 20vw;
+    width: calc(100vw - 20vw);
+  }
+
+  @media (max-width: 768px) {
+    margin-left: 25vw;
+    width: calc(100vw - 25vw);
+  }
+
+  @media (max-width: 480px) {
+    margin-left: 30vw;
+    width: calc(100vw - 30vw);
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center; // center 정렬을 위해 변경
+  justify-content: center; // center 정렬을 위해 추가
   width: 100%;
-  max-width: 800px; /* 적절한 최대 너비 설정 */
+  max-width: 800px;
   padding: 40px;
   overflow-y: auto;
   animation: ${fadeInUp} 1s ease;
   color: #fff;
+  max-height: 100vh;
+  box-sizing: border-box;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
   @media (max-width: 768px) {
-    width: calc(100vw - 180px);
-    margin-left: 180px;
-    padding: 10vh 20px;
+    padding: 20px;
+    width: 100%;
   }
 `;
 
 const SkillSection = styled.div`
   margin-bottom: 20px;
+  width: 100%;
+  text-align: left; // 전체 섹션을 왼쪽 정렬로 변경
 
   h2 {
-    margin-bottom: 15px;
-    margin-left: 30px;
     color: #ffd700;
     font-size: 1.5em;
+    margin-bottom: 15px;
+    text-align: left; // 왼쪽 정렬로 변경
+    margin-left: 0; // 왼쪽 마진 제거
+    width: 100%; // 전체 너비 사용
+    
     @media (max-width: 768px) {
-      font-size: 1.8em;
-    }
-  }
-
-  p {
-    line-height: 1.6;
-    font-size: 0.8em;
-    @media (max-width: 768px) {
-      font-size: 0.7em;
+      font-size: 1.2em;
     }
   }
 
@@ -66,8 +93,16 @@ const SkillSection = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: center;
+    justify-content: center; // skills 아이템들은 중앙 정렬 유지
+    align-items: center;
     font-size: 1.5em;
+    width: 100%;
+    margin: 0 auto;
+
+    @media (max-width: 768px) {
+      gap: 15px;
+      font-size: 1.2em;
+    }
   }
 
   .skill-item {
@@ -81,6 +116,10 @@ const SkillSection = styled.div`
   .skill-icon {
     font-size: 2em;
     margin-bottom: 10px;
+
+    @media (max-width: 768px) {
+      font-size: 1.8em;
+    }
   }
 `;
 

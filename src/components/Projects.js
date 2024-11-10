@@ -18,25 +18,44 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #222;
   padding: 20px;
   margin-left: 15vw;
   width: calc(100vw - 15vw);
-  max-width: calc(100vw - 200px);
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    margin-left: 20vw;
+    width: calc(100vw - 20vw);
+  }
+
+  @media (max-width: 480px) {
+    margin-left: 25vw;
+    width: calc(100vw - 25vw);
+  }
 `;
 
 const Title = styled.h1`
   color: #ffd700;
   font-size: 2em;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   animation: ${fadeInUp} 1s ease;
   text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 1.3em;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1em;
+  }
 `;
 
 const PortfolioGrid = styled.div`
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
   width: 100%;
   justify-content: center;
 `;
@@ -45,13 +64,23 @@ const ProjectBoxWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 20%;
-  max-width: 250px;
+  width: 25%;
+  max-width: 150px;
+
+  @media (max-width: 768px) {
+    width: 40%;
+    max-width: 120px;
+  }
+
+  @media (max-width: 480px) {
+    width: 60%;
+    max-width: 100px;
+  }
 `;
 
 const ProjectBox = styled(Link)`
   width: 100%;
-  height: 250px;
+  height: 150px;
   background-color: #333;
   border: 2px solid #444;
   border-radius: 8px;
@@ -69,8 +98,18 @@ const ProjectBox = styled(Link)`
   img {
     width: 100%;
     height: 100%;
-    object-position: center; /* 중심을 기준으로 표시 */
+    object-fit: cover;
     border-radius: 8px;
+  }
+
+  /* 화면이 768px 이하일 때 이미지 크기를 작게 설정 */
+  @media (max-width: 768px) {
+    height: 100px;
+  }
+
+  /* 화면이 480px 이하일 때 이미지 크기를 더욱 작게 설정 */
+  @media (max-width: 480px) {
+    height: 80px;
   }
 `;
 
@@ -79,6 +118,14 @@ const Description = styled.div`
   font-size: 1em;
   color: #ddd;
   text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 0.8em;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.7em;
+  }
 `;
 
 const Projects = () => {
@@ -90,7 +137,7 @@ const Projects = () => {
           <ProjectBox to="/projects/project1">
             <img src="/images/logo1.png" alt="Project 1" />
           </ProjectBox>
-          <Description>전직시(전지적구직자시점)</Description>
+          <Description>전직시<br/>(전지적구직자시점)</Description>
         </ProjectBoxWrapper>
         <ProjectBoxWrapper>
           <ProjectBox to="/projects/project2">
