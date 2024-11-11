@@ -1,36 +1,37 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FaGithub, FaLink } from 'react-icons/fa'; // FaLink 아이콘 추가
+import { FaGithub, FaLink } from 'react-icons/fa';
 
 const PageWrapper = styled.div`
-  margin-left: 15vw; // 사이드바 너비만큼 여백 추가
+  margin-left: 15vw;
   min-height: 100vh;
   display: flex;
-  justify-content: center; // 가운데 정렬 추가
+  justify-content: center;
+  align-items: center; /* 상하 중앙 정렬 */
   background-color: #222;
-  max-width: 100vw; // 전체 화면을 차지
-  width: calc(100vw - 15vw); // 사이드바 옆 나머지 화면 너비를 차지
+  max-width: 100vw;
+  width: calc(100vw - 15vw);
 
   @media (max-width: 768px) {
-    margin-left: 20vw; // 모바일에서 사이드바 너비에 맞춤
+    margin-left: 20vw;
   }
 
   @media (max-width: 480px) {
-    margin-left: 25vw; // 작은 화면에서 사이드바 너비에 맞춤
+    margin-left: 25vw;
   }
 `;
 
 const Container = styled.div`
-  width: 90%; // 컨텐츠 너비를 늘림
-  max-width: 1400px; // 최대 너비를 크게 설정
+  width: 90%;
+  max-width: 1400px;
   display: flex;
   flex-direction: column;
   padding: 20px;
   color: #e0e0e0;
   background-color: #222;
   font-family: Arial, sans-serif;
-  font-size: clamp(0.7em, 1.5vw, 0.85em); // 반응형 폰트 크기
-  height: 100vh;
+  font-size: clamp(0.7em, 1.5vw, 0.85em);
+  height: auto; /* 자동 높이 설정으로 중간 정렬 유지 */
   overflow: auto;
   padding-left: 50px;
 
@@ -56,20 +57,20 @@ const Header = styled.div`
   width: 100%;
 
   img {
-    width: clamp(30px, 4vw, 50px); // 반응형 이미지 크기
+    width: clamp(30px, 4vw, 50px);
     height: auto;
     margin-right: 10px;
   }
 
   h1 {
-    font-size: clamp(0.9em, 1.8vw, 1.1em); // 반응형 제목 크기
+    font-size: clamp(0.9em, 1.8vw, 1.1em);
     font-weight: bold;
     color: #ffd700;
   }
 `;
 
 const SubHeader = styled.h2`
-  font-size: clamp(0.8em, 1.6vw, 0.95em); // 반응형 부제목 크기
+  font-size: clamp(0.8em, 1.6vw, 0.95em);
   color: #888;
   font-weight: normal;
 `;
@@ -77,7 +78,7 @@ const SubHeader = styled.h2`
 const ContentSection = styled.div`
   display: flex;
   width: 100%;
-  gap: 20px; // 이미지와 텍스트 사이 간격 줄이기
+  gap: 20px;
   align-items: center;
 
   @media (max-width: 768px) {
@@ -142,8 +143,6 @@ const Section = styled.div`
   ul {
     padding-left: 18px;
   }
-
-
 
   @media (max-width: 768px) {
     h3 {
@@ -251,7 +250,7 @@ const Project1 = () => {
             <Section>
               <h3>개발 관련 설명</h3>
               <p>
-                저는 관리자 페이지와 앱 프론트엔드 구현을 담당하였습니다. 관리자 페이지는 URL을 통해 접근할 수 있도록 설정하였으며, 회원 수, 최근 가입한 유저, 일일 및 월별 사용자 수를 한눈에 쉽게 확인할 수 있도록 그래프를 활용해 시각화하였습니다.
+                저는 관리자 페이지의 프론트엔드 백엔드와 앱 구현을 담당하였습니다. 관리자 페이지는 URL을 통해 접근할 수 있도록 설정하였으며, 회원 수, 최근 가입한 유저, 일일 및 월별 사용자 수를 한눈에 쉽게 확인할 수 있도록 그래프를 활용해 시각화하였습니다.
 
               </p>
               <p>

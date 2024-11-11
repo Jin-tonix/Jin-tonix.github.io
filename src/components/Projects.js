@@ -21,19 +21,28 @@ const Container = styled.div`
   min-height: 100vh;
   background-color: #222;
   padding: 20px;
-  margin-left: 15vw;
-  width: calc(100vw - 15vw);
-  box-sizing: border-box;
-
-  @media (max-width: 768px) {
+  margin-left: 15vw; /* 사이드바의 너비 */
+  width: calc(100vw - 15vw); /* 사이드바를 제외한 나머지 공간 */
+  
+  @media (max-width: 1024px) {
     margin-left: 20vw;
-    width: calc(100vw - 20vw);
+    width: calc(100vw - 20vw); /* 화면 크기에 맞춰 너비 조정 */
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
     margin-left: 25vw;
     width: calc(100vw - 25vw);
   }
+
+  @media (max-width: 480px) {
+    margin-left: 30vw;
+    width: calc(100vw - 30vw);
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
 `;
 
 const Title = styled.h1`
@@ -53,28 +62,35 @@ const Title = styled.h1`
 `;
 
 const PortfolioGrid = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
   width: 100%;
-  justify-content: center;
-`;
+  justify-items: center;
+  align-items: center;
 
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr); /* 작은 화면에서 두 개씩 정렬 */
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(2, 1fr); /* 작은 화면에서 두 개씩 정렬 */
+  }
+`;
 const ProjectBoxWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 25%;
-  max-width: 150px;
+  width: 150px;
+  height: auto; /* 높이를 auto로 설정하여 Description과 겹치지 않도록 */
+  margin-bottom: 10px;
 
   @media (max-width: 768px) {
-    width: 40%;
-    max-width: 120px;
+    width: 120px;
   }
 
   @media (max-width: 480px) {
-    width: 60%;
-    max-width: 100px;
+    width: 100px;
   }
 `;
 
@@ -102,19 +118,17 @@ const ProjectBox = styled(Link)`
     border-radius: 8px;
   }
 
-  /* 화면이 768px 이하일 때 이미지 크기를 작게 설정 */
   @media (max-width: 768px) {
-    height: 100px;
+    height: 120px;
   }
 
-  /* 화면이 480px 이하일 때 이미지 크기를 더욱 작게 설정 */
   @media (max-width: 480px) {
-    height: 80px;
+    height: 100px;
   }
 `;
 
 const Description = styled.div`
-  margin-top: 10px;
+  margin-top: 8px; /* 이미지 박스와의 간격 */
   font-size: 1em;
   color: #ddd;
   text-align: center;

@@ -83,28 +83,28 @@ const Section = styled.div`
   h2 {
     margin-bottom: 2px;
     color: #ffd700;
-    font-size: 1.5em;
+    font-size: 2vw; /* 화면 크기에 따라 자동 조절 */
   }
 
   p {
-    line-height: 1.6;
-    font-size: 0.8em;
+    line-height: 1.8;
+    font-size: 1.2vw; /* 화면 크기에 비례한 글씨 크기 설정 */
   }
 
   ul {
     list-style-type: disc;
     padding-left: 20px;
-    font-size: 0.8em;
+    font-size: 1.1vw; /* 화면 크기에 비례한 글씨 크기 설정 */
   }
 
   li span {
-    font-size: 0.9em;
+    font-size: 1vw;
     color: #ccc;
   }
 
   .strong-highlight {
     font-weight: bolder;
-    font-size: 1.3em;
+    font-size: 1.5vw;
   }
 `;
 

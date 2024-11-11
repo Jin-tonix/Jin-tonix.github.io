@@ -16,11 +16,16 @@ const SidebarMain = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 15vw;
-  max-width: 200px;
+  max-width: 250px; /* 화면 크기에 맞게 최대 너비 */
   min-width: 80px;
 
+  /* 간격이 생기지 않도록 화면에 따라 너비 조정 */
+  @media (min-width: 1024px) {
+    width: 15vw;
+  }
+
   .menu {
-    position: relative; /* extra-menu가 이 위치를 기준으로 절대 위치하게 설정 */
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -42,10 +47,10 @@ const SidebarMain = styled.div`
 
   .extra-menu {
     position: absolute;
-    top: 110%; /* 간격을 살짝 띄움 */
+    top: 110%;
     left: 0;
     right: 0;
-    display: ${({ showExtraMenu }) => (showExtraMenu ? 'flex' : 'none')}; /* showExtraMenu 상태에 따라 표시 */
+    display: ${({ showExtraMenu }) => (showExtraMenu ? 'flex' : 'none')};
     flex-direction: column;
     align-items: center;
     gap: 15px;
@@ -82,24 +87,34 @@ const SidebarMain = styled.div`
     }
   }
 
+  @media (max-width: 1024px) {
+    width: 15vw;
+    max-width: 180px;
+    .menu a, .extra-menu a {
+      font-size: 2em;
+    }
+  }
+
   @media (max-width: 768px) {
     width: 20vw;
     max-width: 150px;
-    .menu a, .extra-menu a{
-      font-size: 1.5em; /* 화면 크기에 맞게 글씨 크기 조정 */
+    .menu a, .extra-menu a {
+      font-size: 1.5em;
+    }
   }
 
   @media (max-width: 480px) {
     width: 25vw;
     max-width: 120px;
-  }
-    .menu a, .extra-menu a  {
-      font-size: 1em; /* 화면 크기에 맞게 글씨 크기 조정 */
-  }
+    .menu a, .extra-menu a {
+      font-size: 1em;
+    }
     .social-links a {
-      font-size: 0.5em;
+      font-size: 0.8em;
+    }
   }
 `;
+
 
 
 export default function Sidebar() {

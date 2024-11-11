@@ -3,34 +3,35 @@ import styled from 'styled-components';
 import { FaGithub, FaLink } from 'react-icons/fa'; // FaLink 아이콘 추가
 
 const PageWrapper = styled.div`
-  margin-left: 15vw; // 사이드바 너비만큼 여백 추가
+  margin-left: 15vw;
   min-height: 100vh;
   display: flex;
-  justify-content: center; // 가운데 정렬 추가
+  justify-content: center; /* 상하 중앙 정렬 추가 */
+  align-items: center;     /* 상하 중앙 정렬 추가 */
   background-color: #222;
-  max-width: 100vw; // 전체 화면을 차지
-  width: calc(100vw - 15vw); // 사이드바 옆 나머지 화면 너비를 차지
+  max-width: 100vw;
+  width: calc(100vw - 15vw);
 
   @media (max-width: 768px) {
-    margin-left: 20vw; // 모바일에서 사이드바 너비에 맞춤
+    margin-left: 20vw;
   }
 
   @media (max-width: 480px) {
-    margin-left: 25vw; // 작은 화면에서 사이드바 너비에 맞춤
+    margin-left: 25vw;
   }
 `;
 
 const Container = styled.div`
-  width: 90%; // 컨텐츠 너비를 늘림
-  max-width: 1400px; // 최대 너비를 크게 설정
+  width: 90%;
+  max-width: 1400px;
   display: flex;
   flex-direction: column;
   padding: 20px;
   color: #e0e0e0;
   background-color: #222;
   font-family: Arial, sans-serif;
-  font-size: clamp(0.7em, 1.5vw, 0.85em); // 반응형 폰트 크기
-  height: 100vh;
+  font-size: clamp(0.7em, 1.5vw, 0.85em);
+  height: auto; /* 높이를 auto로 설정하여 중앙에 위치할 수 있도록 */
   overflow: auto;
   padding-left: 50px;
 
@@ -47,6 +48,7 @@ const Container = styled.div`
     border-radius: 4px;
   }
 `;
+
 
 const Header = styled.div`
   display: flex;
