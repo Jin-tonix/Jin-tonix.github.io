@@ -89,8 +89,8 @@ const ProfileContainer = styled.div`
 
   /* 반응형 조정 */
   @media (max-width: 1024px) {
-    margin-left: 20vw;
-    width: calc(100vw - 20vw);
+    margin-left: 15vw;
+    width: calc(100vw - 15vw);
 
     .intro {
       font-size: 1.5em;
@@ -110,8 +110,8 @@ const ProfileContainer = styled.div`
   }
 
   @media (max-width: 768px) {
-    margin-left: 25vw;
-    width: calc(100vw - 25vw);
+    margin-left: 20vw;
+    width: calc(100vw - 15vw);
 
     .intro {
       font-size: 1.3em;
@@ -131,8 +131,9 @@ const ProfileContainer = styled.div`
   }
 
   @media (max-width: 480px) {
-    margin-left: 30vw;
-    width: calc(100vw - 30vw);
+    margin-left: 20vw;
+    width: calc(100vw - 15vw);
+
 
     .intro {
       font-size: 1.1em;

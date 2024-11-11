@@ -7,17 +7,17 @@ const PageWrapper = styled.div`
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start; /* 상단에서 시작하도록 설정 */
   background-color: #222;
   max-width: 100vw;
   width: calc(100vw - 15vw);
 
   @media (max-width: 768px) {
-    margin-left: 20vw;
+    margin-left: 15vw;
   }
 
   @media (max-width: 480px) {
-    margin-left: 25vw;
+    margin-left: 15vw;
   }
 `;
 
@@ -30,27 +30,14 @@ const Container = styled.div`
   color: #e0e0e0;
   background-color: #222;
   font-family: Arial, sans-serif;
-  font-size: clamp(0.8em, 1.5vw, 0.85em);
-  height: auto;
-  overflow: auto;
+  font-size: clamp(0.6em, 1vw, 1em); /* 최소값을 더 작게 설정 */
+  max-height: 100vh; /* 높이 제한 */
+  overflow: auto; /* 스크롤 가능하게 설정 */
   padding-left: 50px;
+  box-sizing: border-box;
 
   &::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: #333;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: #555;
-    border-radius: 4px;
-  }
-
-  /* 큰 화면에서 글씨 약간 커지게 */
-  @media (min-width: 1340px) {
-    font-size: clamp(1em, 2vw, 1.2em);
+    display: none;
   }
 `;
 
@@ -175,6 +162,7 @@ const Footer = styled.footer`
   font-size: 1em;
   color: #888;
   border-top: 1px solid #333;
+  margin-top: auto;
 
   a {
     color: #ffd700;
@@ -191,6 +179,7 @@ const Footer = styled.footer`
     font-size: 0.8em;
   }
 `;
+
 const Project1 = () => {
   return (
     <PageWrapper>
@@ -219,7 +208,6 @@ const Project1 = () => {
                   <li>Vue.js를 이용한 프론트엔드 서버 개발</li>
                   <li>Flutter를 이용한 앱 서버 개발</li>
                   <li>JWT를 활용한 토큰 기반 사용자 인증과정 적용</li>
-                  
                 </ul>
               </Section>
 
@@ -253,13 +241,11 @@ const Project1 = () => {
             <Section>
               <h3>개발 관련 설명</h3>
               <p>
-                저는 관리자 페이지의 프론트엔드 백엔드와 앱 구현을 담당하였습니다. 관리자 페이지는 URL을 통해 접근할 수 있도록 설정하였으며, 회원 수, 최근 가입한 유저, 일일 및 월별 사용자 수를 한눈에 쉽게 확인할 수 있도록 그래프를 활용해 시각화하였습니다.
-
+                저는 관리자 페이지의 프론트/백엔드와 앱 구현을 담당하였습니다. 관리자 페이지는 URL을 통해 접근할 수 있도록 설정하였으며, 회원 수, 최근 가입한 유저, 일일 및 월별 사용자 수를 한눈에 쉽게 확인할 수 있도록 그래프를 활용해 시각화하였습니다.
               </p>
               <p>
                 백엔드와의 연결 과정에서 예상치 못한 엔드포인트와 컬럼 이름의 차이로 인해 오류를 발견하고 해결하는 데 시간이 걸렸습니다. 
                 이 경험을 통해 API 명세서와 테이블 정의서 등 개발 문서를 꼼꼼히 작성하고, 정해진 규칙을 철저히 준수하는 것이 얼마나 중요한지 배울 수 있었습니다.
-
               </p>
             </Section>
           </TextSection>
@@ -276,4 +262,4 @@ const Project1 = () => {
   );
 };
 
-export default Project1;
+export default Project1

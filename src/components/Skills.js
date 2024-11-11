@@ -21,23 +21,23 @@ const Container = styled.div`
   min-height: 100vh;
   background-color: #222;
   margin-left: 15vw;
-  width: calc(100vw - 15vw);
-  padding: 20px;
+  width: calc(100vw - 15vw); /* 화면 전체에서 사이드바 너비를 제외한 나머지 사용 */
+  overflow: hidden;
+  padding: 10px 20px;
   box-sizing: border-box;
   
   @media (max-width: 1024px) {
-    margin-left: 20vw;
-    width: calc(100vw - 20vw);
+    width: calc(100vw - 15vw);
   }
 
   @media (max-width: 768px) {
-    margin-left: 25vw;
-    width: calc(100vw - 25vw);
+     margin-left: 20vw;
+    width: calc(100vw - 15vw);
   }
 
   @media (max-width: 480px) {
-    margin-left: 30vw;
-    width: calc(100vw - 30vw);
+    margin-left: 20vw;
+    width: calc(100vw - 15vw);
   }
 
   &::-webkit-scrollbar {
@@ -66,7 +66,7 @@ const Content = styled.div`
   scrollbar-width: none;
 
   @media (max-width: 768px) {
-    padding: 20px;
+    padding: 15px;
     width: 100%;
   }
 `;

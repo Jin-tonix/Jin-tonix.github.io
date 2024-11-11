@@ -20,29 +20,28 @@ const Container = styled.div`
   justify-content: center;
   min-height: 100vh;
   background-color: #222;
-  padding: 20px;
-  margin-left: 15vw; /* 사이드바의 너비 */
-  width: calc(100vw - 15vw); /* 사이드바를 제외한 나머지 공간 */
+  padding: 10px 20px;
+  margin-left: 15vw;
+  width: calc(100vw - 15vw);
   
   @media (max-width: 1024px) {
-    margin-left: 20vw;
-    width: calc(100vw - 20vw); /* 화면 크기에 맞춰 너비 조정 */
+    margin-left: 15vw;
+    width: calc(100vw - 15vw);
   }
 
   @media (max-width: 768px) {
-    margin-left: 25vw;
-    width: calc(100vw - 25vw);
+    margin-left: 20vw;
+    width: calc(100vw - 15vw);
   }
 
   @media (max-width: 480px) {
-    margin-left: 30vw;
-    width: calc(100vw - 30vw);
+    margin-left: 20vw;
+    width: calc(100vw - 15vw);
   }
 
   &::-webkit-scrollbar {
     display: none;
   }
-
 `;
 
 const Title = styled.h1`
@@ -63,34 +62,35 @@ const Title = styled.h1`
 
 const PortfolioGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 20px;
-  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* 열 너비 조정 */
+  width: 80%;
   justify-items: center;
   align-items: center;
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr); /* 작은 화면에서 두 개씩 정렬 */
+    grid-template-columns: repeat(2, 1fr);
   }
 
   @media (max-width: 480px) {
-    grid-template-columns: repeat(2, 1fr); /* 작은 화면에서 두 개씩 정렬 */
+    grid-template-columns: repeat(2, 1fr);
   }
 `;
+
 const ProjectBoxWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 150px;
-  height: auto; /* 높이를 auto로 설정하여 Description과 겹치지 않도록 */
-  margin-bottom: 10px;
+  width: 140px; /* 박스의 너비를 줄여 전체 레이아웃을 조밀하게 */
+  height: auto;
+  margin-bottom: 5px;
+  text-align: center;
 
   @media (max-width: 768px) {
-    width: 120px;
+    width: 110px;
   }
 
   @media (max-width: 480px) {
-    width: 100px;
+    width: 90px;
   }
 `;
 
@@ -128,10 +128,11 @@ const ProjectBox = styled(Link)`
 `;
 
 const Description = styled.div`
-  margin-top: 8px; /* 이미지 박스와의 간격 */
+  margin-top: 8px;
   font-size: 1em;
   color: #ddd;
   text-align: center;
+  height: 2.5em; /* 일정한 높이 고정 */
 
   @media (max-width: 768px) {
     font-size: 0.8em;
@@ -145,7 +146,7 @@ const Description = styled.div`
 const Projects = () => {
   return (
     <Container>
-      <Title>Portfolio</Title>
+      <Title>Portfolio</Title><br/><br/>
       <PortfolioGrid>
         <ProjectBoxWrapper>
           <ProjectBox to="/projects/project1">

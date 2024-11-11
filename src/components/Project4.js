@@ -7,17 +7,17 @@ const PageWrapper = styled.div`
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start; /* 상단에서 시작하도록 설정 */
   background-color: #222;
   max-width: 100vw;
   width: calc(100vw - 15vw);
 
   @media (max-width: 768px) {
-    margin-left: 20vw;
+    margin-left: 15vw;
   }
 
   @media (max-width: 480px) {
-    margin-left: 25vw;
+    margin-left: 15vw;
   }
 `;
 
@@ -30,27 +30,14 @@ const Container = styled.div`
   color: #e0e0e0;
   background-color: #222;
   font-family: Arial, sans-serif;
-  font-size: clamp(0.8em, 1.5vw, 0.85em);
-  height: auto;
-  overflow: auto;
+  font-size: clamp(0.6em, 1vw, 1em); /* 최소값을 더 작게 설정 */
+  max-height: 100vh; /* 높이 제한 */
+  overflow: auto; /* 스크롤 가능하게 설정 */
   padding-left: 50px;
+  box-sizing: border-box;
 
   &::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: #333;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: #555;
-    border-radius: 4px;
-  }
-
-  /* 큰 화면에서 글씨 약간 커지게 */
-  @media (min-width: 1340px) {
-    font-size: clamp(1em, 2vw, 1.2em);
+    display: none;
   }
 `;
 
@@ -175,6 +162,7 @@ const Footer = styled.footer`
   font-size: 1em;
   color: #888;
   border-top: 1px solid #333;
+  margin-top: auto;
 
   a {
     color: #ffd700;
@@ -191,7 +179,6 @@ const Footer = styled.footer`
     font-size: 0.8em;
   }
 `;
-
 const Project4 = () => {
   return (
     <PageWrapper>
