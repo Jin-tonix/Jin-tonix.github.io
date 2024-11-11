@@ -7,7 +7,7 @@ const PageWrapper = styled.div`
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: start; /* 상단에서 시작하도록 설정 */
+  align-items: start;
   background-color: #222;
   max-width: 100vw;
   width: calc(100vw - 15vw);
@@ -30,9 +30,9 @@ const Container = styled.div`
   color: #e0e0e0;
   background-color: #222;
   font-family: Arial, sans-serif;
-  font-size: clamp(0.6em, 1vw, 1em); /* 최소값을 더 작게 설정 */
-  max-height: 100vh; /* 높이 제한 */
-  overflow: auto; /* 스크롤 가능하게 설정 */
+  font-size: clamp(0.6em, 1vw, 1em);
+  max-height: 100vh;
+  overflow: auto;
   padding-left: 50px;
   box-sizing: border-box;
 
@@ -146,6 +146,29 @@ const Section = styled.div`
   }
 `;
 
+const SideBySideSection = styled.div`
+  margin-top: 20px;
+
+  img {
+    width: 45%;
+    max-width: 250px;
+    border: 3px solid #333;
+    border-radius: 5px;
+    float: right; /* 이미지가 오른쪽에 위치하도록 설정 */
+    margin-left: 20px; /* 텍스트와 이미지 사이의 간격 조정 */
+    margin-bottom: 10px; /* 이미지 아래 여백을 최소화 */
+  }
+
+  h3 {
+    font-size: 1em;
+    color: #ffd700;
+  }
+
+  p {
+    font-size: 0.9em;
+  }
+`;
+
 const SkillsList = styled.ul`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -179,6 +202,7 @@ const Footer = styled.footer`
     font-size: 0.8em;
   }
 `;
+
 const Project3 = () => {
   return (
     <PageWrapper>
@@ -186,16 +210,16 @@ const Project3 = () => {
         <Header>
           <img src="/images/logo3.png" alt="Project Logo" />
           <div>
-            <h1>Briefify - AI 기반 이미지 문서나 텍스트 문서의 번역 및 요약 웹 서비스 개발</h1>
+            <h1>Briefify - 이미지 문서나 텍스트 문서의 번역 및 요약을 지원하는 AI 기반의 웹 서비스 개발</h1>
             <SubHeader>- Team Project (2024.10.25 ~ 11.04): 프론트 MyPage 및 AI 모델 검색</SubHeader>
           </div>
         </Header>
 
         <ContentSection>
           <ImagesSection>
-            <img src="/images/proj1-1.png" alt="채용/자격증 정보" />
-            <img src="/images/proj1-2.png" alt="회원가입/로그인" />
-            <img src="/images/proj1-3.png" alt="Flutter 앱 화면" />
+            <img src="/images/proj3-1.png" alt="홈" />
+            <img src="/images/proj3-2.png" alt="요약하기" />
+            <img src="/images/proj3-3.png" alt="마이페이지" />
           </ImagesSection>
 
           <TextSection>
@@ -203,28 +227,22 @@ const Project3 = () => {
               <Section>
                 <h3>개발 주요 사항</h3>
                 <ul>
-                  <li>Spring Boot 기반 백엔드 서버 개발</li>
-                  <li>Vue.js를 이용한 프론트엔드 서버 개발</li>
-                  <li>Flutter를 이용한 앱 서버 개발</li>
-                  <li>JWT를 활용한 토큰 기반 사용자 인증과정 적용</li>
-                  
+                  <li>React를 이용한 프론트엔드 서버 개발</li>
+                  <li>Python을 이용한 백엔드 서버 개발</li>
+                  <li>FastAPI를 이용해 프론트와 백 연결</li>
+                  <li>다양한 AI모델의 적용</li>
                 </ul>
               </Section>
 
               <Section>
                 <h3>기술 스택</h3>
                 <SkillsList>
-                  <li>Spring Boot</li>
-                  <li>Spring Data</li>
-                  <li>JPA</li>
-                  <li>Spring Security</li>
-                  <li>JWT</li>
-                  <li>MySQL</li>
-                  <li>JavaScript</li>
-                  <li>Vue3</li>
-                  <li>Git</li>
+                  <li>FastAPI</li>
+                  <li>Pytorch</li>
+                  <li>Python</li>
+                  <li>Nginx</li>
+                  <li>React</li>
                   <li>Docker</li>
-                  <li>Flutter</li>
                 </SkillsList>
               </Section>
             </HorizontalSection>
@@ -232,31 +250,32 @@ const Project3 = () => {
             <Section>
               <h3>살펴보기</h3>
               <p>
-                '전지적 구직자 시점(전직자)'는 Vue3와 Spring을 기반으로 개발된 혁신적인 채용정보 사이트입니다.
-                본 사이트는 공공데이터포털의 자격증 API와 채용 API를 활용하여, 최신 채용 정보를 신속하고 효율적으로 제공합니다.
-                특히, 자격증과 관련된 채용정보를 즉시 확인할 수 있는 기능을 중점적으로 제공하여, 구직자들이 보다 쉽게 자신에게 적합한 채용 기회를 찾을 수 있도록 돕습니다.
+                Briefify는 필요한 정보만 빠르게 요약하여 제공함으로써 업무 효율을 극대화하는 AI 기반 요약 서비스입니다. 개발자, 연구원, 비즈니스 전문가 등 방대한 정보를 다루는 직군을 위해 설계된 Briefify는 이미지나 텍스트 자료를 분석하여 핵심만 뽑아냅니다.
               </p>
             </Section>
 
-            <Section>
-              <h3>개발 관련 설명</h3>
-              <p>
-                저는 관리자 페이지와 앱 프론트엔드 구현을 담당하였습니다. 관리자 페이지는 URL을 통해 접근할 수 있도록 설정하였으며, 회원 수, 최근 가입한 유저, 일일 및 월별 사용자 수를 한눈에 쉽게 확인할 수 있도록 그래프를 활용해 시각화하였습니다.
-
-              </p>
-              <p>
-                백엔드와의 연결 과정에서 예상치 못한 엔드포인트와 컬럼 이름의 차이로 인해 오류를 발견하고 해결하는 데 시간이 걸렸습니다. 
-                이 경험을 통해 API 명세서와 테이블 정의서 등 개발 문서를 꼼꼼히 작성하고, 정해진 규칙을 철저히 준수하는 것이 얼마나 중요한지 배울 수 있었습니다.
-
-              </p>
-            </Section>
+            <SideBySideSection>
+              <img src="/images/proj3-4.png" alt="AI 모델" />
+              <div>
+                <h3>개발 관련 설명</h3>
+                <p>
+                  프로젝트에서 프론트 마이페이지와 AI 모델 검색 기능을 구현하였습니다. 요약본을 저장할 때는 제목과 함께 저장하여 사용자가 후에 쉽게 찾을 수 있도록 하였고, 여러 AI 모델을 테스트하며 최적의 모델을 선정하였습니다.
+                </p>
+                <p>
+                  이미지 파일의 텍스트 추출에는 OCR 기반으로 웹 프레임워크와의 연동이 간편한 pytesseract를 활용하였으며, 텍스트 번역에는 빠른 속도와 언어 간 문맥 이해력이 뛰어난 facebook/nllb-200-distilled-600M을 적용했습니다. 텍스트 요약에는 한국어에 특화되고 Transformer 아키텍처로 전후 관계를 파악하는 eenzeenee/t5-base-korean-summarization을, 음성 지원에는 빠르게 음성 파일을 생성하는 gtts를 사용했습니다.
+                </p>
+                <p>
+                  이번 프로젝트에서 다양한 AI 모델을 탐색하고 직접 연동해 볼 수 있었던 좋은 경험이었습니다. 다만, 프로젝트 종료 후에는 LLM 모델을 사용했더라면 더 가볍고 빠르게 구현할 수 있었을 것이라는 아쉬움이 남습니다.
+                </p>
+              </div>
+            </SideBySideSection>
           </TextSection>
         </ContentSection>
 
         <Footer>
           <a href="https://github.com/AI-X-min-projext-ITOWE" target="_blank" rel="noopener noreferrer">
             <FaLink style={{ marginRight: '5px' }} />
-            <FaGithub style={{ marginRight: '5px' }} /> Briefify - GitHub Repository 
+            <FaGithub style={{ marginRight: '5px' }} /> Briefify - GitHub Repository
           </a>
         </Footer>
       </Container>

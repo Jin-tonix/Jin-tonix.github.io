@@ -100,10 +100,11 @@ export default function Sidebar() {
 
         {showExtraMenu && (
           <div className="extra-menu">
-            <Link to="/projects/project1">Project 1</Link>
-            <Link to="/projects/project2">Project 2</Link>
-            <Link to="/projects/project3">Project 3</Link>
             <Link to="/projects/project4">Project 4</Link>
+            <Link to="/projects/project3">Briefify</Link>
+            <Link to="/projects/project1">전직시</Link>
+            <Link to="/projects/project2">Flux</Link>
+           
           </div>
         )}
       </div>

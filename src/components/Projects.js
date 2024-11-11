@@ -149,6 +149,18 @@ const Projects = () => {
       <Title>Portfolio</Title><br/><br/>
       <PortfolioGrid>
         <ProjectBoxWrapper>
+          <ProjectBox to="/projects/project4">
+            <img src="/path/to/image4.jpg" alt="Project 4" />
+          </ProjectBox>
+          <Description>Project 4</Description>
+        </ProjectBoxWrapper>
+        <ProjectBoxWrapper>
+          <ProjectBox to="/projects/project3">
+            <img src="/images/logo3.png" alt="Project 3" />
+          </ProjectBox>
+          <Description>Briefify</Description>
+        </ProjectBoxWrapper>
+        <ProjectBoxWrapper>
           <ProjectBox to="/projects/project1">
             <img src="/images/logo1.png" alt="Project 1" />
           </ProjectBox>
@@ -159,19 +171,7 @@ const Projects = () => {
             <img src="/images/logo2.png" alt="Project 2" />
           </ProjectBox>
           <Description>Flux</Description>
-        </ProjectBoxWrapper>
-        <ProjectBoxWrapper>
-          <ProjectBox to="/projects/project3">
-            <img src="/images/logo3.png" alt="Project 3" />
-          </ProjectBox>
-          <Description>Briefify</Description>
-        </ProjectBoxWrapper>
-        <ProjectBoxWrapper>
-          <ProjectBox to="/projects/project4">
-            <img src="/path/to/image4.jpg" alt="Project 4" />
-          </ProjectBox>
-          <Description>Project 4</Description>
-        </ProjectBoxWrapper>
+        </ProjectBoxWrapper>    
       </PortfolioGrid>
     </Container>
   );
