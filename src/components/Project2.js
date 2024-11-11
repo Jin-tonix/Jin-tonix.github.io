@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FaGithub, FaLink } from 'react-icons/fa'; // FaLink 아이콘 추가
+import { FaGithub, FaLink } from 'react-icons/fa';
 
 const PageWrapper = styled.div`
   margin-left: 15vw;
   min-height: 100vh;
   display: flex;
-  justify-content: center; /* 상하 중앙 정렬 추가 */
-  align-items: center;     /* 상하 중앙 정렬 추가 */
+  justify-content: center;
+  align-items: center;
   background-color: #222;
   max-width: 100vw;
   width: calc(100vw - 15vw);
@@ -30,8 +30,8 @@ const Container = styled.div`
   color: #e0e0e0;
   background-color: #222;
   font-family: Arial, sans-serif;
-  font-size: clamp(0.7em, 1.5vw, 0.85em);
-  height: auto; /* 높이를 auto로 설정하여 중앙에 위치할 수 있도록 */
+  font-size: clamp(0.8em, 1.5vw, 0.85em);
+  height: auto;
   overflow: auto;
   padding-left: 50px;
 
@@ -47,8 +47,12 @@ const Container = styled.div`
     background: #555;
     border-radius: 4px;
   }
-`;
 
+  /* 큰 화면에서 글씨 약간 커지게 */
+  @media (min-width: 1340px) {
+    font-size: clamp(1em, 2vw, 1.2em);
+  }
+`;
 
 const Header = styled.div`
   display: flex;
@@ -58,28 +62,27 @@ const Header = styled.div`
   width: 100%;
 
   img {
-    width: clamp(30px, 4vw, 50px); // 반응형 이미지 크기
+    width: clamp(30px, 4vw, 50px);
     height: auto;
     margin-right: 10px;
   }
 
   h1 {
-    font-size: clamp(0.9em, 1.8vw, 1.1em); // 반응형 제목 크기
+    font-size: clamp(0.9em, 1.8vw, 1.1em);
     font-weight: bold;
     color: #ffd700;
   }
 `;
 
 const SubHeader = styled.h2`
-  font-size: clamp(0.8em, 1.6vw, 0.95em); // 반응형 부제목 크기
+  font-size: clamp(0.8em, 1.6vw, 0.95em);
   color: #888;
-  font-weight: normal;
 `;
 
 const ContentSection = styled.div`
   display: flex;
   width: 100%;
-  gap: 20px; // 이미지와 텍스트 사이 간격 줄이기
+  gap: 20px;
   align-items: center;
 
   @media (max-width: 768px) {
@@ -145,8 +148,6 @@ const Section = styled.div`
     padding-left: 18px;
   }
 
-
-
   @media (max-width: 768px) {
     h3 {
       font-size: 0.9em;
@@ -190,7 +191,6 @@ const Footer = styled.footer`
     font-size: 0.8em;
   }
 `;
-
 const Project2 = () => {
   return (
     <PageWrapper>

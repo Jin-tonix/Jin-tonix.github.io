@@ -7,7 +7,7 @@ const PageWrapper = styled.div`
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center; /* 상하 중앙 정렬 */
+  align-items: center;
   background-color: #222;
   max-width: 100vw;
   width: calc(100vw - 15vw);
@@ -30,8 +30,8 @@ const Container = styled.div`
   color: #e0e0e0;
   background-color: #222;
   font-family: Arial, sans-serif;
-  font-size: clamp(0.7em, 1.5vw, 0.85em);
-  height: auto; /* 자동 높이 설정으로 중간 정렬 유지 */
+  font-size: clamp(0.8em, 1.5vw, 0.85em);
+  height: auto;
   overflow: auto;
   padding-left: 50px;
 
@@ -46,6 +46,11 @@ const Container = styled.div`
   &::-webkit-scrollbar-thumb {
     background: #555;
     border-radius: 4px;
+  }
+
+  /* 큰 화면에서 글씨 약간 커지게 */
+  @media (min-width: 1340px) {
+    font-size: clamp(1em, 2vw, 1.2em);
   }
 `;
 
@@ -72,7 +77,6 @@ const Header = styled.div`
 const SubHeader = styled.h2`
   font-size: clamp(0.8em, 1.6vw, 0.95em);
   color: #888;
-  font-weight: normal;
 `;
 
 const ContentSection = styled.div`
@@ -187,7 +191,6 @@ const Footer = styled.footer`
     font-size: 0.8em;
   }
 `;
-
 const Project1 = () => {
   return (
     <PageWrapper>
