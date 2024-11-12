@@ -217,9 +217,10 @@ const Project3 = () => {
 
         <ContentSection>
           <ImagesSection>
-            <img src="/images/proj3-1.png" alt="홈" />
-            <img src="/images/proj3-2.png" alt="요약하기" />
-            <img src="/images/proj3-3.png" alt="마이페이지" />
+            <img src="/images/proj3-2.png" alt="홈" />
+            <img src="/images/proj3-1.png" alt="요약하기" />
+            <img src="/images/proj3-6.png" alt="마이페이지" />
+            <img src="/images/proj3-5.png" alt="마이페이지" />
           </ImagesSection>
 
           <TextSection>
