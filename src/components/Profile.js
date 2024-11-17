@@ -26,8 +26,12 @@ const ProfileContainer = styled.div`
   margin-left: 15vw; /* 사이드바와의 간격 */
   width: calc(100vw - 15vw); /* 화면 전체에서 사이드바 너비를 제외한 나머지 사용 */
   overflow: hidden;
-  padding: 10px 20px;
+  padding: 15px 20px;
   box-sizing: border-box;
+  color: #ddd;
+  line-height: 1.5;
+  text-shadow: 1.5px 1.5px 5.5px #333;
+  background-color: rgba(0, 0, 0, 0.6);
 
   .intro, .name-wrapper, .description {
     max-width: 70%;
@@ -72,21 +76,7 @@ const ProfileContainer = styled.div`
     }
   }
 
-  .description {
-    font-size: 1.1em;
-    font-weight: 700;
-    color: #ddd;
-    max-width: 800px;
-    line-height: 1.5;
-    text-shadow: 1px 1px 5px #333;
-    animation: ${fadeInUp} 1s ease forwards;
-    animation-delay: 2.5s;
-    opacity: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 10px;
-    border-radius: 10px;
-  }
-
+ 
   /* 반응형 조정 */
   @media (max-width: 1024px) {
     margin-left: 15vw;
@@ -104,9 +94,7 @@ const ProfileContainer = styled.div`
       }
     }
 
-    .description {
-      font-size: 1em;
-    }
+   
   }
 
   @media (max-width: 768px) {
@@ -125,9 +113,7 @@ const ProfileContainer = styled.div`
       }
     }
 
-    .description {
-      font-size: 0.9em;
-    }
+  
   }
 
   @media (max-width: 480px) {
@@ -147,9 +133,6 @@ const ProfileContainer = styled.div`
       }
     }
 
-    .description {
-      font-size: 1em;
-    }
   }
 
   &::-webkit-scrollbar {
@@ -163,12 +146,6 @@ export default function Profile() {
       <div className="intro">소통과 문제 해결, 두 마리 토끼를 잡는 개발자</div>
       <div className="name-wrapper">
         <span className="name-highlight">목진희</span>입니다.
-      </div>
-      <div className="description">
-        법학을 공부하며 얻은 분석력과 영어교육을 하며 다진 소통 능력은<br/> 
-        복잡한 개발 문제 해결과 클라이언트 협업에서 큰 강점입니다. <br />
-        개발자로서 단순히 코딩에 그치지 않고, 문제를 구조적으로 해결하고<br/> 
-        시스템 효율성을 높이며 가치를 창출하는 데 기여하고자 합니다.
       </div>
     </ProfileContainer>
   );

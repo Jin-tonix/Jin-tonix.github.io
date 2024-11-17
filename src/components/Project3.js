@@ -86,6 +86,7 @@ const ImagesSection = styled.div`
   img {
     width: 100%;
     max-width: 250px;
+    max-height: 100px; /* 이미지의 최대 높이 설정 */
     border: 3px solid #333;
     border-radius: 5px;
   }
@@ -94,6 +95,7 @@ const ImagesSection = styled.div`
     align-items: center;
     img {
       max-width: 120px;
+      max-height: 90px; /* 작은 화면에서 높이 조정 */
     }
   }
 `;
@@ -152,11 +154,12 @@ const SideBySideSection = styled.div`
   img {
     width: 45%;
     max-width: 250px;
+    max-height: 180px; /* 이미지의 최대 높이 설정 */
     border: 3px solid #333;
     border-radius: 5px;
-    float: right; /* 이미지가 오른쪽에 위치하도록 설정 */
-    margin-left: 20px; /* 텍스트와 이미지 사이의 간격 조정 */
-    margin-bottom: 10px; /* 이미지 아래 여백을 최소화 */
+    float: right;
+    margin-left: 20px;
+    margin-bottom: 10px;
   }
 
   h3 {
@@ -230,7 +233,6 @@ const Project3 = () => {
                 <ul>
                   <li>React를 이용한 프론트엔드 서버 개발</li>
                   <li>Python을 이용한 백엔드 서버 개발</li>
-                  <li>FastAPI를 이용해 프론트와 백 연결</li>
                   <li>다양한 AI모델의 적용</li>
                 </ul>
               </Section>
@@ -241,7 +243,6 @@ const Project3 = () => {
                   <li>FastAPI</li>
                   <li>Pytorch</li>
                   <li>Python</li>
-                  <li>Nginx</li>
                   <li>React</li>
                   <li>Docker</li>
                 </SkillsList>
@@ -263,10 +264,13 @@ const Project3 = () => {
                   프로젝트에서 프론트 마이페이지와 AI 모델 검색 기능을 구현하였습니다. 요약본을 저장할 때는 제목과 함께 저장하여 사용자가 후에 쉽게 찾을 수 있도록 하였고, 여러 AI 모델을 테스트하며 최적의 모델을 선정하였습니다.
                 </p>
                 <p>
-                  이미지 파일의 텍스트 추출에는 OCR 기반으로 웹 프레임워크와의 연동이 간편한 pytesseract를 활용하였으며, 텍스트 번역에는 빠른 속도와 언어 간 문맥 이해력이 뛰어난 facebook/nllb-200-distilled-600M을 적용했습니다. 텍스트 요약에는 한국어에 특화되고 Transformer 아키텍처로 전후 관계를 파악하는 eenzeenee/t5-base-korean-summarization을, 음성 지원에는 빠르게 음성 파일을 생성하는 gtts를 사용했습니다.
+                  - EasyOCR의 민감도를 해결하고 Tesseract로 전환.<br/>
+                  - Transformers 요약 모델의 한계를 eenzeenee/t5-base로 해결.<br/>
+                  - mbart 모델의 번역 품질 문제를 facebook/nllb로 업그레이드.<br/>
+                  - gTTS로 간단한 음성 변환 구현, 대용량 처리 한계 인지.<br/>
                 </p>
                 <p>
-                  이번 프로젝트에서 다양한 AI 모델을 탐색하고 직접 연동해 볼 수 있었던 좋은 경험이었습니다. 다만, 프로젝트 종료 후에는 LLM 모델을 사용했더라면 더 가볍고 빠르게 구현할 수 있었을 것이라는 아쉬움이 남습니다.
+                다양한 AI 기술을 통합하며 모델 선택과 한계를 이해하는 배움의 기회를 얻었고, 사용자 경험 향상을 위한 개선 방향을 고민했습니다. 번역시 언어를 선택해야 했는데 대상 언어 자동 감지 기능을 도입하고, LLM 모델을 활용했다면 더 효율적인 결과물을 도출했을 것이라는 아쉬움이 남습니다.
                 </p>
               </div>
             </SideBySideSection>

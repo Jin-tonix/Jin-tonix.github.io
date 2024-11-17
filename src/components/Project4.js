@@ -186,8 +186,8 @@ const Project4 = () => {
         <Header>
           <img src="/images/logo4.png" alt="Project Logo" />
           <div>
-            <h1> - 대화를 통해 필요한 운동을 추천해주고, 자세를 잡아주는 AI 기반의 홈트레이닝 앱</h1>
-            <SubHeader>- Team Project (2024.11.05 ~ 12.20): </SubHeader>
+            <h1> FitChecker - 대화를 통해 필요한 운동을 추천해주고, 자세를 잡아주는 AI 기반의 홈트레이닝 앱</h1>
+            <SubHeader>- Team Project (2024.11.05 ~ 12.20) : 백앤드 개발 및 Langchain 을 이용한 AI agent 개발 및 프론트/백 연결</SubHeader>
           </div>
         </Header>
 
@@ -204,9 +204,9 @@ const Project4 = () => {
                 <h3>개발 주요 사항</h3>
                 <ul>
                   <li>Spring Boot 기반 백엔드 서버 개발</li>
-                  <li>React Native를 이용한 프론트엔드 서버 개발</li>
                   <li>FastAPI를 활용한 프론트/백 엔드 연결</li>
-                  <li>LLM과 RAG를 이용한 추천기능 및 모션감지</li>
+                  <li>Langchain을 이용한 AI agent 개발</li>
+                  <li>LLM과 RAG를 이용한 추천기능</li>
                   
                 </ul>
               </Section>
@@ -238,9 +238,9 @@ const Project4 = () => {
         </ContentSection>
 
         <Footer>
-          <a href="https://github.com/Omniscient-Job-Project" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/AI-X-main-projext-ITOWE" target="_blank" rel="noopener noreferrer">
             <FaLink style={{ marginRight: '5px' }} />
-            <FaGithub style={{ marginRight: '5px' }} /> 전직시 (전지적구직자시점) - GitHub Repository 
+            <FaGithub style={{ marginRight: '5px' }} /> FitChecker - GitHub Repository 
           </a>
         </Footer>
       </Container>

@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FaGithub, FaLink } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
 
 const PageWrapper = styled.div`
   margin-left: 15vw;
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: start; 
+  align-items: start;
   background-color: #222;
   max-width: 100vw;
   width: calc(100vw - 15vw);
@@ -87,7 +87,7 @@ const ImagesSection = styled.div`
     width: 100%;
     max-width: 250px;
     height: auto;
-    max-height: 140px; /* 높이 제한 추가 */
+    max-height: 140px;
     border: 3px solid #333;
     border-radius: 5px;
   }
@@ -96,11 +96,10 @@ const ImagesSection = styled.div`
     align-items: center;
     img {
       max-width: 120px;
-      max-height: 80px; /* 작은 화면에서 높이 제한 추가 */
+      max-height: 80px;
     }
   }
 `;
-
 
 const TextSection = styled.div`
   flex: 2.5;
@@ -191,16 +190,16 @@ const Project2 = () => {
         <Header>
           <img src="/images/logo2.png" alt="Project Logo" />
           <div>
-            <h1>FLUX - 아티스트들의 작품을 거래할 수 있는 온라인 경매 웹 서비스 개발</h1>
-            <SubHeader>- Team Project (2024.07.15 ~ 08.07(기간연장 08.16)): 프론트 MyPage 및 AI 모델 검색</SubHeader>
+            <h1>FLUX - 아티스트 경매 플랫폼 개발</h1>
+            <SubHeader>- Team Project (2024.07.15 ~ 08.16): Market Page 및 My Page 전반 구현</SubHeader>
           </div>
         </Header>
 
         <ContentSection>
           <ImagesSection>
-            <img src="/images/proj2-1.png" alt="메인" />
-            <img src="/images/proj2-2.png" alt="회원가입/로그인" />
-            <img src="/images/proj2-3.png" alt="공지사항" />
+            <img src="/images/proj2-1.png" alt="Main Page" />
+            <img src="/images/proj2-2.png" alt="User Login" />
+            <img src="/images/proj2-3.png" alt="Notice Board" />
           </ImagesSection>
 
           <TextSection>
@@ -208,50 +207,62 @@ const Project2 = () => {
               <Section>
                 <h3>개발 주요 사항</h3>
                 <ul>
-                  <li>Spring 프레임워크를 활용한 백엔드 서버 개발</li>
-                  <li>Vue.js 프레임워크를 활용한 프론트엔드 서버 개발</li>                 
+                  <li>Spring Boot 기반의 RESTful API 설계 및 구현</li>
+                  <li>Vue.js를 활용한 사용자 친화적 프론트엔드 UI 개발</li>
+                  <li>경매 시간 및 가격 설정 기능을 포함한 My Page 개발</li>
+                  <li>상품 목록에 페이지네이션 및 정렬 기능 추가</li>
                 </ul>
               </Section>
-
               <Section>
                 <h3>기술 스택</h3>
                 <SkillsList>
                   <li>Spring Boot</li>
-                  <li>Spring Data</li>
                   <li>JPA</li>
-                  <li>Spring Security</li>
-                  <li>JWT</li>
                   <li>MySQL</li>
+                  <li>Vue.js</li>
                   <li>JavaScript</li>
-                  <li>Vue3</li>
-                  <li>Git</li>
                   <li>Docker</li>
-                  <li>Flutter</li>
+                  <li>Git</li>
                 </SkillsList>
               </Section>
             </HorizontalSection>
 
             <Section>
-              <h3>살펴보기</h3>
+              <h3>프로젝트 개요</h3>
               <p>
-              본 프로젝트는 예술가들의 작품, 상품등의 온라인 경매 웹 애플리케이션을 개발하는 것을 목표로 하였습니다. 백엔드는 안정성과 확장성을 갖춘 
-Spring 프레임워크를 활용하여 구현되었으며, 프론트엔드는 사용자 친화적인 Vue.js 프레임워크를 사용하여 구축되었습니다. 이를 통해 사용자에게 매끄러운 경매 경험을 제공하는 것을 목표로 합니다.</p>
+                FLUX는 아티스트와 디자이너들이 상품을 사고팔 수 있는 경매 플랫폼입니다. 안정적이고 확장성 있는 Spring Boot 백엔드와
+                사용자 친화적인 Vue.js 프론트엔드를 통해 사용자 경험을 극대화했습니다.
+              </p>
             </Section>
 
             <Section>
-              <h3>개발 관련 설명</h3>
+              <h3>My Page 및 마켓 페이지 주요 개발</h3>
               <p>
-                
-
+                <strong>마켓 페이지:</strong> 상품 목록을 동적으로 표시하고, 검색 및 필터링 기능을 구현하여 사용자 경험을 극대화했습니다. Vuex로 상태를
+                관리하며, Spring Boot 백엔드와 실시간 API 통신을 통해 데이터를 처리했습니다.
+              </p>
+              <p>
+                <strong>My Page:</strong> Vue.js 기반의 입력 폼을 통해 상품 등록, 경매 시작 시간 및 가격 설정 기능을 구현했습니다. Spring Boot와 JPA를
+                활용해 입력값을 데이터베이스에 저장하고, 정확한 경매 시작 시점을 계산하는 스케줄러를 구현했습니다.
               </p>
             </Section>
+
+            <Section>
+              <h3>트러블 슈팅 및 성과</h3>
+              <ul>
+                <li>Java Time API를 활용해 서버와 클라이언트 간 시간 동기화 문제를 해결.</li>
+                <li>Task Scheduler를 활용하여 경매 시작 및 종료 프로세스를 자동화.</li>
+                <li>경매 시작 시간과 가격 설정 등 복잡한 비즈니스 로직을 성공적으로 구현.</li>
+              </ul>
+              </Section>
+
           </TextSection>
         </ContentSection>
 
         <Footer>
           <a href="https://github.com/Flux2024" target="_blank" rel="noopener noreferrer">
-            <FaLink style={{ marginRight: '5px' }} />
-            <FaGithub style={{ marginRight: '5px' }} /> FLUX - GitHub Repository 
+            <FaGithub style={{ marginRight: '5px' }} />
+            FLUX - GitHub Repository
           </a>
         </Footer>
       </Container>
