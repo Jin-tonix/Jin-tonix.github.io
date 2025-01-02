@@ -150,9 +150,9 @@ const Projects = () => {
       <PortfolioGrid>
         <ProjectBoxWrapper>
           <ProjectBox to="/projects/project4">
-            <img src="/path/to/image4.jpg" alt="Project 4" />
+            <img src="/images/logo4.png" alt="Project 4" />
           </ProjectBox>
-          <Description>Project 4</Description>
+          <Description>FitChecker</Description>
         </ProjectBoxWrapper>
         <ProjectBoxWrapper>
           <ProjectBox to="/projects/project3">
