@@ -62,8 +62,7 @@ const LeftContent = styled(Content)`
   @media (max-width: 768px) {
     width: 100%;
     border-right: none;
--   padding-left: 0;
-+   padding-left: 20px; /* ✅ Experience 섹션과 비슷한 간격 */
+    padding-left: 40; /* ✅ 모바일에선 Container가 이미 여백 줌 */
   }
 `;
 
