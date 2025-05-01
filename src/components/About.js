@@ -63,7 +63,7 @@ const LeftContent = styled(Content)`
     width: 100%;
     border-right: none;
 -   padding-left: 0;
-+   padding-left: 15px; /* ✅ Experience 섹션과 비슷한 간격 */
++   padding-left: 20px; /* ✅ Experience 섹션과 비슷한 간격 */
   }
 `;
 
