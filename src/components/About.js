@@ -37,11 +37,11 @@ const Container = styled.div`
 
   @media (max-width: 768px) {
     flex-direction: column;
-    padding: 20px 10px 20px calc(23vw + 20px);
+    padding: 20px 10px 20px calc(23vw + 20px);  /* ✅ 넓은 여백 확보 */
   }
 
   @media (max-width: 480px) {
-    padding-left: 80px;
+    padding-left: calc(23vw + 20px);  /* ✅ 모바일 사이드바에 안 겹치게 */
   }
 `;
 

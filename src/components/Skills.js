@@ -19,24 +19,21 @@ const Container = styled.div`
   align-items: center;
   min-height: 100vh;
   background-color: #222;
-  margin-left: calc(15vw + 20px); /* ✅ 여백 추가 */
-  width: calc(100vw - 15vw - 20px);
-  overflow: hidden;
-  padding: 10px 20px;
+  padding: 10px 20px 10px calc(15vw + 20px); /* ✅ 사이드바 너비 + 여백 */
   box-sizing: border-box;
+  width: 100vw;
+  overflow: hidden;
 
   @media (max-width: 1024px) {
-    width: calc(100vw - 15vw - 20px);
+    padding-left: calc(17vw + 20px);
   }
 
   @media (max-width: 768px) {
-    margin-left: calc(21vw + 10px);
-    width: calc(100vw - 21vw - 10px);
+    padding-left: calc(23vw + 20px);
   }
 
   @media (max-width: 480px) {
-    margin-left: calc(21vw + 10px);
-    width: calc(100vw - 21vw - 10px);
+    padding-left: calc(23vw + 20px);
   }
 
   &::-webkit-scrollbar {
