@@ -62,7 +62,7 @@ const LeftContent = styled(Content)`
   @media (max-width: 768px) {
     width: 100%;
     border-right: none;
-    padding-left: 40; /* ✅ 모바일에선 Container가 이미 여백 줌 */
+    padding-left: 40px; /* ✅ 모바일에선 Container가 이미 여백 줌 */
   }
 `;
 
