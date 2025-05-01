@@ -16,36 +16,32 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   background-color: #222;
-  padding: 40px 20px;
+  padding: 40px 20px 40px calc(17vw + 20px); /* ✅ 여백 확장 */
   box-sizing: border-box;
-  margin-left: 15vw;
-  width: calc(100vw - 15vw);
+  width: 100%;
   height: 100vh;
-  overflow-y: auto;
+  overflow-y: scroll;
 
-  /* 스크롤바 숨기기 */
   &::-webkit-scrollbar {
     display: none;
   }
-  -ms-overflow-style: none;  /* IE, Edge */
-  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 
   gap: 20px;
 
   @media (max-width: 1024px) {
     flex-direction: column;
-    margin-left: 15vw;
-    width: calc(100vw - 15vw);
-    padding: 30px 20px;
-    gap: 15px;
+    padding: 30px 20px 30px calc(17vw + 20px);
   }
 
   @media (max-width: 768px) {
     flex-direction: column;
-    margin-left: 21vw;
-    width: calc(100vw - 21vw);
-    padding: 20px 10px;
-    gap: 10px;
+    padding: 20px 10px 20px calc(23vw + 20px);
+  }
+
+  @media (max-width: 480px) {
+    padding-left: 80px;
   }
 `;
 

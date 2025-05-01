@@ -13,37 +13,37 @@ const fadeInUp = keyframes`
     transform: translateY(0);
   }
 `;
-
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center; // center 정렬을 위해 변경
+  align-items: center;
   min-height: 100vh;
   background-color: #222;
-  margin-left: 15vw;
-  width: calc(100vw - 15vw); /* 화면 전체에서 사이드바 너비를 제외한 나머지 사용 */
+  margin-left: calc(15vw + 20px); /* ✅ 여백 추가 */
+  width: calc(100vw - 15vw - 20px);
   overflow: hidden;
   padding: 10px 20px;
   box-sizing: border-box;
-  
+
   @media (max-width: 1024px) {
-    width: calc(100vw - 15vw);
+    width: calc(100vw - 15vw - 20px);
   }
 
   @media (max-width: 768px) {
-     margin-left: 20vw;
-    width: calc(100vw - 15vw);
+    margin-left: calc(21vw + 10px);
+    width: calc(100vw - 21vw - 10px);
   }
 
   @media (max-width: 480px) {
-    margin-left: 20vw;
-    width: calc(100vw - 15vw);
+    margin-left: calc(21vw + 10px);
+    width: calc(100vw - 21vw - 10px);
   }
 
   &::-webkit-scrollbar {
     display: none;
   }
 `;
+
 
 const Content = styled.div`
   display: flex;
