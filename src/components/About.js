@@ -16,9 +16,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   background-color: #222;
-  padding: 40px 20px 40px calc(17vw + 20px); /* ✅ 여백 확장 */
+  padding: 40px 20px 40px calc(17vw + 20px);  /* ✅ 데스크탑 */
   box-sizing: border-box;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   overflow-y: scroll;
 
@@ -32,18 +32,19 @@ const Container = styled.div`
 
   @media (max-width: 1024px) {
     flex-direction: column;
-    padding: 30px 20px 30px calc(17vw + 20px);
+    padding-left: calc(17vw + 20px);  /* ✅ 동일 여백 */
   }
 
   @media (max-width: 768px) {
     flex-direction: column;
-    padding: 20px 10px 20px calc(23vw + 20px);  /* ✅ 넓은 여백 확보 */
+    padding-left: calc(23vw + 20px);  /* ✅ 태블릿 이상 보장 */
   }
 
   @media (max-width: 480px) {
-    padding-left: calc(23vw + 20px);  /* ✅ 모바일 사이드바에 안 겹치게 */
+    padding-left: calc(23vw + 20px);  /* ✅ 모바일에서 겹침 방지 */
   }
 `;
+
 
 const Content = styled.div`
   padding: 10px 30px;
@@ -61,9 +62,11 @@ const LeftContent = styled(Content)`
   @media (max-width: 768px) {
     width: 100%;
     border-right: none;
-    padding-left: 10px;
+-   padding-left: 0;
++   padding-left: 15px; /* ✅ Experience 섹션과 비슷한 간격 */
   }
 `;
+
 
 const RightContent = styled(Content)`
   width: 53%;
