@@ -16,7 +16,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   background-color: #222;
-  padding: 10px 20px 40px calc(17vw + 20px);  /* ✅ 데스크탑 - 위쪽 패딩 줄임 */
+  padding: 30px 20px 20px calc(17vw + 20px);  /* ✅ 데스크탑 - 위쪽 패딩 증가 */
   box-sizing: border-box;
   width: 100vw;
   height: 100vh;
@@ -149,7 +149,6 @@ const About = () => (
             <span>- OCR+LLM 파이프라인 구축: 영수증 처리 자동화 핵심 모듈 개발</span><br />
             <span>- 기술 스택 리서치 및 의사결정: 오픈소스 라이선스·성능 비교 분석</span><br />
             <span>- 프롬프트 엔지니어링: LLM 기반 구조화된 데이터 추출(JSON)</span><br />
-            <span>- 프로덕션 배포 경험: 정확도 90% 이상 자동화 시스템 실서비스 적용</span>
           </li>
           <li>
             <strong style={{ color: '#ffd700' }}>(사)한국IT비즈니스진흥협회</strong> (2024.10–2024.12)<br />
@@ -174,7 +173,7 @@ const About = () => (
             <span>- 몰입 교육 및 학습 성과 관리</span>
           </li>
           <li>
-            <strong>JLS 강사</strong> (2018.08–2020.09)<br />
+            <strong>JLS (정상어학원) 강사</strong> (2018.08–2020.09)<br />
             <span>- 참여형 수업 설계 및 학부모 소통</span>
           </li>
           <li>
