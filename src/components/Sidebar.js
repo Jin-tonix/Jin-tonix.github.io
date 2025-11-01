@@ -100,11 +100,12 @@ export default function Sidebar() {
 
         {showExtraMenu && (
           <div className="extra-menu">
+            <Link to="/projects/project5">We:Review</Link>
             <Link to="/projects/project4">FitChecker</Link>
             <Link to="/projects/project3">Briefify</Link>
             <Link to="/projects/project1">전직시</Link>
             <Link to="/projects/project2">Flux</Link>
-           
+
           </div>
         )}
       </div>
@@ -119,6 +120,9 @@ export default function Sidebar() {
         <a href="mailto:jinheemok815@gmail.com">
           <FontAwesomeIcon icon={faEnvelope} /> Email
         </a>
+        <div style={{ marginTop: '15px', fontSize: 'clamp(0.65em, 1.2vw, 0.8em)', color: '#888', textAlign: 'center' }}>
+          Last Updated: 2025.01.11
+        </div>
       </div>
     </SidebarMain>
   );

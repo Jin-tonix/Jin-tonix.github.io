@@ -11,6 +11,7 @@ import Project1 from './components/Project1';
 import Project2 from './components/Project2';
 import Project3 from './components/Project3';
 import Project4 from './components/Project4';
+import Project5 from './components/Project5';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/projects/project2" element={<Project2 />} />
           <Route path="/projects/project3" element={<Project3 />} />
           <Route path="/projects/project4" element={<Project4 />} />
+          <Route path="/projects/project5" element={<Project5 />} />
 
         </Routes>
       </div>

@@ -149,6 +149,12 @@ const Projects = () => {
       <Title>Portfolio</Title><br/><br/>
       <PortfolioGrid>
         <ProjectBoxWrapper>
+          <ProjectBox to="/projects/project5">
+            <img src="/images/logo5.png" alt="Project 5" />
+          </ProjectBox>
+          <Description>We:Review</Description>
+        </ProjectBoxWrapper>
+        <ProjectBoxWrapper>
           <ProjectBox to="/projects/project4">
             <img src="/images/logo4.png" alt="Project 4" />
           </ProjectBox>

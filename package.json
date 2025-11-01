@@ -2,7 +2,6 @@
   "name": "jin-tonix.github.io",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jin-tonix.github.io/",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
@@ -23,7 +22,7 @@
   "scripts": {
     "start": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start",
     "build": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
-    "deploy": "npm run build && xcopy /E /I build\\* ."
+    "deploy": "npm run build && xcopy /E /I /Y build\\* ."
   },
   "eslintConfig": {
     "extends": [

@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chcp)",
+      "Bash(del \"C:\\USERS\\Jin mok\\desktop\\Jin-tonix.github.io\\src\\components\\project5.js\")",
+      "Bash(rm:*)",
+      "Bash(npm run deploy:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
