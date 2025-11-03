@@ -13,7 +13,7 @@ const fadeInUp = keyframes`
 `;
 
 const ProfileContainer = styled.div`
-  background-image: url('/images/img2.jpg');
+  background-image: url('/images/img6.jpg');
   background-size: cover;
   background-position: center;
   color: white;
