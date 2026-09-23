@@ -1,205 +1,44 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FaGithub, FaLink } from 'react-icons/fa';
+import { FaLink } from 'react-icons/fa';
+import { color } from './ui/tokens';
+import {
+  PageWrapper,
+  Container,
+  Header,
+  SubHeader,
+  ContentSection,
+  ImagesSection,
+  TextSection,
+  HorizontalSection,
+  Section,
+  SkillsList,
+  Footer,
+} from './ui/CaseStudyKit';
 
-const PageWrapper = styled.div`
-  margin-left: 0;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: start;
-  background-color: #222;
-  max-width: 100%;
-  width: 100%;
-
-  @media (max-width: 768px) {
-    margin-left: 0;
-  }
-
-  @media (max-width: 480px) {
-    margin-left: 0;
-  }
-`;
-
-const Container = styled.div`
-  width: 90%;
-  max-width: 1400px;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  color: #e0e0e0;
-  background-color: #222;
-  font-family: Arial, sans-serif;
-  font-size: clamp(0.6em, 1vw, 1em);
-  max-height: 100vh;
-  overflow: auto;
-  padding-left: 50px;
-  box-sizing: border-box;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`;
-
-const Header = styled.div`
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #333;
-  padding-bottom: 5px;
-  width: 100%;
-
-  img {
-    width: clamp(30px, 4vw, 50px);
-    height: auto;
-    margin-right: 10px;
-  }
-
-  h1 {
-    font-size: clamp(0.9em, 1.8vw, 1.1em);
-    font-weight: bold;
-    color: #ffd700;
-  }
-`;
-
-const SubHeader = styled.h2`
-  font-size: clamp(0.8em, 1.6vw, 0.95em);
-  color: #888;
-`;
-
-const ContentSection = styled.div`
-  display: flex;
-  width: 100%;
-  gap: 20px;
-  align-items: center;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 5px;
-  }
-`;
-
-const ImagesSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  flex: 1;
-
-  img {
-    width: 100%;
-    max-width: 550px;
-    border: 3px solid #333;
-    border-radius: 5px;
-    object-fit: contain;
-  }
-
-  @media (max-width: 768px) {
-    align-items: center;
-    img {
-      max-width: 250px;
-    }
-  }
-`;
-
-const TextSection = styled.div`
-  flex: 2.5;
-  position: relative;
-
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
-
-const FloatingImage = styled.img`
+const FloatingImageLink = styled.a`
   float: right;
   width: 300px;
-  max-width: 40%;
+  max-width: 45%;
   margin-left: 20px;
   margin-bottom: 10px;
-  margin-top: 50px;
-  border: 3px solid #333;
-  border-radius: 5px;
-  object-fit: contain;
+  margin-top: 0;
+  display: block;
+  cursor: zoom-in;
+
+  img {
+    display: block;
+    width: 100%;
+    border: 1px solid ${color.line};
+    border-radius: 8px;
+    object-fit: contain;
+  }
 
   @media (max-width: 768px) {
     float: none;
     width: 100%;
     max-width: 250px;
     margin: 10px auto;
-    display: block;
-  }
-`;
-
-const HorizontalSection = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 10px;
-  }
-`;
-
-const Section = styled.div`
-  flex: 1;
-
-  h3 {
-    font-size: 1em;
-    color: #ffd700;
-  }
-
-  p, ul {
-    line-height: 1.6;
-    font-size: 0.9em;
-    color: #ccc;
-  }
-
-  ul {
-    padding-left: 18px;
-  }
-
-  @media (max-width: 768px) {
-    h3 {
-      font-size: 0.9em;
-    }
-
-    p, ul {
-      font-size: 0.8em;
-    }
-  }
-`;
-
-const SkillsList = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 4px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const Footer = styled.footer`
-  width: 100%;
-  text-align: left;
-  font-size: 1em;
-  color: #888;
-  border-top: 1px solid #333;
-  margin-top: auto;
-
-  a {
-    color: #ffd700;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-  }
-
-  a:hover {
-    color: #fff;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 0.8em;
   }
 `;
 
@@ -243,8 +82,12 @@ const Project5 = () => {
 
         <ContentSection>
           <ImagesSection>
-            <img src="/images/proj5-1.png" alt="System Architecture" />
-            <img src="/images/proj5-2.png" alt="Processing Pipeline" />
+            <a href="/images/proj5-1.png" target="_blank" rel="noopener noreferrer">
+              <img src="/images/proj5-1.png" alt="System Architecture" />
+            </a>
+            <a href="/images/proj5-2.png" target="_blank" rel="noopener noreferrer">
+              <img src="/images/proj5-2.png" alt="Processing Pipeline" />
+            </a>
           </ImagesSection>
 
           <TextSection>
@@ -302,7 +145,9 @@ const Project5 = () => {
             </p>
           </Section>
 
-          <FloatingImage src="/images/proj5-3.png" alt="Result Screen" style={{ width: '400px', maxWidth: '45%', marginTop: '0' }} />
+          <FloatingImageLink href="/images/proj5-3.png" target="_blank" rel="noopener noreferrer">
+            <img src="/images/proj5-3.png" alt="Result Screen" />
+          </FloatingImageLink>
         </ContentSection>
 
         <Footer>
