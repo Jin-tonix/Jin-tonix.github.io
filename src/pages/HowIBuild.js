@@ -20,6 +20,20 @@ const Step = styled.div`
   padding: 10px 14px;
   color: #eee;
   font-size: clamp(0.75em, 1.1vw, 0.9em);
+  max-width: 170px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  strong {
+    color: #ffd700;
+  }
+
+  small {
+    color: #aaa;
+    font-size: 0.85em;
+    line-height: 1.4;
+  }
 `;
 
 const Arrow = styled.span`
@@ -64,6 +78,21 @@ const IncidentCard = styled.div`
   }
 `;
 
+// 작업 루프 다이어그램 이미지 (클릭하면 원본 크기)
+const LoopImage = styled.a`
+  display: block;
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto 20px;
+
+  img {
+    width: 100%;
+    border: 3px solid #333;
+    border-radius: 5px;
+    background: #fff;
+  }
+`;
+
 export default function HowIBuild() {
   const { content } = useLang();
   const { howIBuild } = content;
@@ -74,10 +103,18 @@ export default function HowIBuild() {
       <GroupIntro style={{ textAlign: 'center' }}>{howIBuild.intro}</GroupIntro>
 
       <GroupTitle>{howIBuild.loopTitle}</GroupTitle>
+      {howIBuild.image && (
+        <LoopImage href={howIBuild.image} target="_blank" rel="noopener noreferrer">
+          <img src={howIBuild.image} alt={howIBuild.loopTitle} />
+        </LoopImage>
+      )}
       <LoopRow>
-        {howIBuild.loop.map((step, i) => (
-          <React.Fragment key={step}>
-            <Step>{step}</Step>
+        {howIBuild.loop.map((item, i) => (
+          <React.Fragment key={item.step}>
+            <Step title={item.desc}>
+              <strong>{item.step}</strong>
+              <small>{item.desc}</small>
+            </Step>
             {i < howIBuild.loop.length - 1 && <Arrow>&rarr;</Arrow>}
           </React.Fragment>
         ))}

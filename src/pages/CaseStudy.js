@@ -11,6 +11,7 @@ import {
   Header,
   SubHeader,
   OneLiner,
+  Repos,
   ContentSection,
   ImagesSection,
   TextSection,
@@ -38,10 +39,10 @@ const LEGACY_PAGES = {
 
 // 옛 /projects/project6~9 URL 이 가리키던 새 case slug
 const LEGACY_SLUG_REDIRECT = {
-  project6: 'ai-company-os',
-  project7: 'brand-tool',
+  project6: 'company-os',
+  project7: 'sales-pipeline',
   project8: 'email-agent',
-  project9: 'field-automation',
+  project9: 'field-fleet',
 };
 
 const LABELS = {
@@ -51,7 +52,9 @@ const LABELS = {
     scale: '규모 (git 실측)',
     background: '프로젝트 배경',
     troubleshooting: '핵심 트러블슈팅',
-    aiCollab: 'AI 협업 방식',
+    aiCollab: '평가 · 운영 · AI 협업',
+    flow: '어떻게 동작하나',
+    repos: '관련 저장소',
     problem: 'Problem',
     cause: 'Cause',
     action: 'Action',
@@ -63,7 +66,9 @@ const LABELS = {
     scale: 'Scale (measured from git)',
     background: 'Background',
     troubleshooting: 'Troubleshooting',
-    aiCollab: 'AI Collaboration',
+    aiCollab: 'Evals · Ops · AI collaboration',
+    flow: 'How it works',
+    repos: 'Repos',
     problem: 'Problem',
     cause: 'Cause',
     action: 'Action',
@@ -107,6 +112,11 @@ export default function CaseStudy() {
           </div>
         </Header>
         <OneLiner>{caseData.oneLiner}</OneLiner>
+        {caseData.repos && (
+          <Repos>
+            <span>{t.repos}</span> {caseData.repos}
+          </Repos>
+        )}
 
         <HorizontalSection>
           <Section>
@@ -143,6 +153,17 @@ export default function CaseStudy() {
               <p>{caseData.background}</p>
             </Section>
 
+            {caseData.flow && (
+              <Section>
+                <h3>{t.flow}</h3>
+                <ol>
+                  {caseData.flow.map((f) => (
+                    <li key={f}>{f}</li>
+                  ))}
+                </ol>
+              </Section>
+            )}
+
             <Section>
               <h3>{t.scale}</h3>
               <ul>
@@ -157,24 +178,30 @@ export default function CaseStudy() {
               {caseData.troubleshooting.map((item) => (
                 <TroubleshootItem key={item.title}>
                   <strong>{item.title}</strong>
-                  <span className="field">
-                    <span className="field-label">{t.problem}</span>
-                    {item.problem}
-                  </span>
+                  {item.problem && (
+                    <span className="field">
+                      <span className="field-label">{t.problem}</span>
+                      {item.problem}
+                    </span>
+                  )}
                   {item.cause && (
                     <span className="field">
                       <span className="field-label">{t.cause}</span>
                       {item.cause}
                     </span>
                   )}
-                  <span className="field">
-                    <span className="field-label">{t.action}</span>
-                    {item.action}
-                  </span>
-                  <span className="field">
-                    <span className="field-label">{t.result}</span>
-                    {item.result}
-                  </span>
+                  {item.action && (
+                    <span className="field">
+                      <span className="field-label">{t.action}</span>
+                      {item.action}
+                    </span>
+                  )}
+                  {item.result && (
+                    <span className="field">
+                      <span className="field-label">{t.result}</span>
+                      {item.result}
+                    </span>
+                  )}
                 </TroubleshootItem>
               ))}
             </Section>

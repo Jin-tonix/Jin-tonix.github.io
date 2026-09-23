@@ -139,13 +139,13 @@ export const Section = styled.div`
     color: #ffd700;
   }
 
-  p, ul {
+  p, ul, ol {
     line-height: 1.6;
     font-size: 0.9em;
     color: #ccc;
   }
 
-  ul {
+  ul, ol {
     padding-left: 18px;
   }
 
@@ -154,7 +154,7 @@ export const Section = styled.div`
       font-size: 0.9em;
     }
 
-    p, ul {
+    p, ul, ol {
       font-size: 0.8em;
     }
   }
@@ -223,5 +223,18 @@ export const Footer = styled.footer`
 
   @media (max-width: 768px) {
     font-size: 0.8em;
+  }
+`;
+
+// 사례 머리에 관련 저장소를 한 줄로 보여준다
+export const Repos = styled.p`
+  margin: 0 0 12px;
+  font-size: 0.85em;
+  color: #999;
+
+  span {
+    color: #ffd700;
+    font-weight: bold;
+    margin-right: 4px;
   }
 `;

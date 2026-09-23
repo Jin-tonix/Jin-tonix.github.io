@@ -58,6 +58,35 @@ const NodeChip = styled(Link)`
   }
 `;
 
+// 시스템 계층 요약 (이미지 아래 한 줄씩)
+const LayerList = styled.dl`
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 6px 14px;
+  max-width: 900px;
+  margin: 0 0 14px;
+  font-size: clamp(0.75em, 1.05vw, 0.88em);
+
+  dt {
+    color: #ffd700;
+    font-weight: bold;
+  }
+
+  dd {
+    color: #bbb;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+
+    dd {
+      margin-bottom: 6px;
+    }
+  }
+`;
+
 export default function SystemMap({ systemMap, withPrefix }) {
   if (!systemMap) return null;
   return (
@@ -68,6 +97,16 @@ export default function SystemMap({ systemMap, withPrefix }) {
         <ImageFrame href={systemMap.image} target="_blank" rel="noopener noreferrer">
           <img src={systemMap.image} alt={systemMap.imageAlt || systemMap.title} />
         </ImageFrame>
+      )}
+      {systemMap.layers && (
+        <LayerList>
+          {systemMap.layers.map((layer) => (
+            <React.Fragment key={layer.name}>
+              <dt>{layer.name}</dt>
+              <dd>{layer.desc}</dd>
+            </React.Fragment>
+          ))}
+        </LayerList>
       )}
       <NodeRow>
         {systemMap.nodes.map((node) => (
