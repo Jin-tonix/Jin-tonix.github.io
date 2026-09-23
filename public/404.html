@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<!-- GitHub Pages SPA 딥링크 리다이렉트: 경로를 쿼리스트링에 인코딩해 index.html 로 보낸다 -->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>목진희 포트폴리오</title>
+    <script>
+      var pathSegmentsToKeep = 0;
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

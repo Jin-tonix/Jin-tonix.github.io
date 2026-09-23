@@ -143,10 +143,53 @@ const Description = styled.div`
   }
 `;
 
+const GroupTitle = styled.h2`
+  width: 80%;
+  color: #888;
+  font-size: clamp(0.8em, 1.4vw, 1em);
+  font-weight: normal;
+  text-align: left;
+  margin: 20px 0 10px;
+
+  @media (max-width: 768px) {
+    font-size: 0.8em;
+  }
+`;
+
 const Projects = () => {
   return (
     <Container>
       <Title>Portfolio</Title><br/><br/>
+
+      <GroupTitle>StyleSeller · 2026</GroupTitle>
+      <PortfolioGrid>
+        <ProjectBoxWrapper>
+          <ProjectBox to="/projects/project6">
+            <img src="/images/logo6.png" alt="Project 6" />
+          </ProjectBox>
+          <Description>AI Company OS</Description>
+        </ProjectBoxWrapper>
+        <ProjectBoxWrapper>
+          <ProjectBox to="/projects/project7">
+            <img src="/images/logo7.png" alt="Project 7" />
+          </ProjectBox>
+          <Description>brand-tool</Description>
+        </ProjectBoxWrapper>
+        <ProjectBoxWrapper>
+          <ProjectBox to="/projects/project8">
+            <img src="/images/logo8.png" alt="Project 8" />
+          </ProjectBox>
+          <Description>Email AI Agent</Description>
+        </ProjectBoxWrapper>
+        <ProjectBoxWrapper>
+          <ProjectBox to="/projects/project9">
+            <img src="/images/logo9.png" alt="Project 9" />
+          </ProjectBox>
+          <Description>현장 자동화</Description>
+        </ProjectBoxWrapper>
+      </PortfolioGrid>
+
+      <GroupTitle>Before · 2024–2025</GroupTitle>
       <PortfolioGrid>
         <ProjectBoxWrapper>
           <ProjectBox to="/projects/project5">
@@ -177,7 +220,7 @@ const Projects = () => {
             <img src="/images/logo2.png" alt="Project 2" />
           </ProjectBox>
           <Description>Flux</Description>
-        </ProjectBoxWrapper>    
+        </ProjectBoxWrapper>
       </PortfolioGrid>
     </Container>
   );

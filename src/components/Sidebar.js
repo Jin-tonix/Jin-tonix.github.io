@@ -48,11 +48,11 @@ const SidebarMain = styled.div`
     display: ${({ showExtraMenu }) => (showExtraMenu ? 'flex' : 'none')};
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
 
     a {
       color: #aaa;
-      font-size: clamp(0.9em, 1.5vw, 1.2em); /* 반응형 폰트 크기 */
+      font-size: clamp(0.75em, 1.3vw, 1em); /* 반응형 폰트 크기, 항목이 늘어 촘촘하게 조정 */
       text-decoration: none;
       font-weight: normal;
       transition: color 0.3s ease;
@@ -100,6 +100,10 @@ export default function Sidebar() {
 
         {showExtraMenu && (
           <div className="extra-menu">
+            <Link to="/projects/project6">AI Company OS</Link>
+            <Link to="/projects/project7">brand-tool</Link>
+            <Link to="/projects/project8">Email Agent</Link>
+            <Link to="/projects/project9">현장 자동화</Link>
             <Link to="/projects/project5">We:Review</Link>
             <Link to="/projects/project4">FitChecker</Link>
             <Link to="/projects/project3">Briefify</Link>
@@ -121,7 +125,7 @@ export default function Sidebar() {
           <FontAwesomeIcon icon={faEnvelope} /> Email
         </a>
         <div style={{ marginTop: '15px', fontSize: 'clamp(0.65em, 1.2vw, 0.8em)', color: '#888', textAlign: 'center' }}>
-          Last Updated: 2025.11.01
+          Last Updated: 2026.09.23
         </div>
       </div>
     </SidebarMain>

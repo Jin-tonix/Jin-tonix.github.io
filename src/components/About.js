@@ -135,6 +135,7 @@ const About = () => (
         <ProfileImage src="/images/img.jpg" alt="Jinhee Mok" />
         <p><strong style={{ color: '#ffd700' }}>열정을 불태울 준비가 된 목진희입니다.</strong></p>
         <p>법학 전공과 영어 강사 경력을 통해 사용자 관점에서 문제를 이해하고 맞춤형 해결책을 제시하는 역량을 키웠습니다. 사람들의 문제를 기술로 해결하고자 개발 분야로 전향하여 K-Digital Training과 생성형 AI 개발자 맞춤형 인재 양성과정을 통해 실무 역량을 쌓았습니다.</p>
+        <p>StyleSeller 에서는 혼자 사내 AI 플랫폼을 만들고 운영했습니다. 에이전트 20여 개가 일하는 AI Company OS, 커밋 1,500개 규모의 영업 운영 플랫폼, 대표 메일 답장 에이전트, 직원 PC 자동화까지 기획부터 배포와 장애 대응을 맡았습니다. AI 코딩 도구로 속도를 내되, 결과는 테스트·교차 리뷰·실기기 확인으로 검증하는 것을 원칙으로 삼았습니다.</p>
         <p>FitChecker 프로젝트에서 LLM 기반 <strong style={{ color: '#ffd700' }}>AI 챗봇</strong>을 개발하며 RAG로 영상 추천 정확도를 50% 향상시켰고, WeReview 인턴십에서 <strong style={{ color: '#ffd700' }}>OCR+LLM 파이프라인</strong>을 구축해 <strong style={{ color: '#ffd700' }}>영수증 검수 자동화</strong>를 달성했습니다.</p>
         <p><strong style={{ color: '#ffd700' }}>강점</strong>은 한 번 문제에 빠져들면 해결될 때까지 깊이 파고드는 <strong style={{ color: '#ffd700' }}>집중력</strong>과, 영어 강사로서 키운 <strong style={{ color: '#ffd700' }}>사용자 관점의 개발 철학</strong>입니다. 다만 간혹 모든 경우의 수를 생각하는 경향 때문에 오버엔지니어링을 할 때가 있어, <strong style={{ color: '#ffd700' }}>Simplicity over Complexity</strong>를 항상 마음에 새기고 팀원의 솔직한 의견에 늘 귀 기울이며 균형 잡힌 개발자로 성장하려고 노력하고 있습니다.</p>
         <p>인턴으로써 첫 실무 3개월 만에 비즈니스 성과를 냈고, 복잡한 기술보다 효율적인 알고리즘이 중요하다는 것을 배웠습니다. 사용자의 진짜 문제를 끝까지 해결하는 개발자로서, 성장과 기여를 동시에 실현하며 발전하겠습니다.</p>
@@ -144,6 +145,12 @@ const About = () => (
       <Section id="resume">
         <h2>Experience</h2>
         <ul>
+          <li>
+            <strong style={{ color: '#ffd700' }}>StyleSeller · AI Product Engineer</strong> (2026.02–현재)<br />
+            <span>- 사내 AI 에이전트 플랫폼 AI Company OS 설계·개발·운영: 에이전트 20여 개, 기획부터 배포·장애 대응까지 담당</span><br />
+            <span>- 영업 운영 플랫폼 brand-tool 풀스택 개발: 셀러 발굴·AI 벤더 매칭·카톡 발송 자동화 (커밋 1,500개)</span><br />
+            <span>- Email AI Agent·현장 자동화(Instagram DM·KakaoTalk) 개발: 직원 PC 자동화 노드 배포·원격 관제</span><br />
+          </li>
           <li>
             <strong style={{ color: '#ffd700' }}>위리뷰(WeReview) 인턴</strong> (2024.08–2024.10)<br />
             <span>- OCR+LLM 파이프라인 구축: 영수증 처리 자동화 핵심 모듈 개발</span><br />

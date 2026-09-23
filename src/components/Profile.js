@@ -143,7 +143,7 @@ const ProfileContainer = styled.div`
 export default function Profile() {
   return (
     <ProfileContainer>
-      <div className="intro">소통과 문제 해결, 두 마리 토끼를 잡는 개발자</div>
+      <div className="intro">현업의 반복 업무를, 운영되는 AI로 바꾸는 개발자</div>
       <div className="name-wrapper">
         <span className="name-highlight">목진희</span>입니다.
       </div>

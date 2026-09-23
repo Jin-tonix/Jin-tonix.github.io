@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { FaJava, FaReact, FaDocker, FaGithub, FaHtml5, FaCss3Alt, FaJs, FaGit, FaDatabase } from 'react-icons/fa';
-import { SiSpring, SiMysql, SiVuedotjs, SiFlutter, SiPython } from 'react-icons/si';
+import { FaJava, FaReact, FaDocker, FaGithub, FaHtml5, FaCss3Alt, FaJs, FaGit, FaDatabase, FaNodeJs, FaRobot, FaProjectDiagram, FaChartLine, FaUserCheck, FaCode, FaChrome, FaSync } from 'react-icons/fa';
+import { SiSpring, SiMysql, SiVuedotjs, SiFlutter, SiPython, SiNextdotjs, SiFastapi, SiPostgresql, SiSupabase, SiN8N, SiPlaywright, SiSwift, SiGooglecloud, SiNginx, SiGithubactions } from 'react-icons/si';
 
 const fadeInUp = keyframes`
   0% {
@@ -123,6 +123,40 @@ const SkillSection = styled.div`
 const Skills = () => (
   <Container>
     <Content>
+      <SkillSection id="ai-agent-skills">
+        <h2>AI / Agent</h2>
+        <div className="skills">
+          <div className="skill-item">
+            <FaRobot className="skill-icon" color="#ffd700" />
+            <span style={{ color: '#fff' }}>LLM 에이전트 설계</span>
+          </div>
+          <div className="skill-item">
+            <FaProjectDiagram className="skill-icon" color="#61DAFB" />
+            <span style={{ color: '#fff' }}>MCP 서버</span>
+          </div>
+          <div className="skill-item">
+            <FaDatabase className="skill-icon" color="#f29111" />
+            <span style={{ color: '#fff' }}>RAG (LightRAG, pgvector)</span>
+          </div>
+          <div className="skill-item">
+            <FaProjectDiagram className="skill-icon" color="#6DB33F" />
+            <span style={{ color: '#fff' }}>LiteLLM</span>
+          </div>
+          <div className="skill-item">
+            <FaChartLine className="skill-icon" color="#F7DF1E" />
+            <span style={{ color: '#fff' }}>Langfuse</span>
+          </div>
+          <div className="skill-item">
+            <FaUserCheck className="skill-icon" color="#E34F26" />
+            <span style={{ color: '#fff' }}>HITL 승인 설계</span>
+          </div>
+          <div className="skill-item">
+            <FaCode className="skill-icon" color="#DE7356" />
+            <span style={{ color: '#fff' }}>Claude Code</span>
+          </div>
+        </div>
+      </SkillSection>
+
       <SkillSection id="backend-skills">
         <h2>Backend</h2>
         <div className="skills">
@@ -145,6 +179,26 @@ const Skills = () => (
           <div className="skill-item">
             <SiPython className="skill-icon" color="#3776AB" />
             <span style={{ color: '#fff' }}>Python</span>
+          </div>
+          <div className="skill-item">
+            <SiNextdotjs className="skill-icon" color="#fff" />
+            <span style={{ color: '#fff' }}>Next.js</span>
+          </div>
+          <div className="skill-item">
+            <FaNodeJs className="skill-icon" color="#339933" />
+            <span style={{ color: '#fff' }}>Node.js/Express</span>
+          </div>
+          <div className="skill-item">
+            <SiFastapi className="skill-icon" color="#009688" />
+            <span style={{ color: '#fff' }}>FastAPI</span>
+          </div>
+          <div className="skill-item">
+            <SiPostgresql className="skill-icon" color="#4169E1" />
+            <span style={{ color: '#fff' }}>PostgreSQL/PostgREST</span>
+          </div>
+          <div className="skill-item">
+            <SiSupabase className="skill-icon" color="#3ECF8E" />
+            <span style={{ color: '#fff' }}>Supabase</span>
           </div>
         </div>
       </SkillSection>
@@ -193,6 +247,42 @@ const Skills = () => (
           <div className="skill-item">
             <FaGithub className="skill-icon" color="#181717" />
             <span style={{ color: '#fff' }}>GitHub</span>
+          </div>
+          <div className="skill-item">
+            <FaDocker className="skill-icon" color="#2496ED" />
+            <span style={{ color: '#fff' }}>Docker Compose</span>
+          </div>
+          <div className="skill-item">
+            <SiGithubactions className="skill-icon" color="#2088FF" />
+            <span style={{ color: '#fff' }}>GitHub Actions</span>
+          </div>
+          <div className="skill-item">
+            <SiGooglecloud className="skill-icon" color="#4285F4" />
+            <span style={{ color: '#fff' }}>GCP VM</span>
+          </div>
+          <div className="skill-item">
+            <SiNginx className="skill-icon" color="#009639" />
+            <span style={{ color: '#fff' }}>nginx</span>
+          </div>
+          <div className="skill-item">
+            <FaSync className="skill-icon" color="#ffd700" />
+            <span style={{ color: '#fff' }}>무중단 배포</span>
+          </div>
+          <div className="skill-item">
+            <SiN8N className="skill-icon" color="#EA4B71" />
+            <span style={{ color: '#fff' }}>n8n</span>
+          </div>
+          <div className="skill-item">
+            <FaChrome className="skill-icon" color="#4285F4" />
+            <span style={{ color: '#fff' }}>Chrome Extension MV3</span>
+          </div>
+          <div className="skill-item">
+            <SiPlaywright className="skill-icon" color="#2EAD33" />
+            <span style={{ color: '#fff' }}>Playwright / CDP</span>
+          </div>
+          <div className="skill-item">
+            <SiSwift className="skill-icon" color="#F05138" />
+            <span style={{ color: '#fff' }}>Swift (macOS)</span>
           </div>
         </div>
       </SkillSection>
