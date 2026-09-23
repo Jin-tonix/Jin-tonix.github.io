@@ -12,9 +12,9 @@ const ko = {
   },
   hero: {
     headline: '현업의 반복 업무를, 매일 돌아가는 AI 시스템으로',
-    sub: 'AI Builder 목진희입니다. 패션 커머스 스타트업 StyleSeller 에서 8개월 동안 사내 AI 운영 시스템을 혼자 설계·구축·운영했습니다.',
+    sub: 'AI Builder 목진희입니다. SNS 커머스 스타트업 StyleSeller 에서 10개월 동안 사내 AI 운영 시스템을 혼자 설계·구축·운영했습니다.',
     metrics: [
-      { value: '8개월', label: '1인 빌더 · 2026.02–현재' },
+      { value: '10개월', label: '1인 빌더 · 2025.12–현재' },
       { value: '7,000', label: '본인 커밋 (핵심 저장소 5개)' },
       { value: '~40', label: '운영 서비스 (Docker · GCP)' },
       { value: '4,500+', label: '자동 테스트 케이스' },
@@ -452,20 +452,13 @@ const ko = {
       },
     ],
   },
-  timeline: [
-    { period: '2024.04 – 10', title: '개발자 전향', desc: '하이미디어아카데미 풀스택 과정 — Spring Boot·Vue.js 팀 프로젝트 (Flux, 전직시)' },
-    { period: '2024.10 – 12', title: 'AI 프로젝트', desc: '하이미디어아카데미 AI 과정 — Briefify, FitChecker' },
-    { period: '2025.05 – 07', title: '생성형 AI 개발자 과정', desc: '한국IT비즈니스진흥협회' },
-    { period: '2025.08 – 10', title: 'We:Review 인턴', desc: 'OCR + LLM 영수증 검증 자동화 (1인)' },
-    { period: '2026.02 ~', title: 'StyleSeller · AI Builder', desc: 'IG DM 자동화로 시작 → 영업 플랫폼·메일 에이전트(03) → AI Company OS(05) → 벤더 CS AI(06)', now: true },
-  ],
   about: {
     title: 'About Me',
     photo: '/images/img.jpg',
     tagline: 'AI Builder 목진희입니다.',
     paragraphs: [
       '현업의 반복 업무를 찾아 AI 에이전트와 자동화로 바꾸고, 그 시스템을 배포하고 운영하는 일을 합니다. 사람이 반복하는 일은 기계가 하게 만들고, 판단은 사람에게 남기는 것이 제 원칙입니다.',
-      'StyleSeller 에서는 8개월 동안 혼자 사내 AI 운영 시스템을 만들고 운영했습니다. 벤더 CS 에이전트, 셀러 발굴부터 맞춤 발송까지 잇는 영업 플랫폼, 사람이 승인하는 에이전트 조직과 사내 AI 비서, 직원 PC 자동화까지 기획부터 배포와 장애 대응을 맡았습니다.',
+      'StyleSeller 에서는 10개월 동안 혼자 사내 AI 운영 시스템을 만들고 운영했습니다. 벤더 CS 에이전트, 셀러 발굴부터 맞춤 발송까지 잇는 영업 플랫폼, 사람이 승인하는 에이전트 조직과 사내 AI 비서, 직원 PC 자동화까지 기획부터 배포와 장애 대응을 맡았습니다.',
       '코드는 Claude Code 에이전트 여러 개를 병렬로 지휘해 만들되, 결과는 테스트·교차 리뷰·실기기 확인·도는 코드의 해시로 검증합니다. 사고가 나면 원인과 교훈을 규칙으로 남겨 같은 실수가 반복되지 않게 합니다.',
       '법학 전공과 영어 강사·운영 실장 경력에서 사용자 관점으로 문제를 이해하는 법을 배웠고, 2024년 개발자로 전향했습니다. We:Review 인턴십에서 OCR + LLM 으로 영수증 검수를 자동화한 경험이 지금의 일로 이어졌습니다.',
     ],
@@ -473,11 +466,12 @@ const ko = {
     experience: [
       {
         org: 'StyleSeller · AI Builder',
-        period: '2026.02–현재',
+        period: '2025.12–현재',
         bullets: [
           '벤더 CS AI: 직원 카톡 실시간 수집 → Agentic RAG 답변 → Slack 에스컬레이션 (벤더 에이전트 커밋 600개)',
           '영업 플랫폼 brand-tool: 셀러 발굴·맞춤카톡·LLM 벤더 매칭 (커밋 1,502개, API 134개)',
           'AI Company OS·Spark, 대표 메일 GraphRAG 에이전트, 직원 PC 함대·운영 인프라',
+          'IG DM 자동화로 시작 → 영업 플랫폼·메일 에이전트(26.03) → AI Company OS(26.05) → 벤더 CS AI(26.06)',
         ],
       },
       {
@@ -498,8 +492,8 @@ const ko = {
         org: '하이미디어아카데미',
         period: '2024.04–2024.12',
         bullets: [
-          '풀스택 과정: Spring Boot·Vue.js 기반 팀 프로젝트와 API 개발 (Career Change)',
-          'AI 과정: 현업 멘토와 AI 애플리케이션 설계·개발',
+          '풀스택 과정: Spring Boot·Vue.js 기반 팀 프로젝트와 API 개발 — Flux, 전직시 (Career Change)',
+          'AI 과정: 현업 멘토와 AI 애플리케이션 설계·개발 — Briefify, FitChecker',
         ],
       },
       { org: '몬테키즈 영어 강사', period: '2022.06–2024.02', bullets: ['개인 맞춤형 교육·자기주도 학습 유도'] },
@@ -507,7 +501,6 @@ const ko = {
       { org: 'JLS (정상어학원) 강사', period: '2018.08–2020.09', bullets: ['참여형 수업 설계 및 학부모 소통'] },
       { org: '전원 어린이집 운영실장', period: '2015.03–2018.02', bullets: ['조직 관리·리더십·효율적 운영'] },
     ],
-    timelineTitle: 'Timeline',
     nowTitle: 'Now',
     nowText: '벤더 CS 자동 답변 개선판 검증, 셀러찾기 목표 상향, 운영 관측 강화를 진행하고 있습니다.',
   },

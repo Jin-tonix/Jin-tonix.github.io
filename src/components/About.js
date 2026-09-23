@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useLang } from '../lang/LangContext';
-import Timeline from './ui/Timeline';
 import PageShell, { Section, SectionTitle } from './ui/PageShell';
-import { color, font } from './ui/tokens';
+import { color, font, layout } from './ui/tokens';
 
 const TwoColumn = styled.div`
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
   gap: 48px;
 
   @media (max-width: 768px) {
@@ -39,32 +39,84 @@ const Paragraph = styled.p`
   margin: 0 0 14px;
 `;
 
+const NowBox = styled.div`
+  border: 1px solid ${color.gold};
+  border-radius: ${layout.radius};
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  background-color: rgba(255, 215, 0, 0.06);
+
+  .now-label {
+    color: ${color.gold};
+    font-weight: ${font.weight.subhead};
+    font-size: ${font.size.xs};
+  }
+
+  .now-text {
+    color: ${color.text};
+    font-size: ${font.size.sm};
+    line-height: 1.6;
+    margin-top: 4px;
+  }
+`;
+
+// 최신 경력이 위, 오래된 경력이 아래로 쌓이는 세로 타임라인
 const ExperienceList = styled.ul`
+  position: relative;
   list-style: none;
-  padding: 0;
+  padding: 0 0 0 26px;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 22px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background-color: ${color.line};
+  }
 `;
 
 const ExperienceItem = styled.li`
-  strong {
-    color: ${color.gold};
-    font-size: ${font.size.md};
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -26px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background-color: ${({ $current }) => ($current ? color.gold : color.bg)};
+    border: 2px solid ${({ $current }) => ($current ? color.gold : color.muted)};
   }
 
   .period {
-    color: ${color.muted};
+    display: block;
+    color: ${color.gold};
     font-size: ${font.size.xs};
-    margin-left: 6px;
+    font-weight: ${font.weight.subhead};
+  }
+
+  strong {
+    display: block;
+    color: ${color.text};
+    font-size: ${font.size.md};
+    font-weight: ${font.weight.subhead};
+    margin-top: 2px;
   }
 
   .bullets {
     margin-top: 6px;
-    color: ${color.text};
+    color: ${color.muted};
     font-size: ${font.size.sm};
-    line-height: ${font.bodyLineHeight};
+    line-height: 1.65;
   }
 
   .bullets span {
@@ -87,23 +139,23 @@ const About = () => {
             ))}
           </Section>
 
-          <Section>
-            <SectionTitle>{about.timelineTitle}</SectionTitle>
-            <Timeline items={content.timeline} nowLabel={about.nowTitle} nowText={about.nowText} />
-          </Section>
         </div>
 
         <div>
           <Section>
             <SectionTitle>{about.experienceTitle}</SectionTitle>
+            <NowBox>
+              <div className="now-label">{about.nowTitle}</div>
+              <div className="now-text">{about.nowText}</div>
+            </NowBox>
             <ExperienceList>
-              {about.experience.map((exp) => (
-                <ExperienceItem key={exp.org + exp.period}>
-                  <strong>{exp.org}</strong>
+              {about.experience.map((exp, i) => (
+                <ExperienceItem key={exp.org + exp.period} $current={i === 0}>
                   <span className="period">{exp.period}</span>
+                  <strong>{exp.org}</strong>
                   <div className="bullets">
                     {exp.bullets.map((b) => (
-                      <span key={b.slice(0, 20)}>- {b}</span>
+                      <span key={b.slice(0, 20)}>{b}</span>
                     ))}
                   </div>
                 </ExperienceItem>

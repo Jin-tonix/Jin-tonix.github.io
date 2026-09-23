@@ -12,9 +12,9 @@ const en = {
   },
   hero: {
     headline: 'I turn repetitive operations work into AI systems that run every day',
-    sub: "I'm Jinhee Mok, an AI Builder. For 8 months I was the only builder at StyleSeller, a fashion commerce startup. I designed, shipped, and ran its in-house AI operations system.",
+    sub: "I'm Jinhee Mok, an AI Builder. For 10 months I was the only builder at StyleSeller, a social commerce startup. I designed, shipped, and ran its in-house AI operations system.",
     metrics: [
-      { value: '8 mo', label: 'Solo builder · Feb 2026–now' },
+      { value: '10 mo', label: 'Solo builder · Dec 2025–now' },
       { value: '7,000', label: 'My commits (5 core repos)' },
       { value: '~40', label: 'Services in production' },
       { value: '4,500+', label: 'Automated test cases' },
@@ -444,20 +444,13 @@ const en = {
       },
     ],
   },
-  timeline: [
-    { period: 'Apr–Oct 2024', title: 'Career change', desc: 'Hi-Media Academy full-stack course: Spring Boot and Vue.js team projects (Flux, JeonJikSi)' },
-    { period: 'Oct–Dec 2024', title: 'AI projects', desc: 'Hi-Media Academy AI course: Briefify, FitChecker' },
-    { period: 'May–Jul 2025', title: 'Generative AI developer program', desc: 'Korea IT Business Promotion Association' },
-    { period: 'Aug–Oct 2025', title: 'We:Review intern', desc: 'OCR + LLM receipt verification (solo)' },
-    { period: 'Feb 2026 –', title: 'StyleSeller · AI Builder', desc: 'Started with IG DM automation → sales platform and email agent (Mar) → AI Company OS (May) → Vendor Support AI (Jun)', now: true },
-  ],
   about: {
     title: 'About Me',
     photo: '/images/img.jpg',
     tagline: "I'm Jinhee Mok, an AI Builder.",
     paragraphs: [
       'I find repetitive work in real operations, turn it into AI agents and automation, then ship and run those systems. My rule: machines do the repetition, and people keep the judgment.',
-      'At StyleSeller I spent 8 months as the only builder of the in-house AI operations system. That meant a vendor-support agent, a sales platform from seller discovery to tailored outreach, an agent org with human approvals and an internal assistant, and automation on employee PCs. I owned it end to end, from scoping to deployment to incident response.',
+      'At StyleSeller I spent 10 months as the only builder of the in-house AI operations system. That meant a vendor-support agent, a sales platform from seller discovery to tailored outreach, an agent org with human approvals and an internal assistant, and automation on employee PCs. I owned it end to end, from scoping to deployment to incident response.',
       "I write code by orchestrating several Claude Code agents in parallel, and I verify the results with tests, cross-reviews, real-device checks, and running-code hashes. After every incident, I turn the cause and the lesson into a rule so it doesn't happen again.",
       'I studied law, then worked as an English instructor and an operations manager. That taught me to understand problems from the user\'s side. I switched to software in 2024, and automating receipt review with OCR + LLM during my We:Review internship led directly to the work I do now.',
     ],
@@ -465,11 +458,12 @@ const en = {
     experience: [
       {
         org: 'StyleSeller · AI Builder',
-        period: 'Feb 2026–present',
+        period: 'Dec 2025–present',
         bullets: [
           'Vendor Support AI: real-time staff chat capture → agentic-RAG answers → Slack escalation (600 commits on the vendor agent)',
           'Sales platform brand-tool: seller discovery, tailored KakaoTalk campaigns, LLM vendor matching (1,502 commits, 134 APIs)',
           'AI Company OS and Spark, a GraphRAG CEO email agent, the employee-PC fleet and platform ops',
+          'Started with IG DM automation → sales platform and email agent (Mar 2026) → AI Company OS (May) → Vendor Support AI (Jun)',
         ],
       },
       {
@@ -485,12 +479,11 @@ const en = {
       {
         org: 'Hi-Media Academy',
         period: 'Apr–Dec 2024',
-        bullets: ['Full-stack course: Spring Boot and Vue.js team projects (career change)', 'AI course: designed and built AI apps with industry mentors'],
+        bullets: ['Full-stack course: Spring Boot and Vue.js team projects, Flux and JeonJikSi (career change)', 'AI course: designed and built AI apps with industry mentors, Briefify and FitChecker'],
       },
       { org: 'English instructor (Montekids, Pots&Pans, JLS)', period: '2018–2024', bullets: ['Personalized teaching and parent communication'] },
       { org: 'Daycare operations manager', period: '2015–2018', bullets: ['Organization management and operations'] },
     ],
-    timelineTitle: 'Timeline',
     nowTitle: 'Now',
     nowText: 'Validating the improved vendor auto-reply, raising Seller Finder targets, and strengthening ops observability.',
   },
