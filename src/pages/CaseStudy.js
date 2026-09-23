@@ -13,7 +13,7 @@ import {
   OneLiner,
   Repos,
   ContentSection,
-  ImagesSection,
+  DiagramRow,
   TextSection,
   HorizontalSection,
   Section,
@@ -138,14 +138,15 @@ export default function CaseStudy() {
           </Section>
         </HorizontalSection>
 
+        <DiagramRow>
+          {caseData.architectureImages.map((img) => (
+            <a key={img.src} href={img.src} target="_blank" rel="noopener noreferrer">
+              <img src={img.src} alt={img.alt} />
+            </a>
+          ))}
+        </DiagramRow>
+
         <ContentSection>
-          <ImagesSection>
-            {caseData.architectureImages.map((img) => (
-              <a key={img.src} href={img.src} target="_blank" rel="noopener noreferrer">
-                <img src={img.src} alt={img.alt} />
-              </a>
-            ))}
-          </ImagesSection>
 
           <TextSection>
             <Section>

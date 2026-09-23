@@ -238,3 +238,25 @@ export const Repos = styled.p`
     margin-right: 4px;
   }
 `;
+
+// 사례 구조도를 본문 위에 넓게 보여준다 (넓은 다이어그램이 좁은 칸에서 읽히지 않아서)
+export const DiagramRow = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  margin: 12px 0 8px;
+
+  a {
+    display: block;
+  }
+
+  img {
+    width: 100%;
+    max-width: 1000px;
+    background: #fff;
+    border: 3px solid #333;
+    border-radius: 5px;
+    cursor: zoom-in;
+  }
+`;
