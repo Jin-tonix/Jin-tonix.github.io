@@ -1,9 +1,9 @@
-// How I Build — 루프 다이어그램(단순 styled steps) + 하네스 목록 + incident lessons
+// How I Build — 루프 다이어그램(단순 styled steps) + 하네스 목록 + 사고에서 배운 원칙 (제목·설명 두 칸 목록)
 import React from 'react';
 import styled from 'styled-components';
 import { useLang } from '../lang/LangContext';
 import PageShell, { Section, SectionTitle } from '../components/ui/PageShell';
-import { Card, CardGrid, ZoomImage } from '../components/ui/primitives';
+import { ZoomImage } from '../components/ui/primitives';
 import { color, font } from '../components/ui/tokens';
 
 const LoopRow = styled.div`
@@ -50,11 +50,24 @@ const List = styled.ul`
   max-width: ${font.proseMaxWidth};
 `;
 
-const IncidentCard = styled(Card)`
+const Lessons = styled.div`
+  border-top: 1px solid ${color.line};
+  max-width: 920px;
+`;
+
+const Lesson = styled.div`
+  display: grid;
+  grid-template-columns: minmax(200px, 300px) 1fr;
+  gap: 8px 32px;
+  padding: 18px 0;
+  border-bottom: 1px solid ${color.line};
+
   h4 {
     color: ${color.gold};
     font-size: ${font.size.md};
-    margin: 0 0 8px;
+    font-weight: ${font.weight.subhead};
+    line-height: 1.45;
+    margin: 0;
   }
 
   p {
@@ -62,6 +75,10 @@ const IncidentCard = styled(Card)`
     font-size: ${font.size.sm};
     line-height: ${font.bodyLineHeight};
     margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
   }
 `;
 
@@ -108,14 +125,14 @@ export default function HowIBuild() {
 
       <Section>
         <SectionTitle>{howIBuild.incidentsTitle}</SectionTitle>
-        <CardGrid>
+        <Lessons>
           {howIBuild.incidents.map((inc) => (
-            <IncidentCard key={inc.title}>
+            <Lesson key={inc.title}>
               <h4>{inc.title}</h4>
               <p>{inc.lesson}</p>
-            </IncidentCard>
+            </Lesson>
           ))}
-        </CardGrid>
+        </Lessons>
       </Section>
     </PageShell>
   );

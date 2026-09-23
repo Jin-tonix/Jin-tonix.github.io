@@ -1,4 +1,4 @@
-// About 페이지용 세로 타임라인 (골드 점 + Now 박스)
+// About 페이지용 세로 타임라인 (골드 점 + 맨 아래 Now 박스)
 import React from 'react';
 import styled from 'styled-components';
 import { color, font, layout } from './tokens';
@@ -60,7 +60,7 @@ const NowBox = styled.div`
   border: 1px solid ${color.gold};
   border-radius: ${layout.radius};
   padding: 10px 14px;
-  margin-bottom: 16px;
+  margin-top: 4px;
   background-color: rgba(255, 215, 0, 0.06);
 
   .now-label {
@@ -81,12 +81,6 @@ export default function Timeline({ items, nowLabel, nowText }) {
   if (!items || items.length === 0) return null;
   return (
     <div>
-      {nowText && (
-        <NowBox>
-          <div className="now-label">{nowLabel || 'Now'}</div>
-          <div className="now-text">{nowText}</div>
-        </NowBox>
-      )}
       <List>
         {items.map((item) => (
           <Item key={`${item.period}-${item.title}`} $now={!!item.now}>
@@ -96,6 +90,12 @@ export default function Timeline({ items, nowLabel, nowText }) {
           </Item>
         ))}
       </List>
+      {nowText && (
+        <NowBox>
+          <div className="now-label">{nowLabel || 'Now'}</div>
+          <div className="now-text">{nowText}</div>
+        </NowBox>
+      )}
     </div>
   );
 }

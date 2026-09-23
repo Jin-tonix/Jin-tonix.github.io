@@ -111,6 +111,18 @@ const SidebarMain = styled.div`
       &:hover {
         color: ${color.gold};
       }
+
+      @media (max-width: 600px) {
+        .label {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .updated {
+    @media (max-width: 600px) {
+      display: none;
     }
   }
 
@@ -189,16 +201,16 @@ export default function Sidebar() {
             <button type="button" className={lang === 'en' ? 'active' : ''}>EN</button>
           </Link>
         </div>
-        <a href="https://github.com/Jin-tonix" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faGithub} /> GitHub
+        <a href="https://github.com/Jin-tonix" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+          <FontAwesomeIcon icon={faGithub} /> <span className="label">GitHub</span>
         </a>
-        <a href="https://www.linkedin.com/in/jin-tonix" target="_blank" rel="noopener noreferrer">
-          <FontAwesomeIcon icon={faLinkedin} /> LinkedIn
+        <a href="https://www.linkedin.com/in/jin-tonix" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+          <FontAwesomeIcon icon={faLinkedin} /> <span className="label">LinkedIn</span>
         </a>
-        <a href="mailto:jinheemok815@gmail.com">
-          <FontAwesomeIcon icon={faEnvelope} /> Email
+        <a href="mailto:jinheemok815@gmail.com" aria-label="Email">
+          <FontAwesomeIcon icon={faEnvelope} /> <span className="label">Email</span>
         </a>
-        <div style={{ marginTop: '10px', fontSize: 'clamp(0.6em, 1.1vw, 0.75em)', color: color.muted, textAlign: 'center' }}>
+        <div className="updated" style={{ marginTop: '10px', fontSize: 'clamp(0.6em, 1.1vw, 0.75em)', color: color.muted, textAlign: 'center' }}>
           Last Updated: 2026.09.23
         </div>
       </div>

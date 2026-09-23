@@ -17,7 +17,8 @@ const fadeInUp = keyframes`
 `;
 
 const HeroContainer = styled.div`
-  background-image: url('/images/img6.jpg');
+  background-image: linear-gradient(rgba(20, 20, 20, 0.55), rgba(20, 20, 20, 0.72)),
+    url('/images/img6.jpg');
   background-size: cover;
   background-position: center;
   color: ${color.text};
@@ -74,6 +75,19 @@ const HeroContainer = styled.div`
         bottom: -5px;
         left: 0;
       }
+    }
+  }
+
+  @media (max-width: 600px) {
+    padding: 40px 14px;
+
+    .headline {
+      font-size: 1.6rem;
+    }
+
+    .sub {
+      font-size: ${font.size.sm};
+      font-weight: ${font.weight.body};
     }
   }
 
