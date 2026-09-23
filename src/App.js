@@ -3,32 +3,36 @@ import React from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
-import Profile from './components/Profile';
+import HeadTags from './components/HeadTags';
 import About from './components/About';
 import Skills from './components/Skills';
-import Projects from './components/Projects';
-import Project1 from './components/Project1';
-import Project2 from './components/Project2';
-import Project3 from './components/Project3';
-import Project4 from './components/Project4';
-import Project5 from './components/Project5';
+import Home from './pages/Home';
+import ProjectsPage from './pages/ProjectsPage';
+import CaseStudy from './pages/CaseStudy';
+import HowIBuild from './pages/HowIBuild';
 
 function App() {
   return (
     <div className="App">
+      <HeadTags />
       <Sidebar />
       <div className="main-content">
         <Routes>
-          <Route path="/" element={<Profile />} />
+          {/* 한국어 (기본) */}
+          <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/skills" element={<Skills />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/projects/project1" element={<Project1 />} />
-          <Route path="/projects/project2" element={<Project2 />} />
-          <Route path="/projects/project3" element={<Project3 />} />
-          <Route path="/projects/project4" element={<Project4 />} />
-          <Route path="/projects/project5" element={<Project5 />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/:slug" element={<CaseStudy />} />
+          <Route path="/build" element={<HowIBuild />} />
 
+          {/* 영어 (/en 미러) */}
+          <Route path="/en" element={<Home />} />
+          <Route path="/en/about" element={<About />} />
+          <Route path="/en/skills" element={<Skills />} />
+          <Route path="/en/projects" element={<ProjectsPage />} />
+          <Route path="/en/projects/:slug" element={<CaseStudy />} />
+          <Route path="/en/build" element={<HowIBuild />} />
         </Routes>
       </div>
     </div>

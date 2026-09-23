@@ -211,7 +211,7 @@ const Project5 = () => {
           <img src="/images/logo5.png" alt="Project Logo" />
           <div>
             <h1>We:Review - 영수증 검증 자동화 시스템 (OCR + LLM 기반)</h1>
-            <SubHeader>- Solo Project (2024.08 ~ 2024.10): Backend/AI 개발 (1인 프로젝트)</SubHeader>
+            <SubHeader>- Solo Project (2025.08 ~ 2025.10): Backend/AI 개발 (1인 프로젝트)</SubHeader>
           </div>
         </Header>
 

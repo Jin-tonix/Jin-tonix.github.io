@@ -1,5 +1,8 @@
+// Home — 기존 Profile.js 의 배경 히어로 느낌을 유지하면서 헤드라인 + 서브 + 골드 메트릭 strip 추가
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { useLang } from '../lang/LangContext';
+import Metrics from '../components/ui/Metrics';
 
 const fadeInUp = keyframes`
   0% {
@@ -12,7 +15,7 @@ const fadeInUp = keyframes`
   }
 `;
 
-const ProfileContainer = styled.div`
+const HeroContainer = styled.div`
   background-image: url('/images/img6.jpg');
   background-size: cover;
   background-position: center;
@@ -22,9 +25,9 @@ const ProfileContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  margin-left: 15vw; /* 사이드바와의 간격 */
-  width: calc(100vw - 15vw); /* 화면 전체에서 사이드바 너비를 제외한 나머지 사용 */
+  min-height: 100vh;
+  margin-left: 15vw;
+  width: calc(100vw - 15vw);
   overflow: hidden;
   padding: 15px 20px;
   box-sizing: border-box;
@@ -33,32 +36,31 @@ const ProfileContainer = styled.div`
   text-shadow: 1.5px 1.5px 5.5px #333;
   background-color: rgba(0, 0, 0, 0.6);
 
-  .intro, .name-wrapper, .description {
+  .headline, .sub {
     max-width: 70%;
     text-align: center;
   }
 
-  .intro {
+  .headline {
     font-size: 1.8em;
     font-weight: 800;
     color: #ddd;
     margin-bottom: 10px;
     animation: ${fadeInUp} 1s ease forwards;
-    animation-delay: 0.5s;
+    animation-delay: 0.3s;
     opacity: 0;
   }
 
-  .name-wrapper {
-    font-size: 2em;
-    font-weight: 800;
+  .sub {
+    font-size: 1.2em;
+    font-weight: 600;
     color: #ddd;
     animation: ${fadeInUp} 1s ease forwards;
-    animation-delay: 1.5s;
+    animation-delay: 0.9s;
     opacity: 0;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 
     .name-highlight {
-      font-size: 1.8em;
       font-weight: 900;
       position: relative;
       display: inline-block;
@@ -76,63 +78,43 @@ const ProfileContainer = styled.div`
     }
   }
 
- 
-  /* 반응형 조정 */
   @media (max-width: 1024px) {
     margin-left: 15vw;
     width: calc(100vw - 15vw);
 
-    .intro {
+    .headline {
       font-size: 1.5em;
     }
 
-    .name-wrapper {
-      font-size: 1.7em;
-
-      .name-highlight {
-        font-size: 1.6em;
-      }
+    .sub {
+      font-size: 1.1em;
     }
-
-   
   }
 
   @media (max-width: 768px) {
     margin-left: 20vw;
     width: calc(100vw - 15vw);
 
-    .intro {
+    .headline {
       font-size: 1.3em;
     }
 
-    .name-wrapper {
-      font-size: 1.5em;
-
-      .name-highlight {
-        font-size: 1.4em;
-      }
+    .sub {
+      font-size: 1em;
     }
-
-  
   }
 
   @media (max-width: 480px) {
     margin-left: 20vw;
     width: calc(100vw - 15vw);
 
-
-    .intro {
+    .headline {
       font-size: 1.1em;
     }
 
-    .name-wrapper {
-      font-size: 1.5em;
-
-      .name-highlight {
-        font-size: 1.5em;
-      }
+    .sub {
+      font-size: 0.95em;
     }
-
   }
 
   &::-webkit-scrollbar {
@@ -140,13 +122,15 @@ const ProfileContainer = styled.div`
   }
 `;
 
-export default function Profile() {
+export default function Home() {
+  const { content } = useLang();
+  const { hero } = content;
+
   return (
-    <ProfileContainer>
-      <div className="intro">소통과 문제 해결, 두 마리 토끼를 잡는 개발자</div>
-      <div className="name-wrapper">
-        <span className="name-highlight">목진희</span>입니다.
-      </div>
-    </ProfileContainer>
+    <HeroContainer>
+      <div className="headline">{hero.headline}</div>
+      <div className="sub">{hero.sub}</div>
+      <Metrics metrics={hero.metrics} />
+    </HeroContainer>
   );
 }

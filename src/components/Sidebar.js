@@ -4,6 +4,7 @@ import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import styled from 'styled-components';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { useLang } from '../lang/LangContext';
 
 const SidebarMain = styled.div`
   position: fixed;
@@ -24,12 +25,12 @@ const SidebarMain = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 60px;
-    gap: 25px;
+    margin-top: 50px;
+    gap: 20px;
 
     a {
       color: #fff;
-      font-size: clamp(1.2em, 2vw, 1.8em); /* 반응형 폰트 크기 */
+      font-size: clamp(1.1em, 1.9vw, 1.6em);
       text-decoration: none;
       font-weight: bold;
       transition: color 0.3s ease;
@@ -48,13 +49,47 @@ const SidebarMain = styled.div`
     display: ${({ showExtraMenu }) => (showExtraMenu ? 'flex' : 'none')};
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 8px;
+    max-height: 46vh;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     a {
       color: #aaa;
-      font-size: clamp(0.9em, 1.5vw, 1.2em); /* 반응형 폰트 크기 */
+      font-size: clamp(0.68em, 1.15vw, 0.9em);
       text-decoration: none;
       font-weight: normal;
+      transition: color 0.3s ease;
+      text-align: center;
+
+      &:hover {
+        color: #ffd700;
+      }
+    }
+
+    .extra-group-label {
+      color: #666;
+      font-size: clamp(0.6em, 1vw, 0.75em);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  }
+
+  .social-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 12px;
+
+    a {
+      color: #fff;
+      font-size: clamp(0.8em, 1.5vw, 1em);
+      text-decoration: none;
       transition: color 0.3s ease;
 
       &:hover {
@@ -63,18 +98,27 @@ const SidebarMain = styled.div`
     }
   }
 
-  .social-links {
+  .lang-switch {
     display: flex;
-    flex-direction: column;
+    gap: 6px;
     align-items: center;
-    margin-bottom: 50px;
-    gap: 15px;
+    font-size: clamp(0.7em, 1.2vw, 0.85em);
+    color: #888;
 
-    a {
-      color: #fff;
-      font-size: clamp(0.8em, 1.5vw, 1em); /* 반응형 폰트 크기 */
-      text-decoration: none;
-      transition: color 0.3s ease;
+    button {
+      background: none;
+      border: 1px solid #555;
+      border-radius: 4px;
+      color: #aaa;
+      padding: 2px 8px;
+      cursor: pointer;
+      font-size: inherit;
+      transition: all 0.2s ease;
+
+      &.active {
+        color: #ffd700;
+        border-color: #ffd700;
+      }
 
       &:hover {
         color: #ffd700;
@@ -85,6 +129,8 @@ const SidebarMain = styled.div`
 
 export default function Sidebar() {
   const [showExtraMenu, setShowExtraMenu] = useState(false);
+  const { content, withPrefix, koPath, enPath, lang } = useLang();
+  const { nav, cases, before } = content;
 
   const handleProjectsClick = () => {
     setShowExtraMenu(!showExtraMenu);
@@ -93,24 +139,39 @@ export default function Sidebar() {
   return (
     <SidebarMain showExtraMenu={showExtraMenu}>
       <div className="menu">
-        <Link to="/" onClick={() => setShowExtraMenu(false)}>Intro</Link>
-        <Link to="/about" onClick={() => setShowExtraMenu(false)}>About</Link>
-        <Link to="/skills" onClick={() => setShowExtraMenu(false)}>Skills</Link>
-        <Link to="/projects" onClick={handleProjectsClick}>Projects</Link>
+        <Link to={withPrefix('/')} onClick={() => setShowExtraMenu(false)}>{nav.home}</Link>
+        <Link to={withPrefix('/about')} onClick={() => setShowExtraMenu(false)}>{nav.about}</Link>
+        <Link to={withPrefix('/skills')} onClick={() => setShowExtraMenu(false)}>{nav.skills}</Link>
+        <Link to={withPrefix('/projects')} onClick={handleProjectsClick}>{nav.projects}</Link>
 
         {showExtraMenu && (
           <div className="extra-menu">
-            <Link to="/projects/project5">We:Review</Link>
-            <Link to="/projects/project4">FitChecker</Link>
-            <Link to="/projects/project3">Briefify</Link>
-            <Link to="/projects/project1">전직시</Link>
-            <Link to="/projects/project2">Flux</Link>
-
+            {cases.map((c) => (
+              <Link key={c.id} to={withPrefix(`/projects/${c.slug}`)} onClick={() => setShowExtraMenu(false)}>
+                {c.shortTitle}
+              </Link>
+            ))}
+            <div className="extra-group-label">{before.title}</div>
+            {before.projects.map((p) => (
+              <Link key={p.route} to={withPrefix(p.route)} onClick={() => setShowExtraMenu(false)}>
+                {p.title}
+              </Link>
+            ))}
           </div>
         )}
+
+        <Link to={withPrefix('/build')} onClick={() => setShowExtraMenu(false)}>{nav.build}</Link>
       </div>
 
       <div className="social-links">
+        <div className="lang-switch">
+          <Link to={koPath}>
+            <button type="button" className={lang === 'ko' ? 'active' : ''}>KO</button>
+          </Link>
+          <Link to={enPath}>
+            <button type="button" className={lang === 'en' ? 'active' : ''}>EN</button>
+          </Link>
+        </div>
         <a href="https://github.com/Jin-tonix" target="_blank" rel="noopener noreferrer">
           <FontAwesomeIcon icon={faGithub} /> GitHub
         </a>
@@ -120,8 +181,8 @@ export default function Sidebar() {
         <a href="mailto:jinheemok815@gmail.com">
           <FontAwesomeIcon icon={faEnvelope} /> Email
         </a>
-        <div style={{ marginTop: '15px', fontSize: 'clamp(0.65em, 1.2vw, 0.8em)', color: '#888', textAlign: 'center' }}>
-          Last Updated: 2025.11.01
+        <div style={{ marginTop: '10px', fontSize: 'clamp(0.6em, 1.1vw, 0.75em)', color: '#888', textAlign: 'center' }}>
+          Last Updated: 2026.09.23
         </div>
       </div>
     </SidebarMain>
