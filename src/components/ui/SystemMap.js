@@ -1,39 +1,45 @@
-// Projects 페이지 상단 System Map: 이미지 + 클릭 가능한 노드 칩
+// Projects 페이지 상단 System Map: 이미지 + 클릭 가능한 노드 칩. Projects 페이지의 시각적 하이라이트.
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { color, font, layout } from './tokens';
 
 const Wrapper = styled.div`
-  width: 80%;
-  margin-bottom: 10px;
+  background-color: ${color.surface};
+  border: 1px solid ${color.line};
+  border-left: 3px solid ${color.gold};
+  border-radius: ${layout.radius};
+  padding: 24px;
 `;
 
 const Title = styled.h2`
-  color: #ffd700;
-  font-size: clamp(1em, 1.8vw, 1.3em);
-  margin-bottom: 6px;
+  color: ${color.gold};
+  font-size: ${font.size.lg};
+  font-weight: ${font.weight.subhead};
+  margin: 0 0 8px;
 `;
 
 const Intro = styled.p`
-  color: #ccc;
-  font-size: clamp(0.8em, 1.2vw, 0.95em);
-  line-height: 1.6;
-  margin-bottom: 14px;
-  max-width: 900px;
+  color: ${color.muted};
+  font-size: ${font.size.md};
+  line-height: ${font.bodyLineHeight};
+  margin: 0 0 18px;
+  max-width: ${font.proseMaxWidth};
 `;
 
 const ImageFrame = styled.a`
   display: block;
-  border: 3px solid #333;
-  border-radius: 6px;
+  border: 1px solid ${color.line};
+  border-radius: ${layout.radius};
   overflow: hidden;
-  max-width: 900px;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
+  cursor: zoom-in;
 
   img {
     display: block;
     width: 100%;
     height: auto;
+    background: #fff;
   }
 `;
 
@@ -44,17 +50,17 @@ const NodeRow = styled.div`
 `;
 
 const NodeChip = styled(Link)`
-  border: 1px solid #ffd700;
-  color: #ffd700;
+  border: 1px solid ${color.gold};
+  color: ${color.gold};
   border-radius: 999px;
   padding: 6px 16px;
-  font-size: clamp(0.75em, 1.1vw, 0.9em);
+  font-size: ${font.size.xs};
   text-decoration: none;
   transition: background-color 0.2s ease, color 0.2s ease;
 
   &:hover {
-    background-color: #ffd700;
-    color: #222;
+    background-color: ${color.gold};
+    color: ${color.bg};
   }
 `;
 
@@ -63,17 +69,16 @@ const LayerList = styled.dl`
   display: grid;
   grid-template-columns: max-content 1fr;
   gap: 6px 14px;
-  max-width: 900px;
-  margin: 0 0 14px;
-  font-size: clamp(0.75em, 1.05vw, 0.88em);
+  margin: 0 0 18px;
+  font-size: ${font.size.sm};
 
   dt {
-    color: #ffd700;
-    font-weight: bold;
+    color: ${color.gold};
+    font-weight: ${font.weight.subhead};
   }
 
   dd {
-    color: #bbb;
+    color: ${color.text};
     margin: 0;
     line-height: 1.5;
   }
