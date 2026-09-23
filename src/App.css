@@ -1,7 +1,20 @@
 /* src/App.css */
 .App {
+  --sidebar-width: clamp(80px, 15vw, 250px);
   display: flex;
+  min-height: 100vh;
+  background-color: #222;
   font-family: Arial, sans-serif;
+}
+
+/* 사이드바 폭만큼 비우고 남은 폭을 전부 쓴다. 스크롤은 여기서 한 번만 */
+.main-content {
+  flex: 1;
+  min-width: 0;
+  margin-left: var(--sidebar-width);
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #222;
 }
 
 

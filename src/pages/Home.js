@@ -3,6 +3,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useLang } from '../lang/LangContext';
 import Metrics from '../components/ui/Metrics';
+import { color, font } from '../components/ui/tokens';
 
 const fadeInUp = keyframes`
   0% {
@@ -16,52 +17,51 @@ const fadeInUp = keyframes`
 `;
 
 const HeroContainer = styled.div`
-  background-image: url('/images/img6.jpg');
+  background-image: linear-gradient(rgba(20, 20, 20, 0.55), rgba(20, 20, 20, 0.72)),
+    url('/images/img6.jpg');
   background-size: cover;
   background-position: center;
-  color: white;
+  color: ${color.text};
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  margin-left: 15vw;
-  width: calc(100vw - 15vw);
-  overflow: hidden;
-  padding: 15px 20px;
+  min-height: 100%;
+  width: 100%;
+  padding: 56px 20px;
   box-sizing: border-box;
-  color: #ddd;
   line-height: 1.5;
-  text-shadow: 1.5px 1.5px 5.5px #333;
+  text-shadow: 1.5px 1.5px 5.5px #000;
   background-color: rgba(0, 0, 0, 0.6);
 
-  .headline, .sub {
-    max-width: 70%;
+  .headline,
+  .sub {
+    max-width: 640px;
     text-align: center;
   }
 
   .headline {
-    font-size: 1.8em;
-    font-weight: 800;
-    color: #ddd;
-    margin-bottom: 10px;
-    animation: ${fadeInUp} 1s ease forwards;
-    animation-delay: 0.3s;
+    font-size: ${font.size.xxl};
+    font-weight: ${font.weight.title};
+    color: ${color.text};
+    margin-bottom: 12px;
+    animation: ${fadeInUp} 0.8s ease forwards;
+    animation-delay: 0.15s;
     opacity: 0;
   }
 
   .sub {
-    font-size: 1.2em;
-    font-weight: 600;
-    color: #ddd;
-    animation: ${fadeInUp} 1s ease forwards;
-    animation-delay: 0.9s;
+    font-size: ${font.size.lg};
+    font-weight: ${font.weight.subhead};
+    color: ${color.text};
+    animation: ${fadeInUp} 0.8s ease forwards;
+    animation-delay: 0.4s;
     opacity: 0;
     margin-bottom: 10px;
 
     .name-highlight {
-      font-weight: 900;
+      font-weight: ${font.weight.title};
       position: relative;
       display: inline-block;
 
@@ -69,8 +69,8 @@ const HeroContainer = styled.div`
         content: '';
         display: block;
         width: 100%;
-        height: 4px;
-        background-color: #ffd700;
+        height: 3px;
+        background-color: ${color.gold};
         position: absolute;
         bottom: -5px;
         left: 0;
@@ -78,47 +78,25 @@ const HeroContainer = styled.div`
     }
   }
 
-  @media (max-width: 1024px) {
-    margin-left: 15vw;
-    width: calc(100vw - 15vw);
+  @media (max-width: 600px) {
+    padding: 40px 14px;
 
     .headline {
-      font-size: 1.5em;
+      font-size: 1.6rem;
     }
 
     .sub {
-      font-size: 1.1em;
+      font-size: ${font.size.sm};
+      font-weight: ${font.weight.body};
     }
   }
 
-  @media (max-width: 768px) {
-    margin-left: 20vw;
-    width: calc(100vw - 15vw);
-
-    .headline {
-      font-size: 1.3em;
-    }
-
+  @media (prefers-reduced-motion: reduce) {
+    .headline,
     .sub {
-      font-size: 1em;
+      animation: none;
+      opacity: 1;
     }
-  }
-
-  @media (max-width: 480px) {
-    margin-left: 20vw;
-    width: calc(100vw - 15vw);
-
-    .headline {
-      font-size: 1.1em;
-    }
-
-    .sub {
-      font-size: 0.95em;
-    }
-  }
-
-  &::-webkit-scrollbar {
-    display: none;
   }
 `;
 

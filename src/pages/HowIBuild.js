@@ -1,95 +1,84 @@
-// How I Build — 루프 다이어그램(단순 styled steps) + 하네스 목록 + incident lessons
+// How I Build — 루프 다이어그램(단순 styled steps) + 하네스 목록 + 사고에서 배운 원칙 (제목·설명 두 칸 목록)
 import React from 'react';
 import styled from 'styled-components';
 import { useLang } from '../lang/LangContext';
-import { PageContainer, Title, GroupTitle, GroupIntro } from '../components/ui/GridKit';
+import PageShell, { Section, SectionTitle } from '../components/ui/PageShell';
+import { ZoomImage } from '../components/ui/primitives';
+import { color, font } from '../components/ui/tokens';
 
 const LoopRow = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-  width: 80%;
-  margin-bottom: 20px;
 `;
 
 const Step = styled.div`
-  background-color: #333;
-  border: 1px solid #444;
+  background-color: ${color.surface};
+  border: 1px solid ${color.line};
   border-radius: 8px;
   padding: 10px 14px;
-  color: #eee;
-  font-size: clamp(0.75em, 1.1vw, 0.9em);
-  max-width: 170px;
+  color: ${color.text};
+  font-size: ${font.size.sm};
+  max-width: 190px;
   display: flex;
   flex-direction: column;
   gap: 4px;
 
   strong {
-    color: #ffd700;
+    color: ${color.gold};
   }
 
   small {
-    color: #aaa;
+    color: ${color.muted};
     font-size: 0.85em;
     line-height: 1.4;
   }
 `;
 
 const Arrow = styled.span`
-  color: #ffd700;
+  color: ${color.gold};
   font-size: 1.1em;
 `;
 
 const List = styled.ul`
-  width: 80%;
-  color: #ccc;
-  font-size: clamp(0.8em, 1.1vw, 0.95em);
-  line-height: 1.8;
+  color: ${color.text};
+  font-size: ${font.size.sm};
+  line-height: ${font.bodyLineHeight};
   padding-left: 20px;
-  margin-bottom: 20px;
+  margin: 0;
+  max-width: ${font.proseMaxWidth};
 `;
 
-const IncidentGrid = styled.div`
-  width: 80%;
+const Lessons = styled.div`
+  border-top: 1px solid ${color.line};
+  max-width: 920px;
+`;
+
+const Lesson = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 14px;
-  margin-bottom: 20px;
-`;
-
-const IncidentCard = styled.div`
-  background-color: #262626;
-  border: 1px solid #333;
-  border-radius: 6px;
-  padding: 12px 16px;
+  grid-template-columns: minmax(200px, 300px) 1fr;
+  gap: 8px 32px;
+  padding: 18px 0;
+  border-bottom: 1px solid ${color.line};
 
   h4 {
-    color: #ffd700;
-    font-size: 0.95em;
-    margin: 0 0 6px;
+    color: ${color.gold};
+    font-size: ${font.size.md};
+    font-weight: ${font.weight.subhead};
+    line-height: 1.45;
+    margin: 0;
   }
 
   p {
-    color: #ccc;
-    font-size: 0.85em;
-    line-height: 1.6;
+    color: ${color.text};
+    font-size: ${font.size.sm};
+    line-height: ${font.bodyLineHeight};
     margin: 0;
   }
-`;
 
-// 작업 루프 다이어그램 이미지 (클릭하면 원본 크기)
-const LoopImage = styled.a`
-  display: block;
-  width: 90%;
-  max-width: 1000px;
-  margin: 0 auto 20px;
-
-  img {
-    width: 100%;
-    border: 3px solid #333;
-    border-radius: 5px;
-    background: #fff;
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
   }
 `;
 
@@ -98,44 +87,53 @@ export default function HowIBuild() {
   const { howIBuild } = content;
 
   return (
-    <PageContainer>
-      <Title>{howIBuild.title}</Title>
-      <GroupIntro style={{ textAlign: 'center' }}>{howIBuild.intro}</GroupIntro>
+    <PageShell title={howIBuild.title} lead={howIBuild.intro}>
+      <Section>
+        <SectionTitle>{howIBuild.loopTitle}</SectionTitle>
+        {howIBuild.image && (
+          <ZoomImage href={howIBuild.image} target="_blank" rel="noopener noreferrer">
+            <img src={howIBuild.image} alt={howIBuild.loopTitle} />
+          </ZoomImage>
+        )}
+        {!howIBuild.image && (
+          <>
+            <LoopRow>
+              {howIBuild.loop.map((item, i) => (
+                <React.Fragment key={item.step}>
+                  <Step title={item.desc}>
+                    <strong>{item.step}</strong>
+                    <small>{item.desc}</small>
+                  </Step>
+                  {i < howIBuild.loop.length - 1 && <Arrow>&rarr;</Arrow>}
+                </React.Fragment>
+              ))}
+            </LoopRow>
+          </>
+        )}
+      </Section>
 
-      <GroupTitle>{howIBuild.loopTitle}</GroupTitle>
-      {howIBuild.image && (
-        <LoopImage href={howIBuild.image} target="_blank" rel="noopener noreferrer">
-          <img src={howIBuild.image} alt={howIBuild.loopTitle} />
-        </LoopImage>
+      {!howIBuild.image && (
+        <Section>
+          <SectionTitle>{howIBuild.harnessTitle}</SectionTitle>
+          <List>
+            {howIBuild.harness.map((h) => (
+              <li key={h}>{h}</li>
+            ))}
+          </List>
+        </Section>
       )}
-      <LoopRow>
-        {howIBuild.loop.map((item, i) => (
-          <React.Fragment key={item.step}>
-            <Step title={item.desc}>
-              <strong>{item.step}</strong>
-              <small>{item.desc}</small>
-            </Step>
-            {i < howIBuild.loop.length - 1 && <Arrow>&rarr;</Arrow>}
-          </React.Fragment>
-        ))}
-      </LoopRow>
 
-      <GroupTitle>{howIBuild.harnessTitle}</GroupTitle>
-      <List>
-        {howIBuild.harness.map((h) => (
-          <li key={h}>{h}</li>
-        ))}
-      </List>
-
-      <GroupTitle>{howIBuild.incidentsTitle}</GroupTitle>
-      <IncidentGrid>
-        {howIBuild.incidents.map((inc) => (
-          <IncidentCard key={inc.title}>
-            <h4>{inc.title}</h4>
-            <p>{inc.lesson}</p>
-          </IncidentCard>
-        ))}
-      </IncidentGrid>
-    </PageContainer>
+      <Section>
+        <SectionTitle>{howIBuild.incidentsTitle}</SectionTitle>
+        <Lessons>
+          {howIBuild.incidents.map((inc) => (
+            <Lesson key={inc.title}>
+              <h4>{inc.title}</h4>
+              <p>{inc.lesson}</p>
+            </Lesson>
+          ))}
+        </Lessons>
+      </Section>
+    </PageShell>
   );
 }

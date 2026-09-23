@@ -1,86 +1,75 @@
-// Project5~9 에서 반복되던 case-study 레이아웃을 공유 컴포넌트로 추출한 것.
-// 기존 페이지(Project1~5)는 건드리지 않고, 새 CaseStudy 페이지와 이후 재사용을 위해 둔다.
+// 케이스 스터디 레이아웃 — 새 CaseStudy 페이지와 옛 Project1~5 페이지가 함께 쓴다.
 import styled from 'styled-components';
+import { color, font, layout } from './tokens';
 
 export const PageWrapper = styled.div`
-  margin-left: 15vw;
-  min-height: 100vh;
+  width: 100%;
+  min-height: 100%;
   display: flex;
   justify-content: center;
-  align-items: start;
-  background-color: #222;
-  max-width: 100vw;
-  width: calc(100vw - 15vw);
-
-  @media (max-width: 768px) {
-    margin-left: 15vw;
-  }
-
-  @media (max-width: 480px) {
-    margin-left: 15vw;
-  }
+  background-color: ${color.bg};
+  box-sizing: border-box;
 `;
 
 export const Container = styled.div`
-  width: 90%;
-  max-width: 1400px;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  color: #e0e0e0;
-  background-color: #222;
-  font-family: Arial, sans-serif;
-  font-size: clamp(0.6em, 1vw, 1em);
-  max-height: 100vh;
-  overflow: auto;
-  padding-left: 50px;
+  width: 100%;
+  max-width: ${layout.maxWidth};
+  padding: ${layout.paddingDesktop};
   box-sizing: border-box;
+  color: ${color.text};
 
-  &::-webkit-scrollbar {
-    display: none;
+  @media (max-width: 768px) {
+    padding: ${layout.paddingMobile};
   }
 `;
 
 export const Header = styled.div`
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #333;
-  padding-bottom: 5px;
+  gap: 16px;
+  border-bottom: 1px solid ${color.line};
+  padding-bottom: 16px;
+  margin-bottom: 16px;
   width: 100%;
 
   img {
-    width: clamp(30px, 4vw, 50px);
-    height: auto;
-    margin-right: 10px;
+    width: 44px;
+    height: 44px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
   }
 
   h1 {
-    font-size: clamp(0.9em, 1.8vw, 1.1em);
-    font-weight: bold;
-    color: #ffd700;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: ${font.weight.title};
+    color: ${color.gold};
+    margin: 0;
+    line-height: 1.3;
   }
 `;
 
 export const SubHeader = styled.h2`
-  font-size: clamp(0.8em, 1.6vw, 0.95em);
-  color: #888;
+  font-size: ${font.size.sm};
+  font-weight: ${font.weight.body};
+  color: ${color.muted};
+  margin: 4px 0 0;
 `;
 
 export const OneLiner = styled.p`
-  font-size: clamp(0.85em, 1.5vw, 1em);
-  color: #ccc;
-  margin: 8px 0 4px;
+  font-size: ${font.size.md};
+  color: ${color.text};
+  line-height: ${font.bodyLineHeight};
+  margin: 0 0 8px;
 `;
 
 export const ContentSection = styled.div`
   display: flex;
   width: 100%;
-  gap: 20px;
-  align-items: center;
+  gap: 24px;
 
   @media (max-width: 768px) {
     flex-direction: column;
-    gap: 5px;
   }
 `;
 
@@ -97,8 +86,8 @@ export const ImagesSection = styled.div`
   img {
     width: 100%;
     max-width: 640px;
-    border: 3px solid #333;
-    border-radius: 5px;
+    border: 1px solid ${color.line};
+    border-radius: ${layout.radius};
     object-fit: contain;
     cursor: zoom-in;
   }
@@ -106,7 +95,7 @@ export const ImagesSection = styled.div`
   @media (max-width: 768px) {
     align-items: center;
     img {
-      max-width: 280px;
+      max-width: 320px;
     }
   }
 `;
@@ -123,11 +112,12 @@ export const TextSection = styled.div`
 export const HorizontalSection = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 24px;
   width: 100%;
 
   @media (max-width: 768px) {
     flex-direction: column;
-    gap: 10px;
+    gap: 16px;
   }
 `;
 
@@ -135,66 +125,74 @@ export const Section = styled.div`
   flex: 1;
 
   h3 {
-    font-size: 1em;
-    color: #ffd700;
+    font-size: ${font.size.lg};
+    font-weight: ${font.weight.subhead};
+    color: ${color.gold};
+    margin: 0 0 10px;
   }
 
-  p, ul, ol {
-    line-height: 1.6;
-    font-size: 0.9em;
-    color: #ccc;
+  p,
+  ul,
+  ol {
+    line-height: ${font.bodyLineHeight};
+    font-size: ${font.size.sm};
+    color: ${color.text};
+    max-width: ${font.proseMaxWidth};
   }
 
-  ul, ol {
+  ul,
+  ol {
     padding-left: 18px;
-  }
-
-  @media (max-width: 768px) {
-    h3 {
-      font-size: 0.9em;
-    }
-
-    p, ul, ol {
-      font-size: 0.8em;
-    }
   }
 `;
 
 export const SkillsList = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding-left: 0 !important;
+  margin: 0;
 
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
+  li {
+    font-size: ${font.size.xs};
+    color: ${color.text};
+    border: 1px solid ${color.line};
+    border-radius: 999px;
+    padding: 4px 12px;
+    line-height: 1.4;
   }
 `;
 
 export const TroubleshootItem = styled.div`
-  margin-bottom: 14px;
+  margin-bottom: 18px;
 
   strong {
-    color: #fff;
+    color: ${color.text};
+    font-size: ${font.size.md};
   }
 
   .field {
     display: block;
-    margin-top: 2px;
+    margin-top: 4px;
+    font-size: ${font.size.sm};
+    color: ${color.text};
+    max-width: ${font.proseMaxWidth};
 
     .field-label {
-      color: #ffd700;
-      font-weight: bold;
+      color: ${color.gold};
+      font-weight: ${font.weight.subhead};
       margin-right: 6px;
     }
   }
 `;
 
 export const AiCollabBox = styled.div`
-  border: 1px solid #333;
-  border-radius: 6px;
-  padding: 12px 16px;
-  margin-top: 10px;
-  background-color: #262626;
+  background-color: ${color.surface};
+  border: 1px solid ${color.line};
+  border-radius: ${layout.radius};
+  padding: 16px 20px;
+  margin-top: 8px;
 
   h3 {
     margin-top: 0;
@@ -204,37 +202,33 @@ export const AiCollabBox = styled.div`
 export const Footer = styled.footer`
   width: 100%;
   text-align: left;
-  font-size: 0.9em;
-  color: #888;
-  border-top: 1px solid #333;
-  margin-top: auto;
-  padding-top: 10px;
+  font-size: ${font.size.sm};
+  color: ${color.muted};
+  border-top: 1px solid ${color.line};
+  margin-top: 32px;
+  padding-top: 16px;
 
   a {
-    color: #ffd700;
+    color: ${color.gold};
     text-decoration: none;
-    display: flex;
+    display: inline-flex;
     align-items: center;
   }
 
   a:hover {
-    color: #fff;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 0.8em;
+    color: ${color.text};
   }
 `;
 
 // 사례 머리에 관련 저장소를 한 줄로 보여준다
 export const Repos = styled.p`
-  margin: 0 0 12px;
-  font-size: 0.85em;
-  color: #999;
+  margin: 0 0 16px;
+  font-size: ${font.size.xs};
+  color: ${color.muted};
 
   span {
-    color: #ffd700;
-    font-weight: bold;
+    color: ${color.gold};
+    font-weight: ${font.weight.subhead};
     margin-right: 4px;
   }
 `;
@@ -245,18 +239,18 @@ export const DiagramRow = styled.div`
   flex-direction: column;
   gap: 16px;
   width: 100%;
-  margin: 12px 0 8px;
+  margin: 16px 0;
 
   a {
     display: block;
+    cursor: zoom-in;
   }
 
   img {
     width: 100%;
     max-width: 1000px;
     background: #fff;
-    border: 3px solid #333;
-    border-radius: 5px;
-    cursor: zoom-in;
+    border: 1px solid ${color.line};
+    border-radius: ${layout.radius};
   }
 `;
