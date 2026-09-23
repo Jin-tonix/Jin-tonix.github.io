@@ -229,10 +229,10 @@ const en = {
           action: 'The server recomputes roles from DB membership instead of trusting the request. SQL runs under a read-only role behind a safe-SELECT guard. Approvals are idempotent, and there is a kill switch.',
         },
         {
-          title: '1,000 reviews took 100 minutes to collect',
-          cause: 'Timer throttling in background tabs slowed collection.',
-          action: "Moved collection into an employee's Chrome extension and resolved the throttling.",
-          result: 'Collecting 1,000 reviews now takes 2 min 30 s.',
+          title: 'Collecting 1,000 reviews was on track to take 100 minutes',
+          cause: 'In a minimized window, timers were throttled to once per minute, so each 0.5 s wait became 60 s. That works out to 100 minutes per 1,000 reviews.',
+          action: 'Moved the waits onto ticks driven by the service worker, which the throttling does not affect.',
+          result: 'Measured: 1,000 reviews in 2 min 30 s.',
         },
         {
           title: 'Safe deploys with many AI sessions at once',
@@ -311,7 +311,7 @@ const en = {
       highlights: [
         'One-line installers for Mac and Windows, no admin rights needed, auto-update 3×/day',
         'Real-time KakaoTalk relay for 11 staff, a Windows KakaoTalk collector, automated group-buy announcements to open chats',
-        'Instagram DM Chrome extension (Feb–Jul 2026): trusted input via CDP, 8-tier send fallback, a daily self-check agent',
+        'Instagram DM Chrome extension (Feb–Jul 2026): trusted input via CDP, multi-step send fallback, a daily self-check agent',
         'Infra: GCP VM, Docker Compose, 6 self-hosted Postgres DBs, GitHub Actions → registry deploys',
       ],
       stack: ['JavaScript / Node.js', 'Chrome Extension MV3', 'Chrome DevTools Protocol', 'Swift', 'Python', 'Bash', 'PowerShell', 'launchd', 'Playwright', 'Docker', 'nginx', 'GitHub Actions', 'GCP'],

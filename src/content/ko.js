@@ -233,10 +233,10 @@ const ko = {
           action: '역할은 요청 본문을 믿지 않고 서버가 DB 멤버십으로 다시 계산합니다. SQL 은 읽기 전용 역할과 안전한 SELECT 검사만 통과합니다. 승인 실행은 멱등이고, 킬 스위치가 있습니다.',
         },
         {
-          title: '리뷰 1,000건 수집에 100분 걸리던 문제',
-          cause: '백그라운드 탭의 타이머 제한 때문에 수집이 느려졌습니다.',
-          action: '직원 크롬 확장이 수집하도록 옮기고 타이머 제한 문제를 해결했습니다.',
-          result: '1,000건 수집이 2분 30초로 줄었습니다.',
+          title: '리뷰 1,000건 수집이 100분 걸리는 구조였던 문제',
+          cause: '최소화된 창에서는 타이머가 분당 1회로 제한돼 0.5초 대기가 60초가 됐습니다. 계산상 1,000건에 100분이었습니다.',
+          action: '대기를 서비스 워커가 잡는 틱으로 바꿔 타이머 제한을 받지 않게 했습니다.',
+          result: '실측 1,000건 2분 30초.',
         },
         {
           title: '여러 AI 세션이 동시에 배포할 때의 안전장치',
@@ -317,7 +317,7 @@ const ko = {
       highlights: [
         '맥·윈도우 한 줄 설치기, 관리자 권한 없이 설치, 하루 3회 자동 갱신',
         '카톡 실시간 릴레이(직원 11명), 윈도우 카톡 수집기, 오픈채팅 공구 공지 자동 발송',
-        'Instagram DM 크롬 확장(2026.02–07): 신뢰 입력(CDP), 8단계 발송 폴백, 매일 도는 자가 점검 에이전트',
+        'Instagram DM 크롬 확장(2026.02–07): 신뢰 입력(CDP), 다단계 발송 폴백, 매일 도는 자가 점검 에이전트',
         '인프라: GCP VM, Docker Compose, 자체 호스팅 Postgres 6개, GitHub Actions → 레지스트리 배포',
       ],
       stack: ['JavaScript / Node.js', 'Chrome Extension MV3', 'Chrome DevTools Protocol', 'Swift', 'Python', 'Bash', 'PowerShell', 'launchd', 'Playwright', 'Docker', 'nginx', 'GitHub Actions', 'GCP'],
