@@ -1,124 +1,27 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { FaJava, FaReact, FaDocker, FaGithub, FaHtml5, FaCss3Alt, FaJs, FaGit, FaDatabase, FaNodeJs, FaRobot, FaProjectDiagram, FaChartLine, FaUserCheck, FaCode, FaChrome, FaSync } from 'react-icons/fa';
 import { SiSpring, SiMysql, SiVuedotjs, SiFlutter, SiPython, SiNextdotjs, SiFastapi, SiPostgresql, SiSupabase, SiN8N, SiPlaywright, SiSwift, SiGooglecloud, SiNginx, SiGithubactions } from 'react-icons/si';
 import { useLang } from '../lang/LangContext';
+import PageShell, { Section, SectionTitle } from './ui/PageShell';
+import { color, font, layout } from './ui/tokens';
 
-const fadeInUp = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-const Container = styled.div`
+const SkillGrid = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #222;
-  padding: 10px 40px 10px 40px;
-  box-sizing: border-box;
-  width: 100%;
-  overflow: hidden;
-
-  @media (max-width: 1024px) {
-    padding-left: 20px;
-  }
-
-  @media (max-width: 768px) {
-    padding-left: 20px;
-  }
-
-  @media (max-width: 480px) {
-    padding-left: 20px;
-  }
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  flex-wrap: wrap;
+  gap: 12px;
 `;
 
-
-const Content = styled.div`
+const SkillItem = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 800px;
-  padding: 40px;
-  overflow-y: auto;
-  animation: ${fadeInUp} 1s ease;
-  color: #fff;
-  max-height: 100vh;
-  box-sizing: border-box;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-
-  @media (max-width: 768px) {
-    padding: 15px;
-    width: 100%;
-  }
-`;
-
-const SkillSection = styled.div`
-  margin-bottom: 20px;
-  width: 100%;
-  text-align: left;
-
-  h2 {
-    color: #ffd700;
-    font-size: 1.5em;
-    margin-bottom: 15px;
-    text-align: left;
-    margin-left: 0;
-    width: 100%;
-
-    @media (max-width: 768px) {
-      font-size: 1.2em;
-    }
-  }
-
-  .skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5em;
-    width: 100%;
-    margin: 0 auto;
-
-    @media (max-width: 768px) {
-      gap: 15px;
-      font-size: 1.2em;
-    }
-  }
-
-  .skill-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 0.7em;
-    color: #fff;
-  }
-
-  .skill-icon {
-    font-size: 2em;
-    margin-bottom: 10px;
-
-    @media (max-width: 768px) {
-      font-size: 1.8em;
-    }
-  }
+  gap: 8px;
+  background-color: ${color.surface};
+  border: 1px solid ${color.line};
+  border-radius: ${layout.radius};
+  padding: 10px 14px;
+  color: ${color.text};
+  font-size: ${font.size.sm};
 `;
 
 // id 는 언어와 무관한 구조 키 — 아이콘/색은 시각 언어이므로 콘텐츠 파일에 두지 않고 여기서 관리한다.
@@ -165,26 +68,24 @@ const Skills = () => {
   const { skills } = content;
 
   return (
-    <Container>
-      <Content>
-        {skills.groups.map((group) => (
-          <SkillSection key={group.id} id={`${group.id}-skills`}>
-            <h2>{group.title}</h2>
-            <div className="skills">
-              {group.items.map((item) => {
-                const [Icon, color] = ICONS[item.id] || [FaCode, '#fff'];
-                return (
-                  <div className="skill-item" key={item.id}>
-                    <Icon className="skill-icon" color={color} />
-                    <span style={{ color: '#fff' }}>{item.label}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </SkillSection>
-        ))}
-      </Content>
-    </Container>
+    <PageShell title={skills.title}>
+      {skills.groups.map((group) => (
+        <Section key={group.id} id={`${group.id}-skills`}>
+          <SectionTitle>{group.title}</SectionTitle>
+          <SkillGrid>
+            {group.items.map((item) => {
+              const [Icon, iconColor] = ICONS[item.id] || [FaCode, color.text];
+              return (
+                <SkillItem key={item.id}>
+                  <Icon size="1.2em" color={iconColor} />
+                  <span>{item.label}</span>
+                </SkillItem>
+              );
+            })}
+          </SkillGrid>
+        </Section>
+      ))}
+    </PageShell>
   );
 };
 
