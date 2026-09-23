@@ -20,21 +20,21 @@ const Container = styled.div`
   align-items: center;
   min-height: 100vh;
   background-color: #222;
-  padding: 10px 20px 10px calc(15vw + 20px); /* ✅ 사이드바 너비 + 여백 */
+  padding: 10px 40px 10px 40px;
   box-sizing: border-box;
-  width: 100vw;
+  width: 100%;
   overflow: hidden;
 
   @media (max-width: 1024px) {
-    padding-left: calc(17vw + 20px);
+    padding-left: 20px;
   }
 
   @media (max-width: 768px) {
-    padding-left: calc(23vw + 20px);
+    padding-left: 20px;
   }
 
   @media (max-width: 480px) {
-    padding-left: calc(23vw + 20px);
+    padding-left: 20px;
   }
 
   &::-webkit-scrollbar {

@@ -9,18 +9,18 @@ export const PageContainer = styled.div`
   min-height: 100vh;
   background-color: #222;
   padding: 30px 20px;
-  margin-left: 15vw;
-  width: calc(100vw - 15vw);
+  margin-left: 0;
+  width: 100%;
   overflow-y: auto;
 
   @media (max-width: 768px) {
-    margin-left: 20vw;
-    width: calc(100vw - 15vw);
+    margin-left: 0;
+    width: 100%;
   }
 
   @media (max-width: 480px) {
-    margin-left: 20vw;
-    width: calc(100vw - 15vw);
+    margin-left: 0;
+    width: 100%;
   }
 
   &::-webkit-scrollbar {

@@ -3,8 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Note = styled.div`
-  margin-left: 15vw;
-  width: calc(100vw - 15vw);
+  margin-left: 0;
+  width: 100%;
   background-color: #222;
   color: #888;
   font-family: Arial, sans-serif;
@@ -13,7 +13,7 @@ const Note = styled.div`
   box-sizing: border-box;
 
   @media (max-width: 768px) {
-    margin-left: 15vw;
+    margin-left: 0;
   }
 `;
 

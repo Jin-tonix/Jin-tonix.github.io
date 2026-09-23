@@ -3,21 +3,21 @@ import styled from 'styled-components';
 import { FaGithub, FaLink } from 'react-icons/fa';
 
 const PageWrapper = styled.div`
-  margin-left: 15vw;
+  margin-left: 0;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: start;
   background-color: #222;
-  max-width: 100vw;
-  width: calc(100vw - 15vw);
+  max-width: 100%;
+  width: 100%;
 
   @media (max-width: 768px) {
-    margin-left: 15vw;
+    margin-left: 0;
   }
 
   @media (max-width: 480px) {
-    margin-left: 15vw;
+    margin-left: 0;
   }
 `;
 

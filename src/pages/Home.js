@@ -26,8 +26,8 @@ const HeroContainer = styled.div`
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  margin-left: 15vw;
-  width: calc(100vw - 15vw);
+  margin-left: 0;
+  width: 100%;
   overflow: hidden;
   padding: 15px 20px;
   box-sizing: border-box;
@@ -79,8 +79,8 @@ const HeroContainer = styled.div`
   }
 
   @media (max-width: 1024px) {
-    margin-left: 15vw;
-    width: calc(100vw - 15vw);
+    margin-left: 0;
+    width: 100%;
 
     .headline {
       font-size: 1.5em;
@@ -92,8 +92,8 @@ const HeroContainer = styled.div`
   }
 
   @media (max-width: 768px) {
-    margin-left: 20vw;
-    width: calc(100vw - 15vw);
+    margin-left: 0;
+    width: 100%;
 
     .headline {
       font-size: 1.3em;
@@ -105,8 +105,8 @@ const HeroContainer = styled.div`
   }
 
   @media (max-width: 480px) {
-    margin-left: 20vw;
-    width: calc(100vw - 15vw);
+    margin-left: 0;
+    width: 100%;
 
     .headline {
       font-size: 1.1em;

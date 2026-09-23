@@ -108,6 +108,8 @@ export default function HowIBuild() {
           <img src={howIBuild.image} alt={howIBuild.loopTitle} />
         </LoopImage>
       )}
+      {!howIBuild.image && (
+      <>
       <LoopRow>
         {howIBuild.loop.map((item, i) => (
           <React.Fragment key={item.step}>
@@ -126,6 +128,8 @@ export default function HowIBuild() {
           <li key={h}>{h}</li>
         ))}
       </List>
+      </>
+      )}
 
       <GroupTitle>{howIBuild.incidentsTitle}</GroupTitle>
       <IncidentGrid>

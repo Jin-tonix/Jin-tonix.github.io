@@ -16,9 +16,8 @@ const SidebarMain = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 15vw;
-  max-width: 250px;
-  min-width: 80px;
+  width: var(--sidebar-width);
+  z-index: 10;
 
   .menu {
     position: relative;
@@ -33,7 +32,13 @@ const SidebarMain = styled.div`
       font-size: clamp(1.1em, 1.9vw, 1.6em);
       text-decoration: none;
       font-weight: bold;
+      text-align: center;
+      line-height: 1.15;
       transition: color 0.3s ease;
+
+      @media (max-width: 600px) {
+        font-size: 0.8em;
+      }
 
       &:hover {
         color: #ffd700;
@@ -142,6 +147,7 @@ export default function Sidebar() {
         <Link to={withPrefix('/')} onClick={() => setShowExtraMenu(false)}>{nav.home}</Link>
         <Link to={withPrefix('/about')} onClick={() => setShowExtraMenu(false)}>{nav.about}</Link>
         <Link to={withPrefix('/skills')} onClick={() => setShowExtraMenu(false)}>{nav.skills}</Link>
+        <Link to={withPrefix('/build')} onClick={() => setShowExtraMenu(false)}>{nav.build}</Link>
         <Link to={withPrefix('/projects')} onClick={handleProjectsClick}>{nav.projects}</Link>
 
         {showExtraMenu && (
@@ -160,7 +166,6 @@ export default function Sidebar() {
           </div>
         )}
 
-        <Link to={withPrefix('/build')} onClick={() => setShowExtraMenu(false)}>{nav.build}</Link>
       </div>
 
       <div className="social-links">
