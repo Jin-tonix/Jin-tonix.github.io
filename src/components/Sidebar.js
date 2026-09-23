@@ -3,21 +3,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import styled from 'styled-components';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useLang } from '../lang/LangContext';
+import { color, font } from './ui/tokens';
 
 const SidebarMain = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
-  background-color: #333;
+  background-color: ${color.surface};
+  border-right: 1px solid ${color.line};
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: var(--sidebar-width);
   z-index: 10;
+  font-family: ${font.family};
 
   .menu {
     position: relative;
@@ -28,20 +31,24 @@ const SidebarMain = styled.div`
     gap: 20px;
 
     a {
-      color: #fff;
+      color: ${color.text};
       font-size: clamp(1.1em, 1.9vw, 1.6em);
       text-decoration: none;
-      font-weight: bold;
+      font-weight: ${font.weight.subhead};
       text-align: center;
       line-height: 1.15;
-      transition: color 0.3s ease;
+      transition: color 0.2s ease;
 
       @media (max-width: 600px) {
         font-size: 0.8em;
       }
 
       &:hover {
-        color: #ffd700;
+        color: ${color.gold};
+      }
+
+      &.active {
+        color: ${color.gold};
       }
     }
   }
@@ -63,20 +70,24 @@ const SidebarMain = styled.div`
     }
 
     a {
-      color: #aaa;
+      color: ${color.muted};
       font-size: clamp(0.68em, 1.15vw, 0.9em);
       text-decoration: none;
-      font-weight: normal;
-      transition: color 0.3s ease;
+      font-weight: ${font.weight.body};
+      transition: color 0.2s ease;
       text-align: center;
 
       &:hover {
-        color: #ffd700;
+        color: ${color.gold};
+      }
+
+      &.active {
+        color: ${color.gold};
       }
     }
 
     .extra-group-label {
-      color: #666;
+      color: ${color.muted};
       font-size: clamp(0.6em, 1vw, 0.75em);
       margin-top: 4px;
       text-transform: uppercase;
@@ -92,13 +103,13 @@ const SidebarMain = styled.div`
     gap: 12px;
 
     a {
-      color: #fff;
+      color: ${color.text};
       font-size: clamp(0.8em, 1.5vw, 1em);
       text-decoration: none;
-      transition: color 0.3s ease;
+      transition: color 0.2s ease;
 
       &:hover {
-        color: #ffd700;
+        color: ${color.gold};
       }
     }
   }
@@ -108,25 +119,26 @@ const SidebarMain = styled.div`
     gap: 6px;
     align-items: center;
     font-size: clamp(0.7em, 1.2vw, 0.85em);
-    color: #888;
+    color: ${color.muted};
 
     button {
       background: none;
-      border: 1px solid #555;
+      border: 1px solid ${color.line};
       border-radius: 4px;
-      color: #aaa;
+      color: ${color.muted};
       padding: 2px 8px;
       cursor: pointer;
       font-size: inherit;
+      font-family: inherit;
       transition: all 0.2s ease;
 
       &.active {
-        color: #ffd700;
-        border-color: #ffd700;
+        color: ${color.gold};
+        border-color: ${color.gold};
       }
 
       &:hover {
-        color: #ffd700;
+        color: ${color.gold};
       }
     }
   }
@@ -144,24 +156,24 @@ export default function Sidebar() {
   return (
     <SidebarMain showExtraMenu={showExtraMenu}>
       <div className="menu">
-        <Link to={withPrefix('/')} onClick={() => setShowExtraMenu(false)}>{nav.home}</Link>
-        <Link to={withPrefix('/about')} onClick={() => setShowExtraMenu(false)}>{nav.about}</Link>
-        <Link to={withPrefix('/skills')} onClick={() => setShowExtraMenu(false)}>{nav.skills}</Link>
-        <Link to={withPrefix('/build')} onClick={() => setShowExtraMenu(false)}>{nav.build}</Link>
-        <Link to={withPrefix('/projects')} onClick={handleProjectsClick}>{nav.projects}</Link>
+        <NavLink to={withPrefix('/')} end onClick={() => setShowExtraMenu(false)}>{nav.home}</NavLink>
+        <NavLink to={withPrefix('/about')} onClick={() => setShowExtraMenu(false)}>{nav.about}</NavLink>
+        <NavLink to={withPrefix('/skills')} onClick={() => setShowExtraMenu(false)}>{nav.skills}</NavLink>
+        <NavLink to={withPrefix('/build')} onClick={() => setShowExtraMenu(false)}>{nav.build}</NavLink>
+        <NavLink to={withPrefix('/projects')} onClick={handleProjectsClick}>{nav.projects}</NavLink>
 
         {showExtraMenu && (
           <div className="extra-menu">
             {cases.map((c) => (
-              <Link key={c.id} to={withPrefix(`/projects/${c.slug}`)} onClick={() => setShowExtraMenu(false)}>
+              <NavLink key={c.id} to={withPrefix(`/projects/${c.slug}`)} onClick={() => setShowExtraMenu(false)}>
                 {c.shortTitle}
-              </Link>
+              </NavLink>
             ))}
             <div className="extra-group-label">{before.title}</div>
             {before.projects.map((p) => (
-              <Link key={p.route} to={withPrefix(p.route)} onClick={() => setShowExtraMenu(false)}>
+              <NavLink key={p.route} to={withPrefix(p.route)} onClick={() => setShowExtraMenu(false)}>
                 {p.title}
-              </Link>
+              </NavLink>
             ))}
           </div>
         )}
@@ -186,7 +198,7 @@ export default function Sidebar() {
         <a href="mailto:jinheemok815@gmail.com">
           <FontAwesomeIcon icon={faEnvelope} /> Email
         </a>
-        <div style={{ marginTop: '10px', fontSize: 'clamp(0.6em, 1.1vw, 0.75em)', color: '#888', textAlign: 'center' }}>
+        <div style={{ marginTop: '10px', fontSize: 'clamp(0.6em, 1.1vw, 0.75em)', color: color.muted, textAlign: 'center' }}>
           Last Updated: 2026.09.23
         </div>
       </div>
