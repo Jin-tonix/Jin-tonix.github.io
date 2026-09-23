@@ -1,6 +1,7 @@
 // About 페이지용 세로 타임라인 (골드 점 + Now 박스)
 import React from 'react';
 import styled from 'styled-components';
+import { color, font, layout } from './tokens';
 
 const List = styled.div`
   position: relative;
@@ -14,7 +15,7 @@ const List = styled.div`
     top: 4px;
     bottom: 4px;
     width: 2px;
-    background-color: #444;
+    background-color: ${color.line};
   }
 `;
 
@@ -30,48 +31,48 @@ const Item = styled.div`
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: ${({ $now }) => ($now ? '#ffd700' : '#666')};
-    border: 2px solid ${({ $now }) => ($now ? '#ffd700' : '#333')};
+    background-color: ${({ $now }) => ($now ? color.gold : color.muted)};
+    border: 2px solid ${({ $now }) => ($now ? color.gold : color.line)};
   }
 
   .period {
-    color: #ffd700;
-    font-size: clamp(0.75em, 1vw, 0.9em);
-    font-weight: bold;
+    color: ${color.gold};
+    font-size: ${font.size.xs};
+    font-weight: ${font.weight.subhead};
   }
 
   .title {
-    color: #fff;
-    font-weight: bold;
-    font-size: clamp(0.85em, 1.1vw, 1em);
+    color: ${color.text};
+    font-weight: ${font.weight.subhead};
+    font-size: ${font.size.sm};
     margin-top: 2px;
   }
 
   .desc {
-    color: #ccc;
-    font-size: clamp(0.75em, 1vw, 0.9em);
+    color: ${color.muted};
+    font-size: ${font.size.xs};
     line-height: 1.5;
     margin-top: 2px;
   }
 `;
 
 const NowBox = styled.div`
-  border: 1px solid #ffd700;
-  border-radius: 6px;
+  border: 1px solid ${color.gold};
+  border-radius: ${layout.radius};
   padding: 10px 14px;
   margin-bottom: 16px;
   background-color: rgba(255, 215, 0, 0.06);
 
   .now-label {
-    color: #ffd700;
-    font-weight: bold;
-    font-size: 0.85em;
+    color: ${color.gold};
+    font-weight: ${font.weight.subhead};
+    font-size: ${font.size.xs};
     letter-spacing: 0.05em;
   }
 
   .now-text {
-    color: #eee;
-    font-size: 0.9em;
+    color: ${color.text};
+    font-size: ${font.size.sm};
     margin-top: 4px;
   }
 `;
