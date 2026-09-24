@@ -1,4 +1,4 @@
-// Projects 페이지 — System Map -> StyleSeller 2026 case grid -> Before 2024-2025 grid
+// Projects 페이지 — StyleSeller case grid(맨 위) -> System Map -> Before 2024-2025 grid
 import React from 'react';
 import { useLang } from '../lang/LangContext';
 import SystemMap from '../components/ui/SystemMap';
@@ -21,10 +21,6 @@ export default function ProjectsPage() {
   return (
     <PageShell title={nav.projects}>
       <Section>
-        <SystemMap systemMap={systemMap} withPrefix={withPrefix} />
-      </Section>
-
-      <Section>
         <SectionTitle>StyleSeller &middot; 2026</SectionTitle>
         <PortfolioGrid>
           {cases.map((c) => (
@@ -39,8 +35,12 @@ export default function ProjectsPage() {
       </Section>
 
       <Section>
+        <SystemMap systemMap={systemMap} withPrefix={withPrefix} />
+      </Section>
+
+      <Section>
         <SectionTitle>{before.title}</SectionTitle>
-        <SectionIntro>{before.intro}</SectionIntro>
+        {before.intro && <SectionIntro>{before.intro}</SectionIntro>}
         <SmallPortfolioGrid>
           {before.projects.map((p) => (
             <SmallProjectBoxWrapper key={p.route}>

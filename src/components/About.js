@@ -10,9 +10,9 @@ const TwoColumn = styled.div`
   align-items: start;
   gap: 96px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1100px) {
     grid-template-columns: 1fr;
-    gap: 0;
+    gap: 48px;
   }
 `;
 

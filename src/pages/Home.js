@@ -39,6 +39,11 @@ const HeroContainer = styled.div`
   .sub {
     max-width: 640px;
     text-align: center;
+    word-break: keep-all;
+  }
+
+  .sub {
+    max-width: 760px;
   }
 
   .headline {

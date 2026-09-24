@@ -12,7 +12,7 @@ const en = {
   },
   hero: {
     headline: 'I turn repetitive operations work into AI systems that run every day',
-    sub: "I'm Jinhee Mok, an AI Builder. For 10 months I was the only builder at StyleSeller, a social commerce startup. I designed, shipped, and ran its in-house AI operations system.",
+    sub: "I'm Jinhee Mok, an AI Builder. For 10 months I was the only builder at StyleSeller, a social commerce startup. I designed, shipped, and ran the in-house AI operations system behind its daily work.",
     metrics: [
       { value: '10 mo', label: 'Solo builder · Dec 2025–now' },
       { value: '7,000', label: 'My commits (5 core repos)' },
@@ -400,7 +400,7 @@ const en = {
   },
   before: {
     title: 'Before · 2024–2025',
-    intro: 'Same cards, smaller. Each one notes how it connects to what I do now. (These project pages are in Korean.)',
+    intro: 'These project pages are in Korean.',
     projects: [
       {
         route: '/projects/project5',
