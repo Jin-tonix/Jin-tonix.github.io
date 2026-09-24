@@ -29,6 +29,8 @@ import {
 } from '../components/ui/CaseStudyKit';
 import StatusBadge from '../components/ui/StatusBadge';
 import imgAttrs from '../components/ui/imgAttrs';
+// 옛 /projects/project6~9 URL 과 바뀐 slug 의 리다이렉트 표 (정적 HTML 생성과 공유)
+import { LEGACY_SLUG_REDIRECT } from '../seo/routeMeta';
 
 import Project1 from '../components/Project1';
 import Project2 from '../components/Project2';
@@ -42,15 +44,6 @@ const LEGACY_PAGES = {
   project3: Project3,
   project4: Project4,
   project5: Project5,
-};
-
-// 옛 /projects/project6~9 URL 과 바뀐 slug 가 가리키는 새 case slug
-const LEGACY_SLUG_REDIRECT = {
-  project6: 'company-os',
-  project7: 'ss-worktool',
-  project8: 'email-agent',
-  project9: 'field-fleet',
-  'sales-pipeline': 'ss-worktool',
 };
 
 const LABELS = {
