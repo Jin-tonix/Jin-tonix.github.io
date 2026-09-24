@@ -9,6 +9,7 @@ const en = {
     skills: 'Skills',
     projects: 'Projects',
     build: 'How I Build',
+    resume: { label: 'Résumé', href: '/resume/Resume_Jinhee_Mok.pdf' },
     langSwitchLabel: 'KO',
     koOnlyNote: 'Korean only',
   },

@@ -124,6 +124,36 @@ const HeroContainer = styled.div`
   }
 `;
 
+// 첫 화면에서 바로 연락·이력서로 가는 버튼 줄
+const Cta = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 16px;
+    border: 1px solid ${color.gold};
+    border-radius: 6px;
+    color: ${color.gold};
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  a.primary {
+    background: ${color.gold};
+    color: #222;
+  }
+
+  a:focus-visible {
+    outline: 2px solid ${color.gold};
+    outline-offset: 2px;
+  }
+`;
+
 const Below = styled.div`
   width: 100%;
   max-width: ${layout.maxWidth};
@@ -244,6 +274,11 @@ export default function Home() {
         <p className="company">{hero.company}</p>
         <Metrics metrics={hero.metrics} />
         {hero.metricsNote && <p className="note">{hero.metricsNote}</p>}
+        <Cta>
+          <a className="primary" href="mailto:jinheemok815@gmail.com">{lang === 'en' ? 'Email me' : '메일 보내기'}</a>
+          <a href={content.nav.resume.href} target="_blank" rel="noopener noreferrer">{content.nav.resume.label} (PDF)</a>
+          <a href="https://github.com/Jin-tonix" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </Cta>
       </HeroContainer>
 
       <Below>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import styled from 'styled-components';
-import { faEnvelope, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faBars, faXmark, faFilePdf } from '@fortawesome/free-solid-svg-icons';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useLang } from '../lang/LangContext';
 import { color, font, breakpoint } from './ui/tokens';
@@ -318,6 +318,9 @@ export default function Sidebar() {
 
         <div className="social-links">
           {langSwitch}
+          <a href={nav.resume.href} target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon icon={faFilePdf} /> <span className="label">{nav.resume.label}</span>
+          </a>
           <a href="https://github.com/Jin-tonix" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon icon={faGithub} /> <span className="label">GitHub</span>
           </a>

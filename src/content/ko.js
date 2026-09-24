@@ -9,6 +9,7 @@ const ko = {
     skills: 'Skills',
     projects: 'Projects',
     build: 'How I Build',
+    resume: { label: '경력기술서', href: '/resume/Career_Jinhee_Mok_KO.pdf' },
     langSwitchLabel: 'EN',
     koOnlyNote: '한국어만 제공',
   },
