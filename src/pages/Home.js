@@ -283,22 +283,6 @@ export default function Home() {
 
       <Below>
         <section>
-          <BlockTitle>{hero.glossaryTitle}</BlockTitle>
-          <Glossary>
-            {hero.glossary.map((g) => (
-              <div key={g.term}>
-                <dt>{g.term}</dt>
-                <dd>{g.desc}</dd>
-              </div>
-            ))}
-          </Glossary>
-        </section>
-
-        <section>
-          <SystemMap systemMap={systemMap} withPrefix={withPrefix} />
-        </section>
-
-        <section>
           <BlockTitle>{hero.casesTitle}</BlockTitle>
           <CaseGrid>
             {cases.map((c, i) => (
@@ -312,6 +296,22 @@ export default function Home() {
               </CaseCard>
             ))}
           </CaseGrid>
+        </section>
+
+        <section>
+          <BlockTitle>{hero.glossaryTitle}</BlockTitle>
+          <Glossary>
+            {hero.glossary.map((g) => (
+              <div key={g.term}>
+                <dt>{g.term}</dt>
+                <dd>{g.desc}</dd>
+              </div>
+            ))}
+          </Glossary>
+        </section>
+
+        <section>
+          <SystemMap systemMap={systemMap} withPrefix={withPrefix} />
         </section>
       </Below>
     </Page>

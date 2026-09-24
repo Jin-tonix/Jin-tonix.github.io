@@ -451,7 +451,7 @@ export default function CaseStudy() {
         <Footer>
           <span>
             <FaLink style={{ marginRight: '5px' }} />
-            {lang === 'ko' ? '회사 비공개 저장소 · 수치는 git 기록 기준' : 'Private company repo · figures measured from git history'}
+            {lang === 'ko' ? '회사 비공개 저장소 · 수치는 git 기록·운영 기록 기준(측정일 표기)' : 'Private company repo · figures from git history and ops records (dated)'}
           </span>
         </Footer>
       </Container>

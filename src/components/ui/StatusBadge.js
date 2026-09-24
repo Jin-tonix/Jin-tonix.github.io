@@ -1,4 +1,4 @@
-// 사례 운영 상태 배지 — 콘텐츠의 status 키(live·staged·stopped·closed·dormant)를 언어별 문구로 보여준다
+// 사례 운영 상태 배지 — 콘텐츠의 status 키(live·partial·staged·stopped·closed·dormant)를 언어별 문구로 보여준다
 import React from 'react';
 import styled from 'styled-components';
 import { color, font } from './tokens';
@@ -6,6 +6,7 @@ import { color, font } from './tokens';
 export const STATUS_LABELS = {
   ko: {
     live: '운영 중',
+    partial: '일부 운영',
     staged: '단계적 검증 중',
     stopped: '중지',
     closed: '종료',
@@ -13,6 +14,7 @@ export const STATUS_LABELS = {
   },
   en: {
     live: 'Live',
+    partial: 'Partly live',
     staged: 'Staged rollout',
     stopped: 'Stopped',
     closed: 'Closed',
@@ -20,8 +22,8 @@ export const STATUS_LABELS = {
   },
 };
 
-// 운영 중·검증 중은 금색, 나머지는 회색
-const ACTIVE = ['live', 'staged'];
+// 운영 중·일부 운영·검증 중은 금색, 나머지는 회색
+const ACTIVE = ['live', 'partial', 'staged'];
 
 const Badge = styled.span`
   display: inline-flex;

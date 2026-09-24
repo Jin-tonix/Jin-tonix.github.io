@@ -118,7 +118,7 @@ const Project5 = () => {
               <p>
                 <strong>3. COORDS 포맷 - 토큰 40% 절감</strong><br/>
                 LLM에 불필요한 데이터 80% 전송(bbox, confidence 등) 문제를 해결하기 위해 4개 필드만 남긴 COORDS 포맷을 개발했습니다.
-                기존 약 800토큰에서 약 480토큰으로 줄여 토큰 -40%, API 비용 -40%, 응답속도 +30% 달성했습니다.
+                기존 약 800토큰에서 약 480토큰으로 줄였습니다.
               </p>
               <p>
                 <strong>4. DDD + Clean Architecture</strong><br/>

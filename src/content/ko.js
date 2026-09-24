@@ -21,12 +21,11 @@ const ko = {
     company:
       'StyleSeller 는 SNS 인플루언서 셀러와 브랜드를 연결해 기간 한정 공동구매(공구)를 열고, 발주·CS·정산을 대신 운영하는 플랫폼입니다.',
     metrics: [
-      { value: '14개', label: '직원이 쓰는 업무 화면', basis: 'brand-tool 라이브 화면 · 상단 메뉴 6개 · 2026-09-23' },
-      { value: '5개', label: '매일 도는 에이전트', basis: '벤더 CS·인플루언서 CS·Supervisor·Hermes·Spark · 2026-09-23' },
-      { value: '11대', label: '직원 PC 배포', basis: '맥 6·윈도우 5 등록 · 2026-09-16' },
+      { value: '14개', label: '직원이 쓰는 업무 화면', basis: 'brand-tool 라이브 화면(로그인 포함) · 상단 메뉴 6개 · 2026-09-23' },
+      { value: '5개', label: '매일 운영에 쓰이는 에이전트', basis: '스케줄·수신 루프가 있는 서비스 4개 + 직원이 쓰는 Spark · 벤더 CS·인플루언서 CS·Supervisor·Hermes·Spark · 2026-09-23' },
+      { value: '11대', label: '직원 PC 배포', basis: '카톡 동기화 등록 기준 · 맥 6·윈도우 5 · 2026-09-16' },
       { value: '4개', label: '저장소가 한 운영 시스템', basis: 'brand-tool · agent-company · email-agent · kakaocli' },
     ],
-    metricsNote: '7,000+ 커밋 (저장소 4개 합 7,276, merge 제외, 2026-09-23 집계)',
     glossaryTitle: '용어',
     glossary: [
       { term: '공구(공동구매)', desc: '셀러가 팔로워에게 기간을 정해 브랜드 상품을 파는 판매 방식' },
@@ -48,11 +47,12 @@ const ko = {
     repos: [
       { name: 'brand-tool', role: '직원이 쓰는 업무 웹, 판매 파트너사·상품 데이터' },
       { name: 'agent-company', role: '에이전트·서버·직원 PC 배포' },
-      { name: 'email-agent', role: '사내 지식 허브' },
+      { name: 'email-agent', role: '공용 메일함 답장 초안 + 사내 지식 허브' },
       { name: 'kakaocli', role: '직원 맥의 카톡 수집·발송' },
+      { name: 'n8n (자체 호스팅, 저장소 아님)', role: '메일 인입·상품 동기화 호출·매칭 판정 트리거 (활성 워크플로 97개, 2026-09-23 인벤토리)' },
     ],
     examples: [
-      '예: 벤더 CS 한 건은 직원 맥(수집) → 에이전트 서버 → 업무 웹(응대 대상 판정)·지식 허브(검색)를 지나 다시 직원 맥에서 발송됩니다.',
+      '예: 벤더 CS 한 건은 직원 맥(수집) → 에이전트 서버(응대 대상 판정) → 업무 웹(응대 대상 명단)·지식 허브(검색)를 지나 다시 직원 맥에서 발송됩니다.',
       '예: Spark 질문 한 건은 업무 웹 → 에이전트 서버 → 업무 웹 API·DB 4개·지식 허브 검색을 지납니다.',
     ],
     nodes: [
@@ -66,11 +66,11 @@ const ko = {
     layers: [
       {
         name: '사람 접점',
-        desc: '업무 웹(brand-tool, 라이브 화면 14개) · Kakao CS Copilot 확장 패널(MV3) · Slack(브리핑·요약·장애 알림). 사람 승인은 Tool Registry 승인 행, Spark 채팅 안 승인 카드, 맞춤카톡 500명 이상 승인 대기로 합니다.',
+        desc: '업무 웹(brand-tool, 라이브 화면 14개) · Kakao CS Copilot 확장 패널(MV3) · Slack(브리핑·요약·장애 알림). 사람 통제는 Spark 채팅 안 승인 카드(Tool Registry 가 승인 행을 DB 에서 다시 확인), 맞춤카톡 500명 이상 승인 대기, 벤더 CS 테스트 방 스위치와 직원 패널입니다. 승인 뒤 실제로 실행되는 것은 이슈 생성·도구 멈춤입니다.',
       },
       {
         name: '에이전트',
-        desc: 'Paperclip 오픈소스 포크 위에 Work OS·Spark·Tool Registry 를 새로 만들었습니다. 매일 도는 것은 벤더 CS·인플루언서 CS·Supervisor·Hermes·Spark 5개입니다. 대량 경로는 LiteLLM → Gemini 2.5 Flash, CEO·board 도구 에이전트는 Claude Code 구독 로그인으로 돌고, 로그인이 풀리면 Hermes(Gemini)로 자동 폴백하며 끊기면 Slack 경보가 갑니다.',
+        desc: 'Paperclip 오픈소스 포크 위에 Work OS·Spark·Tool Registry 를 새로 만들었습니다. 매일 운영에 쓰이는 것은 벤더 CS·인플루언서 CS·Supervisor·Hermes·Spark 5개입니다(스케줄·수신 루프가 있는 서비스 + Spark). 대량 경로는 LiteLLM → Gemini 2.5 Flash, Paperclip 이슈를 처리하는 도구 에이전트(CEO 등)는 Claude Code 구독 로그인으로 돌고, 로그인이 풀리면 Hermes(Gemini)로 자동 폴백하며 끊기면 Slack 경보가 갑니다.',
       },
       {
         name: '지식',
@@ -82,7 +82,7 @@ const ko = {
       },
       {
         name: '데이터·인프라',
-        desc: 'GCP VM 한 대. agent-company 운영 컨테이너 39개(앱 20) + email-agent Swarm 스택 5개. 자체 호스팅 Postgres 8개(두 저장소 합), PostgREST 6개. LiteLLM(Gemini 모델 2개), Langfuse 비용 관측. 배포 락을 세 저장소가 함께 씁니다.',
+        desc: '서버·DB 는 GCP VM 한 대. agent-company 운영 컨테이너 39개(앱 20) + email-agent Swarm 스택 5개. 자체 호스팅 Postgres 8개(두 저장소 합), PostgREST 6개. LiteLLM(Gemini 2.5 Flash, 일반·JSON 별칭 2개), Langfuse 비용 관측(2026-09-23 기준). 배포 락은 agent-company·brand-tool 이 함께 씁니다.',
       },
     ],
   },
@@ -92,18 +92,18 @@ const ko = {
       slug: 'vendor-cs',
       logo: '/images/v2/logo10.png',
       status: 'staged',
-      statusNote: '수집·기록·요약은 운영 중, 자동 답변은 2026-09-15 부터 테스트 방 한정',
+      statusNote: '수집·기록은 운영 중 · 요약은 소수 수신자 대상 · 자동 답변은 2026-09-15 부터 테스트 방 한정 · 실제 거래처 응대는 직원 패널',
       title: '벤더 CS — 직원 카톡에 흩어진 거래처 문의를 모으고, 사내 지식으로 답하는 에이전트',
       shortTitle: '벤더 CS 에이전트',
       period: '2026.06 ~ 현재',
       role: ROLE,
       chain:
-        'styleseller-kakaocli(직원 맥) → styleseller-agent-company(수집기·벤더 에이전트·챗봇·발송기) → brand-tool(응대 대상 판정·상품·제안서) · email-agent(지식 검색)',
+        'styleseller-kakaocli(직원 맥) → agent-company(수집기·벤더 에이전트·챗봇·발송기·직원 패널 확장) → brand-tool(응대 대상 명단·상품·제안서) · email-agent(지식 검색)',
       oneLiner: '직원마다 흩어진 거래처 카톡을, 공식 API 없이 직원 PC 에서 모아 한곳에 기록합니다.',
       tldr: [
-        '직원마다 흩어진 거래처 카톡을, 공식 API 없이 직원 PC 에서 모아 한곳에 기록합니다.',
+        '직원 개인 카톡으로 들어오던 거래처 문의를 직원 PC 에서 모아 거래처별 원장·시트에 기록합니다.',
         '사내 지식에서 근거를 찾아 답하고, 다른 거래처의 조건은 세 겹으로 막습니다.',
-        '자동 답변은 테스트 방 스위치로 묶어 두고 단계적으로 검증합니다.',
+        '자동 답변은 테스트 방 스위치로 묶었고, 실제 거래처 응대는 직원 패널에서 사람이 고쳐 보냅니다.',
       ],
       problem: [
         '이 사례의 "벤더"는 거래처입니다. 상품을 공급하는 브랜드(공급사)와 공구를 함께 여는 판매 파트너사를 모두 가리킵니다.',
@@ -143,6 +143,10 @@ const ko = {
           why: '첫 계획은 트래픽 비율 롤아웃(5%→20%→50%→100%)이었습니다. 실제 단계는 방 단위 허용 목록과 킬 스위치로 나눴습니다.',
         },
         {
+          choice: '외부 거래처 챗봇에는 전사 도구를 주지 않는다',
+          why: '회사 전체를 조회하는 Spark MCP 도구가 외부 거래처 챗봇에도 열려 있었습니다. 2026-08-13 도구 스키마에서 빼고 실행도 막았습니다(fail-closed). 챗봇은 벤더 CS 용 조회 도구만 씁니다.',
+        },
+        {
           choice: '모델은 하나로',
           why: '벤더 CS 경로는 LiteLLM → Gemini 2.5 Flash 뿐입니다. 판정기를 Claude Haiku 로 나누는 시도는 08-12 에 되돌렸습니다.',
         },
@@ -152,7 +156,7 @@ const ko = {
           title: '수집 (직원 PC)',
           points: [
             '맥은 kakaocli 가 로컬 데이터 변경을 감지해 서버로 보냅니다. 윈도우는 설치 호스트가 배포한 수집기가 같은 경로로 보냅니다.',
-            '서버가 받았다고 응답한 뒤에만 로컬 체크포인트를 원자적으로 옮깁니다.',
+            '서버가 받았다고 응답한 뒤에만 로컬 체크포인트를 옮깁니다.',
           ],
         },
         {
@@ -170,26 +174,34 @@ const ko = {
           title: '답변 (agent-company 챗봇, GCP VM)',
           points: [
             '도구 호출 루프로 근거를 찾습니다.',
-            '도구: email-agent 지식 허브(워크스페이스 2개), Spark MCP, 벤더 위키 MCP, brand-tool 조회 API',
+            '도구: 지식 허브 검색(knowledge-mcp 경유. 매 턴 과거 사례·헬프센터를 먼저 찾고, 필요하면 거래처·상품·사내 지식 등 6개 워크스페이스를 더 찾음), 사내 매뉴얼, brand-tool 상품·정산·추천 조회, 제안서 문구 생성',
+            '회사 전체를 조회하는 Spark 도구는 이 채널에서 막았습니다(fail-closed).',
             '관문: 근거·페르소나·턴·상품 주제 판정기, 다른 거래처 언급 치환, 다른 거래처 정보 LLM 판정',
           ],
         },
         {
           title: '발송 (agent-company → 직원 맥)',
-          points: ['Tool Registry 를 거쳐 발송 잡이 됩니다. 직원 맥 로컬 발송기가 잡을 가져가 kakaocli 로 보내고, 도착까지 확인합니다.'],
+          points: ['관문을 통과한 답은 발송 잡이 됩니다. 직원 맥 로컬 발송기가 잡을 가져가 kakaocli 로 보내고, 도착까지 확인합니다. 실행 기록은 Tool Registry 에도 남깁니다.'],
+        },
+        {
+          title: '직원 패널 (Kakao CS Copilot 크롬 확장)',
+          points: [
+            '거래처 문의가 카드로 뜹니다. 테스트 방에서는 봇 초안도 함께 뜹니다.',
+            '직원이 답을 쓰거나 고쳐 보내면 같은 로컬 발송기로 나갑니다. 테스트 방 밖의 실제 거래처 응대는 이 경로입니다.',
+          ],
         },
         {
           title: '학습·알림',
           points: [
-            '사람이 고친 초안과 승인된 Q&A 는 지식 허브에 다시 들어갑니다.',
-            'Slack 은 알려 주기만 합니다. 평일 09:10 직원별 브리핑, 09:20 CEO PDF 롤업, 저녁·아침 요약입니다. 답을 요구하는 Slack 은 껐습니다.',
+            '하루 두 번(09:30·18:10) 그날 대화를 거래처별 위키로 정리해 지식 허브에 넣습니다. 사람이 고친 초안과 승인된 Q&A 도 들어갑니다.',
+            'Slack 은 알려 주기만 합니다. 평일 09:10 직원별 브리핑과 09:20 CEO PDF 롤업이 갑니다. 창 요약은 챗봇이 답한 방부터 소수 수신자에게만 보냅니다. 답을 요구하는 Slack 은 껐습니다.',
           ],
         },
       ],
       results: [
-        '수집·원장·시트·드라이브·요약은 운영 중입니다.',
-        '자동 답변은 2026-08~09 중순 실제 벤더 방에서 돌렸습니다.',
-        '2026-09-15 부터는 개선판을 검증하기 전까지 테스트 방 밖에서는 답하지 않게 했습니다. 설정을 빠뜨리면 봇이 답하지 않는 쪽으로 닫힙니다.',
+        '수집·원장·시트·드라이브는 운영 중입니다. 요약은 챗봇이 답한 방을 먼저 대상으로 소수 수신자에게 돌고 있습니다.',
+        '자동 답변은 2026-08 ~ 09 중순 실제 거래처 방에서 돌렸습니다(09-01 부터는 봇을 태그한 문의에만).',
+        '2026-09-15 부터는 개선판을 검증하기 전까지 테스트 방 밖에서는 답하지 않게 했습니다. 설정을 빠뜨리면 봇이 답하지 않는 쪽으로 닫힙니다. 테스트 방 밖의 거래처 응대는 직원 패널에서 사람이 합니다.',
         '벤더 브리핑은 Paperclip Routine 으로 평일 아침마다 돕니다.',
         '다른 거래처 정보 차단은 워크스페이스 분리(07-27), 도구 단계 치환, LLM 최종 판정의 세 겹입니다.',
       ],
@@ -222,9 +234,9 @@ const ko = {
       ],
       stack: ['Python', 'FastAPI', 'Swift (macOS, kakaocli 포크)', 'Node.js', 'Chrome Extension MV3', 'LiteLLM → Gemini 2.5 Flash (Vertex)', 'LightRAG + Neo4j + pgvector', 'MCP', 'Postgres + PostgREST', 'Paperclip Routine', 'Slack API', 'Google Sheets · Drive API'],
       scale: [
-        '벤더 에이전트 백엔드: 코드 61,437줄 · 커밋 600개 · 테스트 파일 107개 (agent-company, 2026-09-23)',
-        'CS Copilot 확장·로컬 발송기: 커밋 631개 · 20,596줄 · 테스트 파일 56개 (같은 기준)',
-        'kakaocli: MIT 오픈소스 포크. 본인 커밋 81개, Swift 코드 3,904 → 6,595줄(순증 2,691) (2026-09-04)',
+        '벤더 에이전트(수집·기록·게이트): 코드 61,437줄 · 커밋 600개 · 테스트 파일 107개 (agent-company, 2026-09-23). 답을 만드는 챗봇은 콘텐츠 에이전트와 공용인 별도 서비스라 이 수에 없습니다.',
+        'CS Copilot 확장·로컬 발송기(인플루언서 CS 와 공용): 커밋 631개 · 20,596줄 · 테스트 파일 56개 (같은 기준)',
+        'kakaocli: MIT 오픈소스 포크. 본인 커밋 81개, Swift 코드 3,904 → 6,595줄(순증 2,691) (2026-09-08)',
       ],
       architectureImages: [{ src: '/images/v3/vendor-cs-ko.png', alt: '벤더 CS 흐름도' }],
     },
@@ -240,8 +252,8 @@ const ko = {
       chain: 'brand-tool → n8n → email-agent(지식 허브) → agent-company(직원 PC 워커·발송 워커) → styleseller-kakaocli',
       oneLiner: '영업 직원이 구글 시트로 손계산하던 제안서 가격을, 직원이 쓰는 업무 웹으로 옮겼습니다.',
       tldr: [
-        '영업 직원이 구글 시트로 손계산하던 제안서 가격을, 직원이 쓰는 업무 웹으로 옮겼습니다.',
-        '공급사 카탈로그 입력, 공구 파트너 추천, 셀러 발굴, 셀러 대상 카톡까지 업무 화면 14개로 키웠습니다.',
+        '제안서마다 구글 시트로 하던 가격 손계산을 업무 웹의 계산기와 제안서 화면으로 바꿨습니다.',
+        '공급사 카탈로그 입력, 판매 파트너사 추천, 셀러 발굴, 셀러 대상 카톡까지 업무 화면 14개로 키웠습니다.',
         '금액은 코드가 계산하고, LLM 은 고칠 필드만 JSON 으로 돌려줍니다.',
       ],
       problem: [
@@ -279,7 +291,7 @@ const ko = {
           title: '가격 계산기와 제안서 (2026-03 ~)',
           points: [
             '구글 시트 두 탭의 수식을 코드로 옮겨, 파트너 공급가와 마진을 상품마다 계산합니다.',
-            '제안서를 PDF·엑셀로 뽑고, 챗봇에게 말로 고치게 했습니다. 챗봇은 n8n 웹훅 LLM 이고, 금액은 코드가 다시 계산합니다.',
+            '제안서는 파트너 제안서·셀러 제안서 두 종류입니다. PDF·엑셀로 뽑고, 챗봇에게 말로 고치게 했습니다. 챗봇은 n8n 웹훅 LLM 이고, 금액은 코드가 다시 계산합니다.',
             '같은 제안서 화면을 벤더 CS 에이전트가 서버에서 열어 PDF 로 떠서 기존 카톡 큐에 넣습니다.',
           ],
           chain: 'brand-tool 챗봇 → n8n → brand-tool 계산 → brand-tool 제안서 화면',
@@ -308,7 +320,7 @@ const ko = {
           title: '셀러찾기 (2026-09)',
           points: [
             '인스타 셀러 리스트업을 Claude Code 수작업에서 직원 PC 워커로 옮겼습니다.',
-            '규칙은 해시태그 순회 → 팔로워 → 연락 경로 → 최근 릴스 6개 조회수 → 중복 제거 → 30명 배치입니다.',
+            '규칙은 해시태그 순회 → 팔로워 → 연락 경로 → 릴스 6개 조회수(기본은 화면 순위, 최신순·조회수 상위 선택) → 중복 제거 → 30명 배치입니다.',
             '서버는 회차를 올린 직원의 로그인 이메일로 설치된 워커에만 배정합니다. 워커는 잡 사이마다 sha256 을 비교해 스스로 갱신합니다.',
             '사람 계정·사람 PC 에서만 돕니다. 한 계정은 한 PC, 하루 행동 예산에 상한이 있고, 댓글·DM 을 자동으로 쓰는 코드는 없습니다. 원격으로 끌 수 있습니다.',
           ],
@@ -329,15 +341,17 @@ const ko = {
         {
           title: '상품 동기화 (화면 없이 도는 기반)',
           points: [
-            'n8n 이 하루 3회 SaaS 상품을 20쪽 × 500개씩 가져옵니다.',
+            'n8n 스케줄이 하루 3회 brand-tool 동기화를 부르고, brand-tool 이 SaaS 상품을 20쪽 × 500개씩 받습니다.',
             '쪽마다 전체 개수가 2% 넘게 흔들리거나, 받은 양이 90% 미만이면 중단합니다. 판매 종료 표시는 1,800개 이상 받았을 때만 합니다.',
             '사람이 숨긴 상품과 수동 교정값은 덮지 않습니다.',
           ],
         },
       ],
       results: [
-        '직원이 쓰는 라이브 화면 14개, 상단 메뉴 6개(Spark·상품·제안서·벤더사·셀러·콘텐츠)입니다 (2026-09-23 기준).',
-        '로그인하면 사내 AI 비서 Spark 채팅이 첫 화면입니다(2026-07 도입). 자세한 내용은 Spark · Work OS 사례에 있습니다.',
+        '직원이 로그인해 쓰는 라이브 화면 14개(로그인·상세 화면 포함), 상단 메뉴 6개(Spark·상품·제안서·벤더사·셀러·콘텐츠)입니다 (2026-09-23 기준).',
+        '사내 AI 비서 Spark 는 상단 메뉴 첫 칸입니다(2026-07 도입). 로그인 뒤 착지는 상품 메인입니다. 자세한 내용은 Spark · Work OS 사례에 있습니다.',
+        '콘텐츠 메뉴에서 마케팅 담당자가 블로그·광고 카피·캡션·카드뉴스를 요청하면 agent-company 에이전트가 만들어 돌려줍니다(2026-06 도입, 지금은 유지보수만).',
+        'brand-tool 은 사원용 화면이면서, 벤더 CS 에이전트(응대 대상 명단·상품·제안서 PDF)와 Spark(`/api/spark/*` 14개)가 부르는 업무 데이터 백엔드입니다.',
         '판매 파트너사 제안 카톡 큐는 운영 중입니다 (2026-09-24 기준).',
         '맞춤카톡은 2026-09-22 하루 261명에게 발송했습니다 (커밋 본문 기재값).',
         '셀러찾기 워커 PC 9대 등록 (2026-09-18 기준).',
@@ -346,7 +360,7 @@ const ko = {
       limits: [
         '상품 동기화의 3중 가드에는 테스트가 없습니다.',
         'CI 는 main 푸시마다 이미지만 굽습니다. 테스트·타입 검사 게이트가 없습니다.',
-        '셀러찾기와 맞춤카톡은 느슨하게 이어져 있습니다. 셀러 원장 3,036건 중 인스타 ID 가 있는 행은 711건이라, 새로 찾은 셀러 대부분은 카톡 연락처가 없습니다 (2026-09-23 기준). 서버 예약 발송은 2026-09-23 코드에 들어갔고 아직 운영 전입니다.',
+        '셀러찾기와 맞춤카톡은 느슨하게 이어져 있습니다. 카톡 연락처 원장 3,036건 중 인스타 ID 가 있는 행은 711건이라(2026-09-09 실측), 새로 찾은 셀러 대부분은 카톡 연락처가 없습니다. 서버 예약 발송은 2026-09-23 코드에 들어갔고 아직 운영 전입니다.',
       ],
       incidents: [
         {
@@ -374,7 +388,7 @@ const ko = {
       scale: [
         'brand-tool 커밋 1,458개 (merge 제외, main, 2026-09-23 기준)',
         'API 라우트 134개, DB 마이그레이션 130개, 테스트 파일 205개 (같은 기준)',
-        '판매 파트너사 매칭이 커밋이 가장 많이 들어간 기능 축입니다(309커밋, merge 제외). 셀러찾기는 서버 본체 1.1만 줄 + 직원 PC 워커 1.3만 줄(워커는 테스트 포함)입니다.',
+        '판매 파트너사 매칭이 커밋이 가장 많이 들어간 기능 축입니다(309커밋, merge 제외, 매칭 화면·API·관련 lib·컴포넌트 경로 기준). 셀러찾기는 서버 본체 1.1만 줄 + 직원 PC 워커 1.3만 줄(워커는 테스트 포함)입니다.',
         '맞춤카톡은 brand-tool 과 agent-company 발송 워커를 합쳐 3.4만 줄입니다 (테스트 포함 기준).',
       ],
       architectureImages: [{ src: '/images/v3/ss-worktool-ko.png', alt: 'SS 업무툴 흐름도' }],
@@ -383,34 +397,34 @@ const ko = {
       id: 'email-agent',
       slug: 'email-agent',
       logo: '/images/logo8.png',
-      status: 'stopped',
-      statusNote: '대표 메일 자동 초안만 중지(2026-09-02) · 분류·보낸 메일 학습·브랜드 메일함 초안 워크플로는 활성(2026-09-23 기준)',
+      status: 'partial',
+      statusNote: '브랜드·오더 공용 메일함은 운영 중 · 대표 메일함 자동 초안만 2026-09-02 중지(분류·보낸 메일 학습은 계속, 2026-09-24 기준)',
       title: '근거를 강제하는 메일 에이전트와 사내 지식 허브',
       shortTitle: '메일 에이전트 · 지식 허브',
-      period: '2026.03.31 ~ 2026.09.02',
+      period: '2026.03.31 ~ 현재',
       role: ROLE,
       chain:
-        'Gmail → n8n → email-agent(FastAPI·LightRAG) → Gmail 초안·Slack / email-agent LightRAG → agent-company(knowledge-mcp·Spark·벤더 CS) · brand-tool(판매 파트너사 매칭)',
-      oneLiner: '입점·공구·제휴 메일에 회사 지식으로 근거를 붙인 답장 초안을 만듭니다. 발송은 사람이 누릅니다.',
+        'Gmail(공용 메일함·대표 메일함) → n8n → email-agent(FastAPI·LightRAG) → 담당자 Gmail 초안 (대표 메일함 Slack 알림은 중지) / email-agent LightRAG → agent-company(knowledge-mcp·Spark·벤더 CS) · brand-tool(판매 파트너사 매칭)',
+      oneLiner: '입점·공구·제휴 메일에 회사 지식으로 근거를 붙인 답장 초안을 만듭니다.',
       tldr: [
-        '입점·공구·제휴 메일에 회사 지식으로 근거를 붙인 답장 초안을 만듭니다. 발송은 사람이 누릅니다.',
+        '브랜드·오더 공용 메일함의 입점·공구·제휴 메일에 근거를 붙인 답장 초안을 담당자 Gmail 에 만들어 두고, 발송은 사람이 합니다.',
         '초안의 문장마다 근거를 검사하고, 위반이 남으면 다시 쓰게 합니다.',
         '같은 지식 허브를 벤더 CS·Spark·판매 파트너사 매칭이 함께 씁니다.',
       ],
       problem: [
-        '메일함에는 브랜드 입점·공동구매·제휴·제안 검토 문의가 들어옵니다.',
+        '브랜드·오더 공용 메일함에는 브랜드 입점·공동구매·제휴·제안 검토 문의가 들어옵니다.',
         '답장에는 회사 사실(조건·과거 합의·담당자)이 정확히 들어가야 합니다. 첫 버전의 평면 벡터 검색으로는 회사·담당자·과거 요청의 관계를 잇지 못했습니다.',
         'LLM 초안은 근거 없는 문장을 섞을 수 있습니다. 사람이 보기 전에 걸러야 했습니다.',
       ],
       constraints: [
         '외부 자동 발송은 두지 않습니다. 초안까지만 만들고 사람이 보냅니다.',
-        '메모리 초과를 막으려고 stop-first 로 배포해 배포마다 약 40초 응답이 끊깁니다(Docker Swarm).',
+        '메모리 초과를 막으려고 stop-first 로 배포해 배포마다 약 40초 응답이 끊깁니다(Docker Swarm, 커밋 본문 기재값).',
         '한 지식 허브를 여러 사내 시스템이 함께 씁니다. 한 소비자의 부하가 다른 소비자를 멈추면 안 됩니다.',
       ],
       judgments: [
         {
-          choice: 'Gmail 초안을 먼저 만들고, 발송은 사람이 누르게 했습니다',
-          why: '검증을 통과하면 Slack 에 "Draft Ready", 못 하면 "Needs Review" 알림과 발송 버튼이 갑니다.',
+          choice: 'Gmail 초안을 먼저 만들고, 발송은 사람이 하게 했습니다',
+          why: '공용 메일함은 담당자 Gmail 에 초안을 두고 직원이 고쳐 보냅니다. 대표 메일함은 검증을 통과하면 Slack 에 "Draft Ready", 못 하면 "Needs Review" 알림과 발송 버튼을 보냈습니다(2026-09-02 초안 단계 중지).',
         },
         {
           choice: '프롬프트를 더 고치는 대신 critic 으로 잡고 다시 쓰게 했습니다',
@@ -439,8 +453,11 @@ const ko = {
           points: ['규칙 검증기', 'LLM critic(검사·검증 모듈 14개)', '리라이트 뒤 같은 critic 재검증', '7가지 항목 판정(근거 충실도·관련성·어조 등)'],
         },
         {
-          title: 'Gmail 초안·Slack 알림',
-          points: ['Gmail 초안을 만들고 Slack 에 Draft Ready / Needs Review 알림과 발송 버튼을 보냅니다. 사람이 Slack 이나 Gmail 에서 보냅니다.'],
+          title: 'Gmail 초안 (대표 메일함은 Slack 알림·발송 버튼, 09-02 중지)',
+          points: [
+            '공용 메일함은 담당자 Gmail 에 초안을 두고 직원이 고쳐 보냅니다.',
+            '대표 메일함은 Slack 에 Draft Ready / Needs Review 와 발송 버튼을 보냈고, 2026-09-02 에 이 초안 단계를 멈췄습니다.',
+          ],
         },
         {
           title: '보낸 메일 학습',
@@ -452,13 +469,13 @@ const ko = {
             '같은 LightRAG 워크스페이스 13개를 사내 시스템이 함께 씁니다.',
             '벤더 CS: agent-company knowledge-mcp 경유. 인플루언서 CS 도 씁니다.',
             'Spark: email-agent 검색을 직접 부르고, 허용 목록 밖 워크스페이스는 거부합니다(fail-closed).',
-            'brand-tool 판매 파트너사 매칭: knowledge-mcp HTTP 프록시로 naive 모드 벡터 검색',
+            'brand-tool 판매 파트너사 매칭: 지식 허브 검색 API 를 naive(벡터) 모드로 호출',
           ],
         },
       ],
       results: [
-        '상태: 대표 메일 자동 초안은 2026-09-02 운영 판단으로 초안 단계만 끊었습니다. 분류와 보낸 메일 학습은 남겼습니다.',
-        '분류·보낸 메일 학습·브랜드 메일함 초안 워크플로는 2026-09-23 기준 활성입니다.',
+        '상태: 브랜드·오더 공용 메일함은 직원들이 지금도 연결해 씁니다. 대표 메일함 자동 초안만 2026-09-02 운영 판단으로 초안 단계를 끊었고, 그 메일함의 분류·보낸 메일 학습은 계속 돕니다.',
+        '분류·보낸 메일 학습·브랜드·오더 공용 메일함 초안 워크플로는 2026-09-23 기준 활성입니다.',
         'LightRAG 워크스페이스 13개를 벤더 CS·인플루언서 CS·Spark·판매 파트너사 매칭이 함께 씁니다.',
         '2026-08-18 에 CI/CD 를 바꿨습니다. pytest 게이트를 통과한 이미지로만 배포합니다.',
         'DB 는 Supabase 클라우드에서 VM 자체 호스팅(PostgREST)으로 옮겼습니다.',
@@ -491,9 +508,9 @@ const ko = {
           guard: '교차 리뷰 지적을 반영했습니다.',
         },
       ],
-      stack: ['Python', 'FastAPI', 'asyncio', 'LightRAG', 'Neo4j', 'PostgreSQL + pgvector', 'PostgREST', 'Vertex AI Gemini 2.5 Flash', 'Gemini 임베딩(3072차원)', 'Claude(2026-04~07 초안 경로)', 'n8n', 'Gmail API', 'Slack', 'Docker Swarm', 'GitHub Actions', 'pytest', 'Pyright(strict)'],
+      stack: ['Python', 'FastAPI', 'asyncio', 'LightRAG', 'Neo4j', 'PostgreSQL + pgvector', 'PostgREST', 'Vertex AI Gemini 2.5 Flash', 'Gemini 임베딩(3072차원)', 'Claude(초안 경로, 2026-04 도입, 08-02 제거)', 'n8n', 'Gmail API', 'Slack', 'Docker Swarm', 'GitHub Actions', 'pytest', 'Pyright(strict)'],
       scale: [
-        '커밋 1,418개(merge 제외, 조직 저장소, 2026-03-31 ~ 09-02). 가장 많이 일한 달은 8월(449개)입니다.',
+        '커밋 1,418개(merge 제외, 조직 저장소, 첫 커밋 2026-03-31 ~ 마지막 커밋 09-02). 가장 많이 일한 달은 8월(449개)입니다.',
         '제품 코드 44,877줄 + 테스트 28,254줄(Python)',
         'API 라우터 26개, 엔드포인트 85개',
         'LightRAG 워크스페이스 13개, critic·검증기 모듈 14개',
@@ -509,12 +526,12 @@ const ko = {
       shortTitle: 'Spark · Work OS',
       period: '2026.05 ~ 현재',
       role: ROLE,
-      chain: 'brand-tool(Spark 화면) → agent-company(Paperclip 포크 — Work OS 게이트웨이·Spark·Tool Registry·MCP) → email-agent(지식 검색) + 업무 DB 4개(읽기 전용 역할)',
-      oneLiner: '직원이 업무 DB 4개를 말로 묻고, 출처가 붙은 답을 받습니다. 로그인 뒤 첫 화면입니다.',
+      chain: 'brand-tool(Spark 화면·조회 API) → agent-company(Paperclip 포크 — Work OS 게이트웨이·Spark·Tool Registry·MCP) → email-agent(지식 검색) + 업무 DB 4개(읽기 전용 역할)',
+      oneLiner: '직원이 업무 DB 4개를 말로 묻고, 출처가 붙은 답을 받습니다.',
       tldr: [
-        '직원이 업무 DB 4개를 말로 묻고, 출처가 붙은 답을 받습니다. 로그인 뒤 첫 화면입니다.',
+        '업무 웹 상단 메뉴 첫 칸인 Spark 에서, 직원이 업무 DB 4개를 말로 묻고 출처가 붙은 답을 받습니다.',
         'DB 는 읽기 전용 역할로만 조회하고, 요청자의 역할은 서버가 DB 에서 다시 찾습니다.',
-        '카톡·메일처럼 되돌릴 수 없는 실행은 사람 승인을 DB 에서 다시 확인한 뒤 한 번만 나갑니다. 기본은 드라이런입니다.',
+        '되돌릴 수 없는 실행은 기본 드라이런인 Tool Registry 를 지나야 하고, 지금 승인 뒤 실제로 실행되는 것은 이슈 생성·도구 멈춤입니다.',
       ],
       problem: [
         '직원이 쓰는 업무 데이터는 업무툴·맞춤카톡·벤더 CS·Paperclip 의 DB 4개에 나뉘어 있었습니다.',
@@ -535,7 +552,7 @@ const ko = {
         {
           choice: '모델은 업무 성격으로 나눴습니다',
           why:
-            '비용 때문에 LiteLLM 에서 Anthropic 모델을 뺐고(2026-06-06), Spark·벤더 CS·인플루언서 CS 같은 대량 경로는 LiteLLM → Gemini 2.5 Flash 로 보냅니다. Paperclip CEO·board 도구 에이전트는 VM 의 Claude Code CLI 로 돌고, 인증은 구독 로그인입니다. 로그인이 풀리면 Hermes(Gemini)로 자동으로 넘어가고, 끊기면 Slack 으로 알립니다.',
+            '비용 때문에 LiteLLM 에서 Anthropic 모델을 뺐고(2026-06-06), Spark·벤더 CS·인플루언서 CS 같은 대량 경로는 LiteLLM → Gemini 2.5 Flash 로 보냅니다. Paperclip 이슈를 처리하는 도구 에이전트(CEO 등)는 VM 의 Claude Code CLI 로 돌고, 인증은 구독 로그인입니다. 로그인이 풀리면 Hermes(Gemini)로 자동으로 넘어가고, 끊기면 Slack 으로 알립니다.',
         },
         {
           choice: '실행은 기본 드라이런',
@@ -545,7 +562,7 @@ const ko = {
         {
           choice: 'Spark 평가는 정답을 SQL 로 적었습니다',
           why:
-            '실행할 때마다 정답을 다시 계산합니다. "이번 주 19건" 같은 답은 하루면 틀린 답이 되기 때문입니다. 케이스마다 3회 다수결로 판정하고, 케이스 8개는 모두 실제 사고에서 나왔습니다.',
+            '실행할 때마다 정답을 다시 계산합니다. "이번 주 19건" 같은 답은 하루면 틀린 답이 되기 때문입니다. 케이스마다 3회 다수결로 판정하고, 케이스 8개는 모두 실측·실패 사례에서 나왔습니다.',
         },
         {
           choice: '관측은 쓰는 만큼만',
@@ -555,7 +572,7 @@ const ko = {
       systemSteps: [
         {
           title: 'Spark 화면',
-          points: ['직원이 brand-tool 의 Spark 화면(로그인 뒤 첫 화면)에서 묻습니다. brand-tool 이 요청을 agent-company 로 SSE 중계합니다.'],
+          points: ['직원이 업무 웹 상단 메뉴 첫 칸인 Spark 화면에서 묻습니다(로그인 뒤 착지는 상품 메인). brand-tool 이 요청을 agent-company 로 SSE 중계합니다.'],
         },
         {
           title: 'Work OS 게이트웨이 (agent-company, GCP VM)',
@@ -565,7 +582,7 @@ const ko = {
           title: 'Spark 코어',
           points: [
             '라우터 → 도구 루프 → 합성 순서로 돕니다. 모델은 LiteLLM 경유 Gemini 입니다.',
-            'brand-tool Spark API 14개: 상품 검색·정산 실마진·베스트셀러·제안서 생성·카톡 큐 투입·화이트리스트 조회',
+            'brand-tool 조회 API(`/api/spark/*` 14개, 벤더 CS 봇과 공유, origin/main 2026-09-23) 중 Spark 가 부르는 6개: 상품 검색·매칭·베스트셀러·제안 집계·공구 집계·화이트리스트 조회',
             'run_sql: DB 4개를 각각 읽기 전용 역할로 조회',
             'knowledge-mcp 지식 검색',
             'email-agent 검색: 워크스페이스 허용 목록 밖이면 거부합니다(fail-closed).',
@@ -578,23 +595,24 @@ const ko = {
         {
           title: '승인과 실행',
           points: [
-            '실행 제안(CEO 모드의 이슈 생성·도구 멈춤)은 승인 행으로 남기고, 사람이 Spark 채팅 안 확인 카드에서 승인합니다.',
+            'Spark 대표 모드(Gemini)의 실행 제안(이슈 생성·도구 멈춤)은 승인 행으로 남기고, 사람이 Spark 채팅 안 확인 카드에서 승인합니다.',
             '실행 직전 여섯 가지를 차례로 확인합니다. 미등록 → 킬 스위치 → blocked → 역할 → 승인 행 DB 재검증 → 멱등 키입니다.',
+            '승인 뒤 실제로 실행되는 것은 이슈 생성·도구 멈춤(내부 쓰기) 둘입니다. 외부 발송 도구 4개는 등록·기록 단계이고, 벤더 CS 발송은 이 게이트와 따로 발송 큐로 갑니다.',
           ],
         },
         {
           title: 'Paperclip 에이전트',
           points: [
-            '같은 서버에 Paperclip 에이전트가 붙습니다. CEO 는 Claude Code 구독 로그인으로 돌고, 로그인이 풀리면 Hermes 로 넘어갑니다.',
+            '같은 서버에 Paperclip 에이전트가 붙습니다. Paperclip 의 CEO 에이전트(이슈를 받아 처리하는 도구 에이전트)는 Claude Code 구독 로그인으로 돕니다. 로그인이 풀리면 이 claude_local 에이전트들은 Hermes(Gemini)로 넘어갑니다.',
             '벤더 CS 백엔드·인플루언서 CS·Supervisor·Hermes 는 http 서비스로 붙습니다.',
           ],
         },
       ],
       results: [
-        'Spark 는 brand-tool 로그인 뒤 첫 화면으로 운영 중입니다.',
-        'Tool Registry 에 도구 20개가 등록돼 있습니다. 부작용 등급은 none·write_internal·external_send 셋입니다.',
+        'Spark 는 brand-tool 상단 메뉴 첫 칸으로 운영 중입니다.',
+        'Tool Registry 에 도구 20개가 등록돼 있습니다(부작용 등급 none 13·write_internal 3·external_send 4, org/release 2026-09-23). 승인 뒤 실제 실행으로 이어지는 것은 이슈 생성·도구 멈춤입니다.',
         '사람 승인은 Spark 채팅 안에서 합니다. 따로 있던 승인함 화면은 2026-07-19 에 메뉴에서 숨겼고, 07-23 에 채팅 안 확인 카드로 옮겼습니다.',
-        '에이전트는 코드에 22개가 정의돼 있고, 매일 도는 것은 5개입니다(벤더 CS 백엔드·인플루언서 CS·Supervisor·Hermes·Spark). 벤더 CS 는 테스트 방에서만 답합니다.',
+        '에이전트는 코드에 22개가 정의돼 있고(org/release, 2026-09-23), 매일 운영에 쓰이는 것은 5개입니다(스케줄·수신 루프가 있는 벤더 CS 백엔드·인플루언서 CS·Supervisor·Hermes + 직원이 쓰는 Spark). 벤더 CS 는 테스트 방에서만 답합니다.',
         '커머스 리서치(Spark 요청 → 직원 크롬 확장 리뷰 수집 → VOC 엑셀·PDF)는 구축과 E2E 검증을 마쳤습니다(2026-09-09). 실사용은 아직입니다.',
       ],
       limits: [
@@ -607,7 +625,7 @@ const ko = {
           title: '에러 없는 폴백 (2회)',
           symptom: 'CEO 에이전트가 에러 없이 Gemini 1회성 폴백으로 돌았습니다(08-27~09-08, 09-10~09-23).',
           cause: 'Claude 로그인 토큰이 갱신 때마다 바뀌는데, 재기동할 때마다 호스트의 죽은 토큰이 컨테이너 토큰을 덮었습니다.',
-          fix: '방향을 뒤집었습니다. 컨테이너가 유일한 토큰 갱신자가 됐습니다(09-23).',
+          fix: '컨테이너가 갱신한 토큰을 10분마다 호스트로 되돌려 써서, 재기동 때 복사되는 토큰이 늘 최신이 되게 했습니다. 빈 토큰은 되쓰지 않습니다(09-23).',
           guard: '로그인 상태를 주기적으로 확인하고, 풀리면 Slack 으로 알립니다.',
         },
         {
@@ -625,10 +643,10 @@ const ko = {
       ],
       stack: ['TypeScript', 'Express', 'Drizzle', 'React', 'Python', 'FastAPI', 'MCP', 'LiteLLM', 'Vertex AI Gemini 2.5 Flash', 'Claude Code CLI', 'Postgres', 'PostgREST', 'nginx', 'Langfuse', 'n8n', 'Docker Compose', 'GitHub Actions', 'GCP VM'],
       scale: [
-        '본인 커밋 4,319개 (merge·업스트림 제외, agent-company, 2026-05-16 ~ 09-23)',
-        '이 사례의 코드(Work OS 게이트웨이·Spark·Tool Registry·커머스 리서치)는 Paperclip 서버 안에 새로 만든 파일 120개·27,506줄입니다(테스트 51파일·12,880줄 포함, 2026-09-23).',
+        '본인 커밋 4,319개 (merge·업스트림 제외, agent-company org/release, 2026-05-16 ~ 09-23)',
+        '이 사례(Work OS 게이트웨이·Spark·Tool Registry·커머스 리서치)는 Paperclip 서버 안에 새로 만든 파일 120개·27,506줄입니다(빈 줄·테스트 51파일 12,880줄 포함, org/release 2026-09-23).',
         '같은 저장소에서 본인 코드의 대부분은 카톡 업무 자동화입니다. 카톡 계열 8개 경로 합이 18.1만 줄입니다(같은 기준).',
-        '직접 만든 MCP 서버 4개(knowledge-mcp·paperclip-mcp·Spark MCP·벤더 위키 MCP) + 서드파티 통합 1개',
+        '직접 만든 MCP 서버 4개(knowledge-mcp·paperclip-mcp·Spark MCP·벤더 위키 MCP) + 서드파티 통합 1개 (2026-09-23)',
       ],
       architectureImages: [{ src: '/images/v3/company-os-ko.png', alt: 'Spark · Work OS 구조도' }],
     },
@@ -646,7 +664,7 @@ const ko = {
         'kakaocli(직원 맥) · 윈도우 수집기 → agent-company(설치 호스트·relay·워커·발송기·VM compose) → brand-tool(셀러찾기 잡·워커 키·VM 배포) · email-agent(같은 VM 의 스택)',
       oneLiner: '공식 API 가 없는 카톡·인스타 작업을 직원 PC 에서 돌립니다.',
       tldr: [
-        '공식 API 가 없는 카톡·인스타 작업을 직원 PC 에서 돌립니다.',
+        '서버에서 막히는 카톡·인스타 작업을 직원 맥·윈도우 PC 에서 돌리고, 원격으로 끌 수 있게 했습니다.',
         '한 줄 설치, 도구별 자동 갱신, PC 마다 따로 발급하는 키로 PC 에 DB 키를 두지 않습니다.',
         '서버 DB 가 한도로 멈춘 날, 앱 코드를 그대로 둔 채 자체 호스팅으로 당일 옮겼습니다.',
       ],
@@ -685,7 +703,7 @@ const ko = {
       systemSteps: [
         {
           title: '설치 (agent-company 설치 호스트)',
-          points: ['직원이 설치 페이지의 한 줄 명령(맥 bash, 윈도우 PowerShell)으로 도구 묶음을 깝니다. 대부분 관리자 권한 없이 깔리고, Node·Homebrew 가 없는 맥에서만 암호를 한 번 묻습니다.'],
+          points: ['직원이 설치 페이지의 한 줄 명령(맥 bash, 윈도우 PowerShell)으로 도구 묶음을 깝니다. 대부분 관리자 권한 없이 깔리고, 개발자도구·Homebrew·Node 가 없는 맥에서만 암호를 한 번 묻습니다. 셀러찾기 설치기는 관리자 권한을 쓰지 않습니다.'],
         },
         {
           title: '등록 (agent-company 서버 · brand-tool)',
@@ -697,6 +715,7 @@ const ko = {
             '맥: kakaocli 가 로컬 데이터 변경을 감지하고 relay 가 서버로 보냅니다.',
             '윈도우: 수집기가 카톡 프로세스 메모리를 읽기 전용으로 스캔합니다.',
             '셀러찾기 워커: brand-tool 이 만든 잡을 집어 headless 브라우저로 처리합니다.',
+            '맞춤카톡 발송 워커(맥): brand-tool 에서 만든 캠페인 큐를 가져가 kakaocli 로 보냅니다.',
             'Kakao CS Copilot(MV3): 카카오톡 채널 관리자 웹이 받는 메시지를 화면 구조에 기대지 않고 읽어 초안 칸을 채웁니다.',
             '오픈채팅 공지 발송: VM 크론이 큐를 쌓고 맥이 보냅니다.',
           ],
@@ -707,11 +726,11 @@ const ko = {
         },
         {
           title: '관제',
-          points: ['워커는 도는 코드의 해시를, relay 는 앱 버전을 서버에 보고합니다. 윈도우는 1분 watchdog 이 수집기를 다시 띄웁니다. 오픈채팅은 17:25 감시 크론이 봅니다.'],
+          points: ['워커는 도는 코드의 해시를, relay 는 앱 버전을 서버에 보고합니다. 윈도우는 1분 watchdog 이 수집기를 다시 띄웁니다. 오픈채팅은 발송 마감 뒤 도는 감시 크론이 봅니다.'],
         },
         {
           title: '서버',
-          points: ['GCP VM 한 대. 컨테이너·DB 기준은 규모 칸에 적었습니다. 배포 락은 agent-company·email-agent·brand-tool 세 저장소가 함께 씁니다.'],
+          points: ['서버·DB 는 GCP VM 한 대입니다. 컨테이너·DB 기준은 규모 칸에 적었습니다. 배포 락은 agent-company·brand-tool 이 함께 씁니다.'],
         },
       ],
       results: [
@@ -738,7 +757,7 @@ const ko = {
           cause:
             '업로드 대기는 완료를 확인하지 않는 고정 대기였습니다. 카톡 로컬 기록 시각과 로그를 겹쳐 0.6초 차이로 입증했습니다. 사흘 실패는 권한 가설을 기각한 뒤 찾은 "카톡 메인 창 없음" 상태였습니다.',
           fix: 'kakaocli 가 도착을 확인하고 빠진 글만 다시 보냅니다. 창이 없으면 카톡 앱을 재기동하고, 한 건도 안 나갔음을 확인했을 때만 1회 재시도합니다.',
-          guard: '실패 사유를 담은 Slack 알림, 17:25 KST 감시 크론.',
+          guard: '실패 사유를 담은 Slack 알림, 발송 마감 뒤 도는 감시 크론.',
         },
         {
           title: '같은 자원을 두 기기가 쥐는 사고 (가장 자주 난 유형)',
@@ -752,8 +771,8 @@ const ko = {
       scale: [
         '직원 PC 11대 등록 (맥 6·윈도우 5, 2026-09-16 등록 기준)',
         '서버: agent-company compose 컨테이너 39개(앱 20, email-agent 제외) + 같은 VM 의 email-agent Swarm 스택 5개. 자체 호스팅 Postgres 는 전사 8개(agent-company 6 + email-agent 2), PostgREST 6개(agent-company 5 + email-agent 1). (agent-company 2026-09-23, email-agent 2026-09-02 기준)',
-        '직원 PC 도구 커밋 1,445개 — 설치 호스트·셀러찾기 워커·CS Copilot·브로드캐스트 확장·쿠팡 확장·수집기 6개 폴더, merge 제외',
-        'kakaocli 포크: 원작 22커밋(MIT) 위에 본인 81커밋, Swift 코드 3,904 → 6,595줄(순증 2,691)',
+        '직원 PC 도구 커밋 1,445개 — 설치 호스트·셀러찾기 워커·CS Copilot·브로드캐스트 확장·쿠팡 확장·수집기 6개 폴더, merge 제외 (agent-company master, 2026-09-23)',
+        'kakaocli 포크: 원작(MIT) 커밋 위에 본인 81커밋, Swift 코드 3,904 → 6,595줄(순증 2,691) (2026-09-08)',
       ],
       architectureImages: [{ src: '/images/v3/field-fleet-ko.png', alt: '직원 PC 배포와 운영 인프라 구조도' }],
     },
@@ -761,11 +780,11 @@ const ko = {
   howIBuild: {
     title: 'How I Build with AI',
     intro:
-      '설계·개발·운영 1인. 코드는 Claude Code 로 쓰고, 아키텍처·규칙·검증·롤아웃은 직접 판단했습니다. Claude 공동작성 커밋은 agent-company 3,679 · brand-tool 1,125 · email-agent 988 개입니다(merge 제외). Claude Code 세션 여러 개를 병렬로 돌려 씁니다. 에이전트가 틀리는 것을 전제로 둡니다. 아래 "AI 가 틀렸고 제가 잡은 사례" 가 그 기록입니다.',
+      '설계·개발·운영 1인. 코드는 Claude Code 로 쓰고, 아키텍처·규칙·검증·롤아웃은 직접 판단했습니다. Claude 공동작성 트레일러가 있는 커밋은 agent-company 3,646 · brand-tool 1,122 · email-agent 988 개입니다(merge 제외, agent-company org/release·brand-tool main 2026-09-23, email-agent 2026-09-02 기준). 네 저장소의 본인 커밋은 합 7,276개입니다(merge 제외, 2026-09-23 집계). Claude Code 세션 여러 개를 병렬로 돌려 씁니다. 에이전트가 틀리는 것을 전제로 둡니다. 아래 "AI 가 틀렸고 제가 잡은 사례" 가 그 기록입니다.',
     image: null,
     loopTitle: '작업 루프',
     loop: [
-      { step: '설계 문서', desc: '문제·제약·대안을 먼저 씁니다. 설계 문서 77개(brand-tool·agent-company·email-agent 합).' },
+      { step: '설계 문서', desc: '문제·제약·대안을 먼저 씁니다. 설계 문서 77개(brand-tool·agent-company·email-agent 합, 2026-09-23 기준).' },
       { step: '실행 계획', desc: '단계와 단계별 검증 방법을 적습니다. 실행 계획 127개(같은 기준).' },
       { step: '테스트 먼저', desc: '재현 테스트를 쓰고 구현합니다.' },
       { step: '교차 리뷰', desc: '서로 다른 출처의 에이전트 두 개가 따로 리뷰합니다. 한 커밋에서 적대적 리뷰로 실결함 6개를 잡은 기록이 있습니다(2026-09-09).' },
@@ -778,8 +797,8 @@ const ko = {
       '운영 메모: 같은 실수를 다음 세션이 반복하지 않게 교훈을 메모로 남깁니다. 예: "테스트 초록 ≠ 배선 맞음".',
       'pre-commit 훅: 손으로 말아 줄바꿈이 섞인 윈도우 배포본을 커밋 단계에서 거부합니다(2026-09-16).',
       'pre-push 게이트: 서비스가 바뀐 push 는 되돌리기 등록이 없으면 막습니다(2026-06-02). 훅은 저장소마다 한 번 깔아야 걸립니다.',
-      '테스트 → 프로덕션 쓰기 차단: 실제 거래처에게 카톡이 나갈 수 있던 테스트 17건을 네트워크 차단 가드로 막았습니다.',
-      '평가 세트: Spark 는 정답을 정답 SQL 로 적어 실행 때 다시 계산하고, 케이스당 3회 다수결로 봅니다. 8케이스 모두 실제 사고에서 나왔습니다.',
+      '테스트 → 프로덕션 쓰기 차단: 실제 거래처에게 카톡이 나갈 수 있던 테스트 17건을 네트워크 차단 가드로 막았습니다(2026-09-09).',
+      '평가 세트: Spark 는 정답을 정답 SQL 로 적어 실행 때 다시 계산하고, 케이스당 3회 다수결로 봅니다. 8케이스 모두 실측·실패 사례에서 나왔습니다.',
     ],
     aiWrongTitle: 'AI 가 틀렸고 제가 잡은 사례',
     aiWrong: [
@@ -873,7 +892,7 @@ const ko = {
       { month: '2026.08', text: '업무툴 DB 를 자체 호스팅으로 당일 이관(08-20), 맞춤카톡 시작(08-24)' },
       { month: '2026.09', text: '벤더 CS "무조건 답변" 정책(09-02)과 테스트 방 검증(09-15~), 직원 PC 11대 등록(09-16)' },
     ],
-    repoPeriods: '저장소별 기간: brand-tool 2026.03~ · email-agent 2026.03–09 · agent-company 2026.05~ · kakaocli 2026.06~09 · Instagram DM 2026.02–07',
+    repoPeriods: '저장소별 기간: brand-tool 2026.03~ · email-agent 2026.03~(마지막 커밋 09-02) · agent-company 2026.05~ · kakaocli 2026.06~09 · Instagram DM 2026.02–07',
     experienceTitle: 'Journey',
     experienceLead: '법학 전공에서 AI 에이전트 엔지니어까지',
     careerChangeLabel: 'Career Change',
@@ -907,7 +926,7 @@ const ko = {
               { id: 'mcp', label: '직접 만든 MCP 서버 4개' },
               { id: 'rag', label: 'GraphRAG (LightRAG · Neo4j · pgvector)' },
               { id: 'litellm', label: 'LiteLLM 프록시 (Gemini 경로)' },
-              { id: 'hitl', label: '사람 승인 게이트 (Tool Registry)' },
+              { id: 'hitl', label: '실행 게이트 (Tool Registry: 드라이런·승인 행 재검증)' },
               { id: 'claude-code', label: 'Claude Code 멀티 세션' },
             ],
           },
@@ -950,7 +969,7 @@ const ko = {
               { id: 'gh-actions', label: 'GitHub Actions' },
               { id: 'gcp', label: 'GCP VM' },
               { id: 'nginx', label: 'nginx' },
-              { id: 'zero-downtime', label: '무중단 교체 배포 스크립트 (brand-tool VM)' },
+              { id: 'zero-downtime', label: '무중단 교체 배포 스크립트 (brand-tool VM 이전용)' },
               { id: 'n8n', label: 'n8n' },
               { id: 'git', label: 'Git' },
               { id: 'github', label: 'GitHub' },
