@@ -28,7 +28,7 @@ const Column = styled.div`
   }
 `;
 
-const Header = styled.header`
+export const Header = styled.header`
   margin-bottom: ${layout.sectionGap};
   animation: ${fadeInUp} 0.6s ease both;
 
@@ -37,7 +37,7 @@ const Header = styled.header`
   }
 `;
 
-const PageTitle = styled.h1`
+export const PageTitle = styled.h1`
   color: ${color.gold};
   font-size: ${font.size.xxl};
   font-weight: ${font.weight.title};
@@ -45,7 +45,7 @@ const PageTitle = styled.h1`
   margin: 0 0 12px;
 `;
 
-const Lead = styled.p`
+export const Lead = styled.p`
   color: ${color.muted};
   font-size: ${font.size.md};
   font-weight: ${font.weight.body};
