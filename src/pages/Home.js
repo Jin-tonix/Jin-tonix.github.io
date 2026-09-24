@@ -50,7 +50,8 @@ const HeroContainer = styled.div`
     font-size: ${font.size.xxl};
     font-weight: ${font.weight.title};
     color: ${color.text};
-    margin-bottom: 12px;
+    line-height: 1.3;
+    margin: 0 0 12px;
     animation: ${fadeInUp} 0.8s ease forwards;
     animation-delay: 0.15s;
     opacity: 0;
@@ -63,7 +64,7 @@ const HeroContainer = styled.div`
     animation: ${fadeInUp} 0.8s ease forwards;
     animation-delay: 0.4s;
     opacity: 0;
-    margin-bottom: 10px;
+    margin: 0 0 10px;
 
     .name-highlight {
       font-weight: ${font.weight.title};
@@ -111,8 +112,8 @@ export default function Home() {
 
   return (
     <HeroContainer>
-      <div className="headline">{hero.headline}</div>
-      <div className="sub">{hero.sub}</div>
+      <h1 className="headline">{hero.headline}</h1>
+      <p className="sub">{hero.sub}</p>
       <Metrics metrics={hero.metrics} />
     </HeroContainer>
   );
