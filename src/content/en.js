@@ -116,7 +116,7 @@ const en = {
       id: 'sales-pipeline',
       slug: 'sales-pipeline',
       logo: '/images/logo7.png',
-      title: 'Sales Pipeline — from seller discovery to tailored outreach and vendor matching (brand-tool)',
+      title: 'Sales Pipeline — from seller discovery to tailored outreach and vendor matching (internal work tool)',
       shortTitle: 'Sales Pipeline',
       period: 'Mar 2026 – present',
       role: 'Full-stack build and operate (solo; every brand-tool commit is mine)',

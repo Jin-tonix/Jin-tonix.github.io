@@ -118,7 +118,7 @@ const ko = {
       id: 'sales-pipeline',
       slug: 'sales-pipeline',
       logo: '/images/logo7.png',
-      title: '영업 파이프라인 — 셀러 발굴부터 맞춤 발송·벤더 매칭까지 (brand-tool)',
+      title: '영업 파이프라인 — 셀러 발굴부터 맞춤 발송·벤더 매칭까지 (사내 업무툴)',
       shortTitle: '영업 파이프라인',
       period: '2026.03 ~ 현재',
       role: '풀스택 개발·운영 (1인, brand-tool 커밋 전부 본인)',
