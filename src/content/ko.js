@@ -28,7 +28,7 @@ const ko = {
     imageAlt: 'StyleSeller AI 운영 시스템 전체 지도',
     nodes: [
       { id: 'vendor-cs', label: '① 벤더 CS AI', caseId: 'vendor-cs' },
-      { id: 'sales-pipeline', label: '② 영업 파이프라인', caseId: 'sales-pipeline' },
+      { id: 'ss-worktool', label: '② 영업 파이프라인', caseId: 'ss-worktool' },
       { id: 'company-os', label: '③ AI Company OS · Spark', caseId: 'company-os' },
       { id: 'email-agent', label: '④ 대표 메일 에이전트', caseId: 'email-agent' },
       { id: 'field-fleet', label: '⑤ 직원 PC 함대 · 운영 인프라', caseId: 'field-fleet' },
@@ -110,8 +110,8 @@ const ko = {
       ],
     },
     {
-      id: 'sales-pipeline',
-      slug: 'sales-pipeline',
+      id: 'ss-worktool',
+      slug: 'ss-worktool',
       logo: '/images/logo7.png',
       title: '영업 파이프라인 — 셀러 발굴부터 맞춤 발송·벤더 매칭까지 (사내 업무툴)',
       shortTitle: '영업 파이프라인',

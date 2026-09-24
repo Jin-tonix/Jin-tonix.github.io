@@ -37,12 +37,13 @@ const LEGACY_PAGES = {
   project5: Project5,
 };
 
-// 옛 /projects/project6~9 URL 이 가리키던 새 case slug
+// 옛 /projects/project6~9 URL 과 바뀐 slug 가 가리키는 새 case slug
 const LEGACY_SLUG_REDIRECT = {
   project6: 'company-os',
-  project7: 'sales-pipeline',
+  project7: 'ss-worktool',
   project8: 'email-agent',
   project9: 'field-fleet',
+  'sales-pipeline': 'ss-worktool',
 };
 
 const LABELS = {

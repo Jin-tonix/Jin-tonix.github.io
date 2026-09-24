@@ -28,7 +28,7 @@ const en = {
     imageAlt: 'StyleSeller AI operations system map',
     nodes: [
       { id: 'vendor-cs', label: '① Vendor Support AI', caseId: 'vendor-cs' },
-      { id: 'sales-pipeline', label: '② Sales Pipeline', caseId: 'sales-pipeline' },
+      { id: 'ss-worktool', label: '② Sales Pipeline', caseId: 'ss-worktool' },
       { id: 'company-os', label: '③ AI Company OS · Spark', caseId: 'company-os' },
       { id: 'email-agent', label: '④ CEO Email Agent', caseId: 'email-agent' },
       { id: 'field-fleet', label: '⑤ Field Fleet · Platform Ops', caseId: 'field-fleet' },
@@ -108,8 +108,8 @@ const en = {
       ],
     },
     {
-      id: 'sales-pipeline',
-      slug: 'sales-pipeline',
+      id: 'ss-worktool',
+      slug: 'ss-worktool',
       logo: '/images/logo7.png',
       title: 'Sales Pipeline — from seller discovery to tailored outreach and vendor matching (internal work tool)',
       shortTitle: 'Sales Pipeline',
