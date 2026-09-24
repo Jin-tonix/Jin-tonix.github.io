@@ -1,4 +1,5 @@
 // 데이터 기반 케이스 스터디 페이지. content.cases 안의 어떤 케이스도 slug 로 렌더링한다.
+// v3 필드(status·chain·tldr·problem·constraints·judgments·systemSteps·results·limits·incidents)는 있을 때만 그린다. 옛 필드도 그대로 동작한다.
 // 옛 /projects/project6~9 링크는 새 slug 로 리다이렉트하고, project1~5 는 기존 한국어 전용 페이지를 그대로 보여준다.
 import React from 'react';
 import { useParams, Navigate } from 'react-router-dom';
@@ -21,7 +22,13 @@ import {
   TroubleshootItem,
   AiCollabBox,
   Footer,
+  TldrBox,
+  Collapsible,
+  ChoiceItem,
+  CaseMeta,
 } from '../components/ui/CaseStudyKit';
+import StatusBadge from '../components/ui/StatusBadge';
+import imgAttrs from '../components/ui/imgAttrs';
 
 import Project1 from '../components/Project1';
 import Project2 from '../components/Project2';
@@ -60,6 +67,22 @@ const LABELS = {
     cause: 'Cause',
     action: 'Action',
     result: 'Result',
+    chain: '저장소 사슬',
+    tldr: 'TL;DR',
+    v3Problem: '문제',
+    constraints: '제약',
+    judgments: '판단',
+    systemSteps: '시스템',
+    results: '결과',
+    limits: '한계 · 현재 상태',
+    incidents: '사고와 가드',
+    stackScale: '기술 스택 · 규모',
+    why: '이유',
+    symptom: '증상',
+    incidentCause: '원인',
+    fix: '조치',
+    guard: '가드',
+    count: (n) => `${n}개`,
   },
   en: {
     highlights: 'Highlights',
@@ -74,8 +97,40 @@ const LABELS = {
     cause: 'Cause',
     action: 'Action',
     result: 'Result',
+    chain: 'Repo chain',
+    tldr: 'TL;DR',
+    v3Problem: 'Problem',
+    constraints: 'Constraints',
+    judgments: 'Judgment calls',
+    systemSteps: 'System',
+    results: 'Results',
+    limits: 'Limits · current status',
+    incidents: 'Incidents and guards',
+    stackScale: 'Stack · Scale',
+    why: 'Why',
+    symptom: 'Symptom',
+    incidentCause: 'Cause',
+    fix: 'Fix',
+    guard: 'Guard',
+    count: (n) => `${n}`,
   },
 };
+
+// 문자열 하나 또는 배열을 배열로
+const asList = (v) => (Array.isArray(v) ? v : v ? [v] : []);
+
+// 접히는 칸 하나. 짧은 칸은 펼친 채로 시작한다
+function Fold({ title, count, open, children }) {
+  return (
+    <Collapsible open={open}>
+      <summary>
+        <h3>{title}</h3>
+        {count ? <span className="count">{count}</span> : null}
+      </summary>
+      <div className="body">{children}</div>
+    </Collapsible>
+  );
+}
 
 export default function CaseStudy() {
   const { slug } = useParams();
@@ -101,59 +156,217 @@ export default function CaseStudy() {
   }
 
   const t = LABELS[lang];
+  const isV3 = Boolean(caseData.tldr);
+  const tldr = asList(caseData.tldr);
+  const problem = asList(caseData.problem);
+  const constraints = asList(caseData.constraints);
+  const judgments = asList(caseData.judgments);
+  const systemSteps = asList(caseData.systemSteps);
+  const results = asList(caseData.results);
+  const limits = asList(caseData.limits);
+  const incidents = asList(caseData.incidents);
+  const stack = asList(caseData.stack);
+  const scale = asList(caseData.scale);
+  const highlights = asList(caseData.highlights);
+  const images = asList(caseData.architectureImages);
 
   return (
     <PageWrapper>
       <Container>
         <Header>
-          <img src={caseData.logo} alt={caseData.title} />
+          <img src={caseData.logo} {...imgAttrs(caseData.logo, { eager: true })} alt="" />
           <div>
             <h1>{caseData.title}</h1>
-            <SubHeader>- {caseData.period} &middot; {caseData.role}</SubHeader>
+            <CaseMeta>
+              <StatusBadge status={caseData.status} lang={lang} />
+              <SubHeader>- {caseData.period} &middot; {caseData.role}</SubHeader>
+            </CaseMeta>
           </div>
         </Header>
-        <OneLiner>{caseData.oneLiner}</OneLiner>
-        {caseData.repos && (
+        {caseData.oneLiner && <OneLiner>{caseData.oneLiner}</OneLiner>}
+        {caseData.chain ? (
           <Repos>
-            <span>{t.repos}</span> {caseData.repos}
+            <span>{t.chain}</span> {caseData.chain}
           </Repos>
+        ) : (
+          caseData.repos && (
+            <Repos>
+              <span>{t.repos}</span> {caseData.repos}
+            </Repos>
+          )
         )}
 
-        <HorizontalSection>
-          <Section>
-            <h3>{t.highlights}</h3>
+        {tldr.length > 0 && (
+          <TldrBox>
+            <span className="tldr-label">{t.tldr}</span>
             <ul>
-              {caseData.highlights.map((h) => (
-                <li key={h}>{h}</li>
+              {tldr.map((line) => (
+                <li key={line}>{line}</li>
               ))}
             </ul>
-          </Section>
+          </TldrBox>
+        )}
 
+        {(highlights.length > 0 || !isV3) && (
+          <HorizontalSection>
+            {highlights.length > 0 && (
+              <Section>
+                <h3>{t.highlights}</h3>
+                <ul>
+                  {highlights.map((h) => (
+                    <li key={h}>{h}</li>
+                  ))}
+                </ul>
+              </Section>
+            )}
+
+            {!isV3 && stack.length > 0 && (
+              <Section>
+                <h3>{t.stack}</h3>
+                <SkillsList>
+                  {stack.map((s) => (
+                    <li key={s}>{s}</li>
+                  ))}
+                </SkillsList>
+              </Section>
+            )}
+          </HorizontalSection>
+        )}
+
+        {images.length > 0 && (
+          <DiagramRow>
+            {images.map((img, i) => (
+              <a key={img.src} href={img.src} target="_blank" rel="noopener noreferrer">
+                <img src={img.src} {...imgAttrs(img.src, { eager: i === 0 })} alt={img.alt} />
+              </a>
+            ))}
+          </DiagramRow>
+        )}
+
+        {isV3 && (
           <Section>
-            <h3>{t.stack}</h3>
-            <SkillsList>
-              {caseData.stack.map((s) => (
-                <li key={s}>{s}</li>
-              ))}
-            </SkillsList>
+            {problem.length > 0 && (
+              <Fold title={t.v3Problem} open>
+                {problem.map((p) => (
+                  <p key={p}>{p}</p>
+                ))}
+              </Fold>
+            )}
+            {constraints.length > 0 && (
+              <Fold title={t.constraints} open>
+                <ul>
+                  {constraints.map((c) => (
+                    <li key={c}>{c}</li>
+                  ))}
+                </ul>
+              </Fold>
+            )}
+            {judgments.length > 0 && (
+              <Fold title={t.judgments} count={t.count(judgments.length)}>
+                <ul>
+                  {judgments.map((j) => (
+                    <ChoiceItem key={j.choice}>
+                      <strong>{j.choice}</strong>
+                      {j.why && <span className="why">{j.why}</span>}
+                    </ChoiceItem>
+                  ))}
+                </ul>
+              </Fold>
+            )}
+            {systemSteps.length > 0 && (
+              <Fold title={t.systemSteps} count={t.count(systemSteps.length)}>
+                <ol>
+                  {systemSteps.map((step) => (
+                    <ChoiceItem key={step.title}>
+                      <strong>{step.title}</strong>
+                      {asList(step.points).length > 0 && (
+                        <ul>
+                          {asList(step.points).map((pt) => (
+                            <li key={pt}>{pt}</li>
+                          ))}
+                        </ul>
+                      )}
+                      {step.chain && (
+                        <span className="chain">
+                          <span>{t.chain}</span>
+                          {step.chain}
+                        </span>
+                      )}
+                    </ChoiceItem>
+                  ))}
+                </ol>
+              </Fold>
+            )}
+            {results.length > 0 && (
+              <Fold title={t.results} open>
+                <ul>
+                  {results.map((r) => (
+                    <li key={r}>{r}</li>
+                  ))}
+                </ul>
+              </Fold>
+            )}
+            {limits.length > 0 && (
+              <Fold title={t.limits} open>
+                <ul>
+                  {limits.map((l) => (
+                    <li key={l}>{l}</li>
+                  ))}
+                </ul>
+              </Fold>
+            )}
+            {incidents.length > 0 && (
+              <Fold title={t.incidents} count={t.count(incidents.length)}>
+                {incidents.map((item) => (
+                  <TroubleshootItem key={item.title}>
+                    <strong>{item.title}</strong>
+                    {[
+                      ['symptom', t.symptom],
+                      ['cause', t.incidentCause],
+                      ['fix', t.fix],
+                      ['guard', t.guard],
+                    ].map(([key, label]) =>
+                      item[key] ? (
+                        <span className="field" key={key}>
+                          <span className="field-label">{label}</span>
+                          {item[key]}
+                        </span>
+                      ) : null
+                    )}
+                  </TroubleshootItem>
+                ))}
+              </Fold>
+            )}
+            {(stack.length > 0 || scale.length > 0) && (
+              <Fold title={t.stackScale}>
+                {stack.length > 0 && (
+                  <SkillsList>
+                    {stack.map((s) => (
+                      <li key={s}>{s}</li>
+                    ))}
+                  </SkillsList>
+                )}
+                {scale.length > 0 && (
+                  <ul>
+                    {scale.map((s) => (
+                      <li key={s}>{s}</li>
+                    ))}
+                  </ul>
+                )}
+              </Fold>
+            )}
           </Section>
-        </HorizontalSection>
-
-        <DiagramRow>
-          {caseData.architectureImages.map((img) => (
-            <a key={img.src} href={img.src} target="_blank" rel="noopener noreferrer">
-              <img src={img.src} alt={img.alt} />
-            </a>
-          ))}
-        </DiagramRow>
+        )}
 
         <ContentSection>
 
           <TextSection>
-            <Section>
-              <h3>{t.background}</h3>
-              <p>{caseData.background}</p>
-            </Section>
+            {caseData.background && (
+              <Section>
+                <h3>{t.background}</h3>
+                <p>{caseData.background}</p>
+              </Section>
+            )}
 
             {caseData.flow && (
               <Section>
@@ -166,56 +379,62 @@ export default function CaseStudy() {
               </Section>
             )}
 
-            <Section>
-              <h3>{t.scale}</h3>
-              <ul>
-                {caseData.scale.map((s) => (
-                  <li key={s}>{s}</li>
-                ))}
-              </ul>
-            </Section>
+            {!isV3 && scale.length > 0 && (
+              <Section>
+                <h3>{t.scale}</h3>
+                <ul>
+                  {scale.map((s) => (
+                    <li key={s}>{s}</li>
+                  ))}
+                </ul>
+              </Section>
+            )}
 
-            <Section>
-              <h3>{t.troubleshooting}</h3>
-              {caseData.troubleshooting.map((item) => (
-                <TroubleshootItem key={item.title}>
-                  <strong>{item.title}</strong>
-                  {item.problem && (
-                    <span className="field">
-                      <span className="field-label">{t.problem}</span>
-                      {item.problem}
-                    </span>
-                  )}
-                  {item.cause && (
-                    <span className="field">
-                      <span className="field-label">{t.cause}</span>
-                      {item.cause}
-                    </span>
-                  )}
-                  {item.action && (
-                    <span className="field">
-                      <span className="field-label">{t.action}</span>
-                      {item.action}
-                    </span>
-                  )}
-                  {item.result && (
-                    <span className="field">
-                      <span className="field-label">{t.result}</span>
-                      {item.result}
-                    </span>
-                  )}
-                </TroubleshootItem>
-              ))}
-            </Section>
-
-            <AiCollabBox>
-              <h3>{t.aiCollab}</h3>
-              <ul>
-                {caseData.aiCollab.map((a) => (
-                  <li key={a}>{a}</li>
+            {asList(caseData.troubleshooting).length > 0 && (
+              <Section>
+                <h3>{t.troubleshooting}</h3>
+                {caseData.troubleshooting.map((item) => (
+                  <TroubleshootItem key={item.title}>
+                    <strong>{item.title}</strong>
+                    {item.problem && (
+                      <span className="field">
+                        <span className="field-label">{t.problem}</span>
+                        {item.problem}
+                      </span>
+                    )}
+                    {item.cause && (
+                      <span className="field">
+                        <span className="field-label">{t.cause}</span>
+                        {item.cause}
+                      </span>
+                    )}
+                    {item.action && (
+                      <span className="field">
+                        <span className="field-label">{t.action}</span>
+                        {item.action}
+                      </span>
+                    )}
+                    {item.result && (
+                      <span className="field">
+                        <span className="field-label">{t.result}</span>
+                        {item.result}
+                      </span>
+                    )}
+                  </TroubleshootItem>
                 ))}
-              </ul>
-            </AiCollabBox>
+              </Section>
+            )}
+
+            {asList(caseData.aiCollab).length > 0 && (
+              <AiCollabBox>
+                <h3>{t.aiCollab}</h3>
+                <ul>
+                  {caseData.aiCollab.map((a) => (
+                    <li key={a}>{a}</li>
+                  ))}
+                </ul>
+              </AiCollabBox>
+            )}
           </TextSection>
         </ContentSection>
 

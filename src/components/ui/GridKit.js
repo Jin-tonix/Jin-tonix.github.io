@@ -81,3 +81,17 @@ export const Connection = styled.div`
   text-align: center;
   opacity: 0.9;
 `;
+
+// 카드 아래 TL;DR 첫 줄
+export const CardSummary = styled.p`
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: ${color.muted};
+  text-align: center;
+  word-break: keep-all;
+`;
+
+export const CardStatus = styled.div`
+  margin-top: 6px;
+`;
