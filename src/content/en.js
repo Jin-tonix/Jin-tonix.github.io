@@ -426,22 +426,6 @@ const en = {
         oneLiner: 'Image and document translate/summarize web service',
         connection: '→ My first LLM pipeline chaining several models.',
       },
-      {
-        route: '/projects/project1',
-        logo: '/images/logo1.png',
-        title: 'JeonJikSi',
-        period: 'Aug–Oct 2024',
-        oneLiner: 'Certification-based job listings web/app (Spring Boot · Flutter)',
-        connection: '→ Team collaboration and backend fundamentals.',
-      },
-      {
-        route: '/projects/project2',
-        logo: '/images/logo2.png',
-        title: 'Flux',
-        period: 'Jul–Aug 2024',
-        oneLiner: 'Artist auction platform, Market/My Page (Vue)',
-        connection: '→ My first multi-screen state management, and the foundation for the internal ops web app.',
-      },
     ],
   },
   about: {
