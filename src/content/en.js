@@ -535,7 +535,7 @@ const en = {
       tldr: [
         'In Spark, the first item in the web app\'s top menu, staff ask 4 work databases questions in plain language and get answers with sources.',
         "Databases are queried only through read-only roles, and the server looks up the requester's role in the database again.",
-        'Irreversible actions must pass Tool Registry, which defaults to dry run, and what actually runs after approval today is creating an issue or pausing a tool.',
+        'Action tools are registered in Tool Registry, which defaults to dry run; what actually runs after approval today is creating an issue or pausing a tool.',
       ],
       problem: [
         "The work data staff use was split across 4 databases: the work tool, personalized KakaoTalk campaigns, vendor support (brands and sales partners), and Paperclip. KakaoTalk is Korea's dominant messenger.",
