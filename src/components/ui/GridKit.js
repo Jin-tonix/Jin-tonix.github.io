@@ -15,7 +15,8 @@ export const PortfolioGrid = styled.div`
 `;
 
 export const SmallPortfolioGrid = styled(PortfolioGrid)`
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  /* 카드 수가 적어도 위 StyleSeller 카드와 같은 폭을 유지 */
+  grid-template-columns: repeat(5, 1fr);
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(3, 1fr);

@@ -433,22 +433,6 @@ const ko = {
         oneLiner: '이미지·문서 번역·요약 AI 웹 서비스',
         connection: '→ 여러 모델을 잇는 LLM 파이프라인 설계를 처음 해봤습니다.',
       },
-      {
-        route: '/projects/project1',
-        logo: '/images/logo1.png',
-        title: '전직시',
-        period: '2024.08 ~ 10',
-        oneLiner: '자격증 기반 채용정보 웹/앱 서비스 (Spring Boot · Flutter)',
-        connection: '→ 팀 협업과 백엔드 기본기를 다졌습니다.',
-      },
-      {
-        route: '/projects/project2',
-        logo: '/images/logo2.png',
-        title: 'Flux',
-        period: '2024.07 ~ 08',
-        oneLiner: '아티스트 경매 플랫폼 Market/My Page (Vue)',
-        connection: '→ 화면 여러 개의 상태 관리를 처음 설계했습니다. 사내 운영 웹의 기본기가 됐습니다.',
-      },
     ],
   },
   about: {
