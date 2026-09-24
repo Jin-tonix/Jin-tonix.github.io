@@ -46,19 +46,19 @@ const en = {
       id: 'vendor-cs',
       slug: 'vendor-cs',
       logo: '/images/v2/logo10.png',
-      title: 'Vendor Support AI — capture, answer, and escalate supplier chats on KakaoTalk',
+      title: 'Vendor Support AI — an agent that collects partner (vendor) chats on KakaoTalk and answers from evidence',
       shortTitle: 'Vendor Support AI',
       period: 'Jun 2026 – present',
       role: 'Design, build, operate (solo)',
       repos: 'styleseller-agent-company (vendor agent, chatbot, CS Copilot) · styleseller-kakaocli (Swift)',
-      oneLiner: 'Supplier questions arrive in KakaoTalk, a messenger with no public API. This system collects them in real time, answers with evidence, and hands off to a person when unsure.',
+      oneLiner: 'Supplier questions arrive in KakaoTalk, a messenger with no public API. This system collects them in real time, answers with evidence, with no hand-offs and no asking back.',
       highlights: [
         'Real-time chat capture on employee PCs: a Swift CLI that watches local data changes, plus Mac/Windows relays',
         'Agentic-RAG chatbot: a tool-calling loop plus evidence, persona, and turn-taking judges',
-        'Human-in-the-loop: unknown questions go to the owner as Slack cards, and human edits are learned back',
+        'Always-answer policy (since 2026-09-02): the bot answers from evidence with no hand-offs or asking back, and Slack carries morning and evening digests and staff briefings',
         'Ops outputs: per-vendor ledgers (Sheets/Drive), morning and evening digests, a vendor knowledge wiki, contract-term extraction',
       ],
-      stack: ['Python', 'FastAPI', 'Swift (macOS)', 'Node.js', 'Chrome Extension MV3', 'LightRAG + Neo4j', 'MCP', 'LiteLLM', 'Gemini · Claude', 'Postgres + PostgREST', 'Slack API', 'Google Sheets · Drive API'],
+      stack: ['Python', 'FastAPI', 'Swift (macOS)', 'Node.js', 'Chrome Extension MV3', 'LightRAG + Neo4j', 'MCP', 'LiteLLM', 'Gemini 2.5 Flash', 'Postgres + PostgREST', 'Slack API', 'Google Sheets · Drive API'],
       scale: [
         'Vendor agent backend: 61K lines · 600 commits · 107 test files',
         'Chatbot service: 806 commits (485 in the chatbot modules)',
@@ -66,20 +66,20 @@ const en = {
         'KakaoTalk CLI fork: 81 of my commits · Swift 3.9K → 6.6K lines',
       ],
       background:
-        "StyleSeller's supplier (vendor) questions arrived in employees' personal KakaoTalk. The same question got different answers depending on who replied, and the history lived only on each person's PC. " +
+        "StyleSeller's partner (vendor) questions arrived in employees' personal KakaoTalk. The same question got different answers depending on who replied, and the history lived only on each person's PC. " +
         'KakaoTalk has no public API for personal chats, so a server alone could not solve this. I split the work three ways: employee PCs collect the chats, agents on the server draft the answers, and people make the judgment calls at clearly defined points.',
       flow: [
         "A Swift CLI detects KakaoTalk data changes on an employee's Mac and sends webhooks. A separate collector does the same on Windows PCs.",
         'The vendor agent runs an allowlist gate, links the chat room to the internal vendor record, and ingests the raw text into the knowledge graph.',
         'The chatbot agent calls knowledge-graph, product, price, and proposal tools to draft an answer. The draft is queued only if it passes the judges.',
-        'Hard questions go to the owner as a Slack card. Edited answers are learned back into the graph.',
+        'There are two exceptions: other vendors\' information is blocked, and the bot re-confirms when it is unclear whether to send a proposal. Edited answers are learned back into the graph.',
         'An employee Mac claims the send job, sends it through the KakaoTalk CLI, and confirms delivery.',
       ],
       architectureImages: [{ src: '/images/v2/vendor-cs-en.png', alt: 'Vendor Support AI flow' }],
       troubleshooting: [
         {
           title: "Answering vendor A with vendor B's terms (RAG leakage)",
-          problem: "A 30-question smoke test caught the bot quoting another vendor's private deal terms as company policy.",
+          problem: "On 2026-08-13, in production, the bot stated another vendor's private deal terms as company policy.",
           cause: 'The knowledge graph structure, not chat history: private deals were retrieved alongside shared knowledge.',
           action: "Added tool-level redaction of other vendors' private deals, plus an answer-scope gate.",
           result: 'This layer sits on top of the per-vendor/shared workspace split, so mixed retrieval results no longer leak into answers.',
@@ -96,20 +96,15 @@ const en = {
           action: 'Replaced it with a cheap trigger followed by a 5-second, temperature-0 LLM judge. The judge fails closed and shows its reason to staff.',
         },
         {
-          title: 'Empty answers during Claude outages',
-          problem: 'When Claude auth failed and traffic fell back to Gemini, answers came back empty.',
-          action: "Restored multi-turn function calling in the Gemini proxy: tool_calls restoration, tool_call_id mapping, and aligned timeouts.",
-        },
-        {
           title: 'Zero-loss capture',
           problem: 'A dropped connection between an employee PC and the server could lose messages.',
           action: 'The local checkpoint advances atomically only after the server acknowledges. Stalls alert Slack.',
         },
       ],
       aiCollab: [
-        'Evals: a 30-question smoke set caught the leakage, and judge tests live in the suite.',
-        "Status: capture, ledgers, digests, and escalation run on 11 staff members' KakaoTalk. Auto-replies ran in real vendor rooms in August. An improved version is now being validated in a test vendor room.",
-        'Judgment stays with people: unknown questions and anything about prices or contracts go through the owner.',
+        'Evals: the cross-vendor leak found in production on 2026-08-13 is now blocked, and judge tests live in the suite.',
+        'Status: capture, ledgers, and digests run on KakaoTalk across 11 registered staff PCs (6 Mac, 5 Windows, as of 2026-09-16). An improved auto-reply is being validated step by step in a test vendor room.',
+        'Human control: auto-replies are being validated step by step in a test room, behind a test-room-only switch, tool approvals, and a kill switch.',
       ],
     },
     {
@@ -121,7 +116,7 @@ const en = {
       period: 'Mar 2026 – present',
       role: 'Full-stack build and operate (solo; every brand-tool commit is mine)',
       repos: 'brand-tool (Next.js) · styleseller-agent-company (PC workers, send workers) · email-agent (knowledge graph)',
-      oneLiner: 'Finds Instagram sellers automatically, sends each one KakaoTalk product cards that match their sales history, and uses an LLM to recommend suppliers for new products.',
+      oneLiner: 'Finds Instagram sellers automatically, sends each one KakaoTalk product cards that match their sales history, and uses an LLM to recommend, for each product, the sales partner (vendor) that will run a group-buy for it.',
       highlights: [
         'Seller Finder: hashtag rules → distributed workers on employee PCs → per-rule scorecards → sheet mirror',
         "Tailored KakaoTalk campaigns: product cards matched to each seller's sales history, scheduled over channel and personal chats, with a reply inbox and opt-out handling",
@@ -142,7 +137,7 @@ const en = {
         'Workers use browser automation to report sellers who pass the filters (reel views, captions, and so on).',
         'Results merge into a seller ledger that combines Notion, the KakaoTalk ledger, and Seller Finder. Operators pick targets and schedule a campaign.',
         'A browser worker on the VM sends channel messages, and a Mac KakaoTalk CLI sends personal chats. Replies are collected and judged in an inbox.',
-        'For a new product, the LLM recommends suppliers from the combined graph and category candidates. Proposal chats go out through a send queue.',
+        'For a new product, the LLM recommends the sales partners (vendors) that could run a group-buy for it, from the combined graph and category candidates. Proposal chats go out through a send queue.',
       ],
       architectureImages: [{ src: '/images/v2/sales-pipeline-en.png', alt: 'Sales pipeline flow' }],
       troubleshooting: [
@@ -238,6 +233,11 @@ const en = {
           title: 'Safe deploys with many AI sessions at once',
           action: 'Added a VM-wide deploy lock, refused deploys from uncommitted trees, recorded the last-built commit, and tested the deploy-target selection.',
         },
+        {
+          title: 'Empty answers when the CEO agent fell back to Gemini',
+          problem: "When the CEO agent's Claude Code subscription login dropped, Hermes handed the turn to its Gemini fallback, and answers came back empty.",
+          action: "Restored multi-turn function calling in the Gemini proxy: tool_calls restoration, tool_call_id mapping, and aligned timeouts.",
+        },
       ],
       aiCollab: [
         'Evals: a Spark regression case set checks answer quality.',
@@ -251,7 +251,7 @@ const en = {
       logo: '/images/logo8.png',
       title: 'CEO Email Agent — GraphRAG drafts with human approval',
       shortTitle: 'CEO Email Agent',
-      period: 'Mar – Jul 2026 (later grew into the company knowledge hub)',
+      period: 'Mar – Sep 2026 (later grew into the company knowledge hub)',
       role: 'Design, build, deploy (solo)',
       repos: 'email-agent (FastAPI) · styleseller-agent-company (dashboard plugin, knowledge-mcp)',
       oneLiner: "Classifies incoming mail, finds evidence in the company knowledge graph, and drafts replies in the CEO's voice. Nothing is sent without human approval. The graph built here became the company's knowledge hub.",
@@ -261,10 +261,10 @@ const en = {
         'LLM-as-judge verification plus sycophancy and parroting checks',
         'A style book learned from sent mail and human edits',
       ],
-      stack: ['Python', 'FastAPI', 'asyncio', 'LightRAG', 'Neo4j', 'PostgreSQL + pgvector', 'Vertex AI Gemini 2.5', 'Claude', 'n8n', 'Slack', 'Docker Swarm', 'pytest', 'Pyright'],
+      stack: ['Python', 'FastAPI', 'asyncio', 'LightRAG', 'Neo4j', 'PostgreSQL + pgvector', 'Vertex AI Gemini 2.5', 'Claude (Apr–Jul 2026)', 'n8n', 'Slack', 'Docker Swarm', 'pytest', 'Pyright'],
       scale: [
-        '923 commits (Mar–Jul 2026)',
-        '~40K lines of Python · 25 API routers',
+        '1,418 commits (Mar–Sep 2026, excluding merges, org repository)',
+        '~40K lines of Python · 26 API routers · 85 endpoints',
         'Knowledge-graph workspaces shared by email, vendor support, Spark, and vendor matching',
       ],
       background:
@@ -273,7 +273,7 @@ const en = {
       flow: [
         'n8n detects new mail and requests parsing and classification.',
         "The agent looks up the company, contact, and past requests in the graph, drafts a reply, and verifies it with an LLM judge.",
-        'An approval request goes to Slack. Only approved drafts are saved to Gmail drafts.',
+        'After verification, a Gmail draft is created first. Slack then gets a "Draft Ready" or "Needs Review" notice, depending on the result, with a send button. A person presses send.',
         'Sent mail is learned back into the style book and the graph.',
       ],
       architectureImages: [{ src: '/images/v2/email-agent-en.png', alt: 'CEO email agent pipeline' }],
@@ -293,7 +293,7 @@ const en = {
         },
       ],
       aiCollab: [
-        'Status: CEO auto-drafting was paused on 2026-09-02 as a business decision. Classification, learning, and the brand-mailbox drafting pipeline keep running.',
+        'Status: CEO auto-drafting stopped on 2026-09-02. Classification and sent-mail learning keep running, and the knowledge graph built here (13 workspaces) still runs as the internal knowledge hub shared by Kakao CS, vendor CS, Spark, and vendor matching.',
         'Spark and the vendor agent use the graph through knowledge-mcp, and brand-tool queries it directly for vendor matching.',
         'Definition of done: type hints on every function, zero Pyright errors, and every security review finding addressed.',
       ],
@@ -309,7 +309,7 @@ const en = {
       repos: 'styleseller-agent-company (installers, relays, collectors, senders, deploy) · Instagram DM extension · brand-tool (deploy)',
       oneLiner: 'Ran Instagram and KakaoTalk work, which has no API, on employee PCs, and operated those PCs with one-line installs, auto-updates, and remote monitoring.',
       highlights: [
-        'One-line installers for Mac and Windows, no admin rights needed, auto-update 3×/day',
+        'One-line installers for Mac and Windows, no admin rights needed, auto-updates on a per-tool cadence',
         'Real-time KakaoTalk relay for 11 staff, a Windows KakaoTalk collector, automated group-buy announcements to open chats',
         'Instagram DM Chrome extension (Feb–Jul 2026): trusted input via CDP, multi-step send fallback, a daily self-check agent',
         'Infra: GCP VM, Docker Compose, 6 self-hosted Postgres DBs, GitHub Actions → registry deploys',
@@ -325,7 +325,7 @@ const en = {
         'For work a server can\'t do, I turned employee PCs into automation nodes and built a way to deploy, update, and monitor them safely. On the server side, I ran about 40 services on one VM.',
       flow: [
         'Staff install the tools they need with one line. No admin rights required.',
-        'Installed tools check for a new version 3×/day and update themselves.',
+        'Installed tools update themselves on a per-tool cadence: the seller-finder worker between jobs, the Mac KakaoTalk relay once a day, and the Coupang extension 3×/day. The version is the sha256 of the published zip.',
         'The server monitors each PC through job queues and status reports, and alerts Slack when one stalls.',
       ],
       architectureImages: [{ src: '/images/v2/field-fleet-en.png', alt: 'Field fleet and platform ops' }],
@@ -356,8 +356,8 @@ const en = {
           action: 'Replaced it with a Web Crypto HMAC-signed, expiring cookie in edge middleware. It fails closed when the secret is missing.',
         },
         {
-          title: 'A Windows worker crash-looped every 5 minutes',
-          cause: 'A missing import inside an exception handler. Mocked tests stayed green.',
+          title: 'A Windows worker claimed jobs but made zero progress — the server reclaimed them every 5 minutes and the same PC claimed them again',
+          cause: 'A missing import inside an exception handler. The worker process stayed alive, and tests stayed green because none of them went through that branch.',
           action: 'Added a test that spawns the real process to check the wiring.',
           result: "Lesson: green tests don't mean correct wiring.",
         },
@@ -424,7 +424,7 @@ const en = {
         title: 'Briefify',
         period: 'Oct–Nov 2024',
         oneLiner: 'Image and document translate/summarize web service',
-        connection: '→ My first LLM pipeline chaining several models.',
+        connection: '→ My first hands-on AI pipeline, chaining OCR, summarization, and translation models (Tesseract, T5, NLLB).',
       },
     ],
   },
