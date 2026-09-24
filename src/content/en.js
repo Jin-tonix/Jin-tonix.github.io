@@ -447,15 +447,15 @@ const en = {
   about: {
     title: 'About Me',
     photo: '/images/img.jpg',
-    tagline: "I'm Jinhee Mok, an AI Builder.",
+    tagline: "I'm Jinhee Mok, an AI Builder who turns repetitive work into AI systems that run every day.",
     paragraphs: [
-      'I find repetitive work in real operations, turn it into AI agents and automation, then ship and run those systems. My rule: machines do the repetition, and people keep the judgment.',
-      'At StyleSeller I spent 10 months as the only builder of the in-house AI operations system. That meant a vendor-support agent, a sales platform from seller discovery to tailored outreach, an agent org with human approvals and an internal assistant, and automation on employee PCs. I owned it end to end, from scoping to deployment to incident response.',
-      "I write code by orchestrating several Claude Code agents in parallel, and I verify the results with tests, cross-reviews, real-device checks, and running-code hashes. After every incident, I turn the cause and the lesson into a rule so it doesn't happen again.",
-      'I studied law, then worked as an English instructor and an operations manager. That taught me to understand problems from the user\'s side. I switched to software in 2024, and automating receipt review with OCR + LLM during my We:Review internship led directly to the work I do now.',
+      'I find the work people repeat in real operations, turn it into AI agents and automation, then ship and run it. My rule: machines take the repetition, people keep the judgment.',
+      'At StyleSeller I spent 10 months as the only builder of the in-house AI operations system: a vendor-support agent, a sales platform from seller discovery to tailored outreach, an agent org with human approvals, and automation on employee PCs. I owned it from scoping to incident response.',
+      "I build fast by orchestrating several Claude Code agents in parallel, and I verify the results with tests, cross-reviews, and real-device checks. After every incident, I turn the cause into a rule so it doesn't happen twice.",
+      'Studying law, then working as an English instructor and a daycare operations manager, taught me to listen first to the people doing the work. That habit is how I choose what to automate.',
     ],
     experienceTitle: 'Journey',
-    experienceLead: 'From career change to AI Builder',
+    experienceLead: 'From a law degree to AI Builder',
     careerChangeLabel: 'Career Change',
     experience: [
       { period: '2025.12 – Present', org: 'StyleSeller · AI Builder (solo)', summary: 'Designed, built, and ran the in-house AI operations system', kind: 'tech' },
