@@ -1,20 +1,35 @@
 /* src/App.css */
 .App {
   --sidebar-width: clamp(80px, 15vw, 250px);
+  --topbar-height: 52px;
   display: flex;
   min-height: 100vh;
   background-color: #222;
   font-family: Arial, sans-serif;
 }
 
-/* 사이드바 폭만큼 비우고 남은 폭을 전부 쓴다. 스크롤은 여기서 한 번만 */
+/* 사이드바 폭만큼 비우고 남은 폭을 전부 쓴다. 스크롤은 문서(창) 하나만 쓴다 */
 .main-content {
   flex: 1;
   min-width: 0;
   margin-left: var(--sidebar-width);
-  height: 100vh;
-  overflow-y: auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background-color: #222;
+}
+
+/* 각 페이지가 남은 높이를 채운다 (한 화면 배치·히어로용) */
+.main-content > * {
+  flex: 1 0 auto;
+}
+
+/* 좁은 화면: 사이드바가 위쪽 가로 바가 되므로 옆 여백 대신 위 여백 */
+@media (max-width: 600px) {
+  .main-content {
+    margin-left: 0;
+    padding-top: var(--topbar-height);
+  }
 }
 
 
