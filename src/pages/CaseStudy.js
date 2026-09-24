@@ -200,7 +200,7 @@ export default function CaseStudy() {
           </TldrBox>
         )}
 
-        {(highlights.length > 0 || !isV3) && (
+        {!isV3 && (
           <HorizontalSection>
             {highlights.length > 0 && (
               <Section>
@@ -213,7 +213,7 @@ export default function CaseStudy() {
               </Section>
             )}
 
-            {!isV3 && stack.length > 0 && (
+            {stack.length > 0 && (
               <Section>
                 <h3>{t.stack}</h3>
                 <SkillsList>
@@ -238,6 +238,16 @@ export default function CaseStudy() {
 
         {isV3 && (
           <Section>
+            {/* v3 에서는 주요 사항이 그림 아래로 간다 (첫 화면 = 메타 + TL;DR + 그림) */}
+            {highlights.length > 0 && (
+              <Fold title={t.highlights} open>
+                <ul>
+                  {highlights.map((h) => (
+                    <li key={h}>{h}</li>
+                  ))}
+                </ul>
+              </Fold>
+            )}
             {problem.length > 0 && (
               <Fold title={t.v3Problem} open>
                 {problem.map((p) => (
