@@ -12,7 +12,7 @@ const ko = {
   },
   hero: {
     headline: '현업의 반복 업무를, 매일 돌아가는 AI 시스템으로',
-    sub: 'AI Builder 목진희입니다. SNS 커머스 스타트업 StyleSeller 에서 10개월 동안 사내 AI 운영 시스템을 혼자 설계·구축·운영했습니다.',
+    sub: 'AI Builder 목진희입니다. SNS 커머스 스타트업 StyleSeller에서 10개월 동안 업무를 위한 사내 AI 운영 시스템을 혼자 설계·구축·운영했습니다.',
     metrics: [
       { value: '10개월', label: '1인 빌더 · 2025.12–현재' },
       { value: '7,000', label: '본인 커밋 (핵심 저장소 5개)' },
@@ -408,7 +408,6 @@ const ko = {
   },
   before: {
     title: 'Before · 2024–2025',
-    intro: '같은 카드, 작게 둡니다. 지금 하는 일과 어떻게 이어지는지 한 줄씩 남겼습니다.',
     projects: [
       {
         route: '/projects/project5',
