@@ -43,7 +43,7 @@ const NowBox = styled.div`
   border: 1px solid ${color.gold};
   border-radius: ${layout.radius};
   padding: 8px 14px;
-  margin-bottom: 14px;
+  margin-top: 18px;
   background-color: rgba(255, 215, 0, 0.06);
 
   .now-label {
@@ -84,7 +84,7 @@ const JourneyItem = styled.li`
   grid-template-columns: 120px 1fr;
   column-gap: 16px;
   padding: 0 0 0 26px;
-  margin-bottom: ${({ $kind }) => ($kind === 'tech' ? '10px' : '4px')};
+  margin-bottom: 7px;
 
   &::before {
     content: '';
@@ -109,9 +109,9 @@ const JourneyItem = styled.li`
   }
 
   .org {
-    color: ${({ $kind }) => ($kind === 'tech' ? color.text : color.muted)};
-    font-size: ${({ $kind }) => ($kind === 'tech' ? font.size.sm : font.size.xs)};
-    font-weight: ${({ $kind }) => ($kind === 'tech' ? font.weight.subhead : font.weight.body)};
+    color: ${color.text};
+    font-size: ${font.size.sm};
+    font-weight: ${font.weight.subhead};
     line-height: 1.4;
   }
 
@@ -132,11 +132,6 @@ const JourneyItem = styled.li`
     font-size: ${font.size.xs};
     line-height: 1.45;
     margin-top: 1px;
-  }
-
-  .inline-summary {
-    color: ${color.muted};
-    opacity: 0.8;
   }
 
   @media (max-width: 600px) {
@@ -176,6 +171,10 @@ const About = () => {
             {about.paragraphs.map((p) => (
               <Paragraph key={p.slice(0, 20)}>{p}</Paragraph>
             ))}
+            <NowBox>
+              <div className="now-label">{about.nowTitle}</div>
+              <div className="now-text">{about.nowText}</div>
+            </NowBox>
           </Section>
 
         </div>
@@ -186,10 +185,6 @@ const About = () => {
             <Lead>{about.experienceLead}</Lead>
           </TightHeader>
           <Section>
-            <NowBox>
-              <div className="now-label">{about.nowTitle}</div>
-              <div className="now-text">{about.nowText}</div>
-            </NowBox>
             <JourneyList>
               {about.experience.map((exp, i) => (
                 <JourneyItem key={exp.org + exp.period} $current={i === 0} $kind={exp.kind}>
@@ -200,9 +195,8 @@ const About = () => {
                   <div>
                     <div className="org">
                       {exp.org}
-                      {exp.kind !== 'tech' && <span className="inline-summary"> · {exp.summary}</span>}
                     </div>
-                    {exp.kind === 'tech' && <div className="summary">{exp.summary}</div>}
+                    <div className="summary">{exp.summary}</div>
                   </div>
                 </JourneyItem>
               ))}
