@@ -50,35 +50,66 @@ const List = styled.ul`
   max-width: ${font.proseMaxWidth};
 `;
 
+// About·Skills 와 같은 한 화면 배치 — 세로 가운데, 1200px 칼럼
+const CompactShell = styled(PageShell)`
+  align-items: center;
+
+  & > div {
+    max-width: 1200px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  header {
+    margin-bottom: 20px;
+  }
+
+  section {
+    margin-bottom: 20px;
+  }
+`;
+
+// 그림 자체에 제목이 있어 섹션 제목 없이 둔다. 폭으로 높이를 제한해 한 화면에 들어가게 한다.
+const Diagram = styled(ZoomImage)`
+  max-width: 800px;
+
+  @media (max-height: 760px) and (min-width: 900px) {
+    max-width: 680px;
+  }
+`;
+
 const Lessons = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 40px;
   border-top: 1px solid ${color.line};
-  max-width: 920px;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Lesson = styled.div`
-  display: grid;
-  grid-template-columns: minmax(200px, 300px) 1fr;
-  gap: 8px 32px;
-  padding: 18px 0;
+  padding: 10px 0;
   border-bottom: 1px solid ${color.line};
 
   h4 {
     color: ${color.gold};
-    font-size: ${font.size.md};
+    font-size: ${font.size.sm};
     font-weight: ${font.weight.subhead};
     line-height: 1.45;
-    margin: 0;
+    margin: 0 0 2px;
   }
 
   p {
-    color: ${color.text};
-    font-size: ${font.size.sm};
-    line-height: ${font.bodyLineHeight};
+    color: ${color.muted};
+    font-size: ${font.size.xs};
+    line-height: 1.55;
     margin: 0;
-  }
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
   }
 `;
 
@@ -87,13 +118,13 @@ export default function HowIBuild() {
   const { howIBuild } = content;
 
   return (
-    <PageShell title={howIBuild.title} lead={howIBuild.intro}>
+    <CompactShell title={howIBuild.title} lead={howIBuild.intro}>
       <Section>
-        <SectionTitle>{howIBuild.loopTitle}</SectionTitle>
+        {!howIBuild.image && <SectionTitle>{howIBuild.loopTitle}</SectionTitle>}
         {howIBuild.image && (
-          <ZoomImage href={howIBuild.image} target="_blank" rel="noopener noreferrer">
+          <Diagram href={howIBuild.image} target="_blank" rel="noopener noreferrer">
             <img src={howIBuild.image} alt={howIBuild.loopTitle} />
-          </ZoomImage>
+          </Diagram>
         )}
         {!howIBuild.image && (
           <>
@@ -134,6 +165,6 @@ export default function HowIBuild() {
           ))}
         </Lessons>
       </Section>
-    </PageShell>
+    </CompactShell>
   );
 }
