@@ -8,7 +8,7 @@ const TwoColumn = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: start;
-  gap: 56px;
+  gap: 96px;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -148,9 +148,12 @@ const TightHeader = styled(Header)`
 `;
 
 const CompactShell = styled(PageShell)`
+  align-items: center;
+
   & > div {
-    padding-top: 36px;
-    padding-bottom: 24px;
+    max-width: 1200px;
+    padding-top: 32px;
+    padding-bottom: 32px;
   }
 `;
 
