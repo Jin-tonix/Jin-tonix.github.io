@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import styled from 'styled-components';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useLang } from '../lang/LangContext';
 import { color, font } from './ui/tokens';
 
@@ -89,7 +89,7 @@ const SidebarMain = styled.div`
     .extra-group-label {
       color: ${color.muted};
       font-size: clamp(0.6em, 1vw, 0.75em);
-      margin-top: 4px;
+      margin-top: 14px;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
@@ -157,8 +157,10 @@ const SidebarMain = styled.div`
 `;
 
 export default function Sidebar() {
-  const [showExtraMenu, setShowExtraMenu] = useState(false);
   const { content, withPrefix, koPath, enPath, lang } = useLang();
+  const location = useLocation();
+  // 프로젝트 하위 페이지를 보는 동안에는 목록을 열어 둔다 — Projects 를 다시 누르거나 다른 상위 메뉴로 가면 닫힌다
+  const [showExtraMenu, setShowExtraMenu] = useState(() => /\/projects/.test(location.pathname));
   const { nav, cases, before } = content;
 
   const handleProjectsClick = () => {
@@ -177,13 +179,13 @@ export default function Sidebar() {
         {showExtraMenu && (
           <div className="extra-menu">
             {cases.map((c) => (
-              <NavLink key={c.id} to={withPrefix(`/projects/${c.slug}`)} onClick={() => setShowExtraMenu(false)}>
+              <NavLink key={c.id} to={withPrefix(`/projects/${c.slug}`)}>
                 {c.shortTitle}
               </NavLink>
             ))}
             <div className="extra-group-label">{before.title}</div>
             {before.projects.map((p) => (
-              <NavLink key={p.route} to={withPrefix(p.route)} onClick={() => setShowExtraMenu(false)}>
+              <NavLink key={p.route} to={withPrefix(p.route)}>
                 {p.title}
               </NavLink>
             ))}
