@@ -146,6 +146,8 @@ const SidebarMain = styled.nav`
       border: 1px solid ${color.line};
       border-radius: 4px;
       color: ${color.muted};
+      min-width: 32px;
+      min-height: 28px;
       padding: 2px 8px;
       cursor: pointer;
       font-size: inherit;
