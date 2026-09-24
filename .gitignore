@@ -24,3 +24,7 @@ yarn-error.log*
 
 # 빌드 폴더 무시
 build/
+
+# 로컬 전용 설정 (추적하지 않는다)
+.env
+.claude/settings.local.json
