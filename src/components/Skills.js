@@ -3,13 +3,40 @@ import styled from 'styled-components';
 import { FaJava, FaReact, FaDocker, FaGithub, FaHtml5, FaCss3Alt, FaJs, FaGit, FaDatabase, FaNodeJs, FaRobot, FaProjectDiagram, FaChartLine, FaUserCheck, FaCode, FaChrome, FaSync } from 'react-icons/fa';
 import { SiSpring, SiMysql, SiVuedotjs, SiFlutter, SiPython, SiNextdotjs, SiFastapi, SiPostgresql, SiSupabase, SiN8N, SiPlaywright, SiSwift, SiGooglecloud, SiNginx, SiGithubactions } from 'react-icons/si';
 import { useLang } from '../lang/LangContext';
-import PageShell, { Section, SectionTitle } from './ui/PageShell';
+import PageShell, { SectionTitle } from './ui/PageShell';
 import { color, font, layout } from './ui/tokens';
+
+// About 과 같은 한 화면 배치 — 세로 가운데, 넓은 칼럼
+const CompactShell = styled(PageShell)`
+  align-items: center;
+
+  & > div {
+    max-width: 1200px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  header {
+    margin-bottom: 36px;
+  }
+`;
+
+const GroupGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 96px;
+  row-gap: 32px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    row-gap: 32px;
+  }
+`;
 
 const SkillGrid = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 8px;
 `;
 
 const SkillItem = styled.div`
@@ -19,7 +46,7 @@ const SkillItem = styled.div`
   background-color: ${color.surface};
   border: 1px solid ${color.line};
   border-radius: ${layout.radius};
-  padding: 10px 14px;
+  padding: 8px 13px;
   color: ${color.text};
   font-size: ${font.size.sm};
 `;
@@ -51,7 +78,7 @@ const ICONS = {
   flutter: [SiFlutter, '#02569B'],
   docker: [FaDocker, '#2496ED'],
   git: [FaGit, '#F05032'],
-  github: [FaGithub, '#181717'],
+  github: [FaGithub, '#E8E8E8'],
   'docker-compose': [FaDocker, '#2496ED'],
   'gh-actions': [SiGithubactions, '#2088FF'],
   gcp: [SiGooglecloud, '#4285F4'],
@@ -68,24 +95,26 @@ const Skills = () => {
   const { skills } = content;
 
   return (
-    <PageShell title={skills.title}>
-      {skills.groups.map((group) => (
-        <Section key={group.id} id={`${group.id}-skills`}>
-          <SectionTitle>{group.title}</SectionTitle>
-          <SkillGrid>
-            {group.items.map((item) => {
-              const [Icon, iconColor] = ICONS[item.id] || [FaCode, color.text];
-              return (
-                <SkillItem key={item.id}>
-                  <Icon size="1.2em" color={iconColor} />
-                  <span>{item.label}</span>
-                </SkillItem>
-              );
-            })}
-          </SkillGrid>
-        </Section>
-      ))}
-    </PageShell>
+    <CompactShell title={skills.title} lead={skills.lead}>
+      <GroupGrid>
+        {skills.groups.map((group) => (
+          <section key={group.id} id={`${group.id}-skills`}>
+            <SectionTitle>{group.title}</SectionTitle>
+            <SkillGrid>
+              {group.items.map((item) => {
+                const [Icon, iconColor] = ICONS[item.id] || [FaCode, color.text];
+                return (
+                  <SkillItem key={item.id}>
+                    <Icon size="1.2em" color={iconColor} />
+                    <span>{item.label}</span>
+                  </SkillItem>
+                );
+              })}
+            </SkillGrid>
+          </section>
+        ))}
+      </GroupGrid>
+    </CompactShell>
   );
 };
 

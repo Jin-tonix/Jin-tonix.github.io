@@ -475,6 +475,7 @@ const en = {
   },
   skills: {
     title: 'Skills',
+    lead: 'What I have shipped with, from agents to deployment and operations.',
     groups: [
       {
         id: 'ai-agent',

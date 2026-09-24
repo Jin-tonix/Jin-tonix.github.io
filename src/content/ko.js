@@ -483,6 +483,7 @@ const ko = {
   },
   skills: {
     title: 'Skills',
+    lead: '에이전트부터 배포·운영까지, 실제 서비스에 쓴 기술입니다.',
     groups: [
       {
         id: 'ai-agent',
