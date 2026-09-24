@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { color, font, layout } from './tokens';
+import imgAttrs from './imgAttrs';
 
 const Wrapper = styled.div`
   background-color: ${color.surface};
@@ -100,7 +101,7 @@ export default function SystemMap({ systemMap, withPrefix }) {
       <Intro>{systemMap.intro}</Intro>
       {systemMap.image && (
         <ImageFrame href={systemMap.image} target="_blank" rel="noopener noreferrer">
-          <img src={systemMap.image} alt={systemMap.imageAlt || systemMap.title} />
+          <img src={systemMap.image} {...imgAttrs(systemMap.image)} alt={systemMap.imageAlt || systemMap.title} />
         </ImageFrame>
       )}
       {systemMap.layers && (

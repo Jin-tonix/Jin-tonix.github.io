@@ -13,13 +13,14 @@ import {
   SkillsList,
   Footer,
 } from './ui/CaseStudyKit';
+import imgAttrs from './ui/imgAttrs';
 
 const Project1 = () => {
   return (
     <PageWrapper>
       <Container>
         <Header>
-          <img src="/images/logo1.png" alt="Project Logo" />
+          <img src="/images/logo1.png" {...imgAttrs('/images/logo1.png', { eager: true })} alt="Project Logo" />
           <div>
             <h1>자격증 기반 채용정보로 구직자의 취업 기회 발굴과 커리어 성장을 지원하는 웹/앱 서비스 개발</h1>
             <SubHeader>- Team Project (2024.08.26 ~ 10.02): 관리자 페이지 (프론트엔드/백엔드) 및 Flutter 앱 구현</SubHeader>
@@ -29,13 +30,13 @@ const Project1 = () => {
         <ContentSection>
           <ImagesSection>
             <a href="/images/proj1-1.png" target="_blank" rel="noopener noreferrer">
-              <img src="/images/proj1-1.png" alt="채용/자격증 정보" />
+              <img src="/images/proj1-1.png" {...imgAttrs('/images/proj1-1.png')} alt="채용/자격증 정보" />
             </a>
             <a href="/images/proj1-2.png" target="_blank" rel="noopener noreferrer">
-              <img src="/images/proj1-2.png" alt="회원가입/로그인" />
+              <img src="/images/proj1-2.png" {...imgAttrs('/images/proj1-2.png')} alt="회원가입/로그인" />
             </a>
             <a href="/images/proj1-3.png" target="_blank" rel="noopener noreferrer">
-              <img src="/images/proj1-3.png" alt="Flutter 앱 화면" />
+              <img src="/images/proj1-3.png" {...imgAttrs('/images/proj1-3.png')} alt="Flutter 앱 화면" />
             </a>
           </ImagesSection>
 

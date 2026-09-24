@@ -5,6 +5,7 @@ import { useLang } from '../lang/LangContext';
 import PageShell, { Section, SectionTitle } from '../components/ui/PageShell';
 import { ZoomImage } from '../components/ui/primitives';
 import { color, font } from '../components/ui/tokens';
+import imgAttrs from '../components/ui/imgAttrs';
 
 const LoopRow = styled.div`
   display: flex;
@@ -123,7 +124,7 @@ export default function HowIBuild() {
         {!howIBuild.image && <SectionTitle>{howIBuild.loopTitle}</SectionTitle>}
         {howIBuild.image && (
           <Diagram href={howIBuild.image} target="_blank" rel="noopener noreferrer">
-            <img src={howIBuild.image} alt={howIBuild.loopTitle} />
+            <img src={howIBuild.image} {...imgAttrs(howIBuild.image, { eager: true })} alt={howIBuild.loopTitle} />
           </Diagram>
         )}
         {!howIBuild.image && (

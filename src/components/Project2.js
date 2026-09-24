@@ -13,13 +13,14 @@ import {
   SkillsList,
   Footer,
 } from './ui/CaseStudyKit';
+import imgAttrs from './ui/imgAttrs';
 
 const Project2 = () => {
   return (
     <PageWrapper>
       <Container>
         <Header>
-          <img src="/images/logo2.png" alt="Project Logo" />
+          <img src="/images/logo2.png" {...imgAttrs('/images/logo2.png', { eager: true })} alt="Project Logo" />
           <div>
             <h1>FLUX - 아티스트 경매 플랫폼 개발</h1>
             <SubHeader>- Team Project (2024.07.15 ~ 08.16): Market Page 및 My Page 전반 구현</SubHeader>
@@ -29,13 +30,13 @@ const Project2 = () => {
         <ContentSection>
           <ImagesSection>
             <a href="/images/proj2-1.png" target="_blank" rel="noopener noreferrer">
-              <img src="/images/proj2-1.png" alt="Main Page" />
+              <img src="/images/proj2-1.png" {...imgAttrs('/images/proj2-1.png')} alt="Main Page" />
             </a>
             <a href="/images/proj2-2.png" target="_blank" rel="noopener noreferrer">
-              <img src="/images/proj2-2.png" alt="User Login" />
+              <img src="/images/proj2-2.png" {...imgAttrs('/images/proj2-2.png')} alt="User Login" />
             </a>
             <a href="/images/proj2-3.png" target="_blank" rel="noopener noreferrer">
-              <img src="/images/proj2-3.png" alt="Notice Board" />
+              <img src="/images/proj2-3.png" {...imgAttrs('/images/proj2-3.png')} alt="Notice Board" />
             </a>
           </ImagesSection>
 

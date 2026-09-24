@@ -33,6 +33,12 @@ body {
   overflow: hidden; /* 스크롤 방지 — 실제 스크롤은 .main-content 에서 일어난다 */
 }
 
+/* width·height 속성은 비율 예약용 — 실제 크기는 CSS 가 정한다 */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

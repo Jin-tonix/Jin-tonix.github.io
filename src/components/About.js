@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useLang } from '../lang/LangContext';
 import PageShell, { Section, Header, PageTitle, Lead } from './ui/PageShell';
 import { color, font, layout } from './ui/tokens';
+import imgAttrs from './ui/imgAttrs';
 
 const TwoColumn = styled.div`
   display: grid;
@@ -170,7 +171,7 @@ const About = () => {
             <Lead>{about.tagline}</Lead>
           </TightHeader>
           <Section>
-            <ProfileImage src={about.photo} alt="Jinhee Mok" />
+            <ProfileImage src={about.photo} {...imgAttrs(about.photo, { eager: true })} alt="Jinhee Mok" />
             {about.paragraphs.map((p) => (
               <Paragraph key={p.slice(0, 20)}>{p}</Paragraph>
             ))}
