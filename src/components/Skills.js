@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FaJava, FaReact, FaDocker, FaGithub, FaHtml5, FaCss3Alt, FaJs, FaGit, FaDatabase, FaNodeJs, FaRobot, FaProjectDiagram, FaChartLine, FaUserCheck, FaCode, FaChrome, FaSync } from 'react-icons/fa';
-import { SiSpring, SiMysql, SiVuedotjs, SiFlutter, SiPython, SiNextdotjs, SiFastapi, SiPostgresql, SiSupabase, SiN8N, SiPlaywright, SiSwift, SiGooglecloud, SiNginx, SiGithubactions } from 'react-icons/si';
+import { FaJava, FaReact, FaDocker, FaGithub, FaHtml5, FaCss3Alt, FaJs, FaGit, FaDatabase, FaNodeJs, FaRobot, FaProjectDiagram, FaUserCheck, FaCode, FaChrome, FaSync, FaTerminal, FaApple, FaLink, FaImage } from 'react-icons/fa';
+import { SiSpring, SiMysql, SiVuedotjs, SiFlutter, SiPython, SiNextdotjs, SiFastapi, SiPostgresql, SiSupabase, SiN8N, SiPlaywright, SiSwift, SiGooglecloud, SiNginx, SiGithubactions, SiTypescript, SiTailwindcss } from 'react-icons/si';
 import { useLang } from '../lang/LangContext';
 import PageShell, { SectionTitle } from './ui/PageShell';
 import { color, font, layout } from './ui/tokens';
@@ -57,7 +57,6 @@ const ICONS = {
   mcp: [FaProjectDiagram, '#61DAFB'],
   rag: [FaDatabase, '#f29111'],
   litellm: [FaProjectDiagram, '#6DB33F'],
-  langfuse: [FaChartLine, '#F7DF1E'],
   hitl: [FaUserCheck, '#E34F26'],
   'claude-code': [FaCode, '#DE7356'],
   java: [FaJava, '#007396'],
@@ -88,7 +87,32 @@ const ICONS = {
   'chrome-ext': [FaChrome, '#4285F4'],
   playwright: [SiPlaywright, '#2EAD33'],
   swift: [SiSwift, '#F05138'],
+  ts: [SiTypescript, '#3178C6'],
+  tailwind: [SiTailwindcss, '#38BDF8'],
+  powershell: [FaTerminal, '#5391FE'],
+  launchd: [FaApple, '#E8E8E8'],
+  'docker-swarm': [FaDocker, '#2496ED'],
+  langchain: [FaLink, '#1FB8A3'],
+  'rag-course': [FaDatabase, '#f29111'],
+  'model-pipeline': [FaImage, '#A0A0A0'],
 };
+
+const SectionHead = styled.h2`
+  color: ${color.text};
+  font-size: ${font.size.md};
+  font-weight: ${font.weight.subhead};
+  border-bottom: 1px solid ${color.line};
+  padding-bottom: 8px;
+  margin: 0 0 20px;
+`;
+
+const SectionBlock = styled.div`
+  margin-bottom: 40px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
 
 const Skills = () => {
   const { content } = useLang();
@@ -96,24 +120,29 @@ const Skills = () => {
 
   return (
     <CompactShell title={skills.title} lead={skills.lead}>
-      <GroupGrid>
-        {skills.groups.map((group) => (
-          <section key={group.id} id={`${group.id}-skills`}>
-            <SectionTitle>{group.title}</SectionTitle>
-            <SkillGrid>
-              {group.items.map((item) => {
-                const [Icon, iconColor] = ICONS[item.id] || [FaCode, color.text];
-                return (
-                  <SkillItem key={item.id}>
-                    <Icon size="1.2em" color={iconColor} />
-                    <span>{item.label}</span>
-                  </SkillItem>
-                );
-              })}
-            </SkillGrid>
-          </section>
-        ))}
-      </GroupGrid>
+      {skills.sections.map((sec) => (
+        <SectionBlock key={sec.id}>
+          <SectionHead>{sec.title}</SectionHead>
+          <GroupGrid>
+            {sec.groups.map((group) => (
+              <section key={group.id} id={`${group.id}-skills`}>
+                <SectionTitle>{group.title}</SectionTitle>
+                <SkillGrid>
+                  {group.items.map((item) => {
+                    const [Icon, iconColor] = ICONS[item.id] || [FaCode, color.text];
+                    return (
+                      <SkillItem key={item.id}>
+                        <Icon size="1.2em" color={iconColor} />
+                        <span>{item.label}</span>
+                      </SkillItem>
+                    );
+                  })}
+                </SkillGrid>
+              </section>
+            ))}
+          </GroupGrid>
+        </SectionBlock>
+      ))}
     </CompactShell>
   );
 };

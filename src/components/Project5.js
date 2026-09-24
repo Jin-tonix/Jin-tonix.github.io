@@ -15,6 +15,7 @@ import {
   SkillsList,
   Footer,
 } from './ui/CaseStudyKit';
+import imgAttrs from './ui/imgAttrs';
 
 const FloatingImageLink = styled.a`
   float: right;
@@ -47,7 +48,7 @@ const Project5 = () => {
     <PageWrapper>
       <Container>
         <Header>
-          <img src="/images/logo5.png" alt="Project Logo" />
+          <img src="/images/logo5.png" {...imgAttrs('/images/logo5.png', { eager: true })} alt="Project Logo" />
           <div>
             <h1>We:Review - 영수증 검증 자동화 시스템 (OCR + LLM 기반)</h1>
             <SubHeader>- Solo Project (2025.08 ~ 2025.10): Backend/AI 개발 (1인 프로젝트)</SubHeader>
@@ -83,10 +84,10 @@ const Project5 = () => {
         <ContentSection>
           <ImagesSection>
             <a href="/images/proj5-1.png" target="_blank" rel="noopener noreferrer">
-              <img src="/images/proj5-1.png" alt="System Architecture" />
+              <img src="/images/proj5-1.png" {...imgAttrs('/images/proj5-1.png')} alt="System Architecture" />
             </a>
             <a href="/images/proj5-2.png" target="_blank" rel="noopener noreferrer">
-              <img src="/images/proj5-2.png" alt="Processing Pipeline" />
+              <img src="/images/proj5-2.png" {...imgAttrs('/images/proj5-2.png')} alt="Processing Pipeline" />
             </a>
           </ImagesSection>
 
@@ -146,7 +147,7 @@ const Project5 = () => {
           </Section>
 
           <FloatingImageLink href="/images/proj5-3.png" target="_blank" rel="noopener noreferrer">
-            <img src="/images/proj5-3.png" alt="Result Screen" />
+            <img src="/images/proj5-3.png" {...imgAttrs('/images/proj5-3.png')} alt="Result Screen" />
           </FloatingImageLink>
         </ContentSection>
 

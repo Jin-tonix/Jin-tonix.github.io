@@ -53,7 +53,8 @@ export const SubHeader = styled.h2`
   font-size: ${font.size.sm};
   font-weight: ${font.weight.body};
   color: ${color.muted};
-  margin: 4px 0 0;
+  line-height: 1.5;
+  margin: 6px 0 0;
 `;
 
 export const OneLiner = styled.p`
@@ -249,8 +250,148 @@ export const DiagramRow = styled.div`
   img {
     width: 100%;
     max-width: 1000px;
-    background: #fff;
+    height: auto;
     border: 1px solid ${color.line};
     border-radius: ${layout.radius};
+  }
+`;
+
+// 폰에서는 그림 글자가 작아 새 탭에서 원본 크기로 연다는 안내를 붙인다
+export const ZoomHint = styled.span`
+  display: none;
+  margin-top: 6px;
+  color: ${color.muted};
+  font-size: 12px;
+
+  @media (max-width: 600px) {
+    display: block;
+  }
+`;
+
+// v3 사례 틀 — TL;DR 3줄 상자 (첫 화면에 메타 + TL;DR + 그림이 보이게)
+export const TldrBox = styled.div`
+  background-color: ${color.surface};
+  border: 1px solid ${color.line};
+  border-left: 3px solid ${color.gold};
+  border-radius: ${layout.radius};
+  padding: 14px 18px;
+  margin: 8px 0 16px;
+
+  .tldr-label {
+    display: block;
+    color: ${color.gold};
+    font-size: ${font.size.xs};
+    font-weight: ${font.weight.subhead};
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 18px;
+    font-size: ${font.size.sm};
+    line-height: ${font.bodyLineHeight};
+    color: ${color.text};
+    max-width: ${font.proseMaxWidth};
+  }
+`;
+
+// 접을 수 있는 긴 칸 — 네이티브 details/summary 라 키보드·스크린리더가 그대로 쓴다
+export const Collapsible = styled.details`
+  border-top: 1px solid ${color.line};
+  padding: 4px 0;
+
+  &:last-of-type {
+    border-bottom: 1px solid ${color.line};
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    list-style: none;
+    padding: 12px 0;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::before {
+      content: '';
+      flex-shrink: 0;
+      width: 0;
+      height: 0;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 7px solid ${color.gold};
+      transition: transform 0.2s ease;
+    }
+
+    h3 {
+      margin: 0;
+    }
+
+    .count {
+      color: ${color.muted};
+      font-size: ${font.size.xs};
+    }
+  }
+
+  &[open] > summary::before {
+    transform: rotate(90deg);
+  }
+
+  .body {
+    padding: 0 0 16px 17px;
+  }
+`;
+
+// 판단 {choice, why} 와 시스템 단계 {title, points, chain} 한 줄
+export const ChoiceItem = styled.li`
+  margin-bottom: 10px;
+
+  strong {
+    color: ${color.text};
+    font-weight: ${font.weight.subhead};
+  }
+
+  .why {
+    display: block;
+    color: ${color.muted};
+  }
+
+  ul {
+    margin: 4px 0 0;
+  }
+
+  .chain {
+    display: block;
+    margin-top: 2px;
+    font-size: ${font.size.xs};
+    color: ${color.muted};
+
+    span {
+      color: ${color.gold};
+      margin-right: 4px;
+    }
+  }
+`;
+
+export const CaseMeta = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+
+  ${SubHeader} {
+    margin: 0;
+  }
+
+  .status-note {
+    color: ${color.muted};
+    font-size: ${font.size.xs};
+    line-height: 1.45;
   }
 `;

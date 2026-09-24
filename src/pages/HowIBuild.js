@@ -1,44 +1,54 @@
-// How I Build — 루프 다이어그램(단순 styled steps) + 하네스 목록 + 사고에서 배운 원칙 (제목·설명 두 칸 목록)
+// How I Build — 작업 루프(번호 카드) + 하네스 목록 + AI 가 틀렸고 잡은 사례 + 사고에서 배운 원칙
 import React from 'react';
 import styled from 'styled-components';
 import { useLang } from '../lang/LangContext';
 import PageShell, { Section, SectionTitle } from '../components/ui/PageShell';
-import { ZoomImage } from '../components/ui/primitives';
-import { color, font } from '../components/ui/tokens';
+import { color, font, layout } from '../components/ui/tokens';
 
-const LoopRow = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
+const LoopGrid = styled.ol`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: step;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
-const Step = styled.div`
+const Step = styled.li`
+  counter-increment: step;
   background-color: ${color.surface};
   border: 1px solid ${color.line};
-  border-radius: 8px;
-  padding: 10px 14px;
-  color: ${color.text};
-  font-size: ${font.size.sm};
-  max-width: 190px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  border-radius: ${layout.radius};
+  padding: 12px 14px;
 
   strong {
+    display: block;
     color: ${color.gold};
+    font-size: ${font.size.sm};
+    font-weight: ${font.weight.subhead};
+    margin-bottom: 4px;
+
+    &::before {
+      content: counter(step) '. ';
+    }
   }
 
-  small {
+  p {
     color: ${color.muted};
-    font-size: 0.85em;
-    line-height: 1.4;
+    font-size: ${font.size.xs};
+    line-height: 1.55;
+    margin: 0;
+    word-break: keep-all;
   }
-`;
-
-const Arrow = styled.span`
-  color: ${color.gold};
-  font-size: 1.1em;
 `;
 
 const List = styled.ul`
@@ -48,33 +58,42 @@ const List = styled.ul`
   padding-left: 20px;
   margin: 0;
   max-width: ${font.proseMaxWidth};
-`;
 
-// About·Skills 와 같은 한 화면 배치 — 세로 가운데, 1200px 칼럼
-const CompactShell = styled(PageShell)`
-  align-items: center;
-
-  & > div {
-    max-width: 1200px;
-    padding-top: 24px;
-    padding-bottom: 24px;
-  }
-
-  header {
-    margin-bottom: 20px;
-  }
-
-  section {
-    margin-bottom: 20px;
+  li {
+    margin-bottom: 4px;
   }
 `;
 
-// 그림 자체에 제목이 있어 섹션 제목 없이 둔다. 폭으로 높이를 제한해 한 화면에 들어가게 한다.
-const Diagram = styled(ZoomImage)`
-  max-width: 800px;
+const CaughtGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
 
-  @media (max-height: 760px) and (min-width: 900px) {
-    max-width: 680px;
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const Caught = styled.article`
+  border: 1px solid ${color.line};
+  border-left: 3px solid ${color.gold};
+  border-radius: ${layout.radius};
+  padding: 12px 14px;
+
+  h3 {
+    color: ${color.text};
+    font-size: ${font.size.sm};
+    font-weight: ${font.weight.subhead};
+    line-height: 1.45;
+    margin: 0 0 6px;
+  }
+
+  ul {
+    color: ${color.muted};
+    font-size: ${font.size.xs};
+    line-height: 1.55;
+    padding-left: 18px;
+    margin: 0;
   }
 `;
 
@@ -113,44 +132,62 @@ const Lesson = styled.div`
   }
 `;
 
+const Shell = styled(PageShell)`
+  & > div {
+    max-width: 1200px;
+  }
+
+  header {
+    margin-bottom: 32px;
+  }
+
+  section {
+    margin-bottom: 36px;
+  }
+`;
+
 export default function HowIBuild() {
   const { content } = useLang();
   const { howIBuild } = content;
 
   return (
-    <CompactShell title={howIBuild.title} lead={howIBuild.intro}>
+    <Shell title={howIBuild.title} lead={howIBuild.intro}>
       <Section>
-        {!howIBuild.image && <SectionTitle>{howIBuild.loopTitle}</SectionTitle>}
-        {howIBuild.image && (
-          <Diagram href={howIBuild.image} target="_blank" rel="noopener noreferrer">
-            <img src={howIBuild.image} alt={howIBuild.loopTitle} />
-          </Diagram>
-        )}
-        {!howIBuild.image && (
-          <>
-            <LoopRow>
-              {howIBuild.loop.map((item, i) => (
-                <React.Fragment key={item.step}>
-                  <Step title={item.desc}>
-                    <strong>{item.step}</strong>
-                    <small>{item.desc}</small>
-                  </Step>
-                  {i < howIBuild.loop.length - 1 && <Arrow>&rarr;</Arrow>}
-                </React.Fragment>
-              ))}
-            </LoopRow>
-          </>
-        )}
+        <SectionTitle>{howIBuild.loopTitle}</SectionTitle>
+        <LoopGrid>
+          {howIBuild.loop.map((item) => (
+            <Step key={item.step}>
+              <strong>{item.step}</strong>
+              <p>{item.desc}</p>
+            </Step>
+          ))}
+        </LoopGrid>
       </Section>
 
-      {!howIBuild.image && (
+      <Section>
+        <SectionTitle>{howIBuild.harnessTitle}</SectionTitle>
+        <List>
+          {howIBuild.harness.map((h) => (
+            <li key={h}>{h}</li>
+          ))}
+        </List>
+      </Section>
+
+      {howIBuild.aiWrong && (
         <Section>
-          <SectionTitle>{howIBuild.harnessTitle}</SectionTitle>
-          <List>
-            {howIBuild.harness.map((h) => (
-              <li key={h}>{h}</li>
+          <SectionTitle>{howIBuild.aiWrongTitle}</SectionTitle>
+          <CaughtGrid>
+            {howIBuild.aiWrong.map((item) => (
+              <Caught key={item.title}>
+                <h3>{item.title}</h3>
+                <ul>
+                  {item.points.map((pt) => (
+                    <li key={pt}>{pt}</li>
+                  ))}
+                </ul>
+              </Caught>
             ))}
-          </List>
+          </CaughtGrid>
         </Section>
       )}
 
@@ -165,6 +202,6 @@ export default function HowIBuild() {
           ))}
         </Lessons>
       </Section>
-    </CompactShell>
+    </Shell>
   );
 }

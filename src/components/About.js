@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useLang } from '../lang/LangContext';
 import PageShell, { Section, Header, PageTitle, Lead } from './ui/PageShell';
 import { color, font, layout } from './ui/tokens';
+import imgAttrs from './ui/imgAttrs';
 
 const TwoColumn = styled.div`
   display: grid;
@@ -56,8 +57,54 @@ const NowBox = styled.div`
     color: ${color.text};
     font-size: ${font.size.xs};
     line-height: 1.5;
-    margin-top: 2px;
+    margin: 2px 0 0;
+    padding-left: 18px;
   }
+`;
+
+// StyleSeller 월별 타임라인 — 월 칸 · 한 일
+const Timeline = styled.dl`
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px 14px;
+  margin: 0;
+  font-size: ${font.size.xs};
+  line-height: 1.5;
+
+  dt {
+    color: ${color.gold};
+    font-weight: ${font.weight.subhead};
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  dd {
+    color: ${color.text};
+    margin: 0;
+    word-break: keep-all;
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+
+    dd {
+      margin-bottom: 6px;
+    }
+  }
+`;
+
+const SubTitle = styled.h2`
+  color: ${color.gold};
+  font-size: ${font.size.md};
+  font-weight: ${font.weight.subhead};
+  margin: 28px 0 10px;
+`;
+
+const RepoPeriods = styled.p`
+  color: ${color.muted};
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 10px 0 0;
 `;
 
 // 최신이 위로 오는 세로 여정 — 날짜 칸 · 제목 · 한 줄 요약 (Canva Journey 표와 같은 구성)
@@ -170,14 +217,28 @@ const About = () => {
             <Lead>{about.tagline}</Lead>
           </TightHeader>
           <Section>
-            <ProfileImage src={about.photo} alt="Jinhee Mok" />
+            <ProfileImage src={about.photo} {...imgAttrs(about.photo, { eager: true })} alt="Jinhee Mok" />
             {about.paragraphs.map((p) => (
               <Paragraph key={p.slice(0, 20)}>{p}</Paragraph>
             ))}
             <NowBox>
               <div className="now-label">{about.nowTitle}</div>
-              <div className="now-text">{about.nowText}</div>
+              <ul className="now-text">
+                {about.now.map((n) => (
+                  <li key={n}>{n}</li>
+                ))}
+              </ul>
             </NowBox>
+            <SubTitle>{about.timelineTitle}</SubTitle>
+            <Timeline>
+              {about.timeline.map((t) => (
+                <React.Fragment key={t.month}>
+                  <dt>{t.month}</dt>
+                  <dd>{t.text}</dd>
+                </React.Fragment>
+              ))}
+            </Timeline>
+            <RepoPeriods>{about.repoPeriods}</RepoPeriods>
           </Section>
 
         </div>

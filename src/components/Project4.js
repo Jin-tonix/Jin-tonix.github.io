@@ -13,13 +13,14 @@ import {
   SkillsList,
   Footer,
 } from './ui/CaseStudyKit';
+import imgAttrs from './ui/imgAttrs';
 
 const Project4 = () => {
   return (
     <PageWrapper>
       <Container>
         <Header>
-          <img src="/images/logo4.png" alt="Project Logo" />
+          <img src="/images/logo4.png" {...imgAttrs('/images/logo4.png', { eager: true })} alt="Project Logo" />
           <div>
             <h1> FitChecker - 대화를 통해 필요한 운동을 추천해주고, 자세를 잡아주는 AI 기반의 홈트레이닝 앱</h1>
             <SubHeader>- Team Project (2024.11.05 ~ 12.20) : 백앤드 개발 및 Langchain 을 이용한 AI agent 개발 및 프론트/백 연결</SubHeader>
@@ -29,13 +30,13 @@ const Project4 = () => {
         <ContentSection>
           <ImagesSection>
             <a href="/images/proj4-1.png" target="_blank" rel="noopener noreferrer">
-              <img src="/images/proj4-1.png" alt="" />
+              <img src="/images/proj4-1.png" {...imgAttrs('/images/proj4-1.png')} alt="" />
             </a>
             <a href="/images/proj4-2.png" target="_blank" rel="noopener noreferrer">
-              <img src="/images/proj4-2.png" alt="" />
+              <img src="/images/proj4-2.png" {...imgAttrs('/images/proj4-2.png')} alt="" />
             </a>
             <a href="/images/proj4-3.png" target="_blank" rel="noopener noreferrer">
-              <img src="/images/proj4-3.png" alt="" />
+              <img src="/images/proj4-3.png" {...imgAttrs('/images/proj4-3.png')} alt="" />
             </a>
           </ImagesSection>
 

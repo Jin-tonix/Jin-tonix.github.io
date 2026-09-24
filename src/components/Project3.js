@@ -15,6 +15,7 @@ import {
   SkillsList,
   Footer,
 } from './ui/CaseStudyKit';
+import imgAttrs from './ui/imgAttrs';
 
 const SideBySideSection = styled.div`
   margin-top: 20px;
@@ -63,7 +64,7 @@ const Project3 = () => {
     <PageWrapper>
       <Container>
         <Header>
-          <img src="/images/logo3.png" alt="Project Logo" />
+          <img src="/images/logo3.png" {...imgAttrs('/images/logo3.png', { eager: true })} alt="Project Logo" />
           <div>
             <h1>Briefify - 이미지 문서나 텍스트 문서의 번역 및 요약을 지원하는 AI 기반의 웹 서비스 개발</h1>
             <SubHeader>- Team Project (2024.10.25 ~ 11.04): 프론트 MyPage 및 AI 모델 검색</SubHeader>
@@ -73,16 +74,16 @@ const Project3 = () => {
         <ContentSection>
           <ImagesSection>
             <a href="/images/proj3-2.png" target="_blank" rel="noopener noreferrer">
-              <img src="/images/proj3-2.png" alt="홈" />
+              <img src="/images/proj3-2.png" {...imgAttrs('/images/proj3-2.png')} alt="홈" />
             </a>
             <a href="/images/proj3-1.png" target="_blank" rel="noopener noreferrer">
-              <img src="/images/proj3-1.png" alt="요약하기" />
+              <img src="/images/proj3-1.png" {...imgAttrs('/images/proj3-1.png')} alt="요약하기" />
             </a>
             <a href="/images/proj3-6.png" target="_blank" rel="noopener noreferrer">
-              <img src="/images/proj3-6.png" alt="마이페이지" />
+              <img src="/images/proj3-6.png" {...imgAttrs('/images/proj3-6.png')} alt="마이페이지" />
             </a>
             <a href="/images/proj3-5.png" target="_blank" rel="noopener noreferrer">
-              <img src="/images/proj3-5.png" alt="마이페이지" />
+              <img src="/images/proj3-5.png" {...imgAttrs('/images/proj3-5.png')} alt="마이페이지" />
             </a>
           </ImagesSection>
 
@@ -118,7 +119,7 @@ const Project3 = () => {
 
             <SideBySideSection>
               <a href="/images/proj3-4.png" target="_blank" rel="noopener noreferrer">
-                <img src="/images/proj3-4.png" alt="AI 모델" />
+                <img src="/images/proj3-4.png" {...imgAttrs('/images/proj3-4.png')} alt="AI 모델" />
               </a>
               <div>
                 <h3>개발 관련 설명</h3>

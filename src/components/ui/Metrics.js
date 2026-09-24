@@ -1,4 +1,4 @@
-// 홈 히어로 아래 골드 메트릭 strip (4장)
+// 홈 히어로 아래 골드 메트릭 strip (4장) — 값 · 라벨 · 기준(무엇을 언제 셌나)
 import React from 'react';
 import styled from 'styled-components';
 import { color, font, layout } from './tokens';
@@ -8,7 +8,7 @@ const Strip = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: clamp(10px, 2vw, 16px);
   width: 100%;
-  max-width: 760px;
+  max-width: 880px;
   margin-top: 30px;
 
   @media (max-width: 768px) {
@@ -32,8 +32,18 @@ const Card = styled.div`
   .label {
     margin-top: 4px;
     color: ${color.text};
-    font-size: clamp(0.65em, 1vw, 0.8em);
+    font-size: 14px;
     line-height: 1.3;
+    word-break: keep-all;
+  }
+
+  .basis {
+    margin-top: 6px;
+    color: ${color.muted};
+    font-size: 12px;
+    line-height: 1.4;
+    word-break: keep-all;
+    text-shadow: none;
   }
 `;
 
@@ -45,6 +55,7 @@ export default function Metrics({ metrics }) {
         <Card key={m.label}>
           <div className="value">{m.value}</div>
           <div className="label">{m.label}</div>
+          {m.basis && <div className="basis">{m.basis}</div>}
         </Card>
       ))}
     </Strip>

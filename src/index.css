@@ -11,7 +11,7 @@
 html,
 body,
 #root {
-  height: 100%;
+  min-height: 100%;
   background-color: var(--color-bg);
 }
 
@@ -30,7 +30,18 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden; /* 스크롤 방지 — 실제 스크롤은 .main-content 에서 일어난다 */
+}
+
+/* 한국어는 어절 단위로 줄을 바꾼다 (긴 영문 토큰은 넘치지 않게 끊는다) */
+html[lang='ko'] body {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+/* width·height 속성은 비율 예약용 — 실제 크기는 CSS 가 정한다 */
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 code {
