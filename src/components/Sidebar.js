@@ -288,7 +288,7 @@ export default function Sidebar() {
           <NavLink to={withPrefix('/')} end onClick={() => setShowExtraMenu(false)}>{nav.home}</NavLink>
           <NavLink to={withPrefix('/about')} onClick={() => setShowExtraMenu(false)}>{nav.about}</NavLink>
           <NavLink to={withPrefix('/skills')} onClick={() => setShowExtraMenu(false)}>{nav.skills}</NavLink>
-          <NavLink to={withPrefix('/build')} onClick={() => setShowExtraMenu(false)}>{nav.build}</NavLink>
+          <NavLink to={withPrefix('/how-i-build')} onClick={() => setShowExtraMenu(false)}>{nav.build}</NavLink>
           <NavLink
             to={withPrefix('/projects')}
             onClick={handleProjectsClick}

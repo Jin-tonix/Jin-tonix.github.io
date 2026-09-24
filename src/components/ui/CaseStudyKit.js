@@ -53,7 +53,8 @@ export const SubHeader = styled.h2`
   font-size: ${font.size.sm};
   font-weight: ${font.weight.body};
   color: ${color.muted};
-  margin: 4px 0 0;
+  line-height: 1.5;
+  margin: 6px 0 0;
 `;
 
 export const OneLiner = styled.p`
@@ -249,9 +250,21 @@ export const DiagramRow = styled.div`
   img {
     width: 100%;
     max-width: 1000px;
-    background: #fff;
+    height: auto;
     border: 1px solid ${color.line};
     border-radius: ${layout.radius};
+  }
+`;
+
+// 폰에서는 그림 글자가 작아 새 탭에서 원본 크기로 연다는 안내를 붙인다
+export const ZoomHint = styled.span`
+  display: none;
+  margin-top: 6px;
+  color: ${color.muted};
+  font-size: 12px;
+
+  @media (max-width: 600px) {
+    display: block;
   }
 `;
 
@@ -374,5 +387,11 @@ export const CaseMeta = styled.div`
 
   ${SubHeader} {
     margin: 0;
+  }
+
+  .status-note {
+    color: ${color.muted};
+    font-size: ${font.size.xs};
+    line-height: 1.45;
   }
 `;

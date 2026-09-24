@@ -1,6 +1,6 @@
 // 경로별 title·description·og 값 — 브라우저(HeadTags)와 빌드 뒤 정적 HTML 생성(scripts/prerender.mjs)이 함께 쓴다
 export const SITE_ORIGIN = 'https://jin-tonix.github.io';
-export const SITE_NAME = 'Jinhee Mok · AI Builder';
+export const SITE_NAME = 'Jinhee Mok · AI Engineer';
 const OWNER = 'Jinhee Mok';
 const DEFAULT_IMAGE = '/images/hero-bg.jpg';
 
@@ -11,6 +11,11 @@ export const LEGACY_SLUG_REDIRECT = {
   project8: 'email-agent',
   project9: 'field-fleet',
   'sales-pipeline': 'ss-worktool',
+};
+
+// 옛 한국어 기준 경로 → 새 경로 (SPA Navigate 와 정적 리다이렉트 스텁이 함께 쓴다)
+export const LEGACY_ROUTE_REDIRECT = {
+  '/build': '/how-i-build',
 };
 
 // 옛 한국어 전용 프로젝트 페이지
@@ -42,7 +47,7 @@ export function allRoutes(content) {
     '/',
     '/about',
     '/skills',
-    '/build',
+    '/how-i-build',
     '/projects',
     ...content.cases.map((c) => `/projects/${c.slug}`),
     ...LEGACY_PAGE_SLUGS.map((s) => `/projects/${s}`),
@@ -50,13 +55,14 @@ export function allRoutes(content) {
 }
 
 export function routeMeta(content, koPath) {
-  const base = { title: SITE_NAME, description: clip(content.hero.sub), image: DEFAULT_IMAGE, heading: content.hero.headline };
+  const heroHeading = `${content.hero.name} · ${content.hero.title}`;
+  const base = { title: heroHeading, description: clip(content.hero.intro), image: DEFAULT_IMAGE, heading: heroHeading };
   if (koPath === '/') return base;
 
   const pages = {
     '/about': { title: content.about.title, description: content.about.tagline || content.about.paragraphs[0] },
     '/skills': { title: content.skills.title, description: content.skills.lead },
-    '/build': { title: content.howIBuild.title, description: content.howIBuild.intro, image: content.howIBuild.image },
+    '/how-i-build': { title: content.howIBuild.title, description: content.howIBuild.intro, image: content.howIBuild.image },
     '/projects': { title: content.nav.projects, description: content.systemMap.intro, image: content.systemMap.image },
   };
   if (pages[koPath]) {

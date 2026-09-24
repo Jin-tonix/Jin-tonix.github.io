@@ -26,6 +26,7 @@ import {
   Collapsible,
   ChoiceItem,
   CaseMeta,
+  ZoomHint,
 } from '../components/ui/CaseStudyKit';
 import StatusBadge from '../components/ui/StatusBadge';
 import imgAttrs from '../components/ui/imgAttrs';
@@ -76,6 +77,8 @@ const LABELS = {
     fix: '조치',
     guard: '가드',
     count: (n) => `${n}개`,
+    zoomHint: '탭하면 크게 보기',
+    zoomLabel: '새 탭에서 원본 크기로 보기',
   },
   en: {
     highlights: 'Highlights',
@@ -106,6 +109,8 @@ const LABELS = {
     fix: 'Fix',
     guard: 'Guard',
     count: (n) => `${n}`,
+    zoomHint: 'Tap to enlarge',
+    zoomLabel: 'Open full size in a new tab',
   },
 };
 
@@ -172,11 +177,12 @@ export default function CaseStudy() {
             <h1>{caseData.title}</h1>
             <CaseMeta>
               <StatusBadge status={caseData.status} lang={lang} />
-              <SubHeader>- {caseData.period} &middot; {caseData.role}</SubHeader>
+              {caseData.statusNote && <span className="status-note">{caseData.statusNote}</span>}
             </CaseMeta>
+            <SubHeader>{caseData.period} &middot; {caseData.role}</SubHeader>
           </div>
         </Header>
-        {caseData.oneLiner && <OneLiner>{caseData.oneLiner}</OneLiner>}
+        {!isV3 && caseData.oneLiner && <OneLiner>{caseData.oneLiner}</OneLiner>}
         {caseData.chain ? (
           <Repos>
             <span>{t.chain}</span> {caseData.chain}
@@ -229,8 +235,9 @@ export default function CaseStudy() {
         {images.length > 0 && (
           <DiagramRow>
             {images.map((img, i) => (
-              <a key={img.src} href={img.src} target="_blank" rel="noopener noreferrer">
+              <a key={img.src} href={img.src} target="_blank" rel="noopener noreferrer" title={t.zoomLabel}>
                 <img src={img.src} {...imgAttrs(img.src, { eager: i === 0 })} alt={img.alt} />
+                <ZoomHint aria-hidden="true">{t.zoomHint}</ZoomHint>
               </a>
             ))}
           </DiagramRow>

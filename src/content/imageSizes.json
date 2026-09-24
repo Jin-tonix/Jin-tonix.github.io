@@ -1,5 +1,5 @@
 {
-  "/images/hero-bg.jpg": [2400,1500],
+  "/images/hero-bg.jpg": [1600,1000],
   "/images/img.jpg": [734,1088],
   "/images/img2.jpg": [1600,1200],
   "/images/img3.jpg": [420,315],
@@ -53,5 +53,17 @@
   "/images/v2/system-map-en.png": [2800,1964],
   "/images/v2/system-map-ko.png": [2800,1964],
   "/images/v2/vendor-cs-en.png": [2800,1478],
-  "/images/v2/vendor-cs-ko.png": [2800,1440]
+  "/images/v2/vendor-cs-ko.png": [2800,1440],
+  "/images/v3/company-os-en.png": [2560,2396],
+  "/images/v3/company-os-ko.png": [2560,2084],
+  "/images/v3/email-agent-en.png": [2560,2130],
+  "/images/v3/email-agent-ko.png": [2560,1964],
+  "/images/v3/field-fleet-en.png": [2560,1696],
+  "/images/v3/field-fleet-ko.png": [2560,1618],
+  "/images/v3/ss-worktool-en.png": [2560,2364],
+  "/images/v3/ss-worktool-ko.png": [2560,2178],
+  "/images/v3/system-map-en.png": [2560,2544],
+  "/images/v3/system-map-ko.png": [2560,2460],
+  "/images/v3/vendor-cs-en.png": [2560,2516],
+  "/images/v3/vendor-cs-ko.png": [2560,2264]
 }

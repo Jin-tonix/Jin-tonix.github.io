@@ -10,7 +10,7 @@ const load = async (rel) => (await import(pathToFileURL(path.join(repoRoot, rel)
 const ko = await load('src/content/ko.js');
 const en = await load('src/content/en.js');
 const seo = await import(pathToFileURL(path.join(repoRoot, 'src/seo/routeMeta.js')).href);
-const { SITE_ORIGIN, SITE_NAME, LEGACY_SLUG_REDIRECT, allRoutes, routeMeta, canonicalUrl } = seo;
+const { SITE_ORIGIN, SITE_NAME, LEGACY_SLUG_REDIRECT, LEGACY_ROUTE_REDIRECT, allRoutes, routeMeta, canonicalUrl } = seo;
 
 const templatePath = path.join(buildDir, 'index.html');
 if (!fs.existsSync(templatePath)) {
@@ -30,9 +30,8 @@ function noscriptBody(content, koPath, lang, meta) {
   const m = koPath.match(/^\/projects\/([^/]+)$/);
   const c = m && content.cases.find((x) => x.slug === m[1]);
   if (c) {
+    // TL;DR 첫 줄이 한 줄 소개라 oneLiner 는 따로 넣지 않는다
     const lines = [].concat(c.tldr || [], c.highlights || []);
-    // TL;DR 이 없으면 description 이 이미 한 줄 소개다
-    if (c.tldr && c.oneLiner) parts.push(`<p>${esc(c.oneLiner)}</p>`);
     if (lines.length) parts.push(`<ul>${lines.map((l) => `<li>${esc(l)}</li>`).join('')}</ul>`);
   }
   const links = allRoutes(content).map((p) => {
@@ -76,7 +75,7 @@ function render(lang, koPath, redirectTo) {
     .replace(/<noscript>[\s\S]*?<\/noscript>/, `<noscript>${noscriptBody(content, target, lang, meta)}</noscript>`);
 }
 
-// 루트의 build/ 는 CRA 출력 폴더라 한국어 /build 는 정적 파일로 둘 수 없다 (404.html → SPA 로 뜬다)
+// 루트의 build/ 는 CRA 출력 폴더라 한국어 /build 는 정적 파일로 둘 수 없다 (404.html → SPA 가 /how-i-build 로 넘긴다)
 const servedStatically = (lang, koPath) => !(lang === 'ko' && koPath === '/build');
 
 const written = [];
@@ -95,6 +94,7 @@ for (const lang of ['ko', 'en']) {
   for (const [oldSlug, newSlug] of Object.entries(LEGACY_SLUG_REDIRECT)) {
     write(lang, `/projects/${oldSlug}`, `/projects/${newSlug}`);
   }
+  for (const [oldPath, newPath] of Object.entries(LEGACY_ROUTE_REDIRECT)) write(lang, oldPath, newPath);
 }
 
 // sitemap.xml — 언어쌍을 hreflang 으로 묶는다
