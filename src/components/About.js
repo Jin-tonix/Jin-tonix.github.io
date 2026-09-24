@@ -60,67 +60,85 @@ const NowBox = styled.div`
   }
 `;
 
-// 최신 경력이 위, 오래된 경력이 아래로 쌓이는 세로 타임라인
-const ExperienceList = styled.ul`
+// 최신이 위로 오는 세로 여정 — 날짜 칸 · 제목 · 한 줄 요약 (Canva Journey 표와 같은 구성)
+const JourneyList = styled.ol`
   position: relative;
   list-style: none;
-  padding: 0 0 0 26px;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
+  padding: 0;
 
   &::before {
     content: '';
     position: absolute;
     left: 5px;
-    top: 8px;
-    bottom: 8px;
-    width: 2px;
+    top: 10px;
+    bottom: 10px;
+    width: 1px;
     background-color: ${color.line};
   }
 `;
 
-const ExperienceItem = styled.li`
+const JourneyItem = styled.li`
   position: relative;
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  column-gap: 16px;
+  padding: 0 0 0 26px;
+  margin-bottom: ${({ $kind }) => ($kind === 'tech' ? '18px' : '14px')};
 
   &::before {
     content: '';
     position: absolute;
-    left: -26px;
+    left: 0;
     top: 5px;
-    width: 12px;
-    height: 12px;
+    width: 11px;
+    height: 11px;
     box-sizing: border-box;
     border-radius: 50%;
     background-color: ${({ $current }) => ($current ? color.gold : color.bg)};
-    border: 2px solid ${({ $current }) => ($current ? color.gold : color.muted)};
+    border: 2px solid ${({ $kind }) => ($kind === 'tech' ? color.gold : color.line)};
   }
 
   .period {
-    display: block;
-    color: ${color.gold};
+    color: ${({ $kind }) => ($kind === 'tech' ? color.gold : color.muted)};
     font-size: ${font.size.xs};
+    font-weight: ${font.weight.subhead};
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+
+  .org {
+    color: ${({ $kind }) => ($kind === 'tech' ? color.text : color.muted)};
+    font-size: ${({ $kind }) => ($kind === 'tech' ? font.size.md : font.size.sm)};
+    font-weight: ${({ $kind }) => ($kind === 'tech' ? font.weight.subhead : font.weight.body)};
+    line-height: 1.4;
+  }
+
+  .tag {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 1px 8px;
+    border: 1px solid ${color.gold};
+    border-radius: 999px;
+    color: ${color.gold};
+    font-size: 11px;
     font-weight: ${font.weight.subhead};
   }
 
-  strong {
-    display: block;
-    color: ${color.text};
-    font-size: ${font.size.md};
-    font-weight: ${font.weight.subhead};
+  .summary {
+    color: ${color.muted};
+    font-size: ${font.size.sm};
+    line-height: 1.55;
     margin-top: 2px;
   }
 
-  .bullets {
-    margin-top: 6px;
-    color: ${color.muted};
-    font-size: ${font.size.sm};
-    line-height: 1.65;
-  }
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
 
-  .bullets span {
-    display: block;
+    .period {
+      padding-top: 0;
+    }
   }
 `;
 
@@ -148,19 +166,20 @@ const About = () => {
               <div className="now-label">{about.nowTitle}</div>
               <div className="now-text">{about.nowText}</div>
             </NowBox>
-            <ExperienceList>
+            <JourneyList>
               {about.experience.map((exp, i) => (
-                <ExperienceItem key={exp.org + exp.period} $current={i === 0}>
+                <JourneyItem key={exp.org + exp.period} $current={i === 0} $kind={exp.kind}>
                   <span className="period">{exp.period}</span>
-                  <strong>{exp.org}</strong>
-                  <div className="bullets">
-                    {exp.bullets.map((b) => (
-                      <span key={b.slice(0, 20)}>{b}</span>
-                    ))}
+                  <div>
+                    <div className="org">
+                      {exp.org}
+                    </div>
+                    {exp.careerChange && <span className="tag">{about.careerChangeLabel}</span>}
+                    <div className="summary">{exp.summary}</div>
                   </div>
-                </ExperienceItem>
+                </JourneyItem>
               ))}
-            </ExperienceList>
+            </JourneyList>
           </Section>
         </div>
       </TwoColumn>

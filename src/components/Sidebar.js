@@ -211,7 +211,7 @@ export default function Sidebar() {
           <FontAwesomeIcon icon={faEnvelope} /> <span className="label">Email</span>
         </a>
         <div className="updated" style={{ marginTop: '10px', fontSize: 'clamp(0.6em, 1.1vw, 0.75em)', color: color.muted, textAlign: 'center' }}>
-          Last Updated: 2026.09.23
+          Last Updated: 2026.09.24
         </div>
       </div>
     </SidebarMain>
