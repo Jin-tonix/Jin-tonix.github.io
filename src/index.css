@@ -65,3 +65,16 @@ button:focus-visible,
     transition-duration: 0.01ms !important;
   }
 }
+
+/* 문단 끝에 한 어절만 홀로 남는 줄을 줄이고, 제목은 줄 길이를 고르게 나눈다 (지원 브라우저만 적용) */
+p,
+li {
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
