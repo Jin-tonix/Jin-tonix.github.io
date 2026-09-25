@@ -874,10 +874,10 @@ const en = {
     photo: '/images/img.jpg',
     tagline: "I'm Jinhee Mok, an AI engineer who turns repetitive work into AI systems.",
     paragraphs: [
-      "At StyleSeller, a social commerce startup, I design, build, and run the company's internal AI work systems on my own. I joined in 2025-12, started building in 2026-02, and my title is Developer (owner of AI and automation).",
-      'The work falls into five systems: a vendor support agent that answers KakaoTalk inquiries with evidence, a work tool that runs from seller discovery to tailored outreach, Spark and Work OS, an agent org that acts only after human approval, a CEO email agent with a shared knowledge hub, and the install and deploy setup that runs no-API work on staff PCs. The users are company staff; 11 staff PCs and about 40 services run every day.',
-      'I build fast by orchestrating several Claude Code agents in parallel, and I verify results with tests, cross-reviews, and real-device checks. After an incident, I turn the cause and the lesson into a rule so it does not happen twice.',
-      'I came into software from outside CS. Studying law, then working as an English teacher and a daycare operations manager, taught me to listen first to the people doing the work. My rule: "Repetition goes to machines, judgment goes to people."',
+      'When I joined StyleSeller, the first thing I noticed was how much work people did by hand. Staff sent Instagram DMs to sellers one by one, worked out proposal prices in Google Sheets, and vendor questions sat in each person\'s own KakaoTalk.',
+      'In February 2026 I started with a Chrome extension for the DMs. Every fix showed me the next pain point at the desk beside me, and that led to the work tool, the vendor support agent, the email agent, and Spark. Today 11 staff PCs and about 40 services run every day, and I build and fix all of it.',
+      'I let Claude Code write a lot of the code. What to build, how much to automate, and whether it actually works are my calls, and I check them myself. Nothing is done until it has run on a real staff PC.',
+      'I started programming in 2024. Before that I studied law, taught English, and ran a daycare center. What I took from those jobs is that the people doing the work know where it hurts. So I still ask before I build.',
     ],
     nowTitle: 'Now',
     now: [
