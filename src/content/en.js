@@ -874,10 +874,10 @@ const en = {
     photo: '/images/img.jpg',
     tagline: "I'm Jinhee Mok, an AI engineer who turns repetitive work into AI systems.",
     paragraphs: [
-      'I came into software from outside CS. I studied law and worked as an English teacher and as operations manager at a daycare center.',
-      "I joined StyleSeller in 2025-12 and started building software in 2026-02. My title is Developer (owner of AI and automation), and I'm about to start my second year.",
-      "I design, build, and run the company's internal AI work systems on my own. The users are company staff.",
-      'My rule: "Repetition goes to machines, judgment goes to people."',
+      "At StyleSeller, a social commerce startup, I design, build, and run the company's internal AI work systems on my own. I joined in 2025-12, started building in 2026-02, and my title is Developer (owner of AI and automation).",
+      'The work falls into five systems: a vendor support agent that answers KakaoTalk inquiries with evidence, a work tool that runs from seller discovery to tailored outreach, Spark and Work OS, an agent org that acts only after human approval, a CEO email agent with a shared knowledge hub, and the install and deploy setup that runs no-API work on staff PCs. The users are company staff; 11 staff PCs and about 40 services run every day.',
+      'I build fast by orchestrating several Claude Code agents in parallel, and I verify results with tests, cross-reviews, and real-device checks. After an incident, I turn the cause and the lesson into a rule so it does not happen twice.',
+      'I came into software from outside CS. Studying law, then working as an English teacher and a daycare operations manager, taught me to listen first to the people doing the work. My rule: "Repetition goes to machines, judgment goes to people."',
     ],
     nowTitle: 'Now',
     now: [
