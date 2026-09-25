@@ -877,7 +877,7 @@ const en = {
       'When I joined StyleSeller, the first thing I noticed was how much work people did by hand. Staff sent Instagram DMs to sellers one by one, worked out proposal prices in Google Sheets, and vendor questions sat in each person\'s own KakaoTalk.',
       'In February 2026 I started with a Chrome extension for the DMs. Every fix showed me the next pain point at the desk beside me, and that led to the work tool, the vendor support agent, the email agent, and Spark. Today 11 staff PCs and about 40 services run every day, and I build and fix all of it.',
       'I let Claude Code write a lot of the code. What to build, how much to automate, and whether it actually works are my calls, and I check them myself. Nothing is done until it has run on a real staff PC.',
-      'I started programming in 2024. Before that I studied law, taught English, and ran a daycare center. What I took from those jobs is that the people doing the work know where it hurts. So I still ask before I build.',
+      'I started programming in 2024. Before that I studied law, taught English, and ran a daycare center. What I took from those jobs is that the people doing the work know where it hurts. So I still ask before I build, and I want to keep making workplaces where systems take the repetition and people keep the judgment.',
     ],
     nowTitle: 'Now',
     now: [
