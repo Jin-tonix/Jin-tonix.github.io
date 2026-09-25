@@ -4,6 +4,7 @@ import './App.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import HeadTags from './components/HeadTags';
+import ShortTailBalancer from './components/ShortTailBalancer';
 import About from './components/About';
 import Skills from './components/Skills';
 import Home from './pages/Home';
@@ -15,6 +16,7 @@ function App() {
   return (
     <div className="App">
       <HeadTags />
+      <ShortTailBalancer />
       <Sidebar />
       <div className="main-content">
         <Routes>
