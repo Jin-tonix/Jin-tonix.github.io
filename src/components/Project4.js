@@ -23,7 +23,7 @@ const Project4 = () => {
           <img src="/images/logo4.png" {...imgAttrs('/images/logo4.png', { eager: true })} alt="Project Logo" />
           <div>
             <h1> FitChecker - 대화를 통해 필요한 운동을 추천해주고, 자세를 잡아주는 AI 기반의 홈트레이닝 앱</h1>
-            <SubHeader>- Team Project (2024.11.05 ~ 12.20) : 백앤드 개발 및 Langchain 을 이용한 AI agent 개발 및 프론트/백 연결</SubHeader>
+            <SubHeader>- Team Project (2024.11.05 ~ 12.20) : 백앤드 개발 및 Langchain을 이용한 AI agent 개발 및 프론트/백 연결</SubHeader>
           </div>
         </Header>
 
