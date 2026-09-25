@@ -34,10 +34,10 @@ const ProfileImage = styled.img`
 
 const Paragraph = styled.p`
   color: ${color.text};
-  font-size: 16px;
-  line-height: 1.65;
+  font-size: ${font.size.md};
+  line-height: 1.75;
   max-width: ${font.proseMaxWidth};
-  margin: 0 0 12px;
+  margin: 0 0 16px;
 `;
 
 // 최신이 위로 오는 세로 여정 — 날짜 칸 · 제목 · 한 줄 요약 (Canva Journey 표와 같은 구성)
