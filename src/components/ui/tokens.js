@@ -25,7 +25,8 @@ export const font = {
     title: 800,
   },
   bodyLineHeight: 1.7,
-  proseMaxWidth: '72ch',
+  // 한국어는 한 줄에 담기는 글자 수가 적어 넓게, 영어는 72ch 로 읽기 폭을 지킨다 (index.css 의 --prose-max)
+  proseMaxWidth: 'var(--prose-max, 72ch)',
 };
 
 export const layout = {
