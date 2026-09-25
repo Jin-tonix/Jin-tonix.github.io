@@ -78,3 +78,8 @@ h3,
 h4 {
   text-wrap: balance;
 }
+
+/* 한국어 본문 폭 — 72ch 는 한글 40자 남짓이라 문장이 자주 한두 어절만 다음 줄로 넘어간다 */
+html[lang='ko'] {
+  --prose-max: 56em;
+}
