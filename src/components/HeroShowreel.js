@@ -5,31 +5,31 @@ import { color, font } from './ui/tokens';
 
 const revealPricing = keyframes`
   0% { opacity: 0; transform: translateY(12px); }
-  1%, 16% { opacity: 1; transform: translateY(0); }
-  18%, 100% { opacity: 0; transform: translateY(-10px); }
+  1%, 21% { opacity: 1; transform: translateY(0); }
+  23%, 100% { opacity: 0; transform: translateY(-10px); }
 `;
 
 const revealVendor = keyframes`
-  0%, 18% { opacity: 0; transform: translateY(12px); }
-  20%, 36% { opacity: 1; transform: translateY(0); }
-  38%, 100% { opacity: 0; transform: translateY(-10px); }
-`;
-
-const revealEmail = keyframes`
-  0%, 38% { opacity: 0; transform: translateY(12px); }
-  40%, 56% { opacity: 1; transform: translateY(0); }
-  58%, 100% { opacity: 0; transform: translateY(-10px); }
+  0%, 23% { opacity: 0; transform: translateY(12px); }
+  25%, 42% { opacity: 1; transform: translateY(0); }
+  44%, 100% { opacity: 0; transform: translateY(-10px); }
 `;
 
 const revealSpark = keyframes`
-  0%, 58% { opacity: 0; transform: translateY(12px); }
-  60%, 76% { opacity: 1; transform: translateY(0); }
-  78%, 100% { opacity: 0; transform: translateY(-10px); }
+  0%, 42% { opacity: 0; transform: translateY(12px); }
+  44%, 61% { opacity: 1; transform: translateY(0); }
+  63%, 100% { opacity: 0; transform: translateY(-10px); }
+`;
+
+const revealEmail = keyframes`
+  0%, 61% { opacity: 0; transform: translateY(12px); }
+  63%, 80% { opacity: 1; transform: translateY(0); }
+  82%, 100% { opacity: 0; transform: translateY(-10px); }
 `;
 
 const revealFleet = keyframes`
-  0%, 78% { opacity: 0; transform: translateY(12px); }
-  80%, 100% { opacity: 1; transform: translateY(0); }
+  0%, 80% { opacity: 0; transform: translateY(12px); }
+  82%, 100% { opacity: 1; transform: translateY(0); }
 `;
 
 const moveProgress = keyframes`
@@ -697,29 +697,18 @@ const Hero = styled.section`
     background: rgba(255, 215, 0, 0.18);
   }
 
+  .brandtool-case-count {
+    display: block;
+    margin-top: 4px;
+    color: #766314;
+    font-size: clamp(20px, 2vw, 28px);
+    font-weight: 750;
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+
   .project-proof {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px;
-    padding: 0 10px 10px;
-  }
-
-  .proof-chip {
-    display: inline-flex;
-    align-items: center;
-    min-height: 23px;
-    padding: 0 8px;
-    border: 1px solid rgba(255, 215, 0, 0.42);
-    color: var(--reel-gold);
-    font-size: 9px;
-    font-weight: 650;
-    letter-spacing: 0.02em;
-  }
-
-  .proof-copy {
-    color: #c6c4ba;
-    font-size: 9px;
+    display: none;
   }
 
   .timeline {
@@ -991,6 +980,42 @@ const Hero = styled.section`
 
     .project-visual--brandtool {
       padding: 4px;
+    }
+
+    .brandtool-window {
+      display: none;
+    }
+
+    .project-proof {
+      display: flex;
+      min-height: inherit;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 12px;
+    }
+
+    .proof-number {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .proof-number strong {
+      color: var(--reel-gold);
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .proof-number span,
+    .proof-copy {
+      color: #d6d4ca;
+      font-size: 9px;
+      line-height: 1.3;
+    }
+
+    .proof-copy {
+      padding-left: 12px;
+      border-left: 1px solid rgba(242, 240, 231, 0.22);
     }
 
     .brandtool-window {
@@ -1290,6 +1315,10 @@ const Hero = styled.section`
       font-size: 13px;
     }
 
+    .hook {
+      font-size: 13px;
+    }
+
     .project-summary {
       margin: 3px 0 4px;
       font-size: 8px;
@@ -1318,12 +1347,30 @@ const Hero = styled.section`
     }
 
     .visual-card small,
-    .proof-copy {
-      font-size: 7px;
-    }
-
     .project-visual--brandtool {
       padding: 4px;
+    }
+
+    .project-proof {
+      gap: 6px;
+      padding: 4px;
+    }
+
+    .proof-number {
+      gap: 5px;
+    }
+
+    .proof-number strong {
+      font-size: 19px;
+    }
+
+    .proof-number span,
+    .proof-copy {
+      font-size: 9px;
+    }
+
+    .proof-copy {
+      padding-left: 6px;
     }
 
     .brandtool-window {
@@ -1414,6 +1461,10 @@ const Hero = styled.section`
       margin-top: 3px;
     }
 
+    .brandtool-case-count {
+      font-size: 14px;
+    }
+
     .metrics {
       margin-top: 5px;
     }
@@ -1466,15 +1517,15 @@ const Hero = styled.section`
 const copy = {
   en: {
     top: 'AI Engineer · from workflow to production',
-    chapter: 'Five systems in real team workflows',
-    hook: 'I engineer trust into AI systems that run in production.',
+    chapter: 'Five AI systems in daily operation',
+    hook: "I don't let AI set the price.",
     solo: 'SOLO AI ENGINEER · DESIGN → BUILD → OPERATE',
-    intro: 'Code-checked pricing. Grounded answers. Gated actions. I design, deploy, and operate the systems end to end.',
+    intro: 'I connect proposal, partner-support, and email systems—and own the build, deployment, and operations.',
     company: 'StyleSeller · commerce operations for influencer-led brand sales',
     pricingOverline: '01 · MODEL / CODE BOUNDARY · WORK TOOL',
-    pricingTitle: 'The LLM proposes fields. Code owns the price.',
-    pricingSummary: 'Vendor and seller proposals are flows inside one work tool—not separate products. Price rules were checked against 43 real cases with staff.',
-    pricingProof: '43 pricing cases checked with staff',
+    pricingTitle: 'AI edits requested fields. Code recalculates the price.',
+    pricingSummary: 'Vendor and seller proposals live inside the work tool. I moved spreadsheet pricing rules into code and checked 43 cases with staff.',
+    pricingProof: 'pricing cases checked with staff',
     pricingScale: '14 work-tool screens',
     vendorOverline: '02 · GROUNDED SUPPORT · CONTROLLED HANDOFF',
     vendorTitle: 'Separate partner context. Never guess beyond evidence.',
@@ -1482,14 +1533,14 @@ const copy = {
     vendorInputNote: "A partner's question",
     vendorStatus: 'When enabled · Slack reply → KakaoTalk queue',
     vendorGuard: ['Partner chats kept separate', 'Handoff has an explicit gate', 'Slack reply enters KakaoTalk queue'],
-    emailOverline: '03 · HUMAN FEEDBACK · RAG + STYLEBOOK',
+    emailOverline: '04 · HUMAN FEEDBACK · RAG + STYLEBOOK',
     emailTitle: 'A sent correction improves the next relevant draft.',
     emailSummary: 'Sent replies pair with the inquiry in RAG; factual corrections update knowledge, and style edits update the stylebook.',
     emailKnowledge: 'Save reply + corrections',
     emailKnowledgeNote: 'RAG + Stylebook',
     emailHumanNote: 'Search in future drafts',
-    sparkOverline: '04 · MULTI-DATABASE REASONING · APPROVAL GATE',
-    sparkTitle: 'Read across four databases. Gate every enabled write.',
+    sparkOverline: '03 · MULTI-DATABASE REASONING · APPROVAL GATE',
+    sparkTitle: 'One question. Four databases. Approval before enabled actions.',
     sparkSummary: 'Spark answers from four work databases; role and approval checks protect the internal actions enabled today.',
     sparkSources: ['Prices', 'Vendors', 'Campaigns', 'Work'],
     sparkAnswer: 'Find the answer',
@@ -1506,7 +1557,7 @@ const copy = {
     visualProposalTitle: 'Proposal feature',
     visualEdit: 'LLM · fields-to-change JSON',
     visualPrice: 'Code · deterministic price',
-    visualVersionHistory: '43 pricing cases verified',
+    visualVersionHistory: 'Code recalculates price',
     visualHistoryLabel: 'Work records',
     visualSendHistory: 'Created proposals · send requests',
     visualMessage: 'KakaoTalk question',
@@ -1520,7 +1571,7 @@ const copy = {
     visualInstall: 'Deploy work systems',
     visualComputers: 'Staff computers',
     visualUpdate: 'Update all computers',
-    visualChapters: ['Proposals', 'KakaoTalk help', 'Email drafts', 'Work search', 'Staff computers'],
+    visualChapters: ['Proposals', 'KakaoTalk help', 'Work search', 'Email drafts', 'Staff computers'],
     live: 'IN USE EVERY DAY',
     projects: 'Explore projects',
     pause: 'Pause',
@@ -1534,15 +1585,15 @@ const copy = {
   },
   ko: {
     top: 'AI 엔지니어 · 업무 흐름부터 운영까지',
-    chapter: '실제 업무에 연결된 시스템 5개',
-    hook: 'AI를 믿고 맡길 수 있도록, 시스템을 설계합니다.',
+    chapter: '매일 운영하는 AI 시스템 5개',
+    hook: 'AI에 가격을 맡기지 않았습니다.',
     solo: 'StyleSeller · 설계 → 개발 → 배포·운영',
-    intro: '모델 판단·코드 검증·실행 통제를 설계하고, 배포와 운영까지 혼자 책임집니다.',
+    intro: '제안·거래처 응대·메일 시스템을 연결해, 설계부터 배포·운영까지 혼자 맡습니다.',
     company: 'StyleSeller · 크리에이터 셀러와 브랜드의 판매를 운영하는 커머스 플랫폼',
     pricingOverline: '01 · 모델과 코드의 책임 경계 · work tool',
-    pricingTitle: 'LLM은 수정 필드만. 금액은 코드가 계산.',
-    pricingSummary: '별도 서비스가 아닌 work tool 안의 벤더용·셀러용 제안 기능입니다. 가격 규칙을 실무자와 맞춘 43개 사례로 검증했습니다.',
-    pricingProof: '실무자와 가격 예시 43개 확인',
+    pricingTitle: 'AI는 요청한 필드만. 가격은 코드가 재계산.',
+    pricingSummary: '벤더용·셀러용 제안은 work tool 안의 기능입니다. 시트 가격 규칙을 코드로 옮기고, 실무자와 43개 사례를 대조했습니다.',
+    pricingProof: '가격 규칙 43건 실무자 검증',
     pricingScale: 'work tool 화면 14개',
     vendorOverline: '02 · 근거 기반 응대 · 통제된 이관',
     vendorTitle: '거래처별 맥락은 격리. 근거가 없으면 추측하지 않음.',
@@ -1550,14 +1601,14 @@ const copy = {
     vendorInputNote: '거래처가 보낸 질문',
     vendorStatus: '이관 시 · Slack 답장 → 카카오톡 큐',
     vendorGuard: ['거래처별 대화 분리', '이관 on/off 설정', 'Slack 답장은 카카오톡 큐로'],
-    emailOverline: '03 · 사람의 피드백 · RAG + 스타일북',
+    emailOverline: '04 · 사람의 피드백 · RAG + 스타일북',
     emailTitle: '사람이 고쳐 보낸 답장을 다음 초안에 반영.',
     emailSummary: '보낸 답변과 원문은 RAG에 쌓입니다. 사실 교정은 지식으로, 말투 수정은 스타일북으로 반영해 다음 초안이 검색합니다.',
     emailKnowledge: '답변·교정 저장',
     emailKnowledgeNote: 'RAG + 스타일북',
     emailHumanNote: '다음 초안에서 검색',
-    sparkOverline: '04 · 데이터 통합 · 실행 승인 게이트',
-    sparkTitle: 'DB 네 곳을 읽고, 실행 전 권한·승인을 재확인.',
+    sparkOverline: '03 · 데이터 통합 · 실행 승인 게이트',
+    sparkTitle: '질문 하나로 업무 DB 네 곳 조회. 실행 전 권한·승인 확인.',
     sparkSummary: 'Spark가 네 업무 DB를 조회합니다. 현재 켜진 내부 변경 작업은 권한과 DB 승인 행을 다시 확인합니다.',
     sparkSources: ['가격표', '거래처', '캠페인', '업무 기록'],
     sparkAnswer: '답 찾기',
@@ -1574,7 +1625,7 @@ const copy = {
     visualProposalTitle: '제안서 기능',
     visualEdit: 'LLM · 수정 필드 JSON',
     visualPrice: '코드 · 결정론적 가격 계산',
-    visualVersionHistory: '가격 사례 43개 검증',
+    visualVersionHistory: '코드에서 금액 재계산',
     visualHistoryLabel: '업무 기록',
     visualSendHistory: '제안서 생성 · 발송 요청',
     visualMessage: '카카오톡 문의',
@@ -1588,7 +1639,7 @@ const copy = {
     visualInstall: '업무 시스템 배포',
     visualComputers: '직원 컴퓨터',
     visualUpdate: '자동 업데이트',
-    visualChapters: ['제안서', '카톡 문의', '메일 초안', '자료 검색', '컴퓨터 관리'],
+    visualChapters: ['제안서', '카톡 문의', '자료 검색', '메일 초안', '컴퓨터 관리'],
     live: '매일 사용 중',
     projects: '프로젝트 자세히 보기',
     pause: '일시정지',
@@ -1705,14 +1756,18 @@ export default function HeroShowreel({ hero, content, lang, withPrefix }) {
                         </div>
                         <div className="brandtool-history">
                           <small>{text.visualHistoryLabel}</small>
-                          <span>{text.visualVersionHistory}</span>
+                          <strong className="brandtool-case-count">43</strong>
+                          <span>{text.pricingProof}</span>
                           <span>{text.visualSendHistory}</span>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div className="project-proof">
-                    <span className="proof-chip">{text.pricingProof}</span>
+                    <span className="proof-number">
+                      <strong>43</strong>
+                      <span>{text.pricingProof}</span>
+                    </span>
                     <span className="proof-copy">{text.pricingScale}</span>
                   </div>
                 </div>
@@ -1744,10 +1799,36 @@ export default function HeroShowreel({ hero, content, lang, withPrefix }) {
                 </div>
               </div>
 
+              <div className="scene scene--spark">
+                <div className="scene-caption">
+                  <strong>{text.sparkOverline}</strong>
+                  <span className="caption-state">03 / 05</span>
+                </div>
+                <h2 className="project-title">{text.sparkTitle}</h2>
+                <p className="project-summary">{text.sparkSummary}</p>
+                <div className="project-visual">
+                  <div className="visual-track">
+                    <div className="visual-card">
+                      <div className="visual-databases">{text.sparkSources.map((source) => <i key={source} title={source} />)}</div>
+                      <strong>{text.visualRecords}</strong>
+                    </div>
+                    <span className="visual-arrow" aria-hidden="true">→</span>
+                    <div className="visual-card accent">
+                      <strong>{text.visualAnswer}</strong>
+                    </div>
+                    <span className="visual-arrow" aria-hidden="true">→</span>
+                    <div className="visual-card">
+                      <strong>{text.visualApprove}</strong>
+                      <small>{text.sparkGateNote}</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div className="scene scene--email">
                 <div className="scene-caption">
                   <strong>{text.emailOverline}</strong>
-                  <span className="caption-state">03 / 05</span>
+                  <span className="caption-state">04 / 05</span>
                 </div>
                 <h2 className="project-title">{text.emailTitle}</h2>
                 <p className="project-summary">{text.emailSummary}</p>
@@ -1766,32 +1847,6 @@ export default function HeroShowreel({ hero, content, lang, withPrefix }) {
                     <div className="visual-card">
                       <strong>{text.visualDraft}</strong>
                       <small>{text.emailHumanNote}</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="scene scene--spark">
-                <div className="scene-caption">
-                  <strong>{text.sparkOverline}</strong>
-                  <span className="caption-state">04 / 05</span>
-                </div>
-                <h2 className="project-title">{text.sparkTitle}</h2>
-                <p className="project-summary">{text.sparkSummary}</p>
-                <div className="project-visual">
-                  <div className="visual-track">
-                    <div className="visual-card">
-                      <div className="visual-databases">{text.sparkSources.map((source) => <i key={source} title={source} />)}</div>
-                      <strong>{text.visualRecords}</strong>
-                    </div>
-                    <span className="visual-arrow" aria-hidden="true">→</span>
-                    <div className="visual-card accent">
-                      <strong>{text.visualAnswer}</strong>
-                    </div>
-                    <span className="visual-arrow" aria-hidden="true">→</span>
-                    <div className="visual-card">
-                      <strong>{text.visualApprove}</strong>
-                      <small>{text.sparkGateNote}</small>
                     </div>
                   </div>
                 </div>
