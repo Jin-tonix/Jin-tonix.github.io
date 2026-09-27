@@ -15,16 +15,16 @@ const en = {
   },
   hero: {
     name: 'Jinhee Mok',
-    title: 'AI Engineer (Agents & Automation)',
+    title: 'AI Engineer',
     intro:
       "At StyleSeller, I moved proposal pricing, vendor KakaoTalk inquiries, and seller discovery into an internal work app and a set of agents. I'm Jinhee Mok, and I design, build, and run these systems on my own.",
     company:
       'StyleSeller is a platform that connects social media influencer sellers with brands to run group buys (time-limited sales run by an influencer). It handles ordering, customer support, and settlement on their behalf.',
     metrics: [
       { value: '14', label: 'work screens staff use', basis: 'brand-tool live screens incl. login · 6 top-level menus · 2026-09-23' },
-      { value: '5', label: 'agents in daily operation', basis: '4 services with a schedule or intake loop + Spark, which staff use · vendor support · influencer CS · Supervisor · Hermes · Spark · 2026-09-23' },
-      { value: '11', label: 'staff PCs deployed', basis: 'KakaoTalk sync registrations · 6 Macs and 5 Windows PCs · 2026-09-16' },
-      { value: '4', label: 'repositories, one operating system', basis: 'brand-tool · agent-company · email-agent · kakaocli' },
+      { value: '5', label: 'AI helpers in daily use', basis: '4 services with a schedule or intake loop + Spark, which staff use · vendor support · influencer CS · Supervisor · Hermes · Spark · 2026-09-23' },
+      { value: '11', label: 'staff computers with tools installed', basis: 'KakaoTalk sync registrations · 6 Macs and 5 Windows PCs · 2026-09-16' },
+      { value: '4', label: 'connected code projects', basis: 'brand-tool · agent-company · email-agent · kakaocli' },
     ],
     glossaryTitle: 'Terms',
     glossary: [

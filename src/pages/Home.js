@@ -1,157 +1,17 @@
-// Home — 배경 히어로(이름·직함·소개·회사 한 줄·지표) 아래에 용어 · System Map · 사례 카드 5개를 둔다
+// Home — 쇼릴 히어로(이름·직함·소개·운영 지표) 아래에 용어 · System Map · 사례 카드 5개를 둔다
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useLang } from '../lang/LangContext';
-import Metrics from '../components/ui/Metrics';
+import HeroShowreel from '../components/HeroShowreel';
 import SystemMap from '../components/ui/SystemMap';
 import StatusBadge from '../components/ui/StatusBadge';
 import { color, font, layout } from '../components/ui/tokens';
-
-const fadeInUp = keyframes`
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
 
 const Page = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-`;
-
-const HeroContainer = styled.div`
-  background-image: linear-gradient(rgba(20, 20, 20, 0.15), rgba(20, 20, 20, 0.35)),
-    url('/images/hero-bg.jpg');
-  background-size: cover;
-  background-position: center;
-  color: ${color.text};
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  width: 100%;
-  padding: 56px 20px;
-  box-sizing: border-box;
-  line-height: 1.5;
-  text-shadow: 1.5px 1.5px 5.5px #000;
-  background-color: rgba(0, 0, 0, 0.6);
-
-  .name,
-  .role,
-  .intro,
-  .company,
-  .note {
-    max-width: 760px;
-    text-align: center;
-    word-break: keep-all;
-    animation: ${fadeInUp} 0.8s ease forwards;
-    opacity: 0;
-  }
-
-  .name {
-    font-size: ${font.size.xxl};
-    font-weight: ${font.weight.title};
-    line-height: 1.2;
-    margin: 0;
-    animation-delay: 0.1s;
-  }
-
-  .role {
-    display: block;
-    margin-top: 8px;
-    color: ${color.gold};
-    font-size: ${font.size.lg};
-    font-weight: ${font.weight.subhead};
-    animation-delay: 0.2s;
-  }
-
-  .intro {
-    font-size: ${font.size.md};
-    font-weight: ${font.weight.subhead};
-    margin: 20px 0 0;
-    animation-delay: 0.35s;
-  }
-
-  .company {
-    color: ${color.muted};
-    font-size: ${font.size.xs};
-    margin: 10px 0 0;
-    animation-delay: 0.45s;
-  }
-
-  .note {
-    color: ${color.muted};
-    font-size: 12px;
-    margin: 12px 0 0;
-    animation-delay: 0.55s;
-  }
-
-  @media (max-width: 600px) {
-    min-height: calc(100vh - var(--topbar-height));
-    padding: 36px 16px;
-
-    .name {
-      font-size: 2rem;
-    }
-
-    .role {
-      font-size: ${font.size.md};
-    }
-
-    .intro {
-      font-size: ${font.size.sm};
-      font-weight: ${font.weight.body};
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .name,
-    .role,
-    .intro,
-    .company,
-    .note {
-      animation: none;
-      opacity: 1;
-    }
-  }
-`;
-
-// 첫 화면에서 바로 연락·이력서로 가는 버튼 줄
-const Cta = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 18px;
-
-  a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    padding: 0 16px;
-    border: 1px solid ${color.gold};
-    border-radius: 6px;
-    color: ${color.gold};
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  a.primary {
-    background: ${color.gold};
-    color: #222;
-  }
-
-  a:focus-visible {
-    outline: 2px solid ${color.gold};
-    outline-offset: 2px;
-  }
 `;
 
 const Below = styled.div`
@@ -265,21 +125,7 @@ export default function Home() {
 
   return (
     <Page>
-      <HeroContainer>
-        <h1 className="name">
-          {hero.name}
-          <span className="role">{hero.title}</span>
-        </h1>
-        <p className="intro">{hero.intro}</p>
-        <p className="company">{hero.company}</p>
-        <Metrics metrics={hero.metrics} />
-        {hero.metricsNote && <p className="note">{hero.metricsNote}</p>}
-        <Cta>
-          <a className="primary" href="mailto:jinheemok815@gmail.com">{lang === 'en' ? 'Email me' : '메일 보내기'}</a>
-          <a href={content.nav.resume.href} target="_blank" rel="noopener noreferrer">{content.nav.resume.label} (PDF)</a>
-          <a href="https://github.com/Jin-tonix" target="_blank" rel="noopener noreferrer">GitHub</a>
-        </Cta>
-      </HeroContainer>
+      <HeroShowreel hero={hero} content={content} lang={lang} withPrefix={withPrefix} />
 
       <Below>
         <section>
