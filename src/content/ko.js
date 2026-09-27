@@ -784,7 +784,9 @@ const ko = {
   howIBuild: {
     title: 'How I Build with AI',
     intro:
-      '설계·개발·운영 1인. 코드는 Claude Code로 쓰고, 아키텍처·규칙·검증·롤아웃은 직접 판단했습니다. Claude 공동작성 트레일러가 있는 커밋은 agent-company 3,646 · brand-tool 1,122 · email-agent 988 개입니다(merge 제외, agent-company org/release·brand-tool main 2026-09-23, email-agent 2026-09-02 기준). 네 저장소의 본인 커밋은 합 7,276개입니다(merge 제외, 2026-09-23 집계). Claude Code 세션 여러 개를 병렬로 돌려 씁니다. 에이전트가 틀리는 것을 전제로 둡니다. 아래 "AI가 틀렸고 제가 잡은 사례"가 그 기록입니다.',
+      '설계·개발·운영 1인. 코드는 Claude Code로 쓰고, 아키텍처·규칙·검증·롤아웃은 직접 판단했습니다.',
+    introDetail:
+      'Claude 공동작성 트레일러가 있는 커밋은 agent-company 3,646 · brand-tool 1,122 · email-agent 988개입니다(merge 제외, agent-company org/release·brand-tool main 2026-09-23, email-agent 2026-09-02 기준). 네 저장소의 본인 커밋은 합 7,276개입니다(merge 제외, 2026-09-23 집계). Claude Code 세션 여러 개를 병렬로 돌려 씁니다. 에이전트가 틀리는 것을 전제로 둡니다. 아래 "AI가 틀렸고 제가 잡은 사례"가 그 기록입니다.',
     image: null,
     loopTitle: '작업 루프',
     loop: [

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
-import { color } from './ui/tokens';
+import { color, font } from './ui/tokens';
 
 const revealPricing = keyframes`
   0% { opacity: 0; transform: translateY(12px); }
@@ -810,7 +810,7 @@ const Hero = styled.section`
   .metric-value {
     display: block;
     color: var(--reel-gold);
-    font-family: Georgia, serif;
+    font-family: ${font.family};
     font-size: clamp(1.8rem, 3.3vw, 2.7rem);
     line-height: 1;
   }

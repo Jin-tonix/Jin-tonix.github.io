@@ -8,7 +8,7 @@ import { color, font, layout } from '../components/ui/tokens';
 const LoopGrid = styled.ol`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 16px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -25,86 +25,142 @@ const LoopGrid = styled.ol`
 
 const Step = styled.li`
   counter-increment: step;
+  min-height: 126px;
   background-color: ${color.surface};
   border: 1px solid ${color.line};
   border-radius: ${layout.radius};
-  padding: 12px 14px;
+  padding: 20px;
 
   strong {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     color: ${color.gold};
-    font-size: ${font.size.sm};
+    font-size: 17px;
     font-weight: ${font.weight.subhead};
-    margin-bottom: 4px;
+    line-height: 1.35;
+    margin-bottom: 10px;
 
     &::before {
-      content: counter(step) '. ';
+      content: counter(step, decimal-leading-zero);
+      color: ${color.muted};
+      font-size: 11px;
+      font-weight: ${font.weight.body};
+      letter-spacing: 0.06em;
     }
   }
 
   p {
     color: ${color.muted};
-    font-size: ${font.size.xs};
-    line-height: 1.55;
+    font-size: 15px;
+    line-height: 1.7;
     margin: 0;
     word-break: keep-all;
   }
 `;
 
-const List = styled.ul`
-  color: ${color.text};
-  font-size: ${font.size.sm};
-  line-height: ${font.bodyLineHeight};
-  padding-left: 20px;
-  margin: 0;
-  max-width: ${font.proseMaxWidth};
+const HarnessGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 16px;
 
-  li {
-    margin-bottom: 4px;
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const HarnessCard = styled.article`
+  padding: 18px 20px;
+  border: 1px solid ${color.line};
+  border-radius: ${layout.radius};
+  background: ${color.surface};
+
+  h3 {
+    color: ${color.gold};
+    font-size: 16px;
+    font-weight: ${font.weight.subhead};
+    line-height: 1.45;
+    margin: 0 0 6px;
+    overflow-wrap: anywhere;
+  }
+
+  p {
+    color: ${color.muted};
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0;
+    word-break: keep-all;
   }
 `;
 
 const CaughtGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  grid-auto-rows: 1fr;
+  gap: 16px;
 
   @media (max-width: 1000px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 640px) {
     grid-template-columns: 1fr;
   }
 `;
 
 const Caught = styled.article`
+  position: relative;
+  min-width: 0;
   border: 1px solid ${color.line};
-  border-left: 3px solid ${color.gold};
   border-radius: ${layout.radius};
-  padding: 12px 14px;
+  padding: 22px 20px 20px;
+  background: linear-gradient(145deg, rgba(255, 215, 0, 0.035), transparent 55%);
+
+  &::before {
+    position: absolute;
+    top: -1px;
+    left: 20px;
+    width: 42px;
+    height: 2px;
+    background: ${color.gold};
+    content: '';
+  }
 
   h3 {
     color: ${color.text};
-    font-size: ${font.size.sm};
+    font-size: 18px;
     font-weight: ${font.weight.subhead};
-    line-height: 1.45;
-    margin: 0 0 6px;
+    line-height: 1.5;
+    margin: 0 0 12px;
   }
 
   ul {
     color: ${color.muted};
-    font-size: ${font.size.xs};
-    line-height: 1.55;
-    padding-left: 18px;
+    font-size: 15px;
+    line-height: 1.7;
+    padding-left: 16px;
     margin: 0;
+
+    li {
+      padding-left: 2px;
+      margin-top: 7px;
+      overflow-wrap: anywhere;
+    }
+
+    li::marker {
+      color: ${color.gold};
+    }
   }
 `;
 
 const Lessons = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  column-gap: 40px;
+  gap: 0 28px;
   border-top: 1px solid ${color.line};
 
   @media (max-width: 1100px) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   @media (max-width: 700px) {
@@ -112,46 +168,121 @@ const Lessons = styled.div`
   }
 `;
 
-const Lesson = styled.div`
-  padding: 10px 0;
+const Lesson = styled.article`
+  padding: 16px 0;
   border-bottom: 1px solid ${color.line};
 
   h4 {
     color: ${color.gold};
-    font-size: ${font.size.sm};
+    font-size: 16px;
     font-weight: ${font.weight.subhead};
-    line-height: 1.45;
-    margin: 0 0 2px;
+    line-height: 1.5;
+    margin: 0 0 6px;
   }
 
   p {
     color: ${color.muted};
-    font-size: ${font.size.xs};
-    line-height: 1.55;
+    font-size: 15px;
+    line-height: 1.7;
     margin: 0;
+    word-break: keep-all;
   }
 `;
 
 const Shell = styled(PageShell)`
   & > div {
-    max-width: 1200px;
+    max-width: 1120px;
+    padding: clamp(36px, 5vw, 64px) clamp(24px, 4vw, 52px);
   }
 
   header {
-    margin-bottom: 32px;
+    margin-bottom: 48px;
+
+    & > h1 {
+      margin-bottom: 16px;
+    }
+
+    & > p {
+      max-width: 68ch;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .page-lead-primary {
+      display: block;
+      color: ${color.text};
+      font-size: clamp(18px, 1.4vw, 21px);
+      font-weight: ${font.weight.subhead};
+      line-height: 1.55;
+      margin-bottom: 10px;
+    }
+
+    .page-lead-detail {
+      display: block;
+      color: ${color.muted};
+      font-size: 14px;
+      line-height: 1.75;
+    }
   }
 
   section {
-    margin-bottom: 36px;
+    counter-increment: build-section;
+    margin-bottom: 56px;
+  }
+
+  section > h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    font-size: 23px;
+    line-height: 1.35;
+    margin-bottom: 20px;
+
+    &::before {
+      content: counter(build-section, decimal-leading-zero);
+      color: ${color.muted};
+      font-size: 11px;
+      font-weight: ${font.weight.body};
+      letter-spacing: 0.08em;
+    }
+  }
+
+  @media (max-width: 700px) {
+    & > div {
+      padding: 32px 20px 48px;
+    }
+
+    header {
+      margin-bottom: 36px;
+    }
+
+    section {
+      margin-bottom: 42px;
+    }
   }
 `;
+
+const splitHarnessItem = (text) => {
+  const separator = text.indexOf(':');
+  return separator === -1
+    ? { title: text, description: '' }
+    : { title: text.slice(0, separator), description: text.slice(separator + 1).trim() };
+};
 
 export default function HowIBuild() {
   const { content } = useLang();
   const { howIBuild } = content;
 
   return (
-    <Shell title={howIBuild.title} lead={howIBuild.intro}>
+    <Shell
+      title={howIBuild.title}
+      lead={(
+        <>
+          <span className="page-lead-primary">{howIBuild.intro}</span>
+          <span className="page-lead-detail">{howIBuild.introDetail}</span>
+        </>
+      )}
+    >
       <Section>
         <SectionTitle>{howIBuild.loopTitle}</SectionTitle>
         <LoopGrid>
@@ -166,17 +297,23 @@ export default function HowIBuild() {
 
       <Section>
         <SectionTitle>{howIBuild.harnessTitle}</SectionTitle>
-        <List>
-          {howIBuild.harness.map((h) => (
-            <li key={h}>{h}</li>
-          ))}
-        </List>
+        <HarnessGrid className="harness-grid">
+          {howIBuild.harness.map((item) => {
+            const { title, description } = splitHarnessItem(item);
+            return (
+              <HarnessCard key={item}>
+                <h3>{title}</h3>
+                {description && <p>{description}</p>}
+              </HarnessCard>
+            );
+          })}
+        </HarnessGrid>
       </Section>
 
       {howIBuild.aiWrong && (
         <Section>
           <SectionTitle>{howIBuild.aiWrongTitle}</SectionTitle>
-          <CaughtGrid>
+          <CaughtGrid className="caught-grid">
             {howIBuild.aiWrong.map((item) => (
               <Caught key={item.title}>
                 <h3>{item.title}</h3>
@@ -193,7 +330,7 @@ export default function HowIBuild() {
 
       <Section>
         <SectionTitle>{howIBuild.incidentsTitle}</SectionTitle>
-        <Lessons>
+        <Lessons className="lessons-grid">
           {howIBuild.incidents.map((inc) => (
             <Lesson key={inc.title}>
               <h4>{inc.title}</h4>

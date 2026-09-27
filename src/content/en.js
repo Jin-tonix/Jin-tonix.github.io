@@ -788,7 +788,9 @@ const en = {
   howIBuild: {
     title: 'How I Build with AI',
     intro:
-      'Designed, built, and run solo. I write code with Claude Code; architecture, rules, verification, and rollout decisions are mine. Commits with a Claude co-author trailer: agent-company 3,646 · brand-tool 1,122 · email-agent 988 (excluding merges; agent-company org/release and brand-tool main as of 2026-09-23, email-agent as of 2026-09-02). My own commits across the four repositories total 7,276 (excluding merges, counted 2026-09-23). I run several Claude Code sessions in parallel. I assume the agents will make mistakes. The section "Where the AI was wrong and I caught it" below is the record.',
+      'Designed, built, and run solo. I write code with Claude Code; architecture, rules, verification, and rollout decisions are mine.',
+    introDetail:
+      'Commits with a Claude co-author trailer: agent-company 3,646 · brand-tool 1,122 · email-agent 988 (excluding merges; agent-company org/release and brand-tool main as of 2026-09-23, email-agent as of 2026-09-02). My own commits across the four repositories total 7,276 (excluding merges, counted 2026-09-23). I run several Claude Code sessions in parallel. I assume the agents will make mistakes. The section "Where the AI was wrong and I caught it" below is the record.',
     image: null,
     loopTitle: 'Work loop',
     loop: [

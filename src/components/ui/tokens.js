@@ -10,7 +10,7 @@ export const color = {
 };
 
 export const font = {
-  family: "'Pretendard Variable', -apple-system, 'Apple SD Gothic Neo', sans-serif",
+  family: "'Pretendard Variable', Pretendard, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif",
   size: {
     xs: '13px',
     sm: '15px',

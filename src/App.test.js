@@ -75,3 +75,20 @@ test('keeps the Korean hero copy and résumé link on the Korean route', () => {
     '/resume/Career_Jinhee_Mok_KO.pdf'
   );
 });
+
+test('organizes the Korean How I Build page into balanced, readable cards', () => {
+  render(
+    <MemoryRouter initialEntries={['/how-i-build']}>
+      <App />
+    </MemoryRouter>
+  );
+
+  expect(screen.getByRole('heading', { level: 1, name: 'How I Build with AI' })).toBeInTheDocument();
+  expect(screen.getByText('설계·개발·운영 1인. 코드는 Claude Code로 쓰고, 아키텍처·규칙·검증·롤아웃은 직접 판단했습니다.')).toBeInTheDocument();
+  expect(screen.getByText(/네 저장소의 본인 커밋은 합 7,276개입니다/)).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: '하네스 — 에이전트 실수를 규칙으로 막기' })).toBeInTheDocument();
+  expect(document.querySelectorAll('.harness-grid article')).toHaveLength(6);
+  expect(screen.getByRole('heading', { name: 'CLAUDE.md·규칙 파일' })).toBeInTheDocument();
+  expect(document.querySelectorAll('.caught-grid article')).toHaveLength(3);
+  expect(document.querySelectorAll('.lessons-grid article')).toHaveLength(5);
+});
