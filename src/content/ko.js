@@ -15,16 +15,16 @@ const ko = {
   },
   hero: {
     name: '목진희',
-    title: 'AI 에이전트 엔지니어',
+    title: 'AI 엔지니어',
     intro:
-      'StyleSeller에서 제안서 가격 계산·거래처 카톡 문의·셀러 발굴을 사내 업무 웹과 에이전트로 옮겼습니다. 설계부터 운영까지 혼자 하는 AI Builder, 목진희입니다.',
+      'StyleSeller에서 제안서 가격 계산·거래처 카톡 문의·셀러 발굴을 사내 업무 웹과 에이전트로 옮겼습니다. 설계부터 운영까지 혼자 맡는 AI 엔지니어, 목진희입니다.',
     company:
       'StyleSeller는 SNS 인플루언서 셀러와 브랜드를 연결해 기간 한정 공동구매(공구)를 열고, 발주·CS·정산을 대신 운영하는 플랫폼입니다.',
     metrics: [
       { value: '14개', label: '직원이 쓰는 업무 화면', basis: 'brand-tool 라이브 화면(로그인 포함) · 상단 메뉴 6개 · 2026-09-23' },
-      { value: '5개', label: '매일 운영에 쓰이는 에이전트', basis: '스케줄·수신 루프가 있는 서비스 4개 + 직원이 쓰는 Spark · 벤더 CS·인플루언서 CS·Supervisor·Hermes·Spark · 2026-09-23' },
-      { value: '11대', label: '직원 PC 배포', basis: '카톡 동기화 등록 기준 · 맥 6·윈도우 5 · 2026-09-16' },
-      { value: '4개', label: '저장소가 한 운영 시스템', basis: 'brand-tool · agent-company · email-agent · kakaocli' },
+      { value: '5개', label: '매일 쓰는 AI 도우미', basis: '스케줄·수신 루프가 있는 서비스 4개 + 직원이 쓰는 Spark · 벤더 CS·인플루언서 CS·Supervisor·Hermes·Spark · 2026-09-23' },
+      { value: '11대', label: '직원 컴퓨터에 설치', basis: '카톡 동기화 등록 기준 · 맥 6·윈도우 5 · 2026-09-16' },
+      { value: '4개', label: '함께 움직이는 프로젝트 코드', basis: 'brand-tool · agent-company · email-agent · kakaocli' },
     ],
     glossaryTitle: '용어',
     glossary: [
