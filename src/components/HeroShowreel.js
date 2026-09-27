@@ -3,25 +3,25 @@ import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import { color, font } from './ui/tokens';
 
-const revealPricing = keyframes`
+const revealCatalog = keyframes`
   0% { opacity: 0; transform: translateY(12px); }
   1%, 21% { opacity: 1; transform: translateY(0); }
   23%, 100% { opacity: 0; transform: translateY(-10px); }
 `;
 
-const revealVendor = keyframes`
+const revealPricing = keyframes`
   0%, 23% { opacity: 0; transform: translateY(12px); }
   25%, 42% { opacity: 1; transform: translateY(0); }
   44%, 100% { opacity: 0; transform: translateY(-10px); }
 `;
 
-const revealSpark = keyframes`
+const revealMatching = keyframes`
   0%, 42% { opacity: 0; transform: translateY(12px); }
   44%, 61% { opacity: 1; transform: translateY(0); }
   63%, 100% { opacity: 0; transform: translateY(-10px); }
 `;
 
-const revealEmail = keyframes`
+const revealOutreach = keyframes`
   0%, 61% { opacity: 0; transform: translateY(12px); }
   63%, 80% { opacity: 1; transform: translateY(0); }
   82%, 100% { opacity: 0; transform: translateY(-10px); }
@@ -283,20 +283,20 @@ const Hero = styled.section`
     animation-timing-function: ease;
   }
 
+  .scene--catalog {
+    animation-name: ${revealCatalog};
+  }
+
   .scene--pricing {
     animation-name: ${revealPricing};
   }
 
-  .scene--vendor {
-    animation-name: ${revealVendor};
+  .scene--matching {
+    animation-name: ${revealMatching};
   }
 
-  .scene--spark {
-    animation-name: ${revealSpark};
-  }
-
-  .scene--email {
-    animation-name: ${revealEmail};
+  .scene--outreach {
+    animation-name: ${revealOutreach};
   }
 
   .scene--fleet {
@@ -692,9 +692,13 @@ const Hero = styled.section`
     background: rgba(242, 240, 231, 0.08);
   }
 
-  .visual-pcs i:nth-child(-n + 11) {
+  .visual-pcs i:nth-child(-n + 8) {
     border-color: rgba(255, 215, 0, 0.6);
     background: rgba(255, 215, 0, 0.18);
+  }
+
+  .visual-pcs i:nth-child(9) {
+    opacity: 0.35;
   }
 
   .brandtool-case-count {
@@ -1496,7 +1500,7 @@ const Hero = styled.section`
       transform: none;
     }
 
-    .scene--pricing {
+    .scene--catalog {
       opacity: 1;
     }
 
@@ -1517,39 +1521,39 @@ const Hero = styled.section`
 const copy = {
   en: {
     top: 'AI Engineer · from workflow to production',
-    chapter: 'Five AI systems in daily operation',
-    hook: "I don't let AI set the price.",
+    chapter: 'Five AI + automation workflows for commerce ops',
+    hook: 'AI parses the catalog. Code owns the price.',
     solo: 'SOLO AI ENGINEER · DESIGN → BUILD → OPERATE',
-    intro: 'I connect proposal, partner-support, and email systems—and own the build, deployment, and operations.',
     company: 'StyleSeller · commerce operations for influencer-led brand sales',
-    pricingOverline: '01 · MODEL / CODE BOUNDARY · WORK TOOL',
-    pricingTitle: 'AI edits requested fields. Code recalculates the price.',
-    pricingSummary: 'Vendor and seller proposals live inside the work tool. I moved spreadsheet pricing rules into code and checked 43 cases with staff.',
+    catalogOverline: '01 · SUPPLIER CATALOG · PDF / IMAGE / SPREADSHEET',
+    catalogTitle: 'Turn supplier files into structured product listings.',
+    catalogSummary: 'Gemini reads PDFs, images, slides, spreadsheets, and URLs to extract products, options, prices, and photos into the work tool.',
+    catalogInput: 'Supplier files',
+    catalogModel: 'Gemini · catalog parser',
+    catalogOutput: 'Products · options · prices',
+    pricingOverline: '02 · PROPOSALS INSIDE THE WORK TOOL',
+    pricingTitle: 'AI edits requested fields. Code recalculates every price.',
+    pricingSummary: 'I moved spreadsheet pricing formulas into the vendor and seller proposal flows, then checked 43 calculation cases with staff.',
     pricingProof: 'pricing cases checked with staff',
     pricingScale: '14 work-tool screens',
-    vendorOverline: '02 · GROUNDED SUPPORT · CONTROLLED HANDOFF',
-    vendorTitle: 'Separate partner context. Never guess beyond evidence.',
-    vendorSummary: 'Routine questions get grounded answers. The Slack handoff is feature-flagged (off by default in source); enabled replies enter the staff Mac KakaoTalk queue.',
-    vendorInputNote: "A partner's question",
-    vendorStatus: 'When enabled · Slack reply → KakaoTalk queue',
-    vendorGuard: ['Partner chats kept separate', 'Handoff has an explicit gate', 'Slack reply enters KakaoTalk queue'],
-    emailOverline: '04 · HUMAN FEEDBACK · RAG + STYLEBOOK',
-    emailTitle: 'A sent correction improves the next relevant draft.',
-    emailSummary: 'Sent replies pair with the inquiry in RAG; factual corrections update knowledge, and style edits update the stylebook.',
-    emailKnowledge: 'Save reply + corrections',
-    emailKnowledgeNote: 'RAG + Stylebook',
-    emailHumanNote: 'Search in future drafts',
-    sparkOverline: '03 · MULTI-DATABASE REASONING · APPROVAL GATE',
-    sparkTitle: 'One question. Four databases. Approval before enabled actions.',
-    sparkSummary: 'Spark answers from four work databases; role and approval checks protect the internal actions enabled today.',
-    sparkSources: ['Prices', 'Vendors', 'Campaigns', 'Work'],
-    sparkAnswer: 'Find the answer',
-    sparkGateNote: 'Ask before changing',
+    matchingOverline: '03 · SALES-PARTNER MATCHING · RULES + SEARCH',
+    matchingTitle: 'Find sales partners likely to run a group buy.',
+    matchingSummary: 'Combine sales, category, inquiry, and proposal rules with knowledge search. An LLM scores 30 candidates at a time; 5+/10 qualifies for staff review.',
+    matchingInputs: ['Sales history', 'Categories', 'Inquiries', 'Past proposals'],
+    matchingRank: 'LLM · candidate scoring',
+    matchingResult: 'Staff reviews matches',
+    outreachOverline: '04 · CRM-PERSONALIZED KAKAOTALK',
+    outreachTitle: 'A failed CRM lookup is never a confirmed zero.',
+    outreachSummary: 'CRM uses KakaoTalk sales history to pick products; the work tool builds cards. Substitutes require a successful empty result, not a failed lookup.',
+    outreachInput: 'Seller sales history',
+    outreachCard: 'Tailored product card',
+    outreachQueue: 'KakaoTalk send queue',
+    outreachGuard: '500+ recipients · approval hold',
     fleetOverline: '05 · DEPLOYMENT & OPERATIONS · 11 DEVICES',
-    fleetTitle: 'I ship and maintain systems across 11 staff PCs.',
-    fleetSummary: 'Per-device credentials, verified updates, and no database keys on staff machines.',
-    fleetScale: '11 computers in use',
-    visualSite: 'StyleSeller work tool',
+    fleetTitle: 'Instagram seller discovery runs on employee PCs.',
+    fleetSummary: 'Instagram blocks data-center IPs, so a worker runs on an employee PC: one account per PC, capped actions, no automated DMs.',
+    fleetScale: '9 seller-finder PCs · 1 off',
+    visualSite: 'StyleSeller internal work tool',
     visualSection: 'work tool · Proposals',
     visualVendor: 'Vendor version',
     visualSeller: 'Seller version',
@@ -1557,21 +1561,18 @@ const copy = {
     visualProposalTitle: 'Proposal feature',
     visualEdit: 'LLM · fields-to-change JSON',
     visualPrice: 'Code · deterministic price',
-    visualVersionHistory: 'Code recalculates price',
+    visualVersionHistory: '43 pricing cases checked with staff',
     visualHistoryLabel: 'Work records',
     visualSendHistory: 'Created proposals · send requests',
-    visualMessage: 'KakaoTalk question',
-    visualSeparate: 'Chatbot answers most',
-    visualStaff: 'Configured recipient · Slack',
-    visualSearch: 'Review, edit & send',
-    visualDraft: 'Similar future email',
-    visualRecords: 'Four parts of the business',
-    visualAnswer: 'Find an answer',
-    visualApprove: 'Staff approves',
-    visualInstall: 'Deploy work systems',
-    visualComputers: 'Staff computers',
-    visualUpdate: 'Update all computers',
-    visualChapters: ['Proposals', 'KakaoTalk help', 'Work search', 'Email drafts', 'Staff computers'],
+    visualMessage: 'Supplier PDF · image · sheet',
+    visualSeparate: 'Products · options · prices',
+    visualStaff: 'Original photos preferred',
+    visualSearch: 'Sales history · categories',
+    visualDraft: 'Knowledge search',
+    visualRecords: 'Past sales · inquiries · tags',
+    visualInstall: 'Instagram · one account',
+    visualUpdate: 'No automated DMs',
+    visualChapters: ['Catalog intake', 'Code-owned pricing', 'Partner matching', 'KakaoTalk proposals', 'Staff-PC discovery'],
     live: 'IN USE EVERY DAY',
     projects: 'Explore projects',
     pause: 'Pause',
@@ -1585,39 +1586,39 @@ const copy = {
   },
   ko: {
     top: 'AI 엔지니어 · 업무 흐름부터 운영까지',
-    chapter: '매일 운영하는 AI 시스템 5개',
-    hook: 'AI에 가격을 맡기지 않았습니다.',
+    chapter: '커머스 운영에 쓰이는 AI·자동화 흐름 5개',
+    hook: '상품은 AI가 읽고, 가격은 코드가 책임집니다.',
     solo: 'StyleSeller · 설계 → 개발 → 배포·운영',
-    intro: '제안·거래처 응대·메일 시스템을 연결해, 설계부터 배포·운영까지 혼자 맡습니다.',
     company: 'StyleSeller · 크리에이터 셀러와 브랜드의 판매를 운영하는 커머스 플랫폼',
-    pricingOverline: '01 · 모델과 코드의 책임 경계 · work tool',
-    pricingTitle: 'AI는 요청한 필드만. 가격은 코드가 재계산.',
-    pricingSummary: '벤더용·셀러용 제안은 work tool 안의 기능입니다. 시트 가격 규칙을 코드로 옮기고, 실무자와 43개 사례를 대조했습니다.',
-    pricingProof: '가격 규칙 43건 실무자 검증',
+    catalogOverline: '01 · 공급사 카탈로그 · PDF / 이미지 / 엑셀',
+    catalogTitle: '공급사 자료에서 상품·옵션·가격을 등록합니다.',
+    catalogSummary: 'PDF·이미지·PPT·엑셀·URL을 Gemini가 읽어 상품 데이터로 구조화하고, 상품 사진도 함께 가져옵니다.',
+    catalogInput: '공급사 자료',
+    catalogModel: 'Gemini · 카탈로그 파싱',
+    catalogOutput: '상품 · 옵션 · 가격',
+    pricingOverline: '02 · 사내 work tool 제안 기능',
+    pricingTitle: 'AI는 요청 필드만 수정. 가격은 코드가 재계산.',
+    pricingSummary: '시트 수식을 work tool의 벤더용·셀러용 제안 흐름으로 옮기고, 실무자와 계산 43건을 대조했습니다.',
+    pricingProof: '가격 계산 43건 실무자 대조',
     pricingScale: 'work tool 화면 14개',
-    vendorOverline: '02 · 근거 기반 응대 · 통제된 이관',
-    vendorTitle: '거래처별 맥락은 격리. 근거가 없으면 추측하지 않음.',
-    vendorSummary: '일반 문의는 지식 기반으로 응답합니다. Slack 이관은 코드에서 기본 꺼짐이며, 켜면 답장이 직원 Mac 카카오톡 큐로 이어집니다.',
-    vendorInputNote: '거래처가 보낸 질문',
-    vendorStatus: '이관 시 · Slack 답장 → 카카오톡 큐',
-    vendorGuard: ['거래처별 대화 분리', '이관 on/off 설정', 'Slack 답장은 카카오톡 큐로'],
-    emailOverline: '04 · 사람의 피드백 · RAG + 스타일북',
-    emailTitle: '사람이 고쳐 보낸 답장을 다음 초안에 반영.',
-    emailSummary: '보낸 답변과 원문은 RAG에 쌓입니다. 사실 교정은 지식으로, 말투 수정은 스타일북으로 반영해 다음 초안이 검색합니다.',
-    emailKnowledge: '답변·교정 저장',
-    emailKnowledgeNote: 'RAG + 스타일북',
-    emailHumanNote: '다음 초안에서 검색',
-    sparkOverline: '03 · 데이터 통합 · 실행 승인 게이트',
-    sparkTitle: '질문 하나로 업무 DB 네 곳 조회. 실행 전 권한·승인 확인.',
-    sparkSummary: 'Spark가 네 업무 DB를 조회합니다. 현재 켜진 내부 변경 작업은 권한과 DB 승인 행을 다시 확인합니다.',
-    sparkSources: ['가격표', '거래처', '캠페인', '업무 기록'],
-    sparkAnswer: '답 찾기',
-    sparkGateNote: '바꾸기 전 확인',
+    matchingOverline: '03 · 판매 파트너사 매칭 · 규칙 + 지식 검색',
+    matchingTitle: '공동구매를 함께 열 판매 파트너사를 찾습니다.',
+    matchingSummary: '공구 이력·카테고리·문의·제안서 규칙 점수에 지식 허브 후보를 합칩니다. LLM이 30개씩 0~10점 판정하고, 5점 이상을 직원이 검토합니다.',
+    matchingInputs: ['공구 이력', '카테고리', '문의', '과거 제안'],
+    matchingRank: 'LLM · 후보별 매칭 점수',
+    matchingResult: '직원이 후보 검토',
+    outreachOverline: '04 · CRM 판매 이력 기반 맞춤 카카오톡',
+    outreachTitle: 'CRM 조회 실패를 ‘결과 0건’으로 보지 않습니다.',
+    outreachSummary: '카톡 판매 이력으로 상품을 고릅니다. 대체 상품은 CRM 조회가 성공하고 0건일 때만 붙입니다.',
+    outreachInput: '셀러 판매 이력',
+    outreachCard: '맞춤 상품 카드',
+    outreachQueue: '카카오톡 발송 큐',
+    outreachGuard: '500명 이상 · 승인 대기',
     fleetOverline: '05 · 배포와 운영 · 직원 PC 11대',
-    fleetTitle: '직원 PC 11대에 배포하고 업데이트까지 운영.',
-    fleetSummary: 'PC별 인증 정보와 검증된 업데이트. DB 키는 직원 PC에 두지 않습니다.',
-    fleetScale: '직원 컴퓨터 11대',
-    visualSite: 'StyleSeller work tool',
+    fleetTitle: 'Instagram 셀러 발굴은 직원 PC에서 실행합니다.',
+    fleetSummary: 'Instagram 데이터센터 IP 차단에 맞춰 직원 PC 워커로 옮겼습니다. 계정당 PC 1대, 행동 상한, 자동 DM 없음.',
+    fleetScale: '셀러찾기 PC 9대 · 1대 중지',
+    visualSite: 'StyleSeller 사내 work tool',
     visualSection: 'work tool · 제안서',
     visualVendor: '벤더용',
     visualSeller: '셀러용',
@@ -1625,21 +1626,18 @@ const copy = {
     visualProposalTitle: '제안서 기능',
     visualEdit: 'LLM · 수정 필드 JSON',
     visualPrice: '코드 · 결정론적 가격 계산',
-    visualVersionHistory: '코드에서 금액 재계산',
+    visualVersionHistory: '가격 계산 43건 실무자 대조',
     visualHistoryLabel: '업무 기록',
     visualSendHistory: '제안서 생성 · 발송 요청',
-    visualMessage: '카카오톡 문의',
-    visualSeparate: '챗봇이 대부분 답변',
-    visualStaff: '설정된 수신자 · Slack',
-    visualSearch: '확인·수정해 발송',
-    visualDraft: '다음 비슷한 메일',
-    visualRecords: '업무 자료 네 곳',
-    visualAnswer: '답 찾기',
-    visualApprove: '직원 승인',
-    visualInstall: '업무 시스템 배포',
-    visualComputers: '직원 컴퓨터',
-    visualUpdate: '자동 업데이트',
-    visualChapters: ['제안서', '카톡 문의', '자료 검색', '메일 초안', '컴퓨터 관리'],
+    visualMessage: '공급사 PDF · 이미지 · 엑셀',
+    visualSeparate: '상품 · 옵션 · 가격',
+    visualStaff: '원본 사진 우선 사용',
+    visualSearch: '공구 이력 · 카테고리',
+    visualDraft: '지식 허브 검색',
+    visualRecords: '과거 제안 · 문의 · 태그',
+    visualInstall: 'Instagram · 계정 1개',
+    visualUpdate: '자동 DM 없음',
+    visualChapters: ['상품 등록', '코드 가격 계산', '파트너사 매칭', '카톡 제안', '직원 PC 셀러 발굴'],
     live: '매일 사용 중',
     projects: '프로젝트 자세히 보기',
     pause: '일시정지',
@@ -1695,7 +1693,7 @@ export default function HeroShowreel({ hero, content, lang, withPrefix }) {
               <span className="role">{hero.title}</span>
             </h1>
             <p className="solo">{text.solo}</p>
-            <p className="intro">{text.intro}</p>
+            <p className="intro">{hero.intro}</p>
             <p className="company">{text.company}</p>
             <div className="actions">
               <a className="primary" href="mailto:jinheemok815@gmail.com">{text.email}</a>
@@ -1716,10 +1714,38 @@ export default function HeroShowreel({ hero, content, lang, withPrefix }) {
               key={replayKey}
               aria-hidden="true"
             >
+              <div className="scene scene--catalog">
+                <div className="scene-caption">
+                  <strong>{text.catalogOverline}</strong>
+                  <span className="caption-state">01 / 05</span>
+                </div>
+                <h2 className="project-title">{text.catalogTitle}</h2>
+                <p className="project-summary">{text.catalogSummary}</p>
+                <div className="project-visual">
+                  <div className="visual-track">
+                    <div className="visual-card">
+                      <div className="visual-file-stack"><i /><i /><i /></div>
+                      <strong>{text.catalogInput}</strong>
+                      <small>{text.visualMessage}</small>
+                    </div>
+                    <span className="visual-arrow" aria-hidden="true">→</span>
+                    <div className="visual-card accent">
+                      <strong>{text.catalogModel}</strong>
+                      <small>{text.visualStaff}</small>
+                    </div>
+                    <span className="visual-arrow" aria-hidden="true">→</span>
+                    <div className="visual-card">
+                      <strong>{text.catalogOutput}</strong>
+                      <small>{text.visualSeparate}</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <div className="scene scene--pricing">
                 <div className="scene-caption">
                   <strong>{text.pricingOverline}</strong>
-                  <span className="caption-state">01 / 05</span>
+                  <span className="caption-state">02 / 05</span>
                 </div>
                 <h2 className="project-title">{text.pricingTitle}</h2>
                 <p className="project-summary">{text.pricingSummary}</p>
@@ -1773,80 +1799,53 @@ export default function HeroShowreel({ hero, content, lang, withPrefix }) {
                 </div>
               </div>
 
-              <div className="scene scene--vendor">
+              <div className="scene scene--matching">
                 <div className="scene-caption">
-                  <strong>{text.vendorOverline}</strong>
-                  <span className="caption-state">02 / 05</span>
-                </div>
-                <h2 className="project-title">{text.vendorTitle}</h2>
-                <p className="project-summary">{text.vendorSummary}</p>
-                <div className="project-visual">
-                  <div className="visual-track">
-                    <div className="visual-card">
-                      <span className="visual-chat-bubble">{text.visualMessage}</span>
-                      <strong>{text.vendorInputNote}</strong>
-                    </div>
-                    <span className="visual-arrow" aria-hidden="true">→</span>
-                    <div className="visual-card accent">
-                      <strong>{text.visualSeparate}</strong>
-                    </div>
-                    <span className="visual-arrow" aria-hidden="true">→</span>
-                    <div className="visual-card">
-                      <strong>{text.visualStaff}</strong>
-                      <small>{text.vendorStatus}</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="scene scene--spark">
-                <div className="scene-caption">
-                  <strong>{text.sparkOverline}</strong>
+                  <strong>{text.matchingOverline}</strong>
                   <span className="caption-state">03 / 05</span>
                 </div>
-                <h2 className="project-title">{text.sparkTitle}</h2>
-                <p className="project-summary">{text.sparkSummary}</p>
+                <h2 className="project-title">{text.matchingTitle}</h2>
+                <p className="project-summary">{text.matchingSummary}</p>
                 <div className="project-visual">
                   <div className="visual-track">
                     <div className="visual-card">
-                      <div className="visual-databases">{text.sparkSources.map((source) => <i key={source} title={source} />)}</div>
+                      <div className="visual-databases">{text.matchingInputs.map((source) => <i key={source} title={source} />)}</div>
                       <strong>{text.visualRecords}</strong>
                     </div>
                     <span className="visual-arrow" aria-hidden="true">→</span>
                     <div className="visual-card accent">
-                      <strong>{text.visualAnswer}</strong>
+                      <strong>{text.matchingRank}</strong>
+                      <small>{text.visualDraft}</small>
                     </div>
                     <span className="visual-arrow" aria-hidden="true">→</span>
                     <div className="visual-card">
-                      <strong>{text.visualApprove}</strong>
-                      <small>{text.sparkGateNote}</small>
+                      <strong>{text.matchingResult}</strong>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="scene scene--email">
+              <div className="scene scene--outreach">
                 <div className="scene-caption">
-                  <strong>{text.emailOverline}</strong>
+                  <strong>{text.outreachOverline}</strong>
                   <span className="caption-state">04 / 05</span>
                 </div>
-                <h2 className="project-title">{text.emailTitle}</h2>
-                <p className="project-summary">{text.emailSummary}</p>
+                <h2 className="project-title">{text.outreachTitle}</h2>
+                <p className="project-summary">{text.outreachSummary}</p>
                 <div className="project-visual">
                   <div className="visual-track">
                     <div className="visual-card">
-                      <div className="visual-file-stack"><i /><i /><i /></div>
-                      <strong>{text.visualSearch}</strong>
+                      <strong>{text.outreachInput}</strong>
+                      <small>{text.visualSearch}</small>
                     </div>
                     <span className="visual-arrow" aria-hidden="true">→</span>
                     <div className="visual-card accent">
-                      <strong>{text.emailKnowledge}</strong>
-                      <small>{text.emailKnowledgeNote}</small>
+                      <strong>{text.outreachCard}</strong>
                     </div>
                     <span className="visual-arrow" aria-hidden="true">→</span>
                     <div className="visual-card">
-                      <strong>{text.visualDraft}</strong>
-                      <small>{text.emailHumanNote}</small>
+                      <strong>{text.outreachQueue}</strong>
+                      <small>{text.outreachGuard}</small>
                     </div>
                   </div>
                 </div>
@@ -1867,7 +1866,7 @@ export default function HeroShowreel({ hero, content, lang, withPrefix }) {
                     <span className="visual-arrow" aria-hidden="true">→</span>
                     <div className="visual-card accent">
                       <strong>{text.fleetScale}</strong>
-                      <div className="visual-pcs">{Array.from({ length: 11 }, (_, index) => <i key={index} />)}</div>
+                      <div className="visual-pcs">{Array.from({ length: 9 }, (_, index) => <i key={index} />)}</div>
                     </div>
                     <span className="visual-arrow" aria-hidden="true">→</span>
                     <div className="visual-card">
@@ -1910,10 +1909,10 @@ export default function HeroShowreel({ hero, content, lang, withPrefix }) {
           ))}
         </dl>
         <ul className="sr-only project-transcript">
+          <li>{text.catalogOverline}: {text.catalogTitle} {text.catalogSummary} {text.catalogOutput}</li>
           <li>{text.pricingOverline}: {text.pricingTitle} {text.pricingSummary} {text.pricingProof}</li>
-          <li>{text.vendorOverline}: {text.vendorTitle} {text.vendorSummary} {text.vendorGuard.join(', ')}</li>
-          <li>{text.emailOverline}: {text.emailTitle} {text.emailSummary} {text.emailKnowledgeNote}</li>
-          <li>{text.sparkOverline}: {text.sparkTitle} {text.sparkSummary} {text.sparkGateNote}</li>
+          <li>{text.matchingOverline}: {text.matchingTitle} {text.matchingSummary} {text.matchingInputs.join(', ')}.</li>
+          <li>{text.outreachOverline}: {text.outreachTitle} {text.outreachSummary} {text.outreachGuard}</li>
           <li>{text.fleetOverline}: {text.fleetTitle} {text.fleetSummary} {text.fleetScale}</li>
           <li>{hero.intro} {hero.company}</li>
           {hero.metrics.map((metric) => (

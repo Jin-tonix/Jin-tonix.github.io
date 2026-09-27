@@ -17,7 +17,7 @@ const en = {
     name: 'Jinhee Mok',
     title: 'AI Engineer',
     intro:
-      'I design model judgment, code verification, and execution controls. At StyleSeller, I own AI system design through deployment and operations.',
+      'One internal work tool handles product parsing, pricing, partner matching, and KakaoTalk. Seller discovery runs on employee PCs.',
     company:
       'StyleSeller is a commerce platform that operates sales for creator sellers and brands.',
     metrics: [

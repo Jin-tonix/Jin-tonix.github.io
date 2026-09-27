@@ -17,7 +17,7 @@ const ko = {
     name: '목진희',
     title: 'AI 엔지니어',
     intro:
-      '모델 판단·코드 검증·실행 통제를 설계합니다. StyleSeller에서 AI 시스템 설계부터 배포·운영까지 혼자 맡습니다.',
+      '사내 work tool에서 상품 파싱·가격 계산·파트너 매칭·카톡을 운영합니다. 셀러 발굴은 직원 PC 워커로.',
     company:
       'StyleSeller는 크리에이터 셀러와 브랜드의 판매를 운영하는 커머스 플랫폼입니다.',
     metrics: [
