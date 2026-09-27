@@ -17,7 +17,7 @@ const en = {
     name: 'Jinhee Mok',
     title: 'AI Engineer',
     intro:
-      "At StyleSeller, I moved proposal pricing, vendor KakaoTalk inquiries, and seller discovery into an internal work app and a set of agents. I'm Jinhee Mok, and I design, build, and run these systems on my own.",
+      "At StyleSeller, I built an internal work website for proposal management and AI systems for partner KakaoTalk support and seller discovery. I'm Jinhee Mok, and I design, build, and run them on my own.",
     company:
       'StyleSeller is a platform that connects social media influencer sellers with brands to run group buys (time-limited sales run by an influencer). It handles ordering, customer support, and settlement on their behalf.',
     metrics: [
@@ -40,25 +40,25 @@ const en = {
   systemMap: {
     title: 'System Map',
     intro:
-      'It started as Instagram DM automation (2026-02). Today four repositories work together as one operating system. Staff work in one internal web app, a Chrome extension panel, and Slack. Behind them, agents and staff PC workers share self-hosted databases and one knowledge hub. Click a number to jump to that case.',
+      'It started as Instagram DM automation (2026-02). Today four repositories work together as one operating system. Staff work in one internal website, a Chrome extension, and Slack. Behind them, agents and staff PC workers share self-hosted databases and one knowledge hub. Click a number to jump to that case.',
     image: '/images/v3/system-map-en.png',
     zoomHint: 'Tap to enlarge',
     imageAlt: 'Map of the StyleSeller AI operations system',
     reposTitle: 'What each repository does',
     repos: [
-      { name: 'brand-tool', role: 'The web app staff use; sales partner and product data' },
+      { name: 'brand-tool', role: 'The internal website staff use; sales partner and product data' },
       { name: 'agent-company', role: 'Agents, servers, and staff PC deployment' },
       { name: 'email-agent', role: 'Reply drafts for the shared mailboxes + internal knowledge hub' },
       { name: 'kakaocli', role: 'KakaoTalk collection and sending on staff Macs' },
       { name: 'n8n (self-hosted, not a repository)', role: 'Triggers for mail intake, product sync calls, and match judging (97 active workflows, 2026-09-23 inventory)' },
     ],
     examples: [
-      'Example: one vendor support message goes from a staff Mac (collection) → the agent server (should we answer this vendor?) → the web app (the list of vendors to serve) and the knowledge hub (search), then back to a staff Mac to be sent.',
-      'Example: one Spark question goes from the web app → the agent server → the web app API, 4 databases, and knowledge hub search.',
+      'Example: one vendor support message goes from a staff Mac (collection) → the agent server (should we answer this partner?) → the brand-tool website (the list of partners to serve) and the knowledge hub (search), then to Slack for a human reply if handoff is enabled.',
+      'Example: one Spark question goes from the brand-tool website → the agent server → the brand-tool API, 4 databases, and knowledge hub search.',
     ],
     nodes: [
       { id: 'vendor-cs', label: '① Vendor support', caseId: 'vendor-cs' },
-      { id: 'ss-worktool', label: '② SS work tool (brand-tool)', caseId: 'ss-worktool' },
+      { id: 'ss-worktool', label: '② brand-tool internal website', caseId: 'ss-worktool' },
       { id: 'email-agent', label: '③ Email agent and knowledge hub', caseId: 'email-agent' },
       { id: 'company-os', label: '④ Spark · Work OS', caseId: 'company-os' },
       { id: 'field-fleet', label: '⑤ Staff PC deployment · ops infrastructure', caseId: 'field-fleet' },
@@ -67,7 +67,7 @@ const en = {
     layers: [
       {
         name: 'People',
-        desc: 'The web app (brand-tool, 14 live screens) · the Kakao CS Copilot extension panel (MV3) · Slack (briefings, summaries, outage alerts). Human control comes from approval cards inside Spark chat (Tool Registry rechecks the approval row in the database), a hold queue for personalized KakaoTalk campaigns with 500 or more recipients, and the vendor support test-room switch and staff panel. What actually runs after approval is creating an issue or pausing a tool.',
+        desc: 'The internal website (brand-tool, 14 live screens) · the Kakao CS Copilot extension (MV3) · Slack (briefings, summaries, and unresolved inquiry replies). Human control comes from approval cards inside Spark chat (Tool Registry rechecks the approval row in the database), a hold queue for personalized KakaoTalk campaigns with 500 or more recipients, and feature-flagged routing for unresolved vendor inquiries.',
       },
       {
         name: 'Agents',
@@ -92,19 +92,19 @@ const en = {
       id: 'vendor-cs',
       slug: 'vendor-cs',
       logo: '/images/v2/logo10.png',
-      status: 'staged',
-      statusNote: 'collection and logging are in production · summaries go to a few recipients · auto-replies limited to a test room since 2026-09-15 · real vendor replies go through the staff panel',
-      title: 'Vendor support — an agent that gathers vendor inquiries scattered across staff KakaoTalk accounts and answers them from company knowledge',
+      status: 'live',
+      statusNote: 'inquiry collection and chatbot replies are live · Slack handoff is feature-flagged (repo default off) · when enabled, full threads go to Slack and replies enter the staff Mac KakaoTalk queue',
+      title: 'Vendor support — the chatbot handles routine questions; unresolved handoff is feature-flagged',
       shortTitle: 'Vendor support agent',
       period: '2026-06 to present',
       role: ROLE,
       chain:
-        'styleseller-kakaocli (staff Macs) → agent-company (collector, vendor agent, chatbot, sender, staff panel extension) → brand-tool (list of vendors to serve, products, proposals) · email-agent (knowledge search)',
-      oneLiner: 'Vendor KakaoTalk chats were scattered across staff accounts. I collect them on staff PCs, with no official API, and log them in one place.',
+        'styleseller-kakaocli (staff Macs) → agent-company (collector, partner support chatbot, Slack escalation, KakaoTalk sender) → brand-tool (partner list, products, proposals) · email-agent (knowledge search)',
+      oneLiner: 'The chatbot answers partner inquiries. When Slack handoff is enabled, it sends the full thread to the configured recipient and queues replies for KakaoTalk.',
       tldr: [
-        "Vendor inquiries that arrived in staff members' personal KakaoTalk are collected on staff PCs and logged per vendor in a ledger and a sheet.",
-        "The agent answers from company knowledge, and three layers keep other vendors' terms out of the answer.",
-        'Auto-replies sit behind a test-room switch; real vendor replies are edited and sent by staff in the staff panel.',
+        "Inquiries are collected from staff KakaoTalk accounts, logged per partner, and kept separate.",
+        "The chatbot answers most questions from company knowledge, with three layers preventing other partners' information from leaking.",
+        'When Slack handoff is enabled, unresolved questions and the full thread go to the configured recipient; replies enter the KakaoTalk send queue on staff Macs.',
       ],
       problem: [
         '"Vendor" in this case covers brands and sales partners: the brands (suppliers) that supply products and the sales partners (companies that run group buys with their own sellers). A group buy is a time-limited sale run by an influencer.',
@@ -117,12 +117,13 @@ const en = {
         'Collection covers only chats that arrive after install, on the PCs where it is installed. The Mac side drops anything before the install time, and the server drops anything before a cutoff date.',
         'KakaoTalk updates break the collection method. On 2026-09-15 I redesigned the Windows collector to work read-only.',
         "These messages go to real vendors. If one vendor's terms leak to another, it can't be undone.",
+        'Slack handoff has an explicit feature flag that defaults off in the repository. A configured pilot recipient overrides mapped owners, and failed owner resolution falls back to the full staff roster.',
       ],
       judgments: [
         {
-          choice: 'Answer general inquiries without handoffs or follow-up questions',
+          choice: 'Let the chatbot answer routine questions; gate unresolved Slack handoffs',
           why:
-            'Even after I blocked handoffs, the tool was still there, and the bot sent a promise nobody would keep: "We\'ll get back to you after checking with the person in charge." For the same procedural question, it sometimes asked back and sometimes answered, at random. So on 2026-09-02 I removed the handoff tool and follow-up questions. There are two exceptions. Other vendors\' information stays blocked, and the bot checks with the vendor only when it\'s unclear whether a proposal was already sent. Price inquiries reuse the existing proposal and send it automatically (08-08).',
+            'Sending every inquiry to a person slows down routine support. The chatbot answers when it has evidence; it does not guess when it cannot. When the Slack handoff flag is enabled, unresolved threads go to the configured recipient with full context. A Slack reply becomes a send job for the staff Mac KakaoTalk client.',
         },
         {
           choice: 'Rules trigger, the model decides',
@@ -130,14 +131,14 @@ const en = {
             'When the regex was allowed to block, it skipped the LLM and blocked silently. So I kept the regex only as a first-pass trigger. A temperature 0 LLM makes the final call within 5 seconds, and it fails closed if the check fails.',
         },
         {
-          choice: 'The test-room switch is a code default',
+          choice: 'Gate unresolved Slack handoff with full conversation context',
           why:
-            "There were 13 places that scheduled bot replies. I put gates at the 2 places where the flow converges (3 functions in the vendor agent, and the chatbot entry point). I hardcoded the default to the test room ID, because the VM .env doesn't follow releases. Setting it to * turns it on everywhere. I kept 2 snapshot branches as rollback points.",
+            'Passing only the question would force staff to look up the earlier conversation. When enabled, Slack receives the question and full chat history for the mapped or configured recipient. A reply written there becomes a job for the staff Mac KakaoTalk sender.',
         },
         {
-          choice: "When it can't decide, hold",
+          choice: 'Prevent guessed answers; route only through the configured handoff',
           why:
-            "If the list of vendors to serve can't be fetched, the message is marked UNDECIDED. That blocks only auto-sending and keeps the draft. A network outage never turns into a lost vendor inquiry.",
+            'When the chatbot lacks enough evidence, it does not invent an answer. If Slack handoff is enabled, it routes the conversation to the mapped or configured recipient; the reply goes through the staff Mac KakaoTalk queue.',
         },
         {
           choice: 'Stage by room',
@@ -168,8 +169,8 @@ const en = {
           ],
         },
         {
-          title: 'Gate (agent-company ↔ brand-tool)',
-          points: ["Right before drafting or sending, the vendor ID in the room name is checked against brand-tool's list of vendors to serve. Then the message must pass the test-room switch."],
+          title: 'Partner check (agent-company ↔ brand-tool)',
+          points: ["The partner ID in the chat is checked against brand-tool's list of partners to serve, and conversations stay separated by partner."],
         },
         {
           title: 'Answer (agent-company chatbot, GCP VM)',
@@ -185,24 +186,23 @@ const en = {
           points: ['A reply that passes the checks becomes a send job. A local sender on the staff Mac picks up the job, sends it with kakaocli, and confirms delivery. The run is also recorded in Tool Registry.'],
         },
         {
-          title: 'Staff panel (Kakao CS Copilot Chrome extension)',
+          title: 'Unresolved inquiry handoff (feature-flagged Slack)',
           points: [
-            'Vendor inquiries show up as cards. In the test room, the bot draft shows up too.',
-            'When staff write or edit a reply and send it, it goes out through the same local sender. Outside the test room, this is how real vendors get answered.',
+            'When Slack handoff is enabled, unresolved questions and the full conversation go to the configured recipient. If owner resolution fails, the code falls back to the full staff roster.',
+            'The recipient reviews the context and writes a reply in Slack; the send job goes to the staff Mac KakaoTalk client.',
           ],
         },
         {
           title: 'Learning and alerts',
           points: [
             "Twice a day (09:30 and 18:10), the day's conversations are written up as a wiki per vendor and loaded into the knowledge hub. Drafts that people corrected and approved Q&A go in too.",
-            'Slack only informs. Weekdays at 09:10 each staff member gets a briefing, and at 09:20 the CEO gets a PDF rollup. Window summaries go only to a few recipients, starting with rooms the chatbot answered. I turned off the Slack messages that asked people to reply.',
+            'When enabled, Slack carries unresolved inquiries and replies. Staff briefings and a CEO summary are delivered there on weekdays.',
           ],
         },
       ],
       results: [
-        'Collection, the ledger, sheets, and Drive are in production. Summaries go to a few recipients, starting with rooms the chatbot answered.',
-        'Auto-replies ran in real vendor rooms from 2026-08 to mid-09 (from 09-01, only for messages that tagged the bot).',
-        'Since 2026-09-15, the bot answers only in the test room until the improved version is validated. If a setting is missing, the bot fails toward not answering. Outside the test room, staff answer vendors in the staff panel.',
+        'Inquiry collection and chatbot replies are in production. Slack handoff has a feature flag that defaults off in the repository; when enabled, unresolved conversations go to the configured recipient with full context.',
+        'Staff review the conversation and write a reply in Slack; the message is queued for KakaoTalk delivery, keeping the handoff in the same partner-specific support flow.',
         'Vendor briefings run as a Paperclip Routine every weekday morning.',
         "Other vendors' information is blocked in three layers: workspace separation (07-27), substitution at the tool step, and a final LLM check.",
       ],
@@ -246,16 +246,16 @@ const en = {
       slug: 'ss-worktool',
       logo: '/images/logo7.png',
       status: 'live',
-      title: 'SS work tool — from an Excel price-sheet calculator to the internal web app staff use',
-      shortTitle: 'SS work tool (brand-tool)',
+      title: 'brand-tool proposals — separate vendor and seller flows',
+      shortTitle: 'brand-tool work website',
       period: 'Late 2026-03 to present',
       role: ROLE,
       chain: 'brand-tool → n8n → email-agent (knowledge hub) → agent-company (staff PC workers, send workers) → styleseller-kakaocli',
-      oneLiner: 'Sales staff priced proposals by hand in Google Sheets. I moved that into a web app they use.',
+      oneLiner: 'I built separate vendor and seller proposal flows inside brand-tool. Staff compare working revisions and keep records of created proposals and send requests.',
       tldr: [
-        'I replaced hand pricing in Google Sheets, done for every proposal, with a calculator and proposal screens in the web app.',
+        'Working revisions can be compared in the session; created proposals and send requests are saved as separate work records. Proposals export to PDF or Excel.',
         'It grew to 14 work screens: supplier catalog intake, sales partner recommendations, seller discovery, and KakaoTalk campaigns to sellers.',
-        'Code calculates the amounts. The LLM only returns a JSON of the fields to change.',
+        'An n8n chatbot helps edit the content; code recalculates the amounts.',
       ],
       problem: [
         "For every proposal, sales staff worked out the partner's and the seller's shares by hand in an Excel (Google Sheets) price sheet.",
@@ -294,8 +294,9 @@ const en = {
         {
           title: 'Pricing calculator and proposals (2026-03 onward)',
           points: [
-            'I moved the formulas from two Google Sheets tabs into code. It calculates the partner supply price and margin for each product.',
-            'There are two proposal types, partner proposals and seller proposals. They export to PDF and Excel, and staff can edit them by talking to a chatbot. The chatbot is an LLM behind an n8n webhook, and code recalculates the amounts.',
+            'I moved the price formulas from two Google Sheets tabs into brand-tool code. It calculates the supply price and margin for each product.',
+            'brand-tool has separate vendor and seller proposal screens. Staff compare working revisions in the session; created proposals and KakaoTalk send requests are saved as work records.',
+            'An n8n webhook chatbot helps edit proposal copy; code recalculates the amounts.',
             'The vendor support agent opens the same proposal screen on the server, renders it to PDF, and puts it in the existing KakaoTalk queue.',
           ],
           chain: 'brand-tool chatbot → n8n → brand-tool calculation → brand-tool proposal screen',
@@ -355,7 +356,7 @@ const en = {
         '14 live screens staff log in to use (including the login and detail screens), with 6 top-level menus (Spark, Products, Proposals, Vendors, Sellers, Content) (as of 2026-09-23).',
         'Spark, the internal AI assistant, is the first item in the top menu (added 2026-07). Login lands on the product main page. Details are in the Spark · Work OS case.',
         'In the Content menu, marketing staff request blog posts, ad copy, captions, and card news, and agent-company agents make them and send them back (added 2026-06, now maintenance only).',
-        'brand-tool is the staff web app and also the business data backend that the vendor support agent (list of vendors to serve, products, proposal PDFs) and Spark (14 `/api/spark/*` routes) call.',
+        'brand-tool is the staff website and business data backend that the vendor support agent (partner list, products, proposal PDFs) and Spark (14 `/api/spark/*` routes) call.',
         'The KakaoTalk pitch queue for sales partners is in production (as of 2026-09-24).',
         'Personalized KakaoTalk campaigns reached 261 people on 2026-09-22 (value stated in the commit message).',
         '9 seller-finder worker PCs registered (as of 2026-09-18).',
@@ -403,17 +404,17 @@ const en = {
       logo: '/images/logo8.png',
       status: 'partial',
       statusNote: 'brand and order shared mailboxes in production · only CEO-inbox auto-drafts stopped on 2026-09-02 (classification and sent-mail learning continue, as of 2026-09-24)',
-      title: 'An email agent that enforces grounding, and an internal knowledge hub',
+      title: 'An email agent that feeds staff edits back into RAG',
       shortTitle: 'Email agent · knowledge hub',
       period: '2026-03-31 to present',
       role: ROLE,
       chain:
         'Gmail (shared mailboxes, CEO inbox) → n8n → email-agent (FastAPI, LightRAG) → assignee Gmail drafts (CEO-inbox Slack alerts stopped) / email-agent LightRAG → agent-company (knowledge-mcp, Spark, vendor support) · brand-tool (sales partner matching)',
-      oneLiner: 'For brand onboarding, group-buy, and partnership emails, it drafts replies grounded in company knowledge.',
+      oneLiner: 'It pairs sent replies with the original inquiry in RAG, updates the stylebook from edits, and searches both for future drafts.',
       tldr: [
-        "For onboarding, group-buy, and partnership email in the brand and order shared mailboxes, it leaves a grounded reply draft in the assignee's Gmail, and a person sends it.",
-        'Every sentence in a draft is checked for grounding, and the draft is rewritten if violations remain.',
-        'The same knowledge hub also serves vendor support, Spark, and sales partner matching.',
+        "For shared-mailbox inquiries, it drafts a grounded reply for the assignee to review, edit, and send.",
+        'Sent replies are paired with the inquiry in RAG; detected fact changes update knowledge, while style edits update the stylebook.',
+        'New drafts search LightRAG and the recipient stylebook for relevant context.',
       ],
       problem: [
         'The brand and order shared mailboxes get inquiries about brand onboarding, group buys (time-limited sales run by an influencer), partnerships, and proposal reviews.',
@@ -435,8 +436,8 @@ const en = {
           why: 'When it finds a violation, the draft is rewritten and checked again by the same critic.',
         },
         {
-          choice: 'Only emails the CEO actually sent count as "confirmed facts"',
-          why: 'AI drafts are excluded as a source of facts (CEO knowledge wiki).',
+          choice: 'Save edited sent mail as correction knowledge',
+          why: "Only emails the CEO actually sent count as confirmed facts; AI drafts are excluded as a source. The inquiry/reply pair is stored, detected fact changes update RAG correction knowledge, and style edits update the stylebook.",
         },
         {
           choice: 'Search load is split by consumer',
@@ -464,8 +465,11 @@ const en = {
           ],
         },
         {
-          title: 'Learning from sent mail',
-          points: ['It scans sent mail with a persistent cursor. The difference between the draft and what was sent goes into the graph as a correction document, and the style book is updated.'],
+          title: 'Feedback from sent mail',
+          points: [
+            'A persistent cursor scans sent mail and compares it with the original draft.',
+            'The inquiry/reply pair and template are stored in RAG; detected fact changes update correction knowledge. Style edits update the stylebook, and new drafts search both.',
+          ],
         },
         {
           title: 'Internal knowledge hub',
@@ -479,7 +483,7 @@ const en = {
       ],
       results: [
         'Status: staff still use the brand and order shared mailboxes every day. Only the CEO-inbox auto-drafts were cut at the draft step on 2026-09-02, as an operational decision; classification and sent-mail learning for that inbox continue.',
-        'Classification, sent-mail learning, and the draft workflow for the brand and order shared mailboxes are active as of 2026-09-23.',
+        'Classification, shared-mailbox drafts, and sent-reply learning are active. Staff edits can inform the next similar email draft.',
         'Vendor support, influencer CS, Spark, and sales partner matching share 13 LightRAG workspaces.',
         'On 2026-08-18 I changed CI/CD. Only images that pass a pytest gate get deployed.',
         'The database moved from Supabase cloud to self-hosting on the VM (PostgREST).',
@@ -616,7 +620,7 @@ const en = {
         'Spark is in production as the first item in the brand-tool top menu.',
         'Tool Registry has 20 tools registered (side-effect levels: none 13, write_internal 3, external_send 4; org/release, 2026-09-23). What actually runs after approval is creating an issue or pausing a tool.',
         'Human approval happens inside Spark chat. I hid the separate approval inbox from the menu on 2026-07-19 and moved approvals into in-chat confirmation cards on 07-23.',
-        '22 agents are defined in code (org/release, 2026-09-23), and 5 are in daily operation (the vendor support backend, influencer CS, Supervisor, and Hermes, which have a schedule or intake loop, plus Spark, which staff use). Vendor support answers only in the test room.',
+        '22 agents are defined in code (org/release, 2026-09-23), and 5 are in daily operation (the vendor support backend, influencer CS, Supervisor, and Hermes, which have a schedule or intake loop, plus Spark, which staff use). The vendor support chatbot answers routine questions; unresolved Slack handoff is controlled by a feature flag that defaults off in the repository.',
         'Commerce research (Spark request → review collection through a staff Chrome extension → VOC Excel and PDF) is built and passed E2E validation (2026-09-09). Nobody uses it in daily work yet.',
       ],
       limits: [
@@ -875,14 +879,14 @@ const en = {
     tagline: "I'm Jinhee Mok, an AI engineer who turns repetitive work into AI systems.",
     paragraphs: [
       'I take the work people repeat by hand every day, move it into AI agents and automation, and then ship and run those systems myself.',
-      'I joined StyleSeller in December 2025 and started building in February 2026 (Developer, owner of AI and automation). Starting from seller DMs, I built and now run vendor support, the SS work tool, the email agent and knowledge hub, Spark · Work OS, and staff PC deployment.',
+      'I joined StyleSeller in December 2025 and started building in February 2026 (Developer, owner of AI and automation). Starting from seller DMs, I built and now run vendor support, the brand-tool work website, the email agent and knowledge hub, Spark · Work OS, and staff PC deployment.',
       'Claude Code writes a lot of my code, but what to build and whether it works are my calls. Nothing is done until it has run on a real staff PC.',
       'I studied law, taught English, and managed a daycare before moving into software; a We:Review internship automating receipts with OCR + LLM started this work.',
       'I want to build workplaces where systems take the repetition and people keep the judgment.',
     ],
     nowTitle: 'Now',
     now: [
-      "I'm validating an improved version of vendor support auto-replies in a test room.",
+      'Vendor support answers routine inquiries. Slack handoff for unresolved questions is controlled by a feature flag that defaults off in the repository.',
       'I raised the seller-finder target cap to 2,000 (09-22).',
       "I'm adding more operational monitoring. I added a monitor for dropped Claude logins on 09-23.",
     ],

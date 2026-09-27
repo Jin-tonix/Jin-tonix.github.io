@@ -441,19 +441,18 @@ const Hero = styled.section`
     animation: ${moveProgress} 2s ease-in-out infinite alternate;
   }
 
-  .visual-price-table {
-    display: grid;
-    grid-template-columns: 1fr 0.6fr;
+  .visual-doc-types {
+    display: flex;
+    flex-wrap: wrap;
     gap: 4px;
   }
 
-  .visual-price-table i {
-    height: 5px;
-    background: rgba(242, 240, 231, 0.22);
-  }
-
-  .visual-price-table i:nth-child(2n) {
-    background: rgba(255, 215, 0, 0.26);
+  .visual-doc-types span {
+    padding: 4px 5px;
+    border: 1px solid rgba(255, 215, 0, 0.36);
+    color: #dfd7ac;
+    font-size: 8px;
+    line-height: 1.2;
   }
 
   .visual-chat-bubble {
@@ -1043,6 +1042,11 @@ const Hero = styled.section`
       font-size: 7px;
     }
 
+    .visual-doc-types span {
+      padding: 3px;
+      font-size: 6px;
+    }
+
     .metrics {
       margin-top: 5px;
     }
@@ -1089,29 +1093,29 @@ const Hero = styled.section`
 
 const copy = {
   en: {
-    top: 'AI Engineer · Tools for everyday work',
+    top: 'AI Engineer · Business systems in use',
     chapter: 'Five real projects · used by the team',
-    hook: 'I built AI tools a real team uses every day.',
+    hook: 'I build AI systems teams use every day.',
     solo: 'Solo AI Engineer at StyleSeller',
-    intro: 'Proposal prices, partner messages, company notes, and staff computers.',
+    intro: 'Proposal management, AI support for partner messages, company knowledge search, and staff computer operations.',
     company: "StyleSeller · a service where influencers sell brands' products together",
-    pricingOverline: 'PROJECT 01 · PROPOSAL PRICING · IN USE',
-    pricingTitle: 'AI picks what to change. The app works out the price.',
-    pricingSummary: 'Moved proposal pricing out of spreadsheets into a simple app used by staff.',
+    pricingOverline: 'PROJECT 01 · PROPOSALS INSIDE BRAND-TOOL · IN USE',
+    pricingTitle: 'Two proposal flows, built into brand-tool.',
+    pricingSummary: 'Edit either version and recalculate prices in code. Compare working revisions; created proposals and send requests are recorded.',
     pricingProof: '43 pricing cases checked with staff',
-    pricingScale: '14 screens used at work',
-    vendorOverline: 'PROJECT 02 · KAKAO TALK MESSAGE HELP · IN USE',
-    vendorTitle: 'Partners ask in KakaoTalk. Staff check and send every reply.',
-    vendorSummary: 'Messages stay separated by partner; a person checks and sends every real reply.',
+    pricingScale: '14 screens in the work website',
+    vendorOverline: 'PROJECT 02 · KAKAO TALK SUPPORT CHATBOT · HANDOFF FEATURE-FLAGGED',
+    vendorTitle: 'Routine questions get an answer; unresolved handoff is controlled by a feature flag.',
+    vendorSummary: 'When enabled, the full thread goes to the configured Slack recipient; a reply becomes a KakaoTalk send job.',
     vendorInputNote: "A partner's question",
-    vendorStatus: 'A PERSON SENDS',
-    vendorGuard: ['Vendor notes kept apart', 'Staff checks first', 'No automatic send'],
-    emailOverline: 'PROJECT 03 · EMAIL DRAFTS · IN USE',
-    emailTitle: 'Find the right company notes and draft the email.',
-    emailSummary: 'Searches 13 sets of team notes, shows where facts came from, and leaves sending to a person.',
-    emailKnowledge: 'Search shared notes',
-    emailKnowledgeNote: '13 sets of team notes',
-    emailHumanNote: 'Person sends',
+    vendorStatus: 'When enabled · Slack reply → KakaoTalk queue',
+    vendorGuard: ['Partner chats kept separate', 'Handoff has an explicit gate', 'Slack reply enters KakaoTalk queue'],
+    emailOverline: 'PROJECT 03 · EMAIL FEEDBACK LOOP · IN USE',
+    emailTitle: 'A staff-edited reply shapes the next similar email draft.',
+    emailSummary: 'Sent replies pair with the inquiry in RAG; factual corrections update knowledge, and style edits update the stylebook.',
+    emailKnowledge: 'Save reply + corrections',
+    emailKnowledgeNote: 'RAG + Stylebook',
+    emailHumanNote: 'Search in future drafts',
     sparkOverline: 'PROJECT 04 · ONE WORKPLACE SEARCH · IN USE',
     sparkTitle: 'Ask once, search four kinds of business information.',
     sparkSummary: 'Search four parts of the business at once. Ask a person before anything is changed.',
@@ -1122,21 +1126,26 @@ const copy = {
     fleetTitle: 'Install and update work tools on 11 staff computers.',
     fleetSummary: 'Each computer has its own access key; important company passwords stay off staff computers.',
     fleetScale: '11 computers in use',
-    visualSheet: 'Price sheet',
-    visualAsk: 'AI suggests changes',
-    visualCalculate: 'App calculates',
-    visualMessage: 'KakaoTalk message',
-    visualSeparate: 'Keep partner notes apart',
-    visualStaff: 'Staff replies',
-    visualSearch: 'Find the right notes',
-    visualDraft: 'Write a draft',
+    visualWorkWeb: 'brand-tool',
+    visualWorkArea: 'Vendor + seller proposals',
+    visualVendor: 'Vendor version',
+    visualSeller: 'Seller version',
+    visualEdit: 'Edit proposal',
+    visualPrice: 'Code recalculates price',
+    visualSend: 'Send as PDF / Excel',
+    visualHistory: 'Revision view · send requests',
+    visualMessage: 'KakaoTalk question',
+    visualSeparate: 'Chatbot answers most',
+    visualStaff: 'Configured recipient · Slack',
+    visualSearch: 'Review, edit & send',
+    visualDraft: 'Similar future email',
     visualRecords: 'Four parts of the business',
     visualAnswer: 'Find an answer',
     visualApprove: 'Staff approves',
     visualInstall: 'Install a work tool',
     visualComputers: 'Staff computers',
     visualUpdate: 'Update all computers',
-    visualChapters: ['Price tool', 'KakaoTalk help', 'Email drafts', 'Work search', 'Staff computers'],
+    visualChapters: ['Proposals', 'KakaoTalk help', 'Email drafts', 'Work search', 'Staff computers'],
     live: 'IN USE EVERY DAY',
     projects: 'Explore projects',
     pause: 'Pause',
@@ -1149,29 +1158,29 @@ const copy = {
     email: 'Email me',
   },
   ko: {
-    top: 'AI 엔지니어 · 업무에 쓰는 AI 도구',
+    top: 'AI 엔지니어 · 실제 업무 시스템',
     chapter: '직원이 실제로 쓰는 프로젝트 5개',
-    hook: '직원이 매일 쓰는 AI 업무 도구를 만들었습니다.',
+    hook: '직원이 매일 쓰는 AI 업무 시스템을 만듭니다.',
     solo: 'StyleSeller · 혼자 설계·개발·운영',
-    intro: '제안서 가격 계산·거래처 카톡 문의·회사 자료 검색 도구를 만들었습니다.',
+    intro: '제안서 관리·거래처 카톡 AI 응대·회사 자료 검색 시스템을 만들고 운영합니다.',
     company: 'StyleSeller · 인플루언서가 브랜드 상품을 함께 파는 서비스',
-    pricingOverline: '프로젝트 01 · 제안서 가격 계산 · 사용 중',
-    pricingTitle: 'AI는 바꿀 값만 고르고, 앱이 가격을 계산합니다.',
-    pricingSummary: '직원이 쓰던 시트 계산을 업무용 앱으로 바꾸고 화면 14개를 만들었습니다.',
+    pricingOverline: '프로젝트 01 · brand-tool 안의 제안서 기능 · 사용 중',
+    pricingTitle: 'brand-tool 안에서 벤더용·셀러용 제안서를 각각 관리합니다.',
+    pricingSummary: '금액은 코드가 다시 계산합니다. 작업 중 수정본은 비교하고, 생성·발송 요청 기록은 업무 웹에 남깁니다.',
     pricingProof: '실무자와 가격 예시 43개 확인',
-    pricingScale: '업무 화면 14개',
-    vendorOverline: '프로젝트 02 · 카카오톡 거래처 문의 · 사용 중',
-    vendorTitle: '카톡 문의를 모으고, 직원이 확인한 뒤 답합니다.',
-    vendorSummary: '거래처별 정보가 섞이지 않게 나누고, 실제 답장은 직원이 직접 보냅니다.',
+    pricingScale: '업무 웹 화면 14개',
+    vendorOverline: '프로젝트 02 · 카카오톡 응대 챗봇 · Slack 이관은 설정 제어',
+    vendorTitle: '챗봇은 일반 문의에 답하고, 미해결 건의 Slack 이관은 기능 스위치로 제어합니다.',
+    vendorSummary: '이관을 켜면 전체 대화가 설정된 Slack 수신자에게 가고, 답장은 직원 Mac의 카카오톡 발송 큐로 이어집니다.',
     vendorInputNote: '거래처가 보낸 질문',
-    vendorStatus: '직접 보내기',
-    vendorGuard: ['거래처 정보 분리', '직원이 먼저 확인', '자동 발송 안 함'],
-    emailOverline: '프로젝트 03 · 업무 메일 초안 · 사용 중',
-    emailTitle: '회사 자료를 찾아, 답장 초안을 만듭니다.',
-    emailSummary: '공유 자료 13곳에서 근거를 찾아 붙이고, 직원이 확인한 뒤 보냅니다.',
-    emailKnowledge: '공유 자료 찾기',
-    emailKnowledgeNote: '팀 자료 13곳',
-    emailHumanNote: '직원이 발송',
+    vendorStatus: '이관 시 · Slack 답장 → 카카오톡 큐',
+    vendorGuard: ['거래처별 대화 분리', '이관 on/off 설정', 'Slack 답장은 카카오톡 큐로'],
+    emailOverline: '프로젝트 03 · 메일 답장 피드백 루프 · 사용 중',
+    emailTitle: '직원이 고친 답장을 다음 비슷한 메일에 반영합니다.',
+    emailSummary: '보낸 답변과 원문은 RAG에 쌓입니다. 사실 교정은 지식으로, 말투 수정은 스타일북으로 반영해 다음 초안이 검색합니다.',
+    emailKnowledge: '답변·교정 저장',
+    emailKnowledgeNote: 'RAG + 스타일북',
+    emailHumanNote: '다음 초안에서 검색',
     sparkOverline: '프로젝트 04 · 업무 자료 한 번에 찾기 · 사용 중',
     sparkTitle: '업무 자료 네 곳을 한 번에 찾고, 변경은 승인 뒤에 합니다.',
     sparkSummary: '네 곳의 업무 자료를 한 번에 검색합니다. 자료를 바꾸려면 직원이 먼저 승인해야 합니다.',
@@ -1182,21 +1191,26 @@ const copy = {
     fleetTitle: '직원 컴퓨터 11대에 업무 도구를 설치하고 관리합니다.',
     fleetSummary: '자동으로 업데이트하고, 중요한 데이터 비밀번호는 직원 컴퓨터에 저장하지 않습니다.',
     fleetScale: '직원 컴퓨터 11대',
-    visualSheet: '가격표',
-    visualAsk: 'AI가 바꿀 값 선택',
-    visualCalculate: '앱이 가격 계산',
-    visualMessage: '카톡 문의',
-    visualSeparate: '거래처별로 나누기',
-    visualStaff: '직원이 답장',
-    visualSearch: '회사 자료 찾기',
-    visualDraft: '답장 초안',
+    visualWorkWeb: 'brand-tool 업무 웹',
+    visualWorkArea: '벤더용 · 셀러용 제안서',
+    visualVendor: '벤더용',
+    visualSeller: '셀러용',
+    visualEdit: '내용을 고쳐 발송',
+    visualPrice: '금액은 코드가 재계산',
+    visualSend: 'PDF / 엑셀로 보내기',
+    visualHistory: '수정 버전 · 발송 요청 기록',
+    visualMessage: '카카오톡 문의',
+    visualSeparate: '챗봇이 대부분 답변',
+    visualStaff: '설정된 수신자 · Slack',
+    visualSearch: '확인·수정해 발송',
+    visualDraft: '다음 비슷한 메일',
     visualRecords: '업무 자료 네 곳',
     visualAnswer: '답 찾기',
     visualApprove: '직원 승인',
     visualInstall: '업무 도구 설치',
     visualComputers: '직원 컴퓨터',
     visualUpdate: '자동 업데이트',
-    visualChapters: ['가격 계산', '카톡 문의', '메일 초안', '자료 검색', '컴퓨터 관리'],
+    visualChapters: ['제안서', '카톡 문의', '메일 초안', '자료 검색', '컴퓨터 관리'],
     live: '매일 사용 중',
     projects: '프로젝트 자세히 보기',
     pause: '일시정지',
@@ -1283,16 +1297,22 @@ export default function HeroShowreel({ hero, content, lang, withPrefix }) {
                 <div className="project-visual">
                   <div className="visual-track">
                     <div className="visual-card">
-                      <strong>{text.visualSheet}</strong>
-                      <div className="visual-price-table">{Array.from({ length: 6 }, (_, index) => <i key={index} />)}</div>
+                      <strong>{text.visualWorkWeb}</strong>
+                      <small>{text.visualWorkArea}</small>
+                      <div className="visual-doc-types">
+                        <span>{text.visualVendor}</span>
+                        <span>{text.visualSeller}</span>
+                      </div>
                     </div>
                     <span className="visual-arrow" aria-hidden="true">→</span>
                     <div className="visual-card accent">
-                      <strong>{text.visualAsk}</strong>
+                      <strong>{text.visualEdit}</strong>
+                      <small>{text.visualPrice}</small>
                     </div>
                     <span className="visual-arrow" aria-hidden="true">→</span>
                     <div className="visual-card accent">
-                      <strong>{text.visualCalculate}</strong>
+                      <strong>{text.visualSend}</strong>
+                      <small>{text.visualHistory}</small>
                     </div>
                   </div>
                   <div className="project-proof">
