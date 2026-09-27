@@ -45,8 +45,10 @@ const Hero = styled.section`
   position: relative;
   display: flex;
   align-items: center;
-  min-height: 100vh;
-  min-height: 100svh;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  box-sizing: border-box;
   overflow: hidden;
   isolation: isolate;
   color: var(--reel-ink);
@@ -692,8 +694,8 @@ const Hero = styled.section`
   }
 
   @media (max-width: 760px) {
-    min-height: calc(100vh - var(--topbar-height));
-    min-height: calc(100svh - var(--topbar-height));
+    height: calc(100vh - var(--topbar-height));
+    height: calc(100svh - var(--topbar-height));
     align-items: center;
 
     .hero-inner {
