@@ -37,6 +37,11 @@ const moveProgress = keyframes`
   to { transform: scaleX(1); }
 `;
 
+const interfaceEnter = keyframes`
+  from { opacity: 0; transform: translateY(8px) scale(0.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+`;
+
 const Hero = styled.section`
   --reel-ink: #f2f0e7;
   --reel-muted: #a8a69a;
@@ -441,18 +446,185 @@ const Hero = styled.section`
     animation: ${moveProgress} 2s ease-in-out infinite alternate;
   }
 
-  .visual-doc-types {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
+  .project-visual--brandtool {
+    display: block;
+    padding: 8px;
+    background:
+      radial-gradient(ellipse at 75% 0%, rgba(255, 215, 0, 0.12), transparent 55%),
+      #22231f;
   }
 
-  .visual-doc-types span {
-    padding: 4px 5px;
-    border: 1px solid rgba(255, 215, 0, 0.36);
-    color: #dfd7ac;
+  .brandtool-window {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(92px, 0.22fr) minmax(0, 1fr);
+    min-height: 156px;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid rgba(32, 33, 29, 0.18);
+    background: #f3f1e9;
+    color: #282923;
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
+    animation: ${interfaceEnter} 800ms ease-out both;
+  }
+
+  .brandtool-rail {
+    padding: 12px 9px;
+    background: #292b26;
+    color: #f2f0e7;
+  }
+
+  .brandtool-wordmark {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--reel-gold);
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 0.04em;
+  }
+
+  .brandtool-menu-label {
+    display: block;
+    margin: 9px 0 5px;
+    color: #92938b;
+    font-size: 7px;
+    letter-spacing: 0.04em;
+  }
+
+  .brandtool-menu {
+    display: grid;
+    gap: 3px;
+    color: #c9c9c0;
     font-size: 8px;
-    line-height: 1.2;
+  }
+
+  .brandtool-menu span {
+    padding: 4px 5px;
+  }
+
+  .brandtool-menu .is-current {
+    border-left: 2px solid var(--reel-gold);
+    background: rgba(255, 215, 0, 0.12);
+    color: #fff9d3;
+  }
+
+  .brandtool-main {
+    min-width: 0;
+    padding: 10px 14px 11px;
+  }
+
+  .brandtool-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+    color: #73746c;
+    font-size: 7px;
+  }
+
+  .brandtool-breadcrumb strong {
+    color: #3c3d35;
+  }
+
+  .brandtool-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    margin-top: 7px;
+    color: #282923;
+    font-size: 13px;
+    font-weight: 750;
+    letter-spacing: -0.04em;
+  }
+
+  .brandtool-heading small {
+    color: #7b7c72;
+    font-size: 7px;
+    font-weight: 550;
+    letter-spacing: 0.02em;
+  }
+
+  .brandtool-tabs {
+    display: flex;
+    gap: 13px;
+    margin-top: 7px;
+    border-bottom: 1px solid #d9d7cd;
+    color: #73746c;
+    font-size: 8px;
+  }
+
+  .brandtool-tabs span {
+    padding: 0 2px 5px;
+  }
+
+  .brandtool-tabs .is-current {
+    border-bottom: 2px solid #8e7816;
+    color: #37372e;
+    font-weight: 700;
+  }
+
+  .brandtool-workspace {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(106px, 0.65fr);
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .brandtool-editor,
+  .brandtool-history {
+    min-width: 0;
+    padding: 7px 8px;
+    border: 1px solid #dedcd1;
+    background: #fffef9;
+  }
+
+  .brandtool-editor > small,
+  .brandtool-history > small {
+    display: block;
+    color: #797a71;
+    font-size: 7px;
+  }
+
+  .brandtool-editor > strong {
+    display: block;
+    margin-top: 4px;
+    color: #33342d;
+    font-size: 9px;
+  }
+
+  .brandtool-calculation {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    margin-top: 6px;
+    padding-top: 5px;
+    border-top: 1px solid #e6e4da;
+    color: #74756c;
+    font-size: 7px;
+  }
+
+  .brandtool-calculation b {
+    color: #766314;
+    font-weight: 700;
+  }
+
+  .brandtool-history > span {
+    display: block;
+    margin-top: 5px;
+    color: #404139;
+    font-size: 7px;
+  }
+
+  .brandtool-history > span::before {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin-right: 5px;
+    border-radius: 50%;
+    background: #9b8321;
+    content: '';
   }
 
   .visual-chat-bubble {
@@ -817,6 +989,98 @@ const Hero = styled.section`
       padding: 7px;
     }
 
+    .project-visual--brandtool {
+      padding: 4px;
+    }
+
+    .brandtool-window {
+      grid-template-columns: 60px minmax(0, 1fr);
+      min-height: 83px;
+    }
+
+    .brandtool-rail {
+      padding: 6px 4px;
+    }
+
+    .brandtool-wordmark {
+      margin-bottom: 5px;
+      font-size: 6px;
+    }
+
+    .brandtool-menu-label {
+      margin: 4px 0 2px;
+      font-size: 5px;
+    }
+
+    .brandtool-menu {
+      gap: 1px;
+      font-size: 6px;
+    }
+
+    .brandtool-menu span {
+      padding: 3px 2px;
+    }
+
+    .brandtool-main {
+      padding: 5px 6px;
+    }
+
+    .brandtool-breadcrumb {
+      gap: 3px;
+      font-size: 5px;
+    }
+
+    .brandtool-heading {
+      margin-top: 3px;
+      font-size: 9px;
+    }
+
+    .brandtool-heading small,
+    .brandtool-editor > small,
+    .brandtool-history > small {
+      font-size: 5px;
+    }
+
+    .brandtool-tabs {
+      gap: 8px;
+      margin-top: 3px;
+      font-size: 6px;
+    }
+
+    .brandtool-tabs span {
+      padding-bottom: 3px;
+    }
+
+    .brandtool-workspace {
+      grid-template-columns: minmax(0, 1fr) minmax(70px, 0.65fr);
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .brandtool-editor,
+    .brandtool-history {
+      padding: 3px 4px;
+    }
+
+    .brandtool-editor > strong,
+    .brandtool-history > span,
+    .brandtool-calculation {
+      font-size: 6px;
+    }
+
+    .brandtool-editor > strong {
+      margin-top: 2px;
+    }
+
+    .brandtool-calculation {
+      margin-top: 3px;
+      padding-top: 2px;
+    }
+
+    .brandtool-history > span {
+      margin-top: 3px;
+    }
+
     .visual-track {
       grid-template-columns: minmax(0, 1fr) 18px minmax(0, 1fr) 18px minmax(0, 1fr);
       gap: 3px;
@@ -948,9 +1212,18 @@ const Hero = styled.section`
       margin-bottom: 5px;
     }
 
-    .topline span:last-child,
-    .hook {
+    .topline span:last-child {
       display: none;
+    }
+
+    .hook {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      margin-bottom: 4px;
+      font-size: 11px;
+      line-height: 1.2;
     }
 
     .hero-main {
@@ -982,7 +1255,14 @@ const Hero = styled.section`
     }
 
     .film-stage {
-      height: 135px;
+      height: 120px;
+    }
+
+    .project-summary {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
     }
 
     .film-head,
@@ -1042,9 +1322,96 @@ const Hero = styled.section`
       font-size: 7px;
     }
 
-    .visual-doc-types span {
-      padding: 3px;
+    .project-visual--brandtool {
+      padding: 4px;
+    }
+
+    .brandtool-window {
+      grid-template-columns: 57px minmax(0, 1fr);
+      min-height: 70px;
+    }
+
+    .brandtool-rail {
+      padding: 6px 4px;
+    }
+
+    .brandtool-wordmark {
+      margin-bottom: 5px;
       font-size: 6px;
+    }
+
+    .brandtool-menu-label {
+      margin: 4px 0 2px;
+      font-size: 5px;
+    }
+
+    .brandtool-menu {
+      gap: 1px;
+      font-size: 6px;
+    }
+
+    .brandtool-menu span {
+      padding: 3px 2px;
+    }
+
+    .brandtool-main {
+      padding: 5px 6px;
+    }
+
+    .brandtool-breadcrumb {
+      gap: 3px;
+      font-size: 5px;
+    }
+
+    .brandtool-heading {
+      margin-top: 3px;
+      font-size: 9px;
+    }
+
+    .brandtool-heading small,
+    .brandtool-editor > small,
+    .brandtool-history > small {
+      font-size: 5px;
+    }
+
+    .brandtool-tabs {
+      gap: 8px;
+      margin-top: 3px;
+      font-size: 6px;
+    }
+
+    .brandtool-tabs span {
+      padding-bottom: 3px;
+    }
+
+    .brandtool-workspace {
+      grid-template-columns: minmax(0, 1fr) minmax(70px, 0.65fr);
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .brandtool-editor,
+    .brandtool-history {
+      padding: 3px 4px;
+    }
+
+    .brandtool-editor > strong,
+    .brandtool-history > span,
+    .brandtool-calculation {
+      font-size: 6px;
+    }
+
+    .brandtool-editor > strong {
+      margin-top: 2px;
+    }
+
+    .brandtool-calculation {
+      margin-top: 3px;
+      padding-top: 2px;
+    }
+
+    .brandtool-history > span {
+      margin-top: 3px;
     }
 
     .metrics {
@@ -1068,7 +1435,8 @@ const Hero = styled.section`
 
   @media (prefers-reduced-motion: reduce) {
     .scene,
-    .timeline-fill {
+    .timeline-fill,
+    .brandtool-window {
       animation: none !important;
     }
 
@@ -1093,47 +1461,50 @@ const Hero = styled.section`
 
 const copy = {
   en: {
-    top: 'AI Engineer · Business systems in use',
-    chapter: 'Five real projects · used by the team',
-    hook: 'I build AI systems teams use every day.',
+    top: 'AI Engineer · from workflow to production',
+    chapter: 'Five systems in real team workflows',
+    hook: 'I turn repetitive work into AI systems—and run them in production.',
     solo: 'Solo AI Engineer at StyleSeller',
-    intro: 'Proposal management, AI support for partner messages, company knowledge search, and staff computer operations.',
-    company: "StyleSeller · a service where influencers sell brands' products together",
-    pricingOverline: 'PROJECT 01 · PROPOSALS INSIDE BRAND-TOOL · IN USE',
-    pricingTitle: 'Two proposal flows, built into brand-tool.',
-    pricingSummary: 'Edit either version and recalculate prices in code. Compare working revisions; created proposals and send requests are recorded.',
+    intro: 'Proposal features inside the work tool, plus AI systems for partner support, email learning, and operations.',
+    company: 'StyleSeller · commerce operations for influencer-led brand sales',
+    pricingOverline: 'PROJECT 01 · WORKFLOW DESIGN · WORK TOOL',
+    pricingTitle: 'Proposal workflows inside the work tool.',
+    pricingSummary: 'Not a separate product: this is a feature inside StyleSeller’s work tool. Vendor and seller workflows share code-based pricing and recorded proposal/send requests.',
     pricingProof: '43 pricing cases checked with staff',
-    pricingScale: '14 screens in the work website',
-    vendorOverline: 'PROJECT 02 · KAKAO TALK SUPPORT CHATBOT · HANDOFF FEATURE-FLAGGED',
-    vendorTitle: 'Routine questions get an answer; unresolved handoff is controlled by a feature flag.',
+    pricingScale: '14 work-tool screens',
+    vendorOverline: 'PROJECT 02 · GROUNDED AGENTS · HUMAN HANDOFF',
+    vendorTitle: 'Grounded answers for routine questions; gated handoff for the rest.',
     vendorSummary: 'When enabled, the full thread goes to the configured Slack recipient; a reply becomes a KakaoTalk send job.',
     vendorInputNote: "A partner's question",
     vendorStatus: 'When enabled · Slack reply → KakaoTalk queue',
     vendorGuard: ['Partner chats kept separate', 'Handoff has an explicit gate', 'Slack reply enters KakaoTalk queue'],
-    emailOverline: 'PROJECT 03 · EMAIL FEEDBACK LOOP · IN USE',
-    emailTitle: 'A staff-edited reply shapes the next similar email draft.',
+    emailOverline: 'PROJECT 03 · FEEDBACK LOOP · RAG + STYLEBOOK',
+    emailTitle: 'Staff edits become knowledge for the next similar email.',
     emailSummary: 'Sent replies pair with the inquiry in RAG; factual corrections update knowledge, and style edits update the stylebook.',
     emailKnowledge: 'Save reply + corrections',
     emailKnowledgeNote: 'RAG + Stylebook',
     emailHumanNote: 'Search in future drafts',
-    sparkOverline: 'PROJECT 04 · ONE WORKPLACE SEARCH · IN USE',
-    sparkTitle: 'Ask once, search four kinds of business information.',
+    sparkOverline: 'PROJECT 04 · CONNECTED DATA · APPROVAL GATE',
+    sparkTitle: 'One question searches four work data sources.',
     sparkSummary: 'Search four parts of the business at once. Ask a person before anything is changed.',
     sparkSources: ['Prices', 'Vendors', 'Campaigns', 'Work'],
     sparkAnswer: 'Find the answer',
     sparkGateNote: 'Ask before changing',
-    fleetOverline: 'PROJECT 05 · STAFF COMPUTER UPDATES · IN USE',
-    fleetTitle: 'Install and update work tools on 11 staff computers.',
+    fleetOverline: 'PROJECT 05 · PRODUCTION OPERATIONS · 11 DEVICES',
+    fleetTitle: 'Own deployment and updates across 11 staff computers.',
     fleetSummary: 'Each computer has its own access key; important company passwords stay off staff computers.',
     fleetScale: '11 computers in use',
-    visualWorkWeb: 'brand-tool',
-    visualWorkArea: 'Vendor + seller proposals',
+    visualSite: 'StyleSeller work site',
+    visualSection: 'work tool · Proposals',
     visualVendor: 'Vendor version',
     visualSeller: 'Seller version',
-    visualEdit: 'Edit proposal',
-    visualPrice: 'Code recalculates price',
-    visualSend: 'Send as PDF / Excel',
-    visualHistory: 'Revision view · send requests',
+    visualMenu: ['Products', 'Proposals', 'Vendors', 'Sellers'],
+    visualProposalTitle: 'Proposal feature',
+    visualEdit: 'Edit proposal copy',
+    visualPrice: 'Code recalculates amounts',
+    visualVersionHistory: 'Compare working revisions',
+    visualHistoryLabel: 'Work records',
+    visualSendHistory: 'Created proposals · send requests',
     visualMessage: 'KakaoTalk question',
     visualSeparate: 'Chatbot answers most',
     visualStaff: 'Configured recipient · Slack',
@@ -1142,7 +1513,7 @@ const copy = {
     visualRecords: 'Four parts of the business',
     visualAnswer: 'Find an answer',
     visualApprove: 'Staff approves',
-    visualInstall: 'Install a work tool',
+    visualInstall: 'Deploy work systems',
     visualComputers: 'Staff computers',
     visualUpdate: 'Update all computers',
     visualChapters: ['Proposals', 'KakaoTalk help', 'Email drafts', 'Work search', 'Staff computers'],
@@ -1158,47 +1529,50 @@ const copy = {
     email: 'Email me',
   },
   ko: {
-    top: 'AI 엔지니어 · 실제 업무 시스템',
-    chapter: '직원이 실제로 쓰는 프로젝트 5개',
-    hook: '직원이 매일 쓰는 AI 업무 시스템을 만듭니다.',
+    top: 'AI 엔지니어 · 업무 흐름부터 운영까지',
+    chapter: '실제 업무에 연결된 시스템 5개',
+    hook: '반복 업무를 AI 시스템으로 바꾸고, 매일 돌아가게 만듭니다.',
     solo: 'StyleSeller · 혼자 설계·개발·운영',
-    intro: '제안서 관리·거래처 카톡 AI 응대·회사 자료 검색 시스템을 만들고 운영합니다.',
-    company: 'StyleSeller · 인플루언서가 브랜드 상품을 함께 파는 서비스',
-    pricingOverline: '프로젝트 01 · brand-tool 안의 제안서 기능 · 사용 중',
-    pricingTitle: 'brand-tool 안에서 벤더용·셀러용 제안서를 각각 관리합니다.',
-    pricingSummary: '금액은 코드가 다시 계산합니다. 작업 중 수정본은 비교하고, 생성·발송 요청 기록은 업무 웹에 남깁니다.',
+    intro: 'StyleSeller work tool 안에 제안서 기능을 만들고, 거래처 AI 응대·메일 학습·운영 자동화를 설계·개발·운영합니다.',
+    company: 'StyleSeller · 크리에이터 셀러와 브랜드의 판매를 운영하는 커머스 플랫폼',
+    pricingOverline: '프로젝트 01 · 업무 흐름 설계 · work tool',
+    pricingTitle: 'work tool 안의 제안서 기능.',
+    pricingSummary: '별도 서비스가 아니라 StyleSeller work tool 안에 있는 기능입니다. 벤더용·셀러용 흐름을 나누고, 코드로 금액을 계산해 생성·발송 요청을 기록합니다.',
     pricingProof: '실무자와 가격 예시 43개 확인',
-    pricingScale: '업무 웹 화면 14개',
-    vendorOverline: '프로젝트 02 · 카카오톡 응대 챗봇 · Slack 이관은 설정 제어',
-    vendorTitle: '챗봇은 일반 문의에 답하고, 미해결 건의 Slack 이관은 기능 스위치로 제어합니다.',
+    pricingScale: 'work tool 화면 14개',
+    vendorOverline: '프로젝트 02 · 근거 기반 에이전트 · 사람 이관',
+    vendorTitle: '근거 있는 문의는 답하고, 예외 이관은 기능 스위치로 통제.',
     vendorSummary: '이관을 켜면 전체 대화가 설정된 Slack 수신자에게 가고, 답장은 직원 Mac의 카카오톡 발송 큐로 이어집니다.',
     vendorInputNote: '거래처가 보낸 질문',
     vendorStatus: '이관 시 · Slack 답장 → 카카오톡 큐',
     vendorGuard: ['거래처별 대화 분리', '이관 on/off 설정', 'Slack 답장은 카카오톡 큐로'],
-    emailOverline: '프로젝트 03 · 메일 답장 피드백 루프 · 사용 중',
-    emailTitle: '직원이 고친 답장을 다음 비슷한 메일에 반영합니다.',
+    emailOverline: '프로젝트 03 · 피드백 루프 · RAG + 스타일북',
+    emailTitle: '직원의 수정이 다음 메일 초안의 지식이 됩니다.',
     emailSummary: '보낸 답변과 원문은 RAG에 쌓입니다. 사실 교정은 지식으로, 말투 수정은 스타일북으로 반영해 다음 초안이 검색합니다.',
     emailKnowledge: '답변·교정 저장',
     emailKnowledgeNote: 'RAG + 스타일북',
     emailHumanNote: '다음 초안에서 검색',
-    sparkOverline: '프로젝트 04 · 업무 자료 한 번에 찾기 · 사용 중',
-    sparkTitle: '업무 자료 네 곳을 한 번에 찾고, 변경은 승인 뒤에 합니다.',
+    sparkOverline: '프로젝트 04 · 데이터 연결 · 승인 게이트',
+    sparkTitle: '업무 데이터 네 곳을 연결하고, 쓰기는 승인 뒤에.',
     sparkSummary: '네 곳의 업무 자료를 한 번에 검색합니다. 자료를 바꾸려면 직원이 먼저 승인해야 합니다.',
     sparkSources: ['가격표', '거래처', '캠페인', '업무 기록'],
     sparkAnswer: '답 찾기',
     sparkGateNote: '바꾸기 전 확인',
-    fleetOverline: '프로젝트 05 · 직원 컴퓨터 관리 · 사용 중',
-    fleetTitle: '직원 컴퓨터 11대에 업무 도구를 설치하고 관리합니다.',
+    fleetOverline: '프로젝트 05 · 프로덕션 운영 · 직원 PC 11대',
+    fleetTitle: '직원 PC 11대 배포와 업데이트까지 직접 운영.',
     fleetSummary: '자동으로 업데이트하고, 중요한 데이터 비밀번호는 직원 컴퓨터에 저장하지 않습니다.',
     fleetScale: '직원 컴퓨터 11대',
-    visualWorkWeb: 'brand-tool 업무 웹',
-    visualWorkArea: '벤더용 · 셀러용 제안서',
+    visualSite: 'StyleSeller 업무 사이트',
+    visualSection: 'work tool · 제안서',
     visualVendor: '벤더용',
     visualSeller: '셀러용',
-    visualEdit: '내용을 고쳐 발송',
-    visualPrice: '금액은 코드가 재계산',
-    visualSend: 'PDF / 엑셀로 보내기',
-    visualHistory: '수정 버전 · 발송 요청 기록',
+    visualMenu: ['상품', '제안서', '벤더', '셀러'],
+    visualProposalTitle: '제안서 기능',
+    visualEdit: '제안 내용 수정',
+    visualPrice: '코드가 금액 재계산',
+    visualVersionHistory: '작업 수정본 비교',
+    visualHistoryLabel: '업무 기록',
+    visualSendHistory: '제안서 생성 · 발송 요청',
     visualMessage: '카카오톡 문의',
     visualSeparate: '챗봇이 대부분 답변',
     visualStaff: '설정된 수신자 · Slack',
@@ -1207,7 +1581,7 @@ const copy = {
     visualRecords: '업무 자료 네 곳',
     visualAnswer: '답 찾기',
     visualApprove: '직원 승인',
-    visualInstall: '업무 도구 설치',
+    visualInstall: '업무 시스템 배포',
     visualComputers: '직원 컴퓨터',
     visualUpdate: '자동 업데이트',
     visualChapters: ['제안서', '카톡 문의', '메일 초안', '자료 검색', '컴퓨터 관리'],
@@ -1294,25 +1668,43 @@ export default function HeroShowreel({ hero, content, lang, withPrefix }) {
                 </div>
                 <h2 className="project-title">{text.pricingTitle}</h2>
                 <p className="project-summary">{text.pricingSummary}</p>
-                <div className="project-visual">
-                  <div className="visual-track">
-                    <div className="visual-card">
-                      <strong>{text.visualWorkWeb}</strong>
-                      <small>{text.visualWorkArea}</small>
-                      <div className="visual-doc-types">
-                        <span>{text.visualVendor}</span>
+                <div className="project-visual project-visual--brandtool">
+                  <div className="brandtool-window">
+                    <aside className="brandtool-rail">
+                      <strong className="brandtool-wordmark">work tool</strong>
+                      <small className="brandtool-menu-label">{text.visualSite}</small>
+                      <div className="brandtool-menu">
+                        {text.visualMenu.map((item) => (
+                          <span className={item === text.visualMenu[1] ? 'is-current' : ''} key={item}>{item}</span>
+                        ))}
+                      </div>
+                    </aside>
+                    <div className="brandtool-main">
+                      <div className="brandtool-breadcrumb">
+                        <span>{text.visualSite}</span><span>/</span><strong>{text.visualSection}</strong>
+                      </div>
+                      <div className="brandtool-heading">
+                        <span>{text.visualProposalTitle}</span>
+                        <small>{text.pricingScale}</small>
+                      </div>
+                      <div className="brandtool-tabs">
+                        <span className="is-current">{text.visualVendor}</span>
                         <span>{text.visualSeller}</span>
                       </div>
-                    </div>
-                    <span className="visual-arrow" aria-hidden="true">→</span>
-                    <div className="visual-card accent">
-                      <strong>{text.visualEdit}</strong>
-                      <small>{text.visualPrice}</small>
-                    </div>
-                    <span className="visual-arrow" aria-hidden="true">→</span>
-                    <div className="visual-card accent">
-                      <strong>{text.visualSend}</strong>
-                      <small>{text.visualHistory}</small>
+                      <div className="brandtool-workspace">
+                        <div className="brandtool-editor">
+                          <small>{text.visualEdit}</small>
+                          <strong>{text.visualPrice}</strong>
+                          <div className="brandtool-calculation">
+                            <span>{text.visualVersionHistory}</span><b>↻</b>
+                          </div>
+                        </div>
+                        <div className="brandtool-history">
+                          <small>{text.visualHistoryLabel}</small>
+                          <span>{text.visualVersionHistory}</span>
+                          <span>{text.visualSendHistory}</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div className="project-proof">

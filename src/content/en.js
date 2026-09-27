@@ -17,11 +17,11 @@ const en = {
     name: 'Jinhee Mok',
     title: 'AI Engineer',
     intro:
-      "At StyleSeller, I built an internal work website for proposal management and AI systems for partner KakaoTalk support and seller discovery. I'm Jinhee Mok, and I design, build, and run them on my own.",
+      "At StyleSeller, I built proposal workflows inside the work tool and connected AI systems for partner support, email learning, and seller discovery. I'm Jinhee Mok, and I design, build, and operate them on my own.",
     company:
-      'StyleSeller is a platform that connects social media influencer sellers with brands to run group buys (time-limited sales run by an influencer). It handles ordering, customer support, and settlement on their behalf.',
+      'StyleSeller is a commerce platform that operates sales for creator sellers and brands.',
     metrics: [
-      { value: '14', label: 'work screens staff use', basis: 'brand-tool live screens incl. login · 6 top-level menus · 2026-09-23' },
+      { value: '14', label: 'work tool screens in use', basis: 'live screens incl. login · 6 top-level menus · 2026-09-23' },
       { value: '5', label: 'AI helpers in daily use', basis: '4 services with a schedule or intake loop + Spark, which staff use · vendor support · influencer CS · Supervisor · Hermes · Spark · 2026-09-23' },
       { value: '11', label: 'staff computers with tools installed', basis: 'KakaoTalk sync registrations · 6 Macs and 5 Windows PCs · 2026-09-16' },
       { value: '4', label: 'connected code projects', basis: 'brand-tool · agent-company · email-agent · kakaocli' },
@@ -46,19 +46,19 @@ const en = {
     imageAlt: 'Map of the StyleSeller AI operations system',
     reposTitle: 'What each repository does',
     repos: [
-      { name: 'brand-tool', role: 'The internal website staff use; sales partner and product data' },
+      { name: 'brand-tool', role: 'The work tool staff use; sales partner and product data' },
       { name: 'agent-company', role: 'Agents, servers, and staff PC deployment' },
       { name: 'email-agent', role: 'Reply drafts for the shared mailboxes + internal knowledge hub' },
       { name: 'kakaocli', role: 'KakaoTalk collection and sending on staff Macs' },
       { name: 'n8n (self-hosted, not a repository)', role: 'Triggers for mail intake, product sync calls, and match judging (97 active workflows, 2026-09-23 inventory)' },
     ],
     examples: [
-      'Example: one vendor support message goes from a staff Mac (collection) → the agent server (should we answer this partner?) → the brand-tool website (the list of partners to serve) and the knowledge hub (search), then to Slack for a human reply if handoff is enabled.',
-      'Example: one Spark question goes from the brand-tool website → the agent server → the brand-tool API, 4 databases, and knowledge hub search.',
+      'Example: one vendor support message goes from a staff Mac (collection) → the agent server (should we answer this partner?) → the work tool (the list of partners to serve) and the knowledge hub (search), then to Slack for a human reply if handoff is enabled.',
+      'Example: one Spark question goes from the work tool → the agent server → its API, 4 databases, and knowledge hub search.',
     ],
     nodes: [
       { id: 'vendor-cs', label: '① Vendor support', caseId: 'vendor-cs' },
-      { id: 'ss-worktool', label: '② brand-tool internal website', caseId: 'ss-worktool' },
+      { id: 'ss-worktool', label: '② Work tool', caseId: 'ss-worktool' },
       { id: 'email-agent', label: '③ Email agent and knowledge hub', caseId: 'email-agent' },
       { id: 'company-os', label: '④ Spark · Work OS', caseId: 'company-os' },
       { id: 'field-fleet', label: '⑤ Staff PC deployment · ops infrastructure', caseId: 'field-fleet' },
@@ -246,12 +246,12 @@ const en = {
       slug: 'ss-worktool',
       logo: '/images/logo7.png',
       status: 'live',
-      title: 'brand-tool proposals — separate vendor and seller flows',
-      shortTitle: 'brand-tool work website',
+      title: 'Work tool — vendor and seller proposal workflows',
+      shortTitle: 'Work tool',
       period: 'Late 2026-03 to present',
       role: ROLE,
       chain: 'brand-tool → n8n → email-agent (knowledge hub) → agent-company (staff PC workers, send workers) → styleseller-kakaocli',
-      oneLiner: 'I built separate vendor and seller proposal flows inside brand-tool. Staff compare working revisions and keep records of created proposals and send requests.',
+      oneLiner: 'I built separate vendor and seller proposal flows inside the work tool. Staff compare working revisions and keep records of created proposals and send requests.',
       tldr: [
         'Working revisions can be compared in the session; created proposals and send requests are saved as separate work records. Proposals export to PDF or Excel.',
         'It grew to 14 work screens: supplier catalog intake, sales partner recommendations, seller discovery, and KakaoTalk campaigns to sellers.',
@@ -294,8 +294,8 @@ const en = {
         {
           title: 'Pricing calculator and proposals (2026-03 onward)',
           points: [
-            'I moved the price formulas from two Google Sheets tabs into brand-tool code. It calculates the supply price and margin for each product.',
-            'brand-tool has separate vendor and seller proposal screens. Staff compare working revisions in the session; created proposals and KakaoTalk send requests are saved as work records.',
+            'I moved the price formulas from two Google Sheets tabs into the work tool code. It calculates the supply price and margin for each product.',
+            'The work tool has separate vendor and seller proposal screens. Staff compare working revisions in the session; created proposals and KakaoTalk send requests are saved as work records.',
             'An n8n webhook chatbot helps edit proposal copy; code recalculates the amounts.',
             'The vendor support agent opens the same proposal screen on the server, renders it to PDF, and puts it in the existing KakaoTalk queue.',
           ],
@@ -879,7 +879,7 @@ const en = {
     tagline: "I'm Jinhee Mok, an AI engineer who turns repetitive work into AI systems.",
     paragraphs: [
       'I take the work people repeat by hand every day, move it into AI agents and automation, and then ship and run those systems myself.',
-      'I joined StyleSeller in December 2025 and started building in February 2026 (Developer, owner of AI and automation). Starting from seller DMs, I built and now run vendor support, the brand-tool work website, the email agent and knowledge hub, Spark · Work OS, and staff PC deployment.',
+      'I joined StyleSeller in December 2025 and started building in February 2026 (Developer, owner of AI and automation). Starting from seller DMs, I built and now run vendor support, the work tool, the email agent and knowledge hub, Spark · Work OS, and staff PC deployment.',
       'Claude Code writes a lot of my code, but what to build and whether it works are my calls. Nothing is done until it has run on a real staff PC.',
       'I studied law, taught English, and managed a daycare before moving into software; a We:Review internship automating receipts with OCR + LLM started this work.',
       'I want to build workplaces where systems take the repetition and people keep the judgment.',

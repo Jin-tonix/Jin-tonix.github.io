@@ -17,11 +17,11 @@ const ko = {
     name: '목진희',
     title: 'AI 엔지니어',
     intro:
-      'StyleSeller에서 제안서 관리·거래처 카카오톡 AI 응대·셀러 발굴을 사내 업무 웹과 에이전트로 만들었습니다. 설계부터 운영까지 혼자 맡는 AI 엔지니어, 목진희입니다.',
+      'StyleSeller work tool 안에 제안서 기능을 만들고, 거래처 AI 응대·메일 학습·셀러 발굴 시스템을 연결했습니다. 설계부터 운영까지 혼자 맡는 AI 엔지니어, 목진희입니다.',
     company:
-      'StyleSeller는 SNS 인플루언서 셀러와 브랜드를 연결해 기간 한정 공동구매(공구)를 열고, 발주·CS·정산을 대신 운영하는 플랫폼입니다.',
+      'StyleSeller는 크리에이터 셀러와 브랜드의 판매를 운영하는 커머스 플랫폼입니다.',
     metrics: [
-      { value: '14개', label: '직원이 쓰는 업무 화면', basis: 'brand-tool 라이브 화면(로그인 포함) · 상단 메뉴 6개 · 2026-09-23' },
+      { value: '14개', label: 'work tool 업무 화면', basis: '라이브 화면(로그인 포함) · 상단 메뉴 6개 · 2026-09-23' },
       { value: '5개', label: '매일 쓰는 AI 도우미', basis: '스케줄·수신 루프가 있는 서비스 4개 + 직원이 쓰는 Spark · 벤더 CS·인플루언서 CS·Supervisor·Hermes·Spark · 2026-09-23' },
       { value: '11대', label: '직원 컴퓨터에 설치', basis: '카톡 동기화 등록 기준 · 맥 6·윈도우 5 · 2026-09-16' },
       { value: '4개', label: '함께 움직이는 프로젝트 코드', basis: 'brand-tool · agent-company · email-agent · kakaocli' },
@@ -45,19 +45,19 @@ const ko = {
     imageAlt: 'StyleSeller AI 운영 시스템 전체 지도',
     reposTitle: '저장소별 역할',
     repos: [
-      { name: 'brand-tool', role: '직원이 쓰는 업무 웹, 판매 파트너사·상품 데이터' },
+      { name: 'brand-tool', role: '직원이 쓰는 work tool, 판매 파트너사·상품 데이터' },
       { name: 'agent-company', role: '에이전트·서버·직원 PC 배포' },
       { name: 'email-agent', role: '공용 메일함 답장 초안 + 사내 지식 허브' },
       { name: 'kakaocli', role: '직원 맥의 카톡 수집·발송' },
       { name: 'n8n (자체 호스팅, 저장소 아님)', role: '메일 인입·상품 동기화 호출·매칭 판정 트리거 (활성 워크플로 97개, 2026-09-23 인벤토리)' },
     ],
     examples: [
-      '예: 벤더 CS 한 건은 직원 맥(수집) → 에이전트 서버(응대 대상 판정) → 업무 웹(응대 대상 명단)·지식 허브(검색)를 지나 다시 직원 맥에서 발송됩니다.',
-      '예: Spark 질문 한 건은 업무 웹 → 에이전트 서버 → 업무 웹 API·DB 4개·지식 허브 검색을 지납니다.',
+      '예: 벤더 CS 한 건은 직원 맥(수집) → 에이전트 서버(응대 대상 판정) → work tool(응대 대상 명단)·지식 허브(검색)를 지나 다시 직원 맥에서 발송됩니다.',
+      '예: Spark 질문 한 건은 work tool → 에이전트 서버 → work tool API·DB 4개·지식 허브 검색을 지납니다.',
     ],
     nodes: [
       { id: 'vendor-cs', label: '① 벤더 CS', caseId: 'vendor-cs' },
-      { id: 'ss-worktool', label: '② brand-tool 업무 웹', caseId: 'ss-worktool' },
+      { id: 'ss-worktool', label: '② work tool', caseId: 'ss-worktool' },
       { id: 'email-agent', label: '③ 메일 에이전트와 지식 허브', caseId: 'email-agent' },
       { id: 'company-os', label: '④ Spark · Work OS', caseId: 'company-os' },
       { id: 'field-fleet', label: '⑤ 직원 PC 배포 · 운영 인프라', caseId: 'field-fleet' },
@@ -245,12 +245,12 @@ const ko = {
       slug: 'ss-worktool',
       logo: '/images/logo7.png',
       status: 'live',
-      title: 'brand-tool 제안서 — 벤더용·셀러용 문서 관리',
-      shortTitle: 'brand-tool 업무 웹',
+      title: 'work tool 제안서 기능 — 벤더용·셀러용 두 흐름',
+      shortTitle: 'work tool',
       period: '2026.03 말 ~ 현재',
       role: ROLE,
       chain: 'brand-tool → n8n → email-agent(지식 허브) → agent-company(직원 PC 워커·발송 워커) → styleseller-kakaocli',
-      oneLiner: 'brand-tool 안에서 벤더용·셀러용 제안 흐름을 따로 운영합니다. 작업 중 수정본을 비교하고 생성·발송 기록을 남깁니다.',
+      oneLiner: 'work tool 안에서 벤더용·셀러용 제안 흐름을 따로 운영합니다. 작업 중 수정본을 비교하고 생성·발송 기록을 남깁니다.',
       tldr: [
         '작업 중 수정본은 세션에서 비교하고, 생성한 제안서와 발송 요청은 업무 기록으로 각각 저장합니다. PDF·엑셀로 내보낼 수 있습니다.',
         '공급사 카탈로그 입력, 판매 파트너사 추천, 셀러 발굴, 셀러 대상 카톡까지 업무 화면 14개로 키웠습니다.',
@@ -290,8 +290,8 @@ const ko = {
         {
           title: '가격 계산기와 제안서 (2026-03 ~)',
           points: [
-            '구글 시트 두 탭의 가격 수식을 brand-tool 코드로 옮겨, 공급가와 마진을 상품마다 계산합니다.',
-            'brand-tool 안에 벤더용·셀러용 제안 화면을 따로 만들었습니다. 작업 중 수정본은 세션에 남겨 비교하고, 생성한 제안서와 카카오 발송 요청은 업무 기록으로 저장합니다.',
+            '구글 시트 두 탭의 가격 수식을 work tool 코드로 옮겨, 공급가와 마진을 상품마다 계산합니다.',
+            'work tool 안에 벤더용·셀러용 제안 화면을 따로 만들었습니다. 작업 중 수정본은 세션에 남겨 비교하고, 생성한 제안서와 카카오 발송 요청은 업무 기록으로 저장합니다.',
             'n8n 웹훅 챗봇에게 문구 수정을 요청할 수 있고, 금액은 코드가 다시 계산합니다.',
             '같은 제안서 화면을 벤더 CS 에이전트가 서버에서 열어 PDF로 떠서 기존 카톡 큐에 넣습니다.',
           ],
