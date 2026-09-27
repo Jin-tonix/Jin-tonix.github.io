@@ -17,14 +17,14 @@ const ko = {
     name: '목진희',
     title: 'AI 엔지니어',
     intro:
-      'StyleSeller work tool 안에 제안서 기능을 만들고, 거래처 AI 응대·메일 학습·셀러 발굴 시스템을 연결했습니다. 설계부터 운영까지 혼자 맡는 AI 엔지니어, 목진희입니다.',
+      '모델 판단·코드 검증·실행 통제를 설계합니다. StyleSeller에서 AI 시스템 설계부터 배포·운영까지 혼자 맡습니다.',
     company:
       'StyleSeller는 크리에이터 셀러와 브랜드의 판매를 운영하는 커머스 플랫폼입니다.',
     metrics: [
       { value: '14개', label: 'work tool 업무 화면', basis: '라이브 화면(로그인 포함) · 상단 메뉴 6개 · 2026-09-23' },
-      { value: '5개', label: '매일 쓰는 AI 도우미', basis: '스케줄·수신 루프가 있는 서비스 4개 + 직원이 쓰는 Spark · 벤더 CS·인플루언서 CS·Supervisor·Hermes·Spark · 2026-09-23' },
-      { value: '11대', label: '직원 컴퓨터에 설치', basis: '카톡 동기화 등록 기준 · 맥 6·윈도우 5 · 2026-09-16' },
-      { value: '4개', label: '함께 움직이는 프로젝트 코드', basis: 'brand-tool · agent-company · email-agent · kakaocli' },
+      { value: '5개', label: '매일 운영하는 AI 시스템', basis: '스케줄·수신 루프가 있는 서비스 4개 + 직원이 쓰는 Spark · 벤더 CS·인플루언서 CS·Supervisor·Hermes·Spark · 2026-09-23' },
+      { value: '11대', label: '직원 PC 배포·운영', basis: '카톡 동기화 등록 기준 · 맥 6·윈도우 5 · 2026-09-16' },
+      { value: '4개', label: '한 시스템으로 연결된 코드베이스', basis: '업무 웹 · agent-company · email-agent · kakaocli' },
     ],
     glossaryTitle: '용어',
     glossary: [

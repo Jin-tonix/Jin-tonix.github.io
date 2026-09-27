@@ -17,14 +17,14 @@ const en = {
     name: 'Jinhee Mok',
     title: 'AI Engineer',
     intro:
-      "At StyleSeller, I built proposal workflows inside the work tool and connected AI systems for partner support, email learning, and seller discovery. I'm Jinhee Mok, and I design, build, and operate them on my own.",
+      'I design model judgment, code verification, and execution controls. At StyleSeller, I own AI system design through deployment and operations.',
     company:
       'StyleSeller is a commerce platform that operates sales for creator sellers and brands.',
     metrics: [
       { value: '14', label: 'work tool screens in use', basis: 'live screens incl. login · 6 top-level menus · 2026-09-23' },
-      { value: '5', label: 'AI helpers in daily use', basis: '4 services with a schedule or intake loop + Spark, which staff use · vendor support · influencer CS · Supervisor · Hermes · Spark · 2026-09-23' },
-      { value: '11', label: 'staff computers with tools installed', basis: 'KakaoTalk sync registrations · 6 Macs and 5 Windows PCs · 2026-09-16' },
-      { value: '4', label: 'connected code projects', basis: 'brand-tool · agent-company · email-agent · kakaocli' },
+      { value: '5', label: 'AI systems in daily operation', basis: '4 services with a schedule or intake loop + Spark, which staff use · vendor support · influencer CS · Supervisor · Hermes · Spark · 2026-09-23' },
+      { value: '11', label: 'staff PCs deployed and maintained', basis: 'KakaoTalk sync registrations · 6 Macs and 5 Windows PCs · 2026-09-16' },
+      { value: '4', label: 'codebases working as one system', basis: 'work tool · agent-company · email-agent · kakaocli' },
     ],
     glossaryTitle: 'Terms',
     glossary: [

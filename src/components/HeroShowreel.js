@@ -4,32 +4,32 @@ import styled, { keyframes } from 'styled-components';
 import { color } from './ui/tokens';
 
 const revealPricing = keyframes`
-  0% { opacity: 0; transform: translateY(8px); }
-  2%, 14% { opacity: 1; transform: translateY(0); }
-  16%, 100% { opacity: 0; transform: translateY(-8px); }
+  0% { opacity: 0; transform: translateY(12px); }
+  1%, 16% { opacity: 1; transform: translateY(0); }
+  18%, 100% { opacity: 0; transform: translateY(-10px); }
 `;
 
 const revealVendor = keyframes`
-  0%, 16% { opacity: 0; transform: translateY(8px); }
-  18%, 34% { opacity: 1; transform: translateY(0); }
-  36%, 100% { opacity: 0; transform: translateY(-8px); }
+  0%, 18% { opacity: 0; transform: translateY(12px); }
+  20%, 36% { opacity: 1; transform: translateY(0); }
+  38%, 100% { opacity: 0; transform: translateY(-10px); }
 `;
 
 const revealEmail = keyframes`
-  0%, 36% { opacity: 0; transform: translateY(8px); }
-  38%, 54% { opacity: 1; transform: translateY(0); }
-  56%, 100% { opacity: 0; transform: translateY(-8px); }
+  0%, 38% { opacity: 0; transform: translateY(12px); }
+  40%, 56% { opacity: 1; transform: translateY(0); }
+  58%, 100% { opacity: 0; transform: translateY(-10px); }
 `;
 
 const revealSpark = keyframes`
-  0%, 56% { opacity: 0; transform: translateY(8px); }
-  58%, 74% { opacity: 1; transform: translateY(0); }
-  76%, 100% { opacity: 0; transform: translateY(-8px); }
+  0%, 58% { opacity: 0; transform: translateY(12px); }
+  60%, 76% { opacity: 1; transform: translateY(0); }
+  78%, 100% { opacity: 0; transform: translateY(-10px); }
 `;
 
 const revealFleet = keyframes`
-  0%, 76% { opacity: 0; transform: translateY(8px); }
-  78%, 100% { opacity: 1; transform: translateY(0); }
+  0%, 78% { opacity: 0; transform: translateY(12px); }
+  80%, 100% { opacity: 1; transform: translateY(0); }
 `;
 
 const moveProgress = keyframes`
@@ -1453,6 +1453,10 @@ const Hero = styled.section`
       transform: scaleX(1);
     }
 
+    .visual-arrow {
+      animation: none !important;
+    }
+
     .controls {
       display: none;
     }
@@ -1463,46 +1467,46 @@ const copy = {
   en: {
     top: 'AI Engineer · from workflow to production',
     chapter: 'Five systems in real team workflows',
-    hook: 'I turn repetitive work into AI systems—and run them in production.',
-    solo: 'Solo AI Engineer at StyleSeller',
-    intro: 'Proposal features inside the work tool, plus AI systems for partner support, email learning, and operations.',
+    hook: 'I engineer trust into AI systems that run in production.',
+    solo: 'SOLO AI ENGINEER · DESIGN → BUILD → OPERATE',
+    intro: 'Code-checked pricing. Grounded answers. Gated actions. I design, deploy, and operate the systems end to end.',
     company: 'StyleSeller · commerce operations for influencer-led brand sales',
-    pricingOverline: 'PROJECT 01 · WORKFLOW DESIGN · WORK TOOL',
-    pricingTitle: 'Proposal workflows inside the work tool.',
-    pricingSummary: 'Not a separate product: this is a feature inside StyleSeller’s work tool. Vendor and seller workflows share code-based pricing and recorded proposal/send requests.',
+    pricingOverline: '01 · MODEL / CODE BOUNDARY · WORK TOOL',
+    pricingTitle: 'The LLM proposes fields. Code owns the price.',
+    pricingSummary: 'Vendor and seller proposals are flows inside one work tool—not separate products. Price rules were checked against 43 real cases with staff.',
     pricingProof: '43 pricing cases checked with staff',
     pricingScale: '14 work-tool screens',
-    vendorOverline: 'PROJECT 02 · GROUNDED AGENTS · HUMAN HANDOFF',
-    vendorTitle: 'Grounded answers for routine questions; gated handoff for the rest.',
-    vendorSummary: 'When enabled, the full thread goes to the configured Slack recipient; a reply becomes a KakaoTalk send job.',
+    vendorOverline: '02 · GROUNDED SUPPORT · CONTROLLED HANDOFF',
+    vendorTitle: 'Separate partner context. Never guess beyond evidence.',
+    vendorSummary: 'Routine questions get grounded answers. The Slack handoff is feature-flagged (off by default in source); enabled replies enter the staff Mac KakaoTalk queue.',
     vendorInputNote: "A partner's question",
     vendorStatus: 'When enabled · Slack reply → KakaoTalk queue',
     vendorGuard: ['Partner chats kept separate', 'Handoff has an explicit gate', 'Slack reply enters KakaoTalk queue'],
-    emailOverline: 'PROJECT 03 · FEEDBACK LOOP · RAG + STYLEBOOK',
-    emailTitle: 'Staff edits become knowledge for the next similar email.',
+    emailOverline: '03 · HUMAN FEEDBACK · RAG + STYLEBOOK',
+    emailTitle: 'A sent correction improves the next relevant draft.',
     emailSummary: 'Sent replies pair with the inquiry in RAG; factual corrections update knowledge, and style edits update the stylebook.',
     emailKnowledge: 'Save reply + corrections',
     emailKnowledgeNote: 'RAG + Stylebook',
     emailHumanNote: 'Search in future drafts',
-    sparkOverline: 'PROJECT 04 · CONNECTED DATA · APPROVAL GATE',
-    sparkTitle: 'One question searches four work data sources.',
-    sparkSummary: 'Search four parts of the business at once. Ask a person before anything is changed.',
+    sparkOverline: '04 · MULTI-DATABASE REASONING · APPROVAL GATE',
+    sparkTitle: 'Read across four databases. Gate every enabled write.',
+    sparkSummary: 'Spark answers from four work databases; role and approval checks protect the internal actions enabled today.',
     sparkSources: ['Prices', 'Vendors', 'Campaigns', 'Work'],
     sparkAnswer: 'Find the answer',
     sparkGateNote: 'Ask before changing',
-    fleetOverline: 'PROJECT 05 · PRODUCTION OPERATIONS · 11 DEVICES',
-    fleetTitle: 'Own deployment and updates across 11 staff computers.',
-    fleetSummary: 'Each computer has its own access key; important company passwords stay off staff computers.',
+    fleetOverline: '05 · DEPLOYMENT & OPERATIONS · 11 DEVICES',
+    fleetTitle: 'I ship and maintain systems across 11 staff PCs.',
+    fleetSummary: 'Per-device credentials, verified updates, and no database keys on staff machines.',
     fleetScale: '11 computers in use',
-    visualSite: 'StyleSeller work site',
+    visualSite: 'StyleSeller work tool',
     visualSection: 'work tool · Proposals',
     visualVendor: 'Vendor version',
     visualSeller: 'Seller version',
     visualMenu: ['Products', 'Proposals', 'Vendors', 'Sellers'],
     visualProposalTitle: 'Proposal feature',
-    visualEdit: 'Edit proposal copy',
-    visualPrice: 'Code recalculates amounts',
-    visualVersionHistory: 'Compare working revisions',
+    visualEdit: 'LLM · fields-to-change JSON',
+    visualPrice: 'Code · deterministic price',
+    visualVersionHistory: '43 pricing cases verified',
     visualHistoryLabel: 'Work records',
     visualSendHistory: 'Created proposals · send requests',
     visualMessage: 'KakaoTalk question',
@@ -1531,46 +1535,46 @@ const copy = {
   ko: {
     top: 'AI 엔지니어 · 업무 흐름부터 운영까지',
     chapter: '실제 업무에 연결된 시스템 5개',
-    hook: '반복 업무를 AI 시스템으로 바꾸고, 매일 돌아가게 만듭니다.',
-    solo: 'StyleSeller · 혼자 설계·개발·운영',
-    intro: 'StyleSeller work tool 안에 제안서 기능을 만들고, 거래처 AI 응대·메일 학습·운영 자동화를 설계·개발·운영합니다.',
+    hook: 'AI를 믿고 맡길 수 있도록, 시스템을 설계합니다.',
+    solo: 'StyleSeller · 설계 → 개발 → 배포·운영',
+    intro: '모델 판단·코드 검증·실행 통제를 설계하고, 배포와 운영까지 혼자 책임집니다.',
     company: 'StyleSeller · 크리에이터 셀러와 브랜드의 판매를 운영하는 커머스 플랫폼',
-    pricingOverline: '프로젝트 01 · 업무 흐름 설계 · work tool',
-    pricingTitle: 'work tool 안의 제안서 기능.',
-    pricingSummary: '별도 서비스가 아니라 StyleSeller work tool 안에 있는 기능입니다. 벤더용·셀러용 흐름을 나누고, 코드로 금액을 계산해 생성·발송 요청을 기록합니다.',
+    pricingOverline: '01 · 모델과 코드의 책임 경계 · work tool',
+    pricingTitle: 'LLM은 수정 필드만. 금액은 코드가 계산.',
+    pricingSummary: '별도 서비스가 아닌 work tool 안의 벤더용·셀러용 제안 기능입니다. 가격 규칙을 실무자와 맞춘 43개 사례로 검증했습니다.',
     pricingProof: '실무자와 가격 예시 43개 확인',
     pricingScale: 'work tool 화면 14개',
-    vendorOverline: '프로젝트 02 · 근거 기반 에이전트 · 사람 이관',
-    vendorTitle: '근거 있는 문의는 답하고, 예외 이관은 기능 스위치로 통제.',
-    vendorSummary: '이관을 켜면 전체 대화가 설정된 Slack 수신자에게 가고, 답장은 직원 Mac의 카카오톡 발송 큐로 이어집니다.',
+    vendorOverline: '02 · 근거 기반 응대 · 통제된 이관',
+    vendorTitle: '거래처별 맥락은 격리. 근거가 없으면 추측하지 않음.',
+    vendorSummary: '일반 문의는 지식 기반으로 응답합니다. Slack 이관은 코드에서 기본 꺼짐이며, 켜면 답장이 직원 Mac 카카오톡 큐로 이어집니다.',
     vendorInputNote: '거래처가 보낸 질문',
     vendorStatus: '이관 시 · Slack 답장 → 카카오톡 큐',
     vendorGuard: ['거래처별 대화 분리', '이관 on/off 설정', 'Slack 답장은 카카오톡 큐로'],
-    emailOverline: '프로젝트 03 · 피드백 루프 · RAG + 스타일북',
-    emailTitle: '직원의 수정이 다음 메일 초안의 지식이 됩니다.',
+    emailOverline: '03 · 사람의 피드백 · RAG + 스타일북',
+    emailTitle: '사람이 고쳐 보낸 답장을 다음 초안에 반영.',
     emailSummary: '보낸 답변과 원문은 RAG에 쌓입니다. 사실 교정은 지식으로, 말투 수정은 스타일북으로 반영해 다음 초안이 검색합니다.',
     emailKnowledge: '답변·교정 저장',
     emailKnowledgeNote: 'RAG + 스타일북',
     emailHumanNote: '다음 초안에서 검색',
-    sparkOverline: '프로젝트 04 · 데이터 연결 · 승인 게이트',
-    sparkTitle: '업무 데이터 네 곳을 연결하고, 쓰기는 승인 뒤에.',
-    sparkSummary: '네 곳의 업무 자료를 한 번에 검색합니다. 자료를 바꾸려면 직원이 먼저 승인해야 합니다.',
+    sparkOverline: '04 · 데이터 통합 · 실행 승인 게이트',
+    sparkTitle: 'DB 네 곳을 읽고, 실행 전 권한·승인을 재확인.',
+    sparkSummary: 'Spark가 네 업무 DB를 조회합니다. 현재 켜진 내부 변경 작업은 권한과 DB 승인 행을 다시 확인합니다.',
     sparkSources: ['가격표', '거래처', '캠페인', '업무 기록'],
     sparkAnswer: '답 찾기',
     sparkGateNote: '바꾸기 전 확인',
-    fleetOverline: '프로젝트 05 · 프로덕션 운영 · 직원 PC 11대',
-    fleetTitle: '직원 PC 11대 배포와 업데이트까지 직접 운영.',
-    fleetSummary: '자동으로 업데이트하고, 중요한 데이터 비밀번호는 직원 컴퓨터에 저장하지 않습니다.',
+    fleetOverline: '05 · 배포와 운영 · 직원 PC 11대',
+    fleetTitle: '직원 PC 11대에 배포하고 업데이트까지 운영.',
+    fleetSummary: 'PC별 인증 정보와 검증된 업데이트. DB 키는 직원 PC에 두지 않습니다.',
     fleetScale: '직원 컴퓨터 11대',
-    visualSite: 'StyleSeller 업무 사이트',
+    visualSite: 'StyleSeller work tool',
     visualSection: 'work tool · 제안서',
     visualVendor: '벤더용',
     visualSeller: '셀러용',
     visualMenu: ['상품', '제안서', '벤더', '셀러'],
     visualProposalTitle: '제안서 기능',
-    visualEdit: '제안 내용 수정',
-    visualPrice: '코드가 금액 재계산',
-    visualVersionHistory: '작업 수정본 비교',
+    visualEdit: 'LLM · 수정 필드 JSON',
+    visualPrice: '코드 · 결정론적 가격 계산',
+    visualVersionHistory: '가격 사례 43개 검증',
     visualHistoryLabel: '업무 기록',
     visualSendHistory: '제안서 생성 · 발송 요청',
     visualMessage: '카카오톡 문의',
