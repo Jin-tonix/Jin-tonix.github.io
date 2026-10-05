@@ -62,7 +62,7 @@ const en = {
       { id: 'email-agent', label: '③ Email agent and knowledge hub', caseId: 'email-agent' },
       { id: 'company-os', label: '④ Spark · Work OS', caseId: 'company-os' },
       { id: 'field-fleet', label: '⑤ Staff PC deployment · ops infrastructure', caseId: 'field-fleet' },
-      { id: 'instagram-dm', label: '⑥ Instagram DM automation (dormant)' },
+      { id: 'instagram-dm', label: '⑥ Instagram DM automation' },
     ],
     layers: [
       {
@@ -325,7 +325,7 @@ const en = {
           points: [
             'It started as a port of the existing Node sender to TypeScript.',
             'Recipients are seller contacts already connected through the KakaoTalk channel. Seller-finder results are only matched against them by Instagram ID and email.',
-            "An external CRM picks each seller's personalized products from sales history in their KakaoTalk room. brand-tool filters out products whose sale has ended and turns the rest into cards.",
+            "An external CRM picks each seller's personalized products from sales history in their KakaoTalk room and an analysis of their Instagram feed. brand-tool filters out products whose sale has ended and turns the rest into cards.",
             'Substitute products are added only when the CRM lookup succeeds and returns 0 results. A failed lookup never counts as 0.',
             'A Playwright channel worker on the VM sends channel messages, and kakaocli on a Mac sends personal chats. Sends to 500 or more recipients wait for approval.',
             'Replies are classified with a rules dictionary. Refusals show up as candidates, and a person clicks to confirm.',
@@ -343,7 +343,7 @@ const en = {
       ],
       results: [
         'Proposal prices are calculated by code in the work tool instead of by hand in Excel. The 43 cases matched with staff are its reference sheet.',
-        'Personalized KakaoTalk campaigns reached 261 people on 2026-09-22. Each seller gets product cards matched to their sales history.',
+        'Personalized KakaoTalk campaigns reached 261 people on 2026-09-22. Each seller gets product cards matched to their sales history and Instagram feed.',
         'Instagram seller listing moved from manual work to workers running on 9 staff PCs (as of 2026-09-18).',
         'For each new product, the work tool recommends the sales partners that someone used to pick by hand, and queues the pitch KakaoTalk message too (in production as of 2026-09-24).',
         '14 screens staff log in to use, with 6 top-level menus (Spark, Products, Proposals, Vendors, Sellers, Content) (as of 2026-09-23).',
@@ -625,10 +625,10 @@ const en = {
       slug: 'field-fleet',
       logo: '/images/logo9.png',
       status: 'live',
-      statusNote: 'the Instagram DM extension is dormant',
+      statusNote: 'the Instagram DM extension paused after July and has been running again since October',
       title: "Staff PC deployment and operations — doing on staff PCs what the server can't, safely",
       shortTitle: 'Staff PC deployment · ops infrastructure',
-      period: '2026-02 to present (Instagram DM extension 2026-02 to 07, KakaoTalk tools 2026-05 onward)',
+      period: '2026-02 to present (Instagram DM extension 2026-02 onward, KakaoTalk tools 2026-05 onward)',
       role: ROLE,
       chain:
         'kakaocli (staff Macs) · Windows collector → agent-company (installation host, relay, workers, sender, VM compose) → brand-tool (seller-finder jobs, worker keys, VM deploy) · email-agent (a stack on the same VM)',
@@ -706,7 +706,7 @@ const en = {
       results: [
         '11 staff PCs registered (6 Mac, 5 Windows, per the 2026-09-16 ops record, including my own PC and shared-account PCs)',
         '9 seller-finder worker PCs (2026-09-18). I turned 1 Windows PC off on purpose.',
-        'The Instagram DM extension has been dormant since its last commit on 2026-07-01.',
+        'The Instagram DM extension paused in July and has been running again since 2026-10.',
       ],
       limits: [
         "The Windows KakaoTalk collector doesn't follow the update rule above yet. It has no auto-updater, so new versions arrive by reinstalling. That's the next task.",
@@ -865,7 +865,7 @@ const en = {
       { month: '2026-09', text: 'Vendor support chatbot test-room validation (09-15 onward); registered 11 staff PCs (09-16); seller-finder workers on staff PCs' },
       { month: '2026-10', text: 'Stronger monitoring for silent failures; Langfuse upgrade' },
     ],
-    repoPeriods: 'Active period per repository: brand-tool 2026-03 onward · email-agent 2026-03 onward (last commit 09-02) · agent-company 2026-05 onward · kakaocli 2026-06 to 09 · Instagram DM 2026-02 to 07',
+    repoPeriods: 'Active period per repository: brand-tool 2026-03 onward · email-agent 2026-03 onward (last commit 09-02) · agent-company 2026-05 onward · kakaocli 2026-06 to 09 · Instagram DM 2026-02 onward (last commit 07-01)',
     experienceTitle: 'Journey',
     experienceLead: 'From a law degree to AI Engineer (Agents & Automation)',
     careerChangeLabel: 'Career Change',
