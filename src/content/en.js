@@ -122,7 +122,7 @@ const en = {
         {
           choice: 'The chatbot answers only questions it has evidence for',
           why:
-            'Sending every inquiry to a person slows down replies, and people end up handling routine questions the chatbot could answer. So the chatbot answers when it has evidence, and writes no automatic answer when it does not. For inquiries it cannot answer, I built a path that hands the full conversation to the person in charge, turned on with a switch.',
+            'Sending every inquiry to a person slows down replies, and people end up handling routine questions the chatbot could answer. So the chatbot answers when it has evidence, and writes no automatic answer when it does not. Inquiries it cannot answer go to the person in charge with the full conversation.',
         },
         {
           choice: 'Rules trigger, the model decides',
@@ -131,7 +131,7 @@ const en = {
         },
         {
           choice: 'Hand a person the whole conversation, not just the question',
-          why: "Passing only the question would force the person in charge to look up the partner's earlier conversation. So a handoff sends the full conversation, and that person's reply goes out to KakaoTalk through the same send queue. This path is still switched off.",
+          why: "Passing only the question would force the person in charge to look up the partner's earlier conversation. So a handoff sends the full conversation, and that person's reply goes out to KakaoTalk through the same send queue.",
         },
         {
           choice: 'Stage by room',
@@ -179,8 +179,8 @@ const en = {
           points: ['A reply that passes the checks becomes a send job. A local sender on the staff Mac picks up the job, sends it with kakaocli, and confirms delivery. The run is also recorded in Tool Registry.'],
         },
         {
-          title: 'Handing off to a person (Slack, turned on with a switch)',
-          points: ["When switched on, inquiries the chatbot can't answer go to the person in charge in Slack with the full conversation. It is off for now."],
+          title: 'Handing off to a person (Slack)',
+          points: ["Inquiries the chatbot can't answer go to the person in charge in Slack with the full conversation."],
         },
         {
           title: 'Learning and alerts',
