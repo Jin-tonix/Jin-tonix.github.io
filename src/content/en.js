@@ -17,14 +17,14 @@ const en = {
     name: 'Jinhee Mok',
     title: 'AI Engineer',
     intro:
-      'One internal work tool handles product parsing, pricing, partner matching, and KakaoTalk. Seller discovery runs on employee PCs.',
+      'I turn repetitive office work into AI systems that run every day. I build and run them on my own.',
     company:
       'StyleSeller is a commerce platform that operates sales for creator sellers and brands.',
     metrics: [
-      { value: '14', label: 'work tool screens in use', basis: 'live screens incl. login · 6 top-level menus · 2026-09-23' },
-      { value: '5', label: 'AI systems in daily operation', basis: '4 services with a schedule or intake loop + Spark, which staff use · vendor support · influencer CS · Supervisor · Hermes · Spark · 2026-09-23' },
+      { value: '14', label: 'work tool screens staff log in to', basis: 'Proposals, Products, Vendors, Sellers, Spark, and Content menus · 2026-09-23' },
+      { value: '43', label: 'price calculations matched with sales staff', basis: 'test cases matched cell by cell while moving the Excel price sheet into code' },
       { value: '11', label: 'staff PCs deployed and maintained', basis: 'KakaoTalk sync registrations · 6 Macs and 5 Windows PCs · 2026-09-16' },
-      { value: '4', label: 'codebases working as one system', basis: 'work tool · agent-company · email-agent · kakaocli' },
+      { value: '261', label: 'sellers sent personalized KakaoTalk messages in one day', basis: 'as of 2026-09-22' },
     ],
     glossaryTitle: 'Terms',
     glossary: [
@@ -40,7 +40,7 @@ const en = {
   systemMap: {
     title: 'System Map',
     intro:
-      'It started as Instagram DM automation (2026-02). Today four repositories work together as one operating system. Staff work in one internal website, a Chrome extension, and Slack. Behind them, agents and staff PC workers share self-hosted databases and one knowledge hub. Click a number to jump to that case.',
+      'It started as Instagram DM automation (2026-02). Today four repositories work together as one operating system. Staff work in the internal work tool, a Chrome extension, and Slack. Behind them, agents and staff PC workers share the same databases and one knowledge hub. Click a number to jump to that case.',
     image: '/images/v3/system-map-en.png',
     zoomHint: 'Tap to enlarge',
     imageAlt: 'Map of the StyleSeller AI operations system',
@@ -50,11 +50,11 @@ const en = {
       { name: 'agent-company', role: 'Agents, servers, and staff PC deployment' },
       { name: 'email-agent', role: 'Reply drafts for the shared mailboxes + internal knowledge hub' },
       { name: 'kakaocli', role: 'KakaoTalk collection and sending on staff Macs' },
-      { name: 'n8n (self-hosted, not a repository)', role: 'Triggers for mail intake, product sync calls, and match judging (97 active workflows, 2026-09-23 inventory)' },
+      { name: 'n8n (self-hosted, not a repository)', role: 'Triggers for mail intake, product sync calls, and match judging' },
     ],
     examples: [
-      'Example: one vendor support message goes from a staff Mac (collection) → the agent server (should we answer this partner?) → the work tool (the list of partners to serve) and the knowledge hub (search), then to Slack for a human reply if handoff is enabled.',
-      'Example: one Spark question goes from the work tool → the agent server → its API, 4 databases, and knowledge hub search.',
+      'Example: one vendor support message goes from a staff Mac (collection) → the agent server (should we answer this partner?) → the work tool (the list of partners to serve) and the knowledge hub (search), then back to a staff Mac to be sent (test room only for now).',
+      'Example: one Spark question goes from the work tool → the agent server → the work tool API, the work databases, and knowledge hub search.',
     ],
     nodes: [
       { id: 'vendor-cs', label: '① Vendor support', caseId: 'vendor-cs' },
@@ -67,11 +67,11 @@ const en = {
     layers: [
       {
         name: 'People',
-        desc: 'The internal website (brand-tool, 14 live screens) · the Kakao CS Copilot extension (MV3) · Slack (briefings, summaries, and unresolved inquiry replies). Human control comes from approval cards inside Spark chat (Tool Registry rechecks the approval row in the database), a hold queue for personalized KakaoTalk campaigns with 500 or more recipients, and feature-flagged routing for unresolved vendor inquiries.',
+        desc: 'The work tool (brand-tool, 14 screens) · the Kakao CS Copilot extension (MV3) · Slack (briefings and summaries). Human control sits in three places: approval cards inside Spark chat (the approval record is rechecked in the database right before execution), a hold queue for personalized KakaoTalk campaigns with 500 or more recipients, and a per-room allowlist for the vendor support chatbot.',
       },
       {
         name: 'Agents',
-        desc: 'I built Work OS, Spark, and Tool Registry on top of a fork of the open-source Paperclip. Five agents are in daily operation: vendor support, influencer CS, Supervisor, Hermes, and Spark (services with a schedule or intake loop, plus Spark). High-volume paths go through LiteLLM → Gemini 2.5 Flash. The tool agents that work Paperclip issues (the CEO agent and others) run on a Claude Code subscription login. If the login drops, they fall back to Hermes (Gemini) automatically, and Slack gets an alert.',
+        desc: 'I forked Paperclip, an open-source agent platform, and built Work OS, Spark, and Tool Registry (an execution gate) on top of it. What runs every day is vendor support collection and logging, influencer CS, Spark, and monitoring and briefing services. Model calls on high-volume paths go through LiteLLM → Gemini 2.5 Flash.',
       },
       {
         name: 'Knowledge',
@@ -83,7 +83,7 @@ const en = {
       },
       {
         name: 'Data and infra',
-        desc: 'Servers and databases run on one GCP VM. 39 agent-company production containers (20 of them apps) + 5 email-agent Swarm stacks. 8 self-hosted Postgres instances (both repositories combined) and 6 PostgREST instances. LiteLLM (Gemini 2.5 Flash under 2 aliases, plain and JSON) and Langfuse for cost tracking (as of 2026-09-23). agent-company and brand-tool share one deploy lock.',
+        desc: 'I run the servers and databases myself on one GCP VM (Docker Compose and Swarm, self-hosted Postgres and PostgREST). Model calls go through LiteLLM, and Langfuse tracks cost. agent-company and brand-tool share one deploy lock.',
       },
     ],
   },
@@ -92,19 +92,19 @@ const en = {
       id: 'vendor-cs',
       slug: 'vendor-cs',
       logo: '/images/v2/logo10.png',
-      status: 'live',
-      statusNote: 'inquiry collection and chatbot replies are live · Slack handoff is feature-flagged (repo default off) · when enabled, full threads go to Slack and replies enter the staff Mac KakaoTalk queue',
-      title: 'Vendor support — the chatbot handles routine questions; unresolved handoff is feature-flagged',
+      status: 'partial',
+      statusNote: 'inquiry collection and per-partner logging are live · chatbot replies are being verified in a test room and will be turned on room by room',
+      title: 'Vendor support — collecting and answering partner inquiries in KakaoTalk, which has no official API',
       shortTitle: 'Vendor support agent',
       period: '2026-06 to present',
       role: ROLE,
       chain:
-        'styleseller-kakaocli (staff Macs) → agent-company (collector, partner support chatbot, Slack escalation, KakaoTalk sender) → brand-tool (partner list, products, proposals) · email-agent (knowledge search)',
-      oneLiner: 'The chatbot answers partner inquiries. When Slack handoff is enabled, it sends the full thread to the configured recipient and queues replies for KakaoTalk.',
+        'styleseller-kakaocli (staff Macs) → agent-company (collector, partner support chatbot, KakaoTalk sender) → brand-tool (partner list, products, proposals) · email-agent (knowledge search)',
+      oneLiner: "Partner inquiries scattered across staff members' personal KakaoTalk now land in one place, and the chatbot answers questions it has evidence for (being verified in a test room for now). Other partners' information is blocked in three layers.",
       tldr: [
-        "Inquiries are collected from staff KakaoTalk accounts, logged per partner, and kept separate.",
-        "The chatbot answers most questions from company knowledge, with three layers preventing other partners' information from leaking.",
-        'When Slack handoff is enabled, unresolved questions and the full thread go to the configured recipient; replies enter the KakaoTalk send queue on staff Macs.',
+        'Partner inquiries are collected from KakaoTalk on staff PCs and logged per partner.',
+        'The chatbot answers only questions it finds evidence for in company knowledge. Without evidence, it does not write an answer.',
+        'These answers go to real partners, so it is turned on room by room. Right now it is being verified in a test room.',
       ],
       problem: [
         '"Vendor" in this case covers brands and sales partners: the brands (suppliers) that supply products and the sales partners (companies that run group buys with their own sellers). A group buy is a time-limited sale run by an influencer.',
@@ -117,13 +117,12 @@ const en = {
         'Collection covers only chats that arrive after install, on the PCs where it is installed. The Mac side drops anything before the install time, and the server drops anything before a cutoff date.',
         'KakaoTalk updates break the collection method. On 2026-09-15 I redesigned the Windows collector to work read-only.',
         "These messages go to real vendors. If one vendor's terms leak to another, it can't be undone.",
-        'Slack handoff has an explicit feature flag that defaults off in the repository. A configured pilot recipient overrides mapped owners, and failed owner resolution falls back to the full staff roster.',
       ],
       judgments: [
         {
-          choice: 'Let the chatbot answer routine questions; gate unresolved Slack handoffs',
+          choice: 'The chatbot answers only questions it has evidence for',
           why:
-            'Sending every inquiry to a person slows down routine support. The chatbot answers when it has evidence; it does not guess when it cannot. When the Slack handoff flag is enabled, unresolved threads go to the configured recipient with full context. A Slack reply becomes a send job for the staff Mac KakaoTalk client.',
+            'Sending every inquiry to a person slows down replies, and people end up handling routine questions the chatbot could answer. So the chatbot answers when it has evidence, and writes no automatic answer when it does not. For inquiries it cannot answer, I built a path that hands the full conversation to the person in charge, turned on with a switch.',
         },
         {
           choice: 'Rules trigger, the model decides',
@@ -131,18 +130,12 @@ const en = {
             'When the regex was allowed to block, it skipped the LLM and blocked silently. So I kept the regex only as a first-pass trigger. A temperature 0 LLM makes the final call within 5 seconds, and it fails closed if the check fails.',
         },
         {
-          choice: 'Gate unresolved Slack handoff with full conversation context',
-          why:
-            'Passing only the question would force staff to look up the earlier conversation. When enabled, Slack receives the question and full chat history for the mapped or configured recipient. A reply written there becomes a job for the staff Mac KakaoTalk sender.',
-        },
-        {
-          choice: 'Prevent guessed answers; route only through the configured handoff',
-          why:
-            'When the chatbot lacks enough evidence, it does not invent an answer. If Slack handoff is enabled, it routes the conversation to the mapped or configured recipient; the reply goes through the staff Mac KakaoTalk queue.',
+          choice: 'Hand a person the whole conversation, not just the question',
+          why: "Passing only the question would force the person in charge to look up the partner's earlier conversation. So a handoff sends the full conversation, and that person's reply goes out to KakaoTalk through the same send queue. This path is still switched off.",
         },
         {
           choice: 'Stage by room',
-          why: 'The first plan was a traffic-percentage rollout (5%→20%→50%→100%). The actual stages use a per-room allowlist and a kill switch.',
+          why: 'The first plan was a traffic-percentage rollout (5%→20%→50%→100%). In practice I staged it with a per-room allowlist and a kill switch, starting with a test room.',
         },
         {
           choice: 'No company-wide tools for an external vendor chatbot',
@@ -176,7 +169,7 @@ const en = {
           title: 'Answer (agent-company chatbot, GCP VM)',
           points: [
             'A tool-calling loop looks for evidence.',
-            'Tools: knowledge hub search (through knowledge-mcp; every turn it checks past cases and the help center first, and can search 6 workspaces in total, including vendors, products, and company knowledge), the internal manual, brand-tool product, settlement, and recommendation lookups, and proposal copy generation',
+            'Tools: knowledge hub search (through knowledge-mcp; every turn it checks past cases and the help center first, and can search 6 more workspaces when needed, including vendors, products, and company knowledge), the internal manual, brand-tool product, settlement, and recommendation lookups, and proposal copy generation',
             'The Spark tools that query the whole company are blocked on this channel (fail-closed).',
             "Checks: checkers for grounding, persona, turn, and product topic; substitution of other vendors' names; an LLM check for other vendors' information",
           ],
@@ -186,24 +179,20 @@ const en = {
           points: ['A reply that passes the checks becomes a send job. A local sender on the staff Mac picks up the job, sends it with kakaocli, and confirms delivery. The run is also recorded in Tool Registry.'],
         },
         {
-          title: 'Unresolved inquiry handoff (feature-flagged Slack)',
-          points: [
-            'When Slack handoff is enabled, unresolved questions and the full conversation go to the configured recipient. If owner resolution fails, the code falls back to the full staff roster.',
-            'The recipient reviews the context and writes a reply in Slack; the send job goes to the staff Mac KakaoTalk client.',
-          ],
+          title: 'Handing off to a person (Slack, turned on with a switch)',
+          points: ["When switched on, inquiries the chatbot can't answer go to the person in charge in Slack with the full conversation. It is off for now."],
         },
         {
           title: 'Learning and alerts',
           points: [
             "Twice a day (09:30 and 18:10), the day's conversations are written up as a wiki per vendor and loaded into the knowledge hub. Drafts that people corrected and approved Q&A go in too.",
-            'When enabled, Slack carries unresolved inquiries and replies. Staff briefings and a CEO summary are delivered there on weekdays.',
+            'Every weekday morning, each staff member gets a partner briefing in Slack.',
           ],
         },
       ],
       results: [
-        'Inquiry collection and chatbot replies are in production. Slack handoff has a feature flag that defaults off in the repository; when enabled, unresolved conversations go to the configured recipient with full context.',
-        'Staff review the conversation and write a reply in Slack; the message is queued for KakaoTalk delivery, keeping the handoff in the same partner-specific support flow.',
-        'Vendor briefings run as a Paperclip Routine every weekday morning.',
+        "Partner inquiries that used to be scattered across staff members' personal KakaoTalk now come together in one place, logged per partner. This collection and logging runs every day.",
+        'The chatbot used to answer in real partner rooms. After the incident below, I narrowed it to a test room from 2026-09-15 and am verifying it again. It is not yet back on in real partner rooms.',
         "Other vendors' information is blocked in three layers: workspace separation (07-27), substitution at the tool step, and a final LLM check.",
       ],
       limits: [
@@ -212,8 +201,8 @@ const en = {
       ],
       incidents: [
         {
-          title: "Answered with another vendor's terms as if they were policy (2026-08-13, found in production)",
-          symptom: "The bot stated another vendor's individual arrangement, such as a tax invoice issue date, as if it were company policy. The existing grounding checker missed most cases.",
+          title: "Answered with another vendor's individual case as if it were general policy (2026-08-13, found in production)",
+          symptom: 'The bot stated terms agreed with only one vendor as if they were company-wide policy. The existing grounding checker missed most cases.',
           cause: 'Past support transcripts were stored with vendor names intact, so they came back in search mixed with shared knowledge.',
           fix: 'At the tool step, mentions of other vendors are replaced with an "another vendor" placeholder, and a deterministic gate sits at the final step.',
           guard:
@@ -235,7 +224,7 @@ const en = {
       ],
       stack: ['Python', 'FastAPI', 'Swift (macOS, kakaocli fork)', 'Node.js', 'Chrome Extension MV3', 'LiteLLM → Gemini 2.5 Flash (Vertex)', 'LightRAG + Neo4j + pgvector', 'MCP', 'Postgres + PostgREST', 'Paperclip Routine', 'Slack API', 'Google Sheets · Drive API'],
       scale: [
-        'Vendor agent (collection, logging, gate): 61,437 lines of code · 600 commits · 107 test files (agent-company, 2026-09-23). The chatbot that writes the answers is a separate service shared with the content agent, so it is not in these numbers.',
+        'Vendor agent (collection, logging, gate): 61,437 lines of code · 600 commits · 107 test files (as of 2026-09-23). The chatbot that writes the answers is a separate service, so it is not in these numbers.',
         'CS Copilot extension and local sender (shared with influencer CS): 631 commits · 20,596 lines · 56 test files (same basis)',
         'kakaocli: fork of an MIT open-source project. 81 commits by me; Swift code grew from 3,904 to 6,595 lines (net +2,691) (2026-09-08)',
       ],
@@ -246,16 +235,16 @@ const en = {
       slug: 'ss-worktool',
       logo: '/images/logo7.png',
       status: 'live',
-      title: 'Work tool — vendor and seller proposal workflows',
+      title: 'Internal work tool — Excel price-sheet math moved into code, from proposals to KakaoTalk sends',
       shortTitle: 'Work tool',
       period: 'Late 2026-03 to present',
       role: ROLE,
       chain: 'brand-tool → n8n → email-agent (knowledge hub) → agent-company (staff PC workers, send workers) → styleseller-kakaocli',
-      oneLiner: 'I built separate vendor and seller proposal flows inside the work tool. Staff compare working revisions and keep records of created proposals and send requests.',
+      oneLiner: 'Sales staff used to work out every proposal by hand in Excel. I moved that into the internal work tool, and now product registration, sales partner recommendations, seller discovery, and personalized KakaoTalk messages happen there too.',
       tldr: [
-        'Working revisions can be compared in the session; created proposals and send requests are saved as separate work records. Proposals export to PDF or Excel.',
+        'I moved the pricing formulas into code and checked 43 cases against them with the staff who use them. Code calculates the amounts; AI only helps with the copy edits you ask for.',
         'It grew to 14 work screens: supplier catalog intake, sales partner recommendations, seller discovery, and KakaoTalk campaigns to sellers.',
-        'An n8n chatbot helps edit the content; code recalculates the amounts.',
+        'Created proposals and send requests are kept as work records, and proposals export to PDF or Excel.',
       ],
       problem: [
         "For every proposal, sales staff worked out the partner's and the seller's shares by hand in an Excel (Google Sheets) price sheet.",
@@ -266,7 +255,7 @@ const en = {
       constraints: [
         'Instagram blocks data center IPs (per the design doc). When we collected Coupang data, I tested moving the work to a server, and every attempt failed.',
         "KakaoTalk channel messages can only be sent through each manager's admin center login session, and CAPTCHAs and extra admin verification get in the way. KakaoTalk is Korea's dominant messenger.",
-        "I couldn't put database keys on staff PCs. A shared key did leak once.",
+        "I couldn't put database keys on staff PCs.",
       ],
       judgments: [
         {
@@ -353,13 +342,12 @@ const en = {
         },
       ],
       results: [
-        '14 live screens staff log in to use (including the login and detail screens), with 6 top-level menus (Spark, Products, Proposals, Vendors, Sellers, Content) (as of 2026-09-23).',
-        'Spark, the internal AI assistant, is the first item in the top menu (added 2026-07). Login lands on the product main page. Details are in the Spark · Work OS case.',
-        'In the Content menu, marketing staff request blog posts, ad copy, captions, and card news, and agent-company agents make them and send them back (added 2026-06, now maintenance only).',
-        'brand-tool is the staff website and business data backend that the vendor support agent (partner list, products, proposal PDFs) and Spark (14 `/api/spark/*` routes) call.',
-        'The KakaoTalk pitch queue for sales partners is in production (as of 2026-09-24).',
-        'Personalized KakaoTalk campaigns reached 261 people on 2026-09-22 (value stated in the commit message).',
-        '9 seller-finder worker PCs registered (as of 2026-09-18).',
+        'Proposal prices are calculated by code in the work tool instead of by hand in Excel. The 43 cases matched with staff are its reference sheet.',
+        'Personalized KakaoTalk campaigns reached 261 people on 2026-09-22. Each seller gets product cards matched to their sales history.',
+        'Instagram seller listing moved from manual work to workers running on 9 staff PCs (as of 2026-09-18).',
+        'For each new product, the work tool recommends the sales partners that someone used to pick by hand, and queues the pitch KakaoTalk message too (in production as of 2026-09-24).',
+        '14 screens staff log in to use, with 6 top-level menus (Spark, Products, Proposals, Vendors, Sellers, Content) (as of 2026-09-23).',
+        'The work tool is both the staff screens and the business data backend that the vendor support agent and Spark call.',
         "I closed the external partner portal (2026-04-28 to 09-17) with a switch and kept the code. Its features moved into the company's official partner center, and I left redirects so old links still work.",
       ],
       limits: [
@@ -369,11 +357,10 @@ const en = {
       ],
       incidents: [
         {
-          title: 'Shared worker key exposed (2026-09-10)',
-          symptom: 'A shared key was in the config file of a zip on the public installation host.',
-          cause: 'Every staff PC worker connected to the server with the same single key.',
-          fix: 'I switched to one-time install tokens and a device key per PC. The server stores only sha256 hashes and cuts access with a revocation timestamp.',
-          guard: 'I wrote the cleanup step into a code comment: once the switch is done, delete the shared key from the server environment variables so the exposed key stops working.',
+          title: 'Moved staff PC worker auth to per-device keys (2026-09-10)',
+          symptom: 'Every staff PC worker connected to the server with the same single key. A problem on one PC meant changing the key for all of them.',
+          fix: 'I switched to one-time install tokens and a device key per PC. The server stores only sha256 hashes and can cut off a single PC.',
+          guard: 'I left the step in code to delete the old shared key from the server once the switch is done.',
         },
         {
           title: 'LLM scores varied by chunk (2026-07-15)',
@@ -391,7 +378,7 @@ const en = {
       ],
       stack: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind 4', 'Vitest', 'Postgres 16 + PostgREST', 'Vertex AI Gemini 2.5', 'LightRAG (email-agent)', 'n8n', 'Playwright', 'Docker', 'GitHub Actions', 'kakaocli (Swift)'],
       scale: [
-        '1,458 brand-tool commits (excluding merges, main, as of 2026-09-23)',
+        '1,458 brand-tool commits (excluding merges, as of 2026-09-23)',
         '134 API routes, 130 database migrations, 205 test files (same basis)',
         'Sales partner matching is the feature area with the most commits (309, excluding merges, counted over the matching screens, APIs, and related lib and component paths). Seller finder is 11K lines in the server core + 13K lines in the staff PC worker (the worker count includes tests).',
         'Personalized KakaoTalk campaigns total 34K lines across brand-tool and the agent-company send workers (tests included).',
@@ -402,14 +389,14 @@ const en = {
       id: 'email-agent',
       slug: 'email-agent',
       logo: '/images/logo8.png',
-      status: 'partial',
-      statusNote: 'brand and order shared mailboxes in production · only CEO-inbox auto-drafts stopped on 2026-09-02 (classification and sent-mail learning continue, as of 2026-09-24)',
+      status: 'live',
+      statusNote: 'in production on the brand and order shared mailboxes',
       title: 'An email agent that feeds staff edits back into RAG',
       shortTitle: 'Email agent · knowledge hub',
       period: '2026-03-31 to present',
       role: ROLE,
       chain:
-        'Gmail (shared mailboxes, CEO inbox) → n8n → email-agent (FastAPI, LightRAG) → assignee Gmail drafts (CEO-inbox Slack alerts stopped) / email-agent LightRAG → agent-company (knowledge-mcp, Spark, vendor support) · brand-tool (sales partner matching)',
+        'Gmail (shared mailboxes) → n8n → email-agent (FastAPI, LightRAG) → assignee Gmail drafts / email-agent LightRAG → agent-company (knowledge-mcp, Spark, vendor support) · brand-tool (sales partner matching)',
       oneLiner: 'It pairs sent replies with the original inquiry in RAG, updates the stylebook from edits, and searches both for future drafts.',
       tldr: [
         "For shared-mailbox inquiries, it drafts a grounded reply for the assignee to review, edit, and send.",
@@ -423,13 +410,13 @@ const en = {
       ],
       constraints: [
         'No automatic external sending. The system stops at the draft, and a person sends it.',
-        'To prevent out-of-memory errors, deploys use stop-first, so every deploy drops responses for about 40 seconds (Docker Swarm, value stated in the commit message).',
+        'To prevent out-of-memory errors, deploys use stop-first, so every deploy drops responses for about 40 seconds (Docker Swarm).',
         'Several internal systems share one knowledge hub. Load from one consumer must not stall the others.',
       ],
       judgments: [
         {
           choice: 'Create the Gmail draft first and let a person send it',
-          why: 'For the shared mailboxes, the draft goes into the assignee\'s Gmail, and staff edit and send it. For the CEO inbox, Slack got a "Draft Ready" alert if the draft passed verification, or a "Needs Review" alert if not, each with a send button (this draft step stopped on 2026-09-02).',
+          why: "These emails go out under the company's name, and a wrong one can't be taken back. So the draft goes into the assignee's Gmail, and staff edit and send it.",
         },
         {
           choice: 'Instead of more prompt tuning, a critic catches problems and forces a rewrite',
@@ -437,7 +424,7 @@ const en = {
         },
         {
           choice: 'Save edited sent mail as correction knowledge',
-          why: "Only emails the CEO actually sent count as confirmed facts; AI drafts are excluded as a source. The inquiry/reply pair is stored, detected fact changes update RAG correction knowledge, and style edits update the stylebook.",
+          why: "Only emails a person actually sent count as confirmed facts; AI drafts are excluded as a source. The inquiry/reply pair is stored, detected fact changes update RAG correction knowledge, and style edits update the stylebook.",
         },
         {
           choice: 'Search load is split by consumer',
@@ -458,11 +445,8 @@ const en = {
           points: ['Rule-based validator', 'LLM critic (14 check and verification modules)', 'After a rewrite, a second check by the same critic', 'Scoring on 7 criteria (faithfulness to evidence, relevance, tone, and more)'],
         },
         {
-          title: 'Gmail draft (CEO inbox: Slack alert and send button, stopped 09-02)',
-          points: [
-            "For the shared mailboxes, the draft goes into the assignee's Gmail, and staff edit and send it.",
-            'For the CEO inbox, it sent Slack a Draft Ready / Needs Review alert with a send button. That draft step stopped on 2026-09-02.',
-          ],
+          title: 'Gmail draft',
+          points: ["The draft goes into the assignee's Gmail, and staff review, edit, and send it themselves."],
         },
         {
           title: 'Feedback from sent mail',
@@ -482,8 +466,8 @@ const en = {
         },
       ],
       results: [
-        'Status: staff still use the brand and order shared mailboxes every day. Only the CEO-inbox auto-drafts were cut at the draft step on 2026-09-02, as an operational decision; classification and sent-mail learning for that inbox continue.',
-        'Classification, shared-mailbox drafts, and sent-reply learning are active. Staff edits can inform the next similar email draft.',
+        "Staff no longer write each inquiry reply from a blank screen; they edit a draft that comes with evidence and send it. It is still in use on the brand and order shared mailboxes.",
+        'What staff edit and send feeds into the next draft for a similar email. The goal is that nobody has to make the same edit twice.',
         'Vendor support, influencer CS, Spark, and sales partner matching share 13 LightRAG workspaces.',
         'On 2026-08-18 I changed CI/CD. Only images that pass a pytest gate get deployed.',
         'The database moved from Supabase cloud to self-hosting on the VM (PostgREST).',
@@ -511,7 +495,7 @@ const en = {
           title: 'Sent-mail learning lost data on every deploy (fixed 2026-08-29)',
           symptom: 'Some sent emails never made it into learning, and with no alert, nobody noticed.',
           cause:
-            'When the time-window scan overlapped with the no-response window during a deploy, that stretch was lost for good. I counted it from 2 weeks of nginx access logs: 48 of 1,943 requests failed (2.5%), and the longest gap lost about 68 minutes of mail (values stated in the commit message).',
+            'When the time-window scan overlapped with the no-response window during a deploy, that stretch was lost for good. I counted it from 2 weeks of nginx access logs: 48 of 1,943 requests failed (2.5%), and the longest gap lost about 68 minutes of mail.',
           fix: 'I switched to a persistent cursor that remembers only the last successful point.',
           guard: 'I applied the findings from a cross review.',
         },
@@ -537,7 +521,7 @@ const en = {
       chain: 'brand-tool (Spark screen, lookup APIs) → agent-company (Paperclip fork — Work OS gateway, Spark, Tool Registry, MCP) → email-agent (knowledge search) + 4 work databases (read-only roles)',
       oneLiner: 'Staff ask questions of 4 work databases in plain language and get answers with sources.',
       tldr: [
-        'In Spark, the first item in the web app\'s top menu, staff ask 4 work databases questions in plain language and get answers with sources.',
+        'In Spark, the first item in the work tool\'s top menu, staff ask 4 work databases questions in plain language and get answers with sources.',
         "Databases are queried only through read-only roles, and the server looks up the requester's role in the database again.",
         'Action tools are registered in Tool Registry, which defaults to dry run; what actually runs after approval today is creating an issue or pausing a tool.',
       ],
@@ -560,7 +544,7 @@ const en = {
         {
           choice: 'Models are chosen by the type of work',
           why:
-            'I removed Anthropic models from LiteLLM for cost reasons (2026-06-06). High-volume paths like Spark, vendor support, and influencer CS go through LiteLLM → Gemini 2.5 Flash. The tool agents that work Paperclip issues (the CEO agent and others) run on the Claude Code CLI on the VM, authenticated with a subscription login. If the login drops, they switch to Hermes (Gemini) automatically, and Slack gets an alert.',
+            'I removed Anthropic models from LiteLLM for cost reasons (2026-06-06). High-volume paths like Spark, vendor support, and influencer CS go through LiteLLM → Gemini 2.5 Flash. Some issue handling is done by Claude Code agents.',
         },
         {
           choice: 'Execution defaults to dry run',
@@ -580,7 +564,7 @@ const en = {
       systemSteps: [
         {
           title: 'Spark screen',
-          points: ['Staff ask in Spark, the first item in the web app\'s top menu (login lands on the product main page). brand-tool relays the request to agent-company over SSE.'],
+          points: ['Staff ask in Spark, the first item in the work tool\'s top menu (login lands on the product main page). brand-tool relays the request to agent-company over SSE.'],
         },
         {
           title: 'Work OS gateway (agent-company, GCP VM)',
@@ -590,8 +574,8 @@ const en = {
           title: 'Spark core',
           points: [
             'It runs router → tool loop → synthesis. The model is Gemini via LiteLLM.',
-            'brand-tool lookup APIs (14 `/api/spark/*` routes, shared with the vendor support bot, origin/main 2026-09-23); Spark calls 6 of them: product search, matching, best sellers, proposal totals, group-buy totals, allowlist lookup',
-            'run_sql: queries each of the 4 databases through a read-only role',
+            '6 work tool lookup APIs: product search, matching, best sellers, proposal totals, group-buy totals, allowlist lookup',
+            'run_sql: queries each of the 4 work databases through a read-only role',
             'knowledge-mcp knowledge search',
             'email-agent search: rejects any workspace outside the allowlist (fail-closed).',
           ],
@@ -603,56 +587,34 @@ const en = {
         {
           title: 'Approval and execution',
           points: [
-            'Proposed actions from Spark\'s CEO mode (Gemini), creating an issue or pausing a tool, are saved as approval rows, and a person approves them on a confirmation card inside Spark chat.',
+            'Proposed actions from Spark, creating an issue or pausing a tool, are saved as approval rows, and a person approves them on a confirmation card inside Spark chat.',
             'Right before execution, six checks run in order: not registered → kill switch → blocked → role → approval row rechecked in the database → idempotency key.',
             'What actually runs after approval is those two internal writes. The 4 external-send tools are at the register-and-record stage, and vendor support sends go to their own send queue, not through this gate.',
           ],
         },
-        {
-          title: 'Paperclip agents',
-          points: [
-            'Paperclip agents attach to the same server. Paperclip\'s CEO agent (a tool agent that takes and works issues) runs on a Claude Code subscription login. When the login drops, these claude_local agents switch to Hermes (Gemini).',
-            'The vendor support backend, influencer CS, Supervisor, and Hermes attach as http services.',
-          ],
-        },
       ],
       results: [
-        'Spark is in production as the first item in the brand-tool top menu.',
-        'Tool Registry has 20 tools registered (side-effect levels: none 13, write_internal 3, external_send 4; org/release, 2026-09-23). What actually runs after approval is creating an issue or pausing a tool.',
+        'Staff no longer ask someone or dig through several systems for a number; they ask Spark in plain language and get an answer with sources. It is in production as the first item in the work tool top menu.',
+        'Tool Registry has 20 tools registered (read-only 13, internal write 3, external send 4, as of 2026-09-23). What actually runs after approval is creating an issue or pausing a tool.',
         'Human approval happens inside Spark chat. I hid the separate approval inbox from the menu on 2026-07-19 and moved approvals into in-chat confirmation cards on 07-23.',
-        '22 agents are defined in code (org/release, 2026-09-23), and 5 are in daily operation (the vendor support backend, influencer CS, Supervisor, and Hermes, which have a schedule or intake loop, plus Spark, which staff use). The vendor support chatbot answers routine questions; unresolved Slack handoff is controlled by a feature flag that defaults off in the repository.',
         'Commerce research (Spark request → review collection through a staff Chrome extension → VOC Excel and PDF) is built and passed E2E validation (2026-09-09). Nobody uses it in daily work yet.',
       ],
       limits: [
         "I run Spark evals by hand, and the result files aren't kept in the repository.",
-        "The Hermes fallback answers once and ends. That's why I added a separate alert for dropped logins.",
-        "I don't use Paperclip's budget feature (budgetMonthlyCents: 0). Many of the 22 defined agents have only a prompt and no evidence of ever running.",
+        'Many of the agents defined in code have only a prompt and no evidence of ever running. What runs every day is vendor support, influencer CS, Spark, and the monitoring and briefing services.',
       ],
       incidents: [
         {
-          title: 'Fallback with no error (twice)',
-          symptom: 'The CEO agent ran on a one-shot Gemini fallback without raising any error (08-27 to 09-08, 09-10 to 09-23).',
-          cause: "The Claude login token changes on every refresh, and each restart copied the host's dead token over the container's token.",
-          fix: 'A job now writes the token the container refreshed back to the host every 10 minutes, so the token copied in at restart is always current. It never writes back an empty token (09-23).',
-          guard: 'Login status is checked periodically, and Slack gets an alert when it drops.',
-        },
-        {
-          title: 'One set_config call turned off read-only (2026-08-27)',
-          symptom: 'In a live test, a single set_config call turned off read_only and statement_timeout.',
-          fix: 'A blocklist of risky functions, a new connection per query, an EXPLAIN cost cap of 1,000,000, a 500-row/100KB limit, and a 10-second limit.',
+          title: 'Agent SQL queries are blocked in two layers (2026-08-27)',
+          symptom: 'Agents send SQL straight to company databases. I designed it assuming code-side settings alone cannot block everything.',
+          fix: 'A blocklist of risky functions, a new connection per query, a cost cap, a 500-row/100KB limit, and a 10-second limit.',
           guard: "Final enforcement lives in the database's read-only role. If a code guard is bypassed, the role still blocks as the second layer.",
-        },
-        {
-          title: 'Unauthenticated database exposure (2026-08-27)',
-          symptom: 'I found an unauthenticated PostgREST open on the public network.',
-          fix: 'I removed the public NIC binding, put an nginx apikey gate in front, and made startup fail if the key is empty.',
-          guard: 'I downgraded the PostgREST anon role to a role with only the table permissions it needs. Access logs are kept permanently.',
         },
       ],
       stack: ['TypeScript', 'Express', 'Drizzle', 'React', 'Python', 'FastAPI', 'MCP', 'LiteLLM', 'Vertex AI Gemini 2.5 Flash', 'Claude Code CLI', 'Postgres', 'PostgREST', 'nginx', 'Langfuse', 'n8n', 'Docker Compose', 'GitHub Actions', 'GCP VM'],
       scale: [
-        '4,319 commits by me (excluding merges and upstream, agent-company org/release, 2026-05-16 to 09-23)',
-        'This case (Work OS gateway, Spark, Tool Registry, commerce research) is 120 new files and 27,506 lines inside the Paperclip server (blank lines and 51 test files with 12,880 lines included, org/release 2026-09-23).',
+        '4,319 commits by me (excluding merges and upstream, agent-company, 2026-05-16 to 09-23)',
+        'This case (Work OS gateway, Spark, Tool Registry, commerce research) is 120 new files and 27,506 lines inside the Paperclip server (51 test files with 12,880 lines included, as of 2026-09-23).',
         'Most of my code in the same repository is KakaoTalk work automation. The 8 KakaoTalk-related paths add up to 181K lines (same basis).',
         '4 MCP servers I built (knowledge-mcp, paperclip-mcp, Spark MCP, vendor wiki MCP) + 1 third-party integration (2026-09-23)',
       ],
@@ -738,13 +700,12 @@ const en = {
         },
         {
           title: 'Server',
-          points: ['Servers and databases run on one GCP VM. Container and database counts are in the Scale section. agent-company and brand-tool share one deploy lock.'],
+          points: ['Servers and databases run on one GCP VM. agent-company and brand-tool share one deploy lock.'],
         },
       ],
       results: [
         '11 staff PCs registered (6 Mac, 5 Windows, per the 2026-09-16 ops record, including my own PC and shared-account PCs)',
         '9 seller-finder worker PCs (2026-09-18). I turned 1 Windows PC off on purpose.',
-        'I found and closed a hole where the local sender accepted requests from any web page (CORS *) before it caused an incident (09-15). It now accepts only the extension and local clients.',
         'The Instagram DM extension has been dormant since its last commit on 2026-07-01.',
       ],
       limits: [
@@ -755,7 +716,7 @@ const en = {
         {
           title: "The work tool's whole API stopped when the cloud database hit its transfer limit (2026-08-20)",
           symptom: "brand-tool's dedicated cloud database went over its data transfer limit, and every API call was blocked.",
-          cause: 'The plan limit of the managed cloud database. On 08-25 a different database stopped again because of a billing suspension.',
+          cause: 'The plan limit of the managed cloud database.',
           fix: 'A full search confirmed that all 27 API routes used only the REST protocol. I stood up Postgres + PostgREST + nginx on the VM and migrated and recovered the same day, with the app code unchanged.',
           guard: 'All 4 databases moved to self-hosting the same way (08-06 to 08-25; this one on 08-20). The code stayed; only the URLs changed.',
         },
@@ -778,8 +739,7 @@ const en = {
       stack: ['JavaScript / Node.js', 'Chrome Extension MV3', 'Chrome DevTools Protocol', 'Swift (macOS)', 'Python', 'Bash', 'PowerShell', 'launchd', 'Playwright', 'Docker', 'Docker Compose', 'Docker Swarm', 'nginx', 'GitHub Actions', 'GCP VM', 'PostgreSQL', 'PostgREST'],
       scale: [
         '11 staff PCs registered (6 Mac, 5 Windows, registrations as of 2026-09-16)',
-        'Server: 39 agent-company compose containers (20 of them apps, email-agent excluded) + 5 email-agent Swarm stacks on the same VM. 8 self-hosted Postgres instances company-wide (agent-company 6 + email-agent 2) and 6 PostgREST instances (agent-company 5 + email-agent 1). (agent-company 2026-09-23, email-agent 2026-09-02)',
-        '1,445 commits to staff PC tools — 6 folders (installation host, seller-finder worker, CS Copilot, broadcast extension, Coupang extension, collector), excluding merges (agent-company master, 2026-09-23)',
+        '1,445 commits to staff PC tools — 6 folders (installation host, seller-finder worker, CS Copilot, broadcast extension, Coupang extension, collector), excluding merges (as of 2026-09-23)',
         'kakaocli fork: 81 commits by me on top of the original MIT project; Swift code grew from 3,904 to 6,595 lines (net +2,691) (2026-09-08)',
       ],
       architectureImages: [{ src: '/images/v3/field-fleet-en.png', alt: 'Staff PC deployment and ops infrastructure' }],
@@ -790,7 +750,7 @@ const en = {
     intro:
       'Designed, built, and run solo. I write code with Claude Code; architecture, rules, verification, and rollout decisions are mine.',
     introDetail:
-      'Commits with a Claude co-author trailer: agent-company 3,646 · brand-tool 1,122 · email-agent 988 (excluding merges; agent-company org/release and brand-tool main as of 2026-09-23, email-agent as of 2026-09-02). My own commits across the four repositories total 7,276 (excluding merges, counted 2026-09-23). I run several Claude Code sessions in parallel. I assume the agents will make mistakes. The section "Where the AI was wrong and I caught it" below is the record.',
+      'Commits with a Claude co-author trailer: agent-company 3,646 · brand-tool 1,122 · email-agent 988 (excluding merges, as of 2026-09-23; the last email-agent commit was 09-02). My own commits across the four repositories total 7,276 (excluding merges, counted 2026-09-23). I run several Claude Code sessions in parallel. I assume the agents will make mistakes. The section "Where the AI was wrong and I caught it" below is the record.',
     image: null,
     loopTitle: 'Work loop',
     loop: [
@@ -888,9 +848,9 @@ const en = {
     ],
     nowTitle: 'Now',
     now: [
-      'Vendor support answers routine inquiries. Slack handoff for unresolved questions is controlled by a feature flag that defaults off in the repository.',
-      'I raised the seller-finder target cap to 2,000 (09-22).',
-      "I'm adding more operational monitoring. I added a monitor for dropped Claude logins on 09-23.",
+      'I am verifying the vendor support chatbot in a test room. Real partner rooms will be turned on one room at a time.',
+      'I am adding monitoring that catches failures that stop silently. In early October I changed a health check that reported "healthy" even when the database had stopped, so it now checks the database too.',
+      'I upgraded the cost tracking tool (Langfuse) to a new version (10-04).',
     ],
     timelineTitle: 'StyleSeller month by month',
     timeline: [
@@ -902,7 +862,8 @@ const en = {
       { month: '2026-06', text: 'Removed Claude from LiteLLM and moved to Gemini (06-06); started the vendor support backend (06-29)' },
       { month: '2026-07', text: 'Started Spark and Work OS (07-18 to 07-19); expanded the knowledge hub to multiple workspaces (07-10)' },
       { month: '2026-08', text: 'Moved the work tool database to self-hosting in a single day (08-20); started personalized KakaoTalk campaigns (08-24)' },
-      { month: '2026-09', text: 'Vendor support "always answer" policy (09-02) and test-room validation (09-15 onward); registered 11 staff PCs (09-16)' },
+      { month: '2026-09', text: 'Vendor support chatbot test-room validation (09-15 onward); registered 11 staff PCs (09-16); seller-finder workers on staff PCs' },
+      { month: '2026-10', text: 'Stronger monitoring for silent failures; Langfuse upgrade' },
     ],
     repoPeriods: 'Active period per repository: brand-tool 2026-03 onward · email-agent 2026-03 onward (last commit 09-02) · agent-company 2026-05 onward · kakaocli 2026-06 to 09 · Instagram DM 2026-02 to 07',
     experienceTitle: 'Journey',
