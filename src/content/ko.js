@@ -61,7 +61,7 @@ const ko = {
       { id: 'email-agent', label: '③ 메일 에이전트와 지식 허브', caseId: 'email-agent' },
       { id: 'company-os', label: '④ Spark · Work OS', caseId: 'company-os' },
       { id: 'field-fleet', label: '⑤ 직원 PC 배포 · 운영 인프라', caseId: 'field-fleet' },
-      { id: 'instagram-dm', label: '⑥ Instagram DM 자동화 (휴면)' },
+      { id: 'instagram-dm', label: '⑥ Instagram DM 자동화' },
     ],
     layers: [
       {
@@ -321,7 +321,7 @@ const ko = {
           points: [
             '기존 Node 발송기를 TS로 옮기며 시작했습니다.',
             '대상은 이미 카톡 채널로 이어진 셀러 연락처입니다. 셀러찾기 결과는 인스타 ID·이메일로 대조만 합니다.',
-            '셀러별 맞춤 상품은 외부 CRM이 카톡방 판매 이력으로 고르고, brand-tool은 판매가 끝난 상품을 걸러 카드로 만듭니다.',
+            '셀러별 맞춤 상품은 외부 CRM이 카톡방 판매 이력과 인스타그램 피드 분석으로 고르고, brand-tool은 판매가 끝난 상품을 걸러 카드로 만듭니다.',
             '대체 상품은 CRM 조회가 성공하고 0건일 때만 붙입니다. 조회 실패는 0건으로 치지 않습니다.',
             '채널톡은 VM의 Playwright 채널 워커가, 개인톡은 맥의 kakaocli가 보냅니다. 500명 이상 발송은 승인 대기로 들어갑니다.',
             '답장은 규칙 사전으로 판정하고, 거절은 후보로 띄워 사람이 누릅니다.',
@@ -339,7 +339,7 @@ const ko = {
       ],
       results: [
         '제안서 가격은 엑셀 손계산 대신 업무툴의 코드가 계산합니다. 실무자와 맞춘 43건이 그 기준표입니다.',
-        '맞춤카톡은 2026-09-22 하루 261명에게 발송했습니다. 셀러마다 판매 이력에 맞춘 상품 카드가 갑니다.',
+        '맞춤카톡은 2026-09-22 하루 261명에게 발송했습니다. 셀러마다 판매 이력과 인스타그램 피드에 맞춘 상품 카드가 갑니다.',
         '인스타 셀러 리스트업을 사람이 손으로 하던 일에서 직원 PC 워커 9대가 도는 일로 옮겼습니다(2026-09-18 기준).',
         '새 상품마다 사람이 고르던 판매 파트너사를 업무툴이 추천하고, 제안 카톡까지 큐로 보냅니다(2026-09-24 기준 운영 중).',
         '직원이 로그인해 쓰는 화면 14개, 상단 메뉴 6개(Spark·상품·제안서·벤더사·셀러·콘텐츠)입니다 (2026-09-23 기준).',
@@ -621,10 +621,10 @@ const ko = {
       slug: 'field-fleet',
       logo: '/images/logo9.png',
       status: 'live',
-      statusNote: 'Instagram DM 확장은 휴면',
+      statusNote: 'Instagram DM 확장은 7월 이후 쉬었다가 10월부터 다시 운영 중',
       title: '직원 PC 배포와 운영 — 서버가 못 하는 일을 직원 PC에서, 안전하게',
       shortTitle: '직원 PC 배포 · 운영 인프라',
-      period: '2026.02 ~ 현재 (Instagram DM 확장 2026.02–07, 카톡 도구 2026.05~)',
+      period: '2026.02 ~ 현재 (Instagram DM 확장 2026.02~, 카톡 도구 2026.05~)',
       role: ROLE,
       chain:
         'kakaocli(직원 맥) · 윈도우 수집기 → agent-company(설치 호스트·relay·워커·발송기·VM compose) → brand-tool(셀러찾기 잡·워커 키·VM 배포) · email-agent(같은 VM의 스택)',
@@ -702,7 +702,7 @@ const ko = {
       results: [
         '직원 PC 11대 등록 (맥 6·윈도우 5, 2026-09-16 운영 기록, 개발자 본인·공용 계정 PC 포함)',
         '셀러찾기 워커 PC 9대 (2026-09-18). 그중 윈도우 1대는 일부러 꺼 두었습니다.',
-        'Instagram DM 확장은 2026-07-01 마지막 커밋 뒤 휴면입니다.',
+        'Instagram DM 확장은 7월에 잠시 멈췄다가 2026-10부터 다시 운영하고 있습니다.',
       ],
       limits: [
         '윈도우 카톡 수집기는 아직 위의 갱신 원칙을 못 따릅니다. 자동 갱신기가 없어 새 판은 재설치로 들어갑니다. 다음 작업입니다.',
@@ -860,7 +860,7 @@ const ko = {
       { month: '2026.09', text: '벤더 CS 챗봇 테스트 방 검증(09-15~), 직원 PC 11대 등록(09-16), 셀러찾기 직원 PC 워커' },
       { month: '2026.10', text: '조용한 장애 감시 강화, Langfuse 업그레이드' },
     ],
-    repoPeriods: '저장소별 기간: brand-tool 2026.03~ · email-agent 2026.03~(마지막 커밋 09-02) · agent-company 2026.05~ · kakaocli 2026.06~09 · Instagram DM 2026.02–07',
+    repoPeriods: '저장소별 기간: brand-tool 2026.03~ · email-agent 2026.03~(마지막 커밋 09-02) · agent-company 2026.05~ · kakaocli 2026.06~09 · Instagram DM 2026.02~(마지막 커밋 07-01)',
     experienceTitle: 'Journey',
     experienceLead: '법학 전공에서 AI 에이전트 엔지니어까지',
     careerChangeLabel: 'Career Change',
