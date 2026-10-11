@@ -21,8 +21,8 @@ const en = {
     company:
       'StyleSeller is a commerce platform that operates sales for creator sellers and brands.',
     metrics: [
-      { value: '14', label: 'work tool screens staff log in to', basis: 'Proposals, Products, Vendors, Sellers, Spark, and Content menus · 2026-09-23' },
-      { value: '43', label: 'price calculations matched with sales staff', basis: 'test cases matched cell by cell while moving the Excel price sheet into code' },
+      { value: '18', label: 'staff work screens', basis: 'excluding login; Proposals, Products, Vendors, Sellers, Spark, and Content menus · as of 2026-09-23' },
+      { value: '43', label: 'unit tests verifying price calculation', basis: 'Google Sheet price formulas moved into code, verified with 43 unit tests, some cross-checked against real sheet values' },
       { value: '11', label: 'staff PCs deployed and maintained', basis: 'KakaoTalk sync registrations · 6 Macs and 5 Windows PCs · 2026-09-16' },
       { value: '261', label: 'sellers sent personalized KakaoTalk messages in one day', basis: 'as of 2026-09-22' },
     ],
@@ -67,7 +67,7 @@ const en = {
     layers: [
       {
         name: 'People',
-        desc: 'The work tool (brand-tool, 14 screens) · the Kakao CS Copilot extension (MV3) · Slack (briefings and summaries). Human control sits in three places: approval cards inside Spark chat (the approval record is rechecked in the database right before execution), a hold queue for personalized KakaoTalk campaigns with 500 or more recipients, and a per-room allowlist for the vendor support chatbot.',
+        desc: 'The work tool (brand-tool, 18 staff work screens excluding login, as of 2026-09-23) · the Kakao CS Copilot extension (MV3) · Slack (briefings and summaries). Human control sits in three places: approval cards inside Spark chat (the approval record is rechecked in the database right before execution), a hold queue for personalized KakaoTalk campaigns with 500 or more recipients, and a per-room allowlist for the vendor support chatbot.',
       },
       {
         name: 'Agents',
@@ -242,8 +242,8 @@ const en = {
       chain: 'brand-tool → n8n → email-agent (knowledge hub) → agent-company (staff PC workers, send workers) → styleseller-kakaocli',
       oneLiner: 'Sales staff used to work out every proposal by hand in Excel. I moved that into the internal work tool, and now product registration, sales partner recommendations, seller discovery, and personalized KakaoTalk messages happen there too.',
       tldr: [
-        'I moved the pricing formulas into code and checked 43 cases against them with the staff who use them. Code calculates the amounts; AI only helps with the copy edits you ask for.',
-        'It grew to 14 work screens: supplier catalog intake, sales partner recommendations, seller discovery, and KakaoTalk campaigns to sellers.',
+        'I moved the Google Sheet pricing formulas into code and verified them with 43 unit tests, some cross-checked against real sheet values. Code calculates the amounts; AI only helps with the copy edits you ask for.',
+        'It grew to 18 staff work screens (excluding login, as of 2026-09-23): supplier catalog intake, sales partner recommendations, seller discovery, and KakaoTalk campaigns to sellers.',
         'Created proposals and send requests are kept as work records, and proposals export to PDF or Excel.',
       ],
       problem: [
@@ -263,8 +263,8 @@ const en = {
           why: 'This stops a failure where I asked it to change only the margin and it changed the price too.',
         },
         {
-          choice: 'Check the pricing formulas cell by cell with the staff who use them',
-          why: "The formulas are the company's pricing policy, so from 04-24 to 07-13 I matched the numbers with them. The 43 calculation test cases are that comparison sheet.",
+          choice: 'Move the pricing formulas into code and verify them with tests',
+          why: "The formulas are the company's pricing policy, so I moved the Google Sheet formulas into code and verified them with 43 unit tests, some cross-checked against real sheet values.",
         },
         {
           choice: 'Match candidates = rule score ∪ vector search, and the LLM makes the final call',
@@ -342,11 +342,11 @@ const en = {
         },
       ],
       results: [
-        'Proposal prices are calculated by code in the work tool instead of by hand in Excel. The 43 cases matched with staff are its reference sheet.',
+        'Proposal prices are calculated by code in the work tool instead of by hand in Excel, verified with 43 unit tests, some cross-checked against real sheet values.',
         'Personalized KakaoTalk campaigns reached 261 people on 2026-09-22. Each seller gets product cards matched to their sales history and Instagram feed.',
         'Instagram seller listing moved from manual work to workers running on 9 staff PCs (as of 2026-09-18).',
         'For each new product, the work tool recommends the sales partners that someone used to pick by hand, and queues the pitch KakaoTalk message too (in production as of 2026-09-24).',
-        '14 screens staff log in to use, with 6 top-level menus (Spark, Products, Proposals, Vendors, Sellers, Content) (as of 2026-09-23).',
+        '18 staff work screens (excluding login), with 6 top-level menus (Spark, Products, Proposals, Vendors, Sellers, Content) (as of 2026-09-23).',
         'The work tool is both the staff screens and the business data backend that the vendor support agent and Spark call.',
         "I closed the external partner portal (2026-04-28 to 09-17) with a switch and kept the code. Its features moved into the company's official partner center, and I left redirects so old links still work.",
       ],
@@ -376,10 +376,10 @@ const en = {
           guard: 'I kept a psql reproduction test. The old function cancels 2/2; the new one cancels 0.',
         },
       ],
-      stack: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind 4', 'Vitest', 'Postgres 16 + PostgREST', 'Vertex AI Gemini 2.5', 'LightRAG (email-agent)', 'n8n', 'Playwright', 'Docker', 'GitHub Actions', 'kakaocli (Swift)'],
+      stack: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind 4', 'Vitest', 'Postgres 16 + PostgREST', 'Vertex AI Gemini 2.5', 'LightRAG (email-agent)', 'n8n', 'Docker', 'GitHub Actions', 'kakaocli (Swift)'],
       scale: [
         '1,458 brand-tool commits (excluding merges, as of 2026-09-23)',
-        '134 API routes, 130 database migrations, 205 test files (same basis)',
+        '134 API routes, 130 database migrations, 207 test files (same basis)',
         'Sales partner matching is the feature area with the most commits (309, excluding merges, counted over the matching screens, APIs, and related lib and component paths). Seller finder is 11K lines in the server core + 13K lines in the staff PC worker (the worker count includes tests).',
         'Personalized KakaoTalk campaigns total 34K lines across brand-tool and the agent-company send workers (tests included).',
       ],
@@ -405,11 +405,11 @@ const en = {
       ],
       problem: [
         'The brand and order shared mailboxes get inquiries about brand onboarding, group buys (time-limited sales run by an influencer), partnerships, and proposal reviews.',
-        "Replies must state company facts (terms, past agreements, contacts) correctly. The first version's flat vector search couldn't connect companies, contacts, and past requests.",
+        "Replies must state company facts (terms, past agreements, contacts) correctly. The first version used hybrid vector and full-text search; within days I moved to LightRAG (Neo4j + pgvector) to connect companies, contacts, and past requests as relations.",
         'LLM drafts can slip in unsupported sentences. They had to be filtered out before a person saw the draft.',
       ],
       constraints: [
-        'No automatic external sending. The system stops at the draft, and a person sends it.',
+        'Nothing is sent without human approval. The system stops at the draft, and a person sends it.',
         'To prevent out-of-memory errors, deploys use stop-first, so every deploy drops responses for about 40 seconds (Docker Swarm).',
         'Several internal systems share one knowledge hub. Load from one consumer must not stall the others.',
       ],
@@ -419,8 +419,8 @@ const en = {
           why: "These emails go out under the company's name, and a wrong one can't be taken back. So the draft goes into the assignee's Gmail, and staff edit and send it.",
         },
         {
-          choice: 'Instead of more prompt tuning, a critic catches problems and forces a rewrite',
-          why: 'When it finds a violation, the draft is rewritten and checked again by the same critic.',
+          choice: 'Instead of more prompt tuning, verifiers catch problems and force a rewrite',
+          why: 'Concrete claims are extracted from the draft, and rule checkers plus an LLM verifier compare them against the evidence. Unsupported claims trigger a rewrite; if they remain, the draft is rejected.',
         },
         {
           choice: 'Save edited sent mail as correction knowledge',
@@ -441,8 +441,8 @@ const en = {
           ],
         },
         {
-          title: 'Draft, with grounding enforced in four steps',
-          points: ['Rule-based validator', 'LLM critic (14 check and verification modules)', 'After a rewrite, a second check by the same critic', 'Scoring on 7 criteria (faithfulness to evidence, relevance, tone, and more)'],
+          title: 'Draft, with grounding enforced',
+          points: ['Extract concrete claims from the draft (up to 6)', 'About 10 rule checkers plus an LLM verifier compare them against the evidence', 'Unsupported claims trigger a rewrite', 'If they remain, the draft is rejected'],
         },
         {
           title: 'Gmail draft',
@@ -505,7 +505,7 @@ const en = {
         '1,418 commits (excluding merges, org repository, first commit 2026-03-31 to last commit 09-02). The busiest month was August (449 commits).',
         '44,877 lines of product code + 28,254 lines of tests (Python)',
         '26 API routers, 85 endpoints',
-        '13 LightRAG workspaces, 14 critic and validator modules',
+        '13 LightRAG workspaces, 14 check and verification modules',
       ],
       architectureImages: [{ src: '/images/v3/email-agent-en.png', alt: 'Email agent pipeline' }],
     },
@@ -636,7 +636,7 @@ const en = {
       tldr: [
         'KakaoTalk and Instagram work that the server is blocked from runs on staff Macs and Windows PCs, and I can shut it off remotely.',
         'One-line install, per-tool auto-update, and a key issued per PC mean no database keys live on the PCs.',
-        'The day the server database hit its plan limit and stopped, I moved it to self-hosting the same day without changing the app code.',
+        'The day the server database hit its plan limit and stopped, I moved it to self-hosting the same day by swapping environment variables, leaving the database access code unchanged.',
       ],
       problem: [
         "Instagram cold DMs and personal KakaoTalk chats have no official API. KakaoTalk is Korea's dominant messenger.",
@@ -666,7 +666,7 @@ const en = {
           why: "It doesn't inject code into the KakaoTalk process, and it doesn't rely on fixed addresses that change with every build. That makes it less sensitive to KakaoTalk auto-updates.",
         },
         {
-          choice: 'Deploy only committed images',
+          choice: 'Deploy only images and source built from the deploy commit',
           why: 'If the CI image is missing, the deploy fails and does not fall back to :latest ("Running code from a commit you didn\'t deploy is worse than a failure"). The personalized KakaoTalk campaign worker is swapped only when 0 sends are in progress.',
         },
       ],
@@ -717,7 +717,7 @@ const en = {
           title: "The work tool's whole API stopped when the cloud database hit its transfer limit (2026-08-20)",
           symptom: "brand-tool's dedicated cloud database went over its data transfer limit, and every API call was blocked.",
           cause: 'The plan limit of the managed cloud database.',
-          fix: 'A full search confirmed that all 27 API routes used only the REST protocol. I stood up Postgres + PostgREST + nginx on the VM and migrated and recovered the same day, with the app code unchanged.',
+          fix: 'A full search confirmed that all 27 API routes used only the REST protocol. I stood up Postgres + PostgREST + nginx on the VM and migrated and recovered the same day by swapping environment variables, leaving the database access code unchanged (Edge Functions were ported to app routes).',
           guard: 'All 4 databases moved to self-hosting the same way (08-06 to 08-25; this one on 08-20). The code stayed; only the URLs changed.',
         },
         {
@@ -759,7 +759,7 @@ const en = {
       { step: 'Test first', desc: 'I write a reproduction test, then implement.' },
       { step: 'Cross review', desc: 'Two agents from different sources review the change separately. In one commit, adversarial review caught 6 real defects (2026-09-09).' },
       { step: 'Real-device check', desc: 'I check on real PCs and real screens, and turn features on in stages, starting with a test room and one person.' },
-      { step: 'Deploy check', desc: 'I judge a deploy by the hash of the running code, not by the image date.' },
+      { step: 'Deploy check', desc: 'I deploy only images and source tagged with the deploy commit sha (never falling back to :latest), then check the running code directly after the deploy.' },
     ],
     harnessTitle: 'Harness — turning agent mistakes into rules',
     harness: [
@@ -800,7 +800,7 @@ const en = {
     incidents: [
       { title: 'Green tests ≠ correct wiring', lesson: 'If no test goes through a branch, even a missing import stays green. I start the real process and run it through the catch path too.' },
       { title: "Not finding it once doesn't mean it isn't there", lesson: 'Before I report that something is missing, I recheck the time range, what I searched, and the entry and exit points.' },
-      { title: 'Judge by the running code', lesson: 'I confirm deploys by the hash of the code that is running.' },
+      { title: 'Judge by the running code', lesson: 'After a deploy, I check the code that is actually running.' },
       { title: 'No irreversible bulk conversions', lesson: 'I change code to accept both the old and new formats.' },
       { title: 'Turn things off with a switch', lesson: 'I count real usage first, then shut things down by switching them off and keeping the files.' },
     ],

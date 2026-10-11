@@ -16,7 +16,7 @@ test('renders the English portfolio hero and accessible showreel controls', () =
   expect(projectTranscript).toContain('I turn repetitive office work into AI systems that run every day.');
   expect(projectTranscript).toContain('Gemini reads PDFs, images, slides, spreadsheets, and URLs');
   expect(projectTranscript).toContain('AI edits requested fields. Code recalculates every price.');
-  expect(projectTranscript).toContain('checked 43 calculation cases with staff');
+  expect(projectTranscript).toContain('verified with 43 unit tests, some cross-checked against real sheet values');
   expect(projectTranscript).toContain('An LLM scores 30 candidates at a time; 5+/10 qualifies for staff review.');
   expect(projectTranscript).toContain('A failed CRM lookup is never a confirmed zero.');
   expect(projectTranscript).toContain('Substitutes require a successful empty result, not a failed lookup.');
@@ -34,7 +34,7 @@ test('renders the English portfolio hero and accessible showreel controls', () =
   expect(document.querySelector('.brandtool-window').textContent).toContain('Seller version');
   expect(document.querySelector('.film-stage').textContent).not.toContain('brand-tool');
   expect(screen.getByRole('link', { name: 'Email me' })).toHaveAttribute('href', 'mailto:jinheemok815@gmail.com');
-  expect(screen.getByText('price calculations matched with sales staff')).toBeInTheDocument();
+  expect(screen.getByText('unit tests verifying price calculation')).toBeInTheDocument();
   expect(screen.getByText('sellers sent personalized KakaoTalk messages in one day')).toBeInTheDocument();
 
   fireEvent.click(screen.getByRole('button', { name: 'Pause' }));
@@ -63,7 +63,7 @@ test('keeps the Korean hero copy and résumé link on the Korean route', () => {
   expect(projectTranscript).toContain('현업의 반복 업무를 매일 돌아가는 AI 시스템으로 바꿉니다.');
   expect(projectTranscript).toContain('PDF·이미지·PPT·엑셀·URL을 Gemini가 읽어 상품 데이터로 구조화');
   expect(projectTranscript).toContain('AI는 요청 필드만 수정. 가격은 코드가 재계산.');
-  expect(projectTranscript).toContain('실무자와 계산 43건을 대조했습니다.');
+  expect(projectTranscript).toContain('테스트 43개로 검증했습니다(일부는 실제 상품의 시트 값과 대조).');
   expect(projectTranscript).toContain('LLM이 30개씩 0~10점 판정하고, 5점 이상을 직원이 검토합니다.');
   expect(projectTranscript).toContain('CRM 조회 실패를 ‘결과 0건’으로 보지 않습니다.');
   expect(projectTranscript).toContain('대체 상품은 CRM 조회가 성공하고 0건일 때만 붙입니다.');
@@ -78,7 +78,7 @@ test('keeps the Korean hero copy and résumé link on the Korean route', () => {
   expect(document.querySelector('.brandtool-window').textContent).toContain('업무툴 · 제안서');
   expect(document.querySelector('.film-stage').textContent).not.toContain('brand-tool');
   expect(document.querySelector('.intro').textContent).toContain('현업의 반복 업무를 매일 돌아가는 AI 시스템으로');
-  expect(screen.getByText('실무자와 대조한 가격 계산')).toBeInTheDocument();
+  expect(screen.getByText('가격 계산 검증 테스트')).toBeInTheDocument();
   expect(screen.getByText('하루에 보낸 셀러 맞춤 카톡')).toBeInTheDocument();
   expect(screen.getByRole('link', { name: '경력기술서 (PDF)' })).toHaveAttribute(
     'href',
