@@ -61,7 +61,7 @@ test('keeps the Korean hero copy and résumé link on the Korean route', () => {
   expect(screen.getByText(/상품은 AI가 읽고, 가격은 코드가 책임집니다/)).toBeInTheDocument();
   const projectTranscript = document.querySelector('.project-transcript').textContent;
   expect(projectTranscript).toContain('현업의 반복 업무를 매일 돌아가는 AI 시스템으로 바꿉니다.');
-  expect(projectTranscript).toContain('PDF·이미지·PPT·엑셀·URL을 Gemini가 읽어 상품 데이터로 구조화');
+  expect(projectTranscript).toContain('PDF·이미지·PPT·엑셀·URL을 Gemini가 읽어 상품 후보로 뽑고');
   expect(projectTranscript).toContain('AI는 요청 필드만 수정. 가격은 코드가 재계산.');
   expect(projectTranscript).toContain('테스트 43개로 검증했습니다(일부는 실제 상품의 시트 값과 대조).');
   expect(projectTranscript).toContain('LLM이 30개씩 0~10점 판정하고, 5점 이상을 직원이 검토합니다.');
@@ -94,7 +94,7 @@ test('organizes the Korean How I Build page into balanced, readable cards', () =
   );
 
   expect(screen.getByRole('heading', { level: 1, name: 'How I Build with AI' })).toBeInTheDocument();
-  expect(screen.getByText('설계·개발·운영 1인. 코드는 Claude Code로 쓰고, 아키텍처·규칙·검증·롤아웃은 직접 판단했습니다.')).toBeInTheDocument();
+  expect(screen.getByText('설계·개발·운영 담당. 코드는 Claude Code로 쓰고, 아키텍처·규칙·검증·롤아웃은 직접 판단했습니다.')).toBeInTheDocument();
   expect(screen.getByText(/네 저장소의 본인 커밋은 합 7,276개입니다/)).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: '하네스 — 에이전트 실수를 규칙으로 막기' })).toBeInTheDocument();
   expect(document.querySelectorAll('.harness-grid article')).toHaveLength(6);
