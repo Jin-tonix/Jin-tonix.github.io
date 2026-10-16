@@ -139,7 +139,7 @@ const en = {
         },
         {
           choice: 'No company-wide tools for an external vendor chatbot',
-          why: 'The Spark MCP tools, which query the whole company, were also open to the chatbot that answers outside vendors. On 2026-08-13 I removed them from the tool schema and blocked their execution (fail-closed). The chatbot uses only vendor support lookup tools.',
+          why: 'The Spark MCP tools, which query the whole company, were also open to the chatbot that answers outside vendors. I removed them from the tool schema and blocked their execution (fail-closed). The chatbot uses only vendor support lookup tools.',
         },
         {
           choice: 'One model',
@@ -200,14 +200,6 @@ const en = {
         'The Windows collector has no auto-updater. New versions arrive by reinstalling. The Mac collector updates once a day.',
       ],
       incidents: [
-        {
-          title: "Answered with another vendor's individual case as if it were general policy (2026-08-13, found in production)",
-          symptom: 'The bot stated terms agreed with only one vendor as if they were company-wide policy. The existing grounding checker missed most cases.',
-          cause: 'Past support transcripts were stored with vendor names intact, so they came back in search mixed with shared knowledge.',
-          fix: 'At the tool step, mentions of other vendors are replaced with an "another vendor" placeholder, and a deterministic gate sits at the final step.',
-          guard:
-            'On 08-18 the final gate mistook brand names for vendor names and stripped them. On 08-30 I changed regex blocking to "regex trigger + LLM check."',
-        },
         {
           title: 'Send jobs never finished and ended as permanent failures (2026-08-17 to 18)',
           cause: 'An accessibility call that queries the KakaoTalk window state ignored its timeout setting and waited forever.',
@@ -782,10 +774,9 @@ const en = {
         ],
       },
       {
-        title: 'A leak guard where rules overrode judgment (2026-08-13 to 08-30)',
+        title: 'A leak guard where rules overrode judgment (2026-08-18 to 08-30)',
         points: [
-          "The bot answered with another vendor's individual terms as if they were company policy. The existing LLM grounding checker missed most of these cases.",
-          'I added deterministic substitution and a final gate. Then the regex started blocking on its own and skipped the LLM check.',
+          'To keep other vendors\' information out of answers, I added deterministic substitution and a final gate. Then the regex started blocking on its own and skipped the LLM check.',
           'I kept the regex as a trigger only. The decision moved to an LLM check.',
         ],
       },
@@ -842,7 +833,7 @@ const en = {
     tagline: "I'm Jinhee Mok, an AI engineer who turns repetitive work into AI systems.",
     paragraphs: [
       'I take the work people repeat by hand every day, move it into AI agents and automation, and then ship and run those systems myself.',
-      'I joined StyleSeller in December 2025 and started building in February 2026 (Developer, owner of AI and automation). Starting from seller DMs, I built and now run vendor support, the work tool, the email agent and knowledge hub, Spark · Work OS, and staff PC deployment.',
+      'I joined StyleSeller in November 2025 and work as a PL in the business team. Starting from seller DMs, I built and now run vendor support, the work tool, the email agent and knowledge hub, Spark · Work OS, and staff PC deployment.',
       'Claude Code writes a lot of my code, but what to build and whether it works are my calls. Nothing is done until it has run on a real staff PC.',
       'I studied law, taught English, and managed a daycare before moving into software; a We:Review internship automating receipts with OCR + LLM started this work.',
       'I want to build workplaces where systems take the repetition and people keep the judgment.',
@@ -855,8 +846,9 @@ const en = {
     ],
     timelineTitle: 'StyleSeller month by month',
     timeline: [
-      { month: '2025-12 to 2026-01', text: 'Joined' },
-      { month: '2026-02', text: 'Started building. First commit on Instagram DM automation (02-08), moved it to a Chrome extension (02-27)' },
+      { month: '2025-11', text: 'Joined, learned the team\'s work' },
+      { month: '2025-12 to 2026-01', text: 'Started automating team work' },
+      { month: '2026-02', text: 'First commit on Instagram DM automation (02-08), moved it to a Chrome extension (02-27)' },
       { month: '2026-03', text: 'First brand-tool commit — a pricing calculator and proposals moved over from a Google Sheet price sheet (03-31)' },
       { month: '2026-04', text: 'Added a LightRAG knowledge graph to email-agent (04-03); AI parsing of supplier catalogs' },
       { month: '2026-05', text: 'Started agent-company (05-16, Paperclip fork); KakaoTalk CS Chrome extension (05-24)' },
@@ -871,8 +863,8 @@ const en = {
     experienceLead: 'From a law degree to AI Engineer (Agents & Automation)',
     careerChangeLabel: 'Career Change',
     experience: [
-      { period: '2025-12 – present', org: 'StyleSeller · Developer (owner of AI and automation)', summary: 'Design, build, and run the internal AI work systems (building since 2026-02)', kind: 'tech' },
-      { period: '2025-08 – 2025-10', org: 'We:Review (Welead) · intern', summary: 'Built an OCR + LLM receipt review pipeline on my own', kind: 'tech' },
+      { period: '2025-11 – present', org: 'StyleSeller · PL (business team)', summary: 'Design, build, and run the internal AI work systems', kind: 'tech' },
+      { period: '2025-08 – 2025-10', org: 'We:Review (Welead) · intern', summary: 'Built an OCR + LLM receipt review pipeline', kind: 'tech' },
       { period: '2025-05 – 2025-07', org: 'Korea IT Business Promotion Association', summary: 'Generative AI developer training program', kind: 'tech' },
       { period: '2024-10 – 2024-12', org: 'HiMedia Academy · AI course', summary: 'AI projects with industry mentors (Briefify, FitChecker)', kind: 'tech' },
       { period: '2024-04 – 2024-10', org: 'HiMedia Academy · full-stack course', summary: 'Spring Boot and Vue.js team projects; collaboration and version control', kind: 'tech', careerChange: true },
