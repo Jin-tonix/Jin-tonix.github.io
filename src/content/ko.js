@@ -34,7 +34,7 @@ const ko = {
       { term: '판매 파트너사', desc: '셀러와 함께 공구를 여는 판매사. 업무툴 화면의 "벤더사"' },
       { term: '벤더(거래처)', desc: '벤더 CS 사례에서는 브랜드와 판매 파트너사를 함께 가리킵니다' },
     ],
-    casesTitle: 'StyleSeller 사례 5개',
+    casesTitle: 'StyleSeller 사례 7개',
     glanceTitle: '한눈에 보기',
     glanceIntro:
       'StyleSeller(크리에이터 셀러와 브랜드의 판매를 운영하는 커머스 플랫폼) 비즈니스 부서에서 PL(프로젝트 리더)로 일합니다. 직원이 손으로 반복하던 거래처 기록 정리와 응대를 AI 에이전트(도구를 직접 쓰는 AI)와 자동화로 옮겨 운영합니다. 2026-10-24 기준 현황판은 거래 상대 352곳을 첫 연락부터 정산까지 단계별로 보여 주고, 벤더 CS 챗봇은 근거를 찾은 질문에만 답합니다. 코드는 Claude Code에 많이 맡기고, 무엇을 만들지, 어디까지 켜 둘지, 결과가 맞는지는 제가 정하고 확인합니다.',
@@ -42,10 +42,10 @@ const ko = {
   systemMap: {
     title: 'System Map',
     intro:
-      'Instagram DM 자동화에서 시작했습니다(2026-02). 지금은 저장소 네 개가 한 운영 시스템으로 맞물립니다. 직원은 업무툴, 크롬 확장 패널, Slack에서 일합니다. 뒤에서는 에이전트와 직원 PC 워커가 같은 DB와 하나의 지식 허브를 나눠 씁니다. 번호를 누르면 해당 사례로 이동합니다.',
+      '사례 7개가 이어지는 모습입니다. 카톡 방·메일함·Slack·업무 웹으로 들어온 일을 에이전트가 처리하고, 공용 지식과 직원 PC가 뒤를 받칩니다. 쓰기와 발송, 게시는 사람이 승인합니다. 번호를 누르면 해당 사례로 이동합니다.',
     image: '/images/v3/system-map-ko.png',
     zoomHint: '탭하면 크게 보기',
-    imageAlt: 'StyleSeller AI 운영 시스템 전체 지도',
+    imageAlt: 'StyleSeller 운영 시스템 지도. 사례 7개의 입력, 에이전트, 지식, 직원 PC와 사람 승인 단계',
     reposTitle: '저장소별 역할',
     repos: [
       { name: 'brand-tool', role: '직원이 쓰는 업무툴, 판매 파트너사·상품 데이터' },
@@ -59,12 +59,13 @@ const ko = {
       '예: Spark 질문 한 건은 업무툴 → 에이전트 서버 → 업무툴 API·업무 DB·지식 허브 검색을 지납니다.',
     ],
     nodes: [
-      { id: 'vendor-cs', label: '① 벤더 CS', caseId: 'vendor-cs' },
-      { id: 'ss-worktool', label: '② 업무툴', caseId: 'ss-worktool' },
-      { id: 'email-agent', label: '③ 메일 에이전트와 지식 허브', caseId: 'email-agent' },
-      { id: 'agent-platform', label: '④ Spark · Work OS', caseId: 'agent-platform' },
-      { id: 'field-fleet', label: '⑤ 직원 PC 배포 · 운영 인프라', caseId: 'field-fleet' },
-      { id: 'instagram-dm', label: '⑥ Instagram DM 자동화' },
+      { id: 'status-board', label: '① 현황판 · 운영 원장', caseId: 'status-board' },
+      { id: 'vendor-cs', label: '② 벤더 CS 에이전트', caseId: 'vendor-cs' },
+      { id: 'ss-worktool', label: '③ 사내 업무툴', caseId: 'ss-worktool' },
+      { id: 'email-agent', label: '④ LightRAG 지식 허브 · 메일 에이전트', caseId: 'email-agent' },
+      { id: 'agent-platform', label: '⑤ 에이전트 플랫폼 · Spark', caseId: 'agent-platform' },
+      { id: 'content-autopilot', label: '⑥ 콘텐츠 오토파일럿', caseId: 'content-autopilot' },
+      { id: 'field-fleet', label: '⑦ 직원 PC 배포 · 운영', caseId: 'field-fleet' },
     ],
     layers: [
       {

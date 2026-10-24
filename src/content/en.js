@@ -34,17 +34,17 @@ const en = {
       { term: 'Vendor', desc: 'In the vendor support case, this means brands and sales partners together' },
       { term: 'KakaoTalk', desc: "Korea's dominant messenger. Personal chats have no official API" },
     ],
-    casesTitle: 'Five StyleSeller cases',
+    casesTitle: 'Seven StyleSeller cases',
     glanceTitle: 'At a glance',
     glanceIntro: 'Seven systems I designed, built, and run at StyleSeller. Full case write-ups are in Korean.',
   },
   systemMap: {
     title: 'System Map',
     intro:
-      'It started as Instagram DM automation (2026-02). Today four repositories work together as one operating system. Staff work in the internal work tool, a Chrome extension, and Slack. Behind them, agents and staff PC workers share the same databases and one knowledge hub. Click a number to jump to that case.',
+      'How the 7 cases connect. Work arrives through KakaoTalk rooms, mailboxes, Slack, and the work tool, agents handle it, and shared knowledge and staff PCs support them. Staff approve anything that writes, sends, or publishes. Click a number to jump to that case.',
     image: '/images/v3/system-map-en.png',
     zoomHint: 'Tap to enlarge',
-    imageAlt: 'Map of the StyleSeller AI operations system',
+    imageAlt: 'Map of the StyleSeller operating system: inputs, agents, knowledge, staff PCs, and human approval across the 7 cases',
     reposTitle: 'What each repository does',
     repos: [
       { name: 'brand-tool', role: 'The work tool staff use; sales partner and product data' },
@@ -58,12 +58,13 @@ const en = {
       'Example: one Spark question goes from the work tool → the agent server → the work tool API, the work databases, and knowledge hub search.',
     ],
     nodes: [
-      { id: 'vendor-cs', label: '① Vendor support', caseId: 'vendor-cs' },
-      { id: 'ss-worktool', label: '② Work tool', caseId: 'ss-worktool' },
-      { id: 'email-agent', label: '③ Email agent and knowledge hub', caseId: 'email-agent' },
-      { id: 'agent-platform', label: '④ Spark · Work OS', caseId: 'agent-platform' },
-      { id: 'field-fleet', label: '⑤ Staff PC deployment · ops infrastructure', caseId: 'field-fleet' },
-      { id: 'instagram-dm', label: '⑥ Instagram DM automation' },
+      { id: 'status-board', label: '① Status board · ledger', caseId: 'status-board' },
+      { id: 'vendor-cs', label: '② Vendor CS agent', caseId: 'vendor-cs' },
+      { id: 'ss-worktool', label: '③ Internal work tool', caseId: 'ss-worktool' },
+      { id: 'email-agent', label: '④ LightRAG knowledge hub · email agent', caseId: 'email-agent' },
+      { id: 'agent-platform', label: '⑤ Agent platform · Spark', caseId: 'agent-platform' },
+      { id: 'content-autopilot', label: '⑥ Content autopilot', caseId: 'content-autopilot' },
+      { id: 'field-fleet', label: '⑦ Staff PC fleet', caseId: 'field-fleet' },
     ],
     layers: [
       {

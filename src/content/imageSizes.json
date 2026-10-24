@@ -53,8 +53,8 @@
   "/images/v3/status-board-ko.png": [1800,900],
   "/images/v3/status-board-screen-a.jpg": [1518,784],
   "/images/v3/status-board-screen-b.jpg": [1518,784],
-  "/images/v3/system-map-en.png": [2560,2588],
-  "/images/v3/system-map-ko.png": [2560,2460],
+  "/images/v3/system-map-en.png": [2560,2200],
+  "/images/v3/system-map-ko.png": [2560,2080],
   "/images/v3/vendor-cs-en.png": [2560,2628],
   "/images/v3/vendor-cs-ko.png": [2560,2342]
 }
