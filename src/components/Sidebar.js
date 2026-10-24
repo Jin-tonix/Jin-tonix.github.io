@@ -307,6 +307,11 @@ export default function Sidebar() {
           <a href={nav.resume.href} target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon icon={faFilePdf} /> <span className="label">{nav.resume.label}</span>
           </a>
+          {nav.portfolio && (
+            <a href={nav.portfolio.href} target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faFilePdf} /> <span className="label">{nav.portfolio.label}</span>
+            </a>
+          )}
           <a href="https://github.com/Jin-tonix" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon icon={faGithub} /> <span className="label">GitHub</span>
           </a>
@@ -317,7 +322,7 @@ export default function Sidebar() {
             <FontAwesomeIcon icon={faEnvelope} /> <span className="label">Email</span>
           </a>
           <div className="updated" style={{ marginTop: '10px', fontSize: 'clamp(0.6em, 1.1vw, 0.75em)', color: color.muted, textAlign: 'center' }}>
-            Last Updated: 2026.10.24
+            Last Updated: 2026.10.25
           </div>
         </div>
       </div>

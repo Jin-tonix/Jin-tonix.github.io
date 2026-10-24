@@ -10,6 +10,7 @@ const en = {
     projects: 'Projects',
     build: 'How I Build',
     resume: { label: 'Career description', href: '/files/career-description-en.pdf' },
+    portfolio: { label: 'Portfolio (PDF)', href: '/files/portfolio-en.pdf' },
     langSwitchLabel: 'KO',
     koOnlyNote: 'Korean only',
   },

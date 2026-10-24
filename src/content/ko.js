@@ -10,6 +10,7 @@ const ko = {
     projects: 'Projects',
     build: 'How I Build',
     resume: { label: '경력기술서', href: '/files/career-description-ko.pdf' },
+    portfolio: { label: '포트폴리오 PDF', href: '/files/portfolio-ko.pdf' },
     langSwitchLabel: 'EN',
     koOnlyNote: '한국어만 제공',
   },
