@@ -86,7 +86,7 @@ const en = {
       },
       {
         name: 'Data and infra',
-        desc: 'The business web app (Next.js) runs on Vercel; about 20 FastAPI services, the databases, and the LLM proxy run in Docker on one GCP VM (Compose and Swarm, self-hosted Postgres and PostgREST). Model calls go through LiteLLM, and Langfuse tracks cost. agent-company and brand-tool share one deploy lock.',
+        desc: 'The business web app (Next.js) runs on Vercel; 60 containers (agent services, databases, the LLM proxy, and more) run in Docker on one GCP VM with 4 cores and 17 GB of memory (counted 2026-10-25; Compose and Swarm, self-hosted Postgres and PostgREST). Model calls go through LiteLLM, and Langfuse tracks cost. agent-company and brand-tool share one deploy lock.',
       },
     ],
   },
