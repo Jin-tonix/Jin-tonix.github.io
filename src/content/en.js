@@ -56,6 +56,7 @@ const en = {
     examples: [
       'Example: one vendor support message goes from a staff Mac (collection) → the agent server (should we answer this partner?) → the work tool (the list of partners to serve) and the knowledge hub (search), then back to a staff Mac to be sent.',
       'Example: one Spark question goes from the work tool → the agent server → the work tool API, the work databases, and knowledge hub search.',
+      'Example: the status board summarizes records from KakaoTalk rooms, order@ mail, Slack, and emailed order sheets by day, links them to a counterpart by fixed rules, and puts them on that counterpart\'s calendar. Staff resolve what it cannot link.',
     ],
     nodes: [
       { id: 'status-board', label: '① Status board · ledger', caseId: 'status-board' },
@@ -69,11 +70,11 @@ const en = {
     layers: [
       {
         name: 'People',
-        desc: 'The work tool (brand-tool, 18 staff work screens excluding login, as of 2026-09-23) · the Kakao CS Copilot extension (MV3) · Slack (briefings and summaries). Human control sits in three places: approval cards inside Spark chat (the approval record is rechecked in the database right before execution), a hold queue for personalized KakaoTalk campaigns with 500 or more recipients, and a per-room allowlist for the vendor support chatbot.',
+        desc: 'The work tool (brand-tool: status board, pricing, matching, campaign, and Spark screens) · the Kakao CS Copilot extension (MV3) · Slack (briefings and summaries). Human control sits in three places: approval cards inside Spark chat (the approval record is rechecked in the database right before execution), a hold queue for personalized KakaoTalk campaigns with 500 or more recipients, and a per-room allowlist for the vendor support chatbot.',
       },
       {
         name: 'Agents',
-        desc: 'I forked Paperclip, an open-source agent platform, and built Work OS, Spark, and Tool Registry (an execution gate) on top of it. What runs every day is vendor support collection and logging, influencer CS, Spark, and monitoring and briefing services. Model calls on high-volume paths go through a single LiteLLM proxy.',
+        desc: 'I forked Paperclip, an open-source agent platform, and built Work OS, Spark, and Tool Registry (an execution gate) on top of it. Work that people hand off reaches the CEO agent as a work order and is assigned; workers pick what they need from 109 shared skills (Jev only hints at three candidates). What runs every day is status board collection and summaries, vendor support collection and logging, influencer CS, Spark, and monitoring and briefing services. Model calls go through a single LiteLLM proxy.',
       },
       {
         name: 'Knowledge',
@@ -324,8 +325,8 @@ const en = {
       { period: '2025-05 – 2025-07', org: 'Korea IT Business Promotion Association', summary: 'Generative AI developer training program', kind: 'tech' },
       { period: '2024-10 – 2024-12', org: 'HiMedia Academy · AI course', summary: 'AI projects with industry mentors (LangChain RAG chatbot, OCR and translation pipeline)', kind: 'tech' },
       { period: '2024-04 – 2024-10', org: 'HiMedia Academy · full-stack course', summary: 'Spring Boot and Vue.js team projects; collaboration and version control', kind: 'tech', careerChange: true },
-      { period: '2018-08 – 2024-02', org: 'Monte Kids · Btop Kinder · Jungsang Academy · English teacher', summary: 'Lesson design, teaching materials, and parent consultations', kind: 'pre' },
       { period: '2021-02 – 2023-06', org: 'Academic Credit Bank System · Business Administration', summary: 'Business administration degree program', kind: 'pre' },
+      { period: '2018-08 – 2024-02', org: 'Monte Kids · Btop Kinder · Jungsang Academy · English teacher', summary: 'Lesson design, teaching materials, and parent consultations', kind: 'pre' },
       { period: '2015-03 – 2018-02', org: 'Jeonwon Daycare Center · operations manager', summary: 'Staff management and day-to-day operations', kind: 'pre' },
       { period: '2008-03 – 2012-02', org: 'Cheongju University · B.A. in Law', summary: 'Law major', kind: 'pre' },
     ],
