@@ -1,6 +1,4 @@
 // 영문 콘텐츠 — ko.js 와 같은 사실을 영어로 쓴다 (원고: portfolio-research/v3/content/*.en.md)
-const ROLE = 'Design, build, and operations. I write code with Claude Code; architecture, rules, verification, and rollout decisions are mine.';
-
 const en = {
   lang: 'en',
   nav: {
@@ -9,22 +7,23 @@ const en = {
     skills: 'Skills',
     projects: 'Projects',
     build: 'How I Build',
-    resume: { label: 'Résumé', href: '/resume/Resume_Jinhee_Mok.pdf' },
+    resume: { label: 'Career description', href: '/files/career-description-en.pdf' },
     langSwitchLabel: 'KO',
     koOnlyNote: 'Korean only',
   },
   hero: {
     name: 'Jinhee Mok',
     title: 'AI Engineer',
+    headline: 'I build AI work systems that staff use every day, and design them so people make the final call.',
     intro:
       'I turn repetitive office work into AI systems that run every day. I build and run them.',
     company:
       'StyleSeller is a commerce platform that operates sales for creator sellers and brands.',
     metrics: [
-      { value: '18', label: 'staff work screens', basis: 'excluding login; Proposals, Products, Vendors, Sellers, Spark, and Content menus · as of 2026-09-23' },
-      { value: '43', label: 'unit tests verifying price calculation', basis: 'Google Sheet price formulas moved into code, verified with 43 unit tests, some cross-checked against real sheet values' },
-      { value: '11', label: 'staff PCs deployed and maintained', basis: 'seller collector program (Mac and Windows) · one-line install and auto-update' },
-      { value: '261', label: 'sellers sent personalized KakaoTalk messages in one day', basis: 'as of 2026-09-22' },
+      { value: '352', label: 'counterparts tracked stage by stage on the status board' },
+      { value: '109', label: 'shared skills used by all agents' },
+      { value: '13', label: 'knowledge-hub workspaces shared by 4 agents' },
+      { value: '11', label: 'staff PCs deployed with a one-line install' },
     ],
     glossaryTitle: 'Terms',
     glossary: [
@@ -36,6 +35,8 @@ const en = {
       { term: 'KakaoTalk', desc: "Korea's dominant messenger. Personal chats have no official API" },
     ],
     casesTitle: 'Five StyleSeller cases',
+    glanceTitle: 'At a glance',
+    glanceIntro: 'Seven systems I designed, built, and run at StyleSeller. Full case write-ups are in Korean.',
   },
   systemMap: {
     title: 'System Map',
@@ -60,7 +61,7 @@ const en = {
       { id: 'vendor-cs', label: '① Vendor support', caseId: 'vendor-cs' },
       { id: 'ss-worktool', label: '② Work tool', caseId: 'ss-worktool' },
       { id: 'email-agent', label: '③ Email agent and knowledge hub', caseId: 'email-agent' },
-      { id: 'company-os', label: '④ Spark · Work OS', caseId: 'company-os' },
+      { id: 'agent-platform', label: '④ Spark · Work OS', caseId: 'agent-platform' },
       { id: 'field-fleet', label: '⑤ Staff PC deployment · ops infrastructure', caseId: 'field-fleet' },
       { id: 'instagram-dm', label: '⑥ Instagram DM automation' },
     ],
@@ -71,7 +72,7 @@ const en = {
       },
       {
         name: 'Agents',
-        desc: 'I forked Paperclip, an open-source agent platform, and built Work OS, Spark, and Tool Registry (an execution gate) on top of it. What runs every day is vendor support collection and logging, influencer CS, Spark, and monitoring and briefing services. Model calls on high-volume paths go through LiteLLM → Gemini 2.5 Flash.',
+        desc: 'I forked Paperclip, an open-source agent platform, and built Work OS, Spark, and Tool Registry (an execution gate) on top of it. What runs every day is vendor support collection and logging, influencer CS, Spark, and monitoring and briefing services. Model calls on high-volume paths go through a single LiteLLM proxy.',
       },
       {
         name: 'Knowledge',
@@ -89,654 +90,138 @@ const en = {
   },
   cases: [
     {
-      id: 'vendor-cs',
-      slug: 'vendor-cs',
-      logo: '/images/v2/logo10.png',
-      status: 'live',
-      statusNote: 'inquiry collection and per-partner logging are live · the chatbot answers tagged (@스타일셀러_AI) questions in real partner rooms',
-      title: 'Vendor support — collecting and answering partner inquiries in KakaoTalk, which has no official API',
-      shortTitle: 'Vendor support agent',
-      period: '2026-06 to present',
-      role: ROLE,
-      chain:
-        'styleseller-kakaocli (staff Macs) → agent-company (collector, partner support chatbot, KakaoTalk sender) → brand-tool (partner list, products, proposals) · email-agent (knowledge search)',
-      oneLiner: "Partner inquiries scattered across staff members' personal KakaoTalk now land in one place, and the chatbot answers tagged questions it has evidence for. If it cannot identify the partner, it does not answer and hands off to the person in charge.",
-      tldr: [
-        'Partner inquiries are collected from KakaoTalk on staff PCs and logged per partner.',
-        'The chatbot answers only questions it finds evidence for in company knowledge. Without evidence, it does not write an answer.',
-        'It answers questions tagged @스타일셀러_AI in real partner rooms. When it cannot identify the partner or cannot answer, the question goes to the person in charge in Slack with the conversation.',
-      ],
-      problem: [
-        '"Vendor" in this case covers brands and sales partners: the brands (suppliers) that supply products and the sales partners (companies that run group buys with their own sellers). A group buy is a time-limited sale run by an influencer.',
-        "Vendor inquiries came into vendor chat rooms in each assigned staff member's personal KakaoTalk.",
-        "KakaoTalk is Korea's dominant messenger, and personal chats have no official API. A server alone could neither read nor send those chats.",
-        "The vendor rooms lived in staff members' personal KakaoTalk, and there was no place to see each vendor's conversations together.",
-      ],
-      constraints: [
-        'No official API. Collection uses local data change detection on staff PCs. Sending uses KakaoTalk UI automation on staff Macs.',
-        'Collection covers only chats that arrive after install, on the PCs where it is installed. The Mac side drops anything before the install time, and the server drops anything before a cutoff date.',
-        'KakaoTalk updates break the collection method. On 2026-09-15 I redesigned the Windows collector to work read-only.',
-        "These messages go to real vendors. If one vendor's terms leak to another, it can't be undone.",
-      ],
-      judgments: [
-        {
-          choice: 'The chatbot answers only questions it has evidence for',
-          why:
-            'Sending every inquiry to a person slows down replies, and people end up handling routine questions the chatbot could answer. So the chatbot answers when it has evidence, and writes no automatic answer when it does not. Inquiries it cannot answer go to the person in charge with the full conversation.',
-        },
-        {
-          choice: 'Rules trigger, the model decides',
-          why:
-            'When the regex was allowed to block, it skipped the LLM and blocked silently. So I kept the regex only as a first-pass trigger and left the decision to the model (2026-08-30).',
-        },
-        {
-          choice: 'Hand a person the whole conversation, not just the question',
-          why: "Passing only the question would force the person in charge to look up the partner's earlier conversation. So a handoff sends the full conversation, and that person's reply goes out to KakaoTalk through the same send queue.",
-        },
-        {
-          choice: 'Stage by room',
-          why: 'The first plan was a traffic-percentage rollout (5%→20%→50%→100%). In practice I staged it with a per-room allowlist and a kill switch, starting with a test room.',
-        },
-        {
-          choice: 'No company-wide tools for an external vendor chatbot',
-          why: 'The Spark MCP tools, which query the whole company, were also open to the chatbot that answers outside vendors. I removed them from the tool schema and blocked their execution (fail-closed). The chatbot uses only vendor support lookup tools.',
-        },
-        {
-          choice: 'One model',
-          why: 'The vendor support path uses only LiteLLM → Gemini 2.5 Flash. I tried moving the checkers to Claude Haiku and reverted it on 08-12.',
-        },
-      ],
-      systemSteps: [
-        {
-          title: 'Collection (staff PCs)',
-          points: [
-            'On Macs, kakaocli detects local data changes and sends them to the server. On Windows, a collector deployed from the installation host sends them the same way.',
-            'The local checkpoint moves forward only after the server confirms receipt.',
-          ],
-        },
-        {
-          title: 'Logging (agent-company vendor agent, GCP VM)',
-          points: [
-            "Writes each vendor's conversation to a ledger, a sheet, and Drive. An async worker loads the raw text into the knowledge hub.",
-            'A server-side floor drops past conversations from before the cutoff date. The server enforces this no matter which version is installed on the PC.',
-          ],
-        },
-        {
-          title: 'Partner check (agent-company ↔ brand-tool)',
-          points: ["The partner ID in the chat is checked against brand-tool's list of partners to serve, and conversations stay separated by partner.", 'If the partner cannot be identified, it does not answer and hands off to the person in charge.'],
-        },
-        {
-          title: 'Answer (agent-company chatbot, GCP VM)',
-          points: [
-            'It answers only questions tagged @스타일셀러_AI. A tool-calling loop looks for evidence.',
-            'Tools: knowledge hub search (through knowledge-mcp; every turn it checks past cases and the help center first, and can search 6 more workspaces when needed, including vendors, products, and company knowledge), the internal manual, brand-tool product, settlement, and recommendation lookups, and proposal copy generation',
-            'The Spark tools that query the whole company are blocked on this channel (fail-closed).',
-            "Checks: checkers for grounding, persona, turn, and product topic; substitution of other vendors' names; an LLM check for other vendors' information",
-          ],
-        },
-        {
-          title: 'Sending (agent-company → staff Mac)',
-          points: ['A reply that passes the checks becomes a send job. A local sender on the staff Mac picks up the job, sends it with kakaocli, and confirms delivery. The run is also recorded in Tool Registry.'],
-        },
-        {
-          title: 'Handing off to a person (Slack)',
-          points: ["Inquiries the chatbot can't answer go to the person in charge in Slack with the full conversation."],
-        },
-        {
-          title: 'Learning and alerts',
-          points: [
-            "Twice a day (09:30 and 18:10), the day's conversations are written up as a wiki per vendor and loaded into the knowledge hub. Drafts that people corrected and approved Q&A go in too.",
-            'Every weekday morning, each staff member gets a partner briefing in Slack.',
-          ],
-        },
-      ],
-      results: [
-        "Partner inquiries that used to be scattered across staff members' personal KakaoTalk now come together in one place, logged per partner. This collection and logging runs every day.",
-        'The chatbot answers tagged questions in real partner rooms. Questions where the partner cannot be identified, or that it cannot answer, go to the person in charge in Slack with the conversation.',
-        "Other vendors' information is kept out by workspace separation (07-27) and by substituting other vendors' names at the tool step.",
-      ],
-      limits: [
-        'The collection-gap alert (30 minutes of silence during work hours → Slack) exists in code but is OFF by default. Turning it on is the next task.',
-        'The Windows collector has no auto-updater. New versions arrive by reinstalling. The Mac collector updates once a day.',
-      ],
-      incidents: [
-        {
-          title: 'Send jobs never finished and ended as permanent failures (2026-08-17 to 18)',
-          cause: 'An accessibility call that queries the KakaoTalk window state ignored its timeout setting and waited forever.',
-          fix: 'A hard timeout using a separate thread and a semaphore deadline.',
-          guard: 'Since 09-08, after each send the sender rechecks the local record to confirm the message actually arrived.',
-        },
-        {
-          title: 'Flood of past conversations (2026-09-16)',
-          symptom:
-            "Old collector versions on 3 Windows PCs installed that afternoon uploaded past conversations all at once. 2,500 messages arrived in 50 minutes, sheet writes backed up, and records from a staff member who installed later didn't show up for more than an hour.",
-          fix: "I added a server-side floor. It drops anything before the cutoff date and returns 200 instead of 5xx. On a 5xx, the collector doesn't move its checkpoint and uploads the same data again.",
-          guard: "Messages that can't be classified are kept. The collector side also records only from install time onward. The server floor works even before a PC receives the new version.",
-        },
-      ],
-      stack: ['Python', 'FastAPI', 'Swift (macOS, kakaocli fork)', 'Node.js', 'Chrome Extension MV3', 'LiteLLM → Gemini 2.5 Flash (Vertex)', 'LightRAG + Neo4j + pgvector', 'MCP', 'Postgres + PostgREST', 'Paperclip Routine', 'Slack API', 'Google Sheets · Drive API'],
-      scale: [
-        'Vendor agent (collection, logging, gate): 61,437 lines of code · 600 commits · 107 test files (as of 2026-09-23). The chatbot that writes the answers is a separate service, so it is not in these numbers.',
-        'CS Copilot extension and local sender (shared with influencer CS): 631 commits · 20,596 lines · 56 test files (same basis)',
-        'kakaocli: fork of an MIT open-source project. 81 commits by me; Swift code grew from 3,904 to 6,595 lines (net +2,691) (2026-09-08)',
-      ],
-      architectureImages: [{ src: '/images/v3/vendor-cs-en.png', alt: 'Vendor support flow' }],
+      "id": "status-board",
+      "slug": "status-board",
+      "reelFlow": [{"label": "KakaoTalk · email · Slack", "note": ""}, {"label": "Masking · LLM extraction", "note": "agent-company"}, {"label": "Staff confirms", "note": ""}],
+      "logo": "/images/v3/status-board-screen-a.jpg",
+      "status": "live",
+            "koOnly": true,
+      "title": "Status Board · Operations Ledger",
+      "shortTitle": "Status Board",
+      "subtitle": "Pick one counterpart and its KakaoTalk chats, emails, and order sheets land on one calendar, while the deal stages of 352 counterparts fit on one screen.",
+      "headline": {
+        "value": "352",
+        "label": "counterparts on the board"
+      },
+      "diagram": {
+        "src": "/images/v3/diagram-status-board.png",
+        "alt": "Status Board architecture diagram (Korean labels)"
+      }
     },
     {
-      id: 'ss-worktool',
-      slug: 'ss-worktool',
-      logo: '/images/logo7.png',
-      status: 'live',
-      title: 'Internal work tool — Google Sheet price math moved into code, from proposals to KakaoTalk sends',
-      shortTitle: 'Work tool',
-      period: 'Late 2026-03 to present',
-      role: ROLE,
-      chain: 'brand-tool → n8n → email-agent (knowledge hub) → agent-company (staff PC workers, send workers) → styleseller-kakaocli',
-      oneLiner: 'Sales staff used to work out every proposal by hand in a Google Sheet. I moved that into the internal work tool, and now product registration, sales partner recommendations, seller discovery, and personalized KakaoTalk messages happen there too.',
-      tldr: [
-        'I moved the Google Sheet pricing formulas into code and verified them with 43 unit tests, some cross-checked against real sheet values. AI returns only the fields to change as JSON; the same calculation code recalculates the amounts.',
-        'It grew to 18 staff work screens (excluding login, as of 2026-09-23): supplier catalog intake, sales partner recommendations, seller discovery, and KakaoTalk campaigns to sellers.',
-        'Created proposals and send requests are kept as work records, and proposals export to PDF or Excel.',
-      ],
-      problem: [
-        "For every proposal, sales staff worked out the partner's and the seller's shares by hand in a Google Sheets price sheet.",
-        'Product and brand data were scattered across Google Sheets and the website database.',
-        'Each time we sourced a new product, someone had to pick which sales partners (companies that run group buys with their own sellers) to pitch it to. A group buy is a time-limited sale run by an influencer.',
-        'Finding Instagram influencer sellers was manual work, done with Claude Code against a document of listing rules.',
-      ],
-      constraints: [
-        'Instagram blocks data center IPs (per the design doc). When we collected Coupang data, I tested moving the work to a server, and every attempt failed.',
-        "KakaoTalk channel messages can only be sent through each manager's admin center login session, and CAPTCHAs and extra admin verification get in the way. KakaoTalk is Korea's dominant messenger.",
-        "I couldn't put database keys on staff PCs.",
-      ],
-      judgments: [
-        {
-          choice: 'Code owns the amounts; the LLM returns only a JSON of "fields to change"',
-          why: 'This stops a failure where I asked it to change only the margin and it changed the price too.',
-        },
-        {
-          choice: 'Move the pricing formulas into code and verify them with tests',
-          why: "The formulas are the company's pricing policy, so I moved the Google Sheet formulas into code and verified them with 43 unit tests, some cross-checked against real sheet values.",
-        },
-        {
-          choice: 'Match candidates = rule score ∪ vector search, and the LLM makes the final call',
-          why: 'Internal knowledge search widens the pool beyond what the rules catch, and the model gives each candidate a 0 to 10 score with a reason.',
-        },
-        {
-          choice: 'Classify replies with a rules dictionary',
-          why: 'A person has to be able to inspect the matching phrase, and only opt-outs are removed automatically. The reason: "If someone drops off the list without evidence, nobody can undo it."',
-        },
-        {
-          choice: 'Seller finder runs on staff PC workers, one Instagram account per PC',
-          why: 'Instagram blocks server IPs, and if two PCs hold the same account, their sessions keep pushing each other out.',
-        },
-      ],
-      systemSteps: [
-        {
-          title: 'Pricing calculator and proposals (2026-03 onward)',
-          points: [
-            'I moved the price formulas from two Google Sheets tabs into the work tool code. It calculates the supply price and margin for each product.',
-            'The work tool has separate vendor and seller proposal screens. Staff compare working revisions in the session; created proposals and KakaoTalk send requests are saved as work records.',
-            'An n8n webhook chatbot returns only the fields to change as JSON; the same calculation code recalculates the amounts.',
-            'The vendor support agent opens the same proposal screen on the server, renders it to PDF, and puts it in the existing KakaoTalk queue.',
-          ],
-          chain: 'brand-tool chatbot → n8n → brand-tool calculation → brand-tool proposal screen',
-        },
-        {
-          title: 'AI parsing of supplier catalogs (2026-04)',
-          points: [
-            'Gemini 2.5 reads PDFs, images, PPTs, Excel files, and URLs sent by brands (suppliers) and extracts product candidates (products, options, prices, and photos) that staff confirm before registering.',
-            'For photos, it uses the originals embedded in the PDF first, and crops using coordinates from the model only when there are none.',
-          ],
-          chain: 'brand-tool intake screen → brand-tool parsing API → Vertex Gemini → brand-tool products → (on app registration) external CRM and SaaS',
-        },
-        {
-          title: 'Sales partner matching and KakaoTalk pitches (2026-06 onward)',
-          points: [
-            'The recommendation target is the sales partner that will run a group buy with the product, not the brand (supplier).',
-            'It starts when staff check products and click "find matching vendors" (벤더사 매칭찾기). The reverse direction (sales partner → matching products) also exists.',
-            'It merges rule scores (group-buy history, category, inquiries, proposals, tags) with vector search candidates from the knowledge hub. The LLM judges them in batches of 30, and 5 points or higher counts as a match.',
-            'It analyzes group-buy performance, inquiries, and proposal history, and searches vector embeddings of products and sales partner profiles. It widens to adjacent categories and skips recently pitched pairs.',
-            'Closed deals are tracked by sales partner + top-level category + a 60-day window.',
-            'n8n writes the pitch copy, and the server enforces at most one send in the morning and one in the afternoon per sales partner per day. Only the pitches staff pick are sent automatically by KakaoTalk.',
-          ],
-          chain:
-            'n8n (group-buy history → sales partner profiles) → email-agent knowledge hub → brand-tool matching API → n8n LLM judgment → brand-tool send queue → agent-company Mac poller → kakaocli → sales partner KakaoTalk room',
-        },
-        {
-          title: 'Seller finder (2026-09)',
-          points: [
-            'I moved Instagram influencer seller listing from manual Claude Code work to workers on staff PCs.',
-            'The rules: walk hashtags → followers → contact path → view counts on 6 Reels (by default the top of the Reels tab; latest or most-viewed selectable) → dedupe → batches of 30.',
-            'The server assigns a run only to workers installed under the login email of the staff member who created it. Between jobs, each worker compares sha256 hashes and updates itself.',
-            "It runs only on real people's accounts and PCs. One account per PC, a daily cap on actions, and no code that writes comments or DMs automatically. It can be shut off remotely.",
-          ],
-          chain: 'brand-tool rules and runs → agent-company worker (staff PC) → brand-tool results and per-rule scorecard → n8n sheet mirror → Google Sheets, plus a Slack DM on completion',
-        },
-        {
-          title: 'Personalized KakaoTalk campaigns (2026-08-24 onward)',
-          points: [
-            'It started as a port of the existing Node sender to TypeScript.',
-            'Recipients are seller contacts already connected through the KakaoTalk channel. Seller-finder results are only matched against them by Instagram ID and email.',
-            "A colleague's CRM picks each seller's personalized products from sales history in their KakaoTalk room and an analysis of their Instagram feed. I built the automation that takes those picks and sends them; brand-tool filters out products whose sale has ended and turns the rest into cards.",
-            'Substitute products are added only when the CRM lookup succeeds and returns 0 results. A failed lookup never counts as 0.',
-            'A Playwright channel worker on the VM sends channel messages, and kakaocli on a Mac sends personal chats. Sends to 500 or more recipients wait for approval.',
-            'Replies are classified with a rules dictionary. Refusals show up as candidates, and a person clicks to confirm.',
-          ],
-          chain: 'brand-tool contacts, CRM matching, and cards → agent-company send DB → channel worker (VM) / personal-chat worker (Mac, kakaocli) → reply collection → brand-tool reply inbox',
-        },
-        {
-          title: 'Product sync (a base layer with no screen)',
-          points: [
-            'An n8n schedule calls the brand-tool sync 3 times a day, and brand-tool fetches SaaS products itself, 20 pages × 500 items.',
-            'It stops if the total count on any page shifts by more than 2%, or if it received less than 90%. It marks products as ended only when it received 1,800 or more.',
-            'It never overwrites products that staff hid or values they corrected by hand.',
-          ],
-        },
-      ],
-      results: [
-        'Proposal prices are calculated by code in the work tool instead of by hand in a Google Sheet, verified with 43 unit tests, some cross-checked against real sheet values.',
-        'Personalized KakaoTalk campaigns reached 261 people on 2026-09-22. Each seller gets product cards matched to their sales history and Instagram feed (the recommendation logic is a colleague\'s CRM).',
-        'Instagram seller listing moved from manual work to workers running on 9 staff PCs (as of 2026-09-18).',
-        'For each new product, the work tool recommends the sales partners that someone used to pick by hand, and queues the pitch KakaoTalk message too (in production as of 2026-09-24).',
-        '18 staff work screens (excluding login), with 6 top-level menus (Spark, Products, Proposals, Vendors, Sellers, Content) (as of 2026-09-23).',
-        'The work tool is both the staff screens and the business data backend that the vendor support agent and Spark call.',
-        "I closed the external partner portal (2026-04-28 to 09-17) with a switch and kept the code. Its features moved into the company's official partner center, and I left redirects so old links still work.",
-      ],
-      limits: [
-        'The three guards in product sync have no tests.',
-        'CI only builds an image on every push to main. There is no test or type-check gate.',
-        "Seller finder and the campaigns are loosely connected. Of 3,036 rows in the KakaoTalk contact ledger, 711 have an Instagram ID (measured 2026-09-09), so most newly found sellers have no KakaoTalk contact. Server-scheduled sending landed in code on 2026-09-23 and isn't in production yet.",
-      ],
-      incidents: [
-        {
-          title: 'Moved staff PC worker auth to per-device keys (2026-09-10)',
-          symptom: 'Every staff PC worker connected to the server with the same single key. A problem on one PC meant changing the key for all of them.',
-          fix: 'I switched to one-time install tokens and a device key per PC. The server stores only sha256 hashes and can cut off a single PC.',
-          guard: 'I left the step in code to delete the old shared key from the server once the switch is done.',
-        },
-        {
-          title: 'LLM scores varied by chunk (2026-07-15)',
-          symptom: 'The same sales partner got a different score in each 30-item chunk. Across 4 chunks it scored 5, 5, 7, and 9.',
-          cause: 'The last value overwrote earlier ones, and the model sometimes skipped items.',
-          fix: 'Keep the highest score, re-ask only for the skipped items, and collect candidates as a union.',
-        },
-        {
-          title: 'In-progress runs mass-cancelled after a server outage (2026-09-20)',
-          symptom: 'The server was down for two days. After recovery, the first cleanup pass cancelled all 6 in-progress seller-finder runs.',
-          cause: 'The rule "worker not seen for 3 minutes" counted the server\'s own downtime as the workers being gone.',
-          fix: 'Cleanup now records the interval between its runs. If the gap is more than 2 minutes, it treats it as server downtime and resets the liveness baseline.',
-          guard: 'I kept a psql reproduction test. The old function cancels 2/2; the new one cancels 0.',
-        },
-      ],
-      stack: ['Next.js 16', 'React 19', 'TypeScript', 'Tailwind 4', 'Vitest', 'Postgres 16 + PostgREST', 'Vertex AI Gemini 2.5', 'LightRAG (email-agent)', 'n8n', 'Docker', 'GitHub Actions', 'kakaocli (Swift)'],
-      scale: [
-        '1,458 brand-tool commits (excluding merges, as of 2026-09-23)',
-        '134 API routes, 130 database migrations, 207 test files (same basis)',
-        'Sales partner matching is the feature area with the most commits (309, excluding merges, counted over the matching screens, APIs, and related lib and component paths). Seller finder is 11K lines in the server core + 13K lines in the staff PC worker (the worker count includes tests).',
-        'Personalized KakaoTalk campaigns total 34K lines across brand-tool and the agent-company send workers (tests included).',
-      ],
-      architectureImages: [{ src: '/images/v3/ss-worktool-en.png', alt: 'SS work tool flow' }],
+      "id": "vendor-cs",
+      "slug": "vendor-cs",
+      "reelFlow": [{"label": "Staff-PC collection", "note": ""}, {"label": "Knowledge hub search", "note": ""}, {"label": "Mac send · delivery check", "note": ""}],
+      "logo": "/images/v2/logo10.png",
+      "status": "live",
+            "koOnly": true,
+      "title": "Vendor CS Agent",
+      "shortTitle": "Vendor CS Agent",
+      "subtitle": "A KakaoTalk chatbot that answers only tagged vendor questions, without hand-off, and checks every amount and brand against the evidence and rewrites the answer when they do not match.",
+      "headline": {
+        "value": "107",
+        "label": "test files"
+      },
+      "diagram": {
+        "src": "/images/v3/diagram-vendor-cs.png",
+        "alt": "Vendor CS Agent architecture diagram (Korean labels)"
+      }
     },
     {
-      id: 'email-agent',
-      slug: 'email-agent',
-      logo: '/images/logo8.png',
-      status: 'live',
-      statusNote: 'in production on the brand and order shared mailboxes',
-      title: 'An email agent that feeds staff edits back into RAG',
-      shortTitle: 'Email agent · knowledge hub',
-      period: '2026-03-31 to present',
-      role: ROLE,
-      chain:
-        'Gmail (shared mailboxes) → n8n → email-agent (FastAPI, LightRAG) → assignee Gmail drafts / email-agent LightRAG → agent-company (knowledge-mcp, Spark, vendor support) · brand-tool (sales partner matching)',
-      oneLiner: 'It pairs sent replies with the original inquiry in RAG, updates the stylebook from edits, and searches both for future drafts.',
-      tldr: [
-        "For shared-mailbox inquiries, it drafts a grounded reply for the assignee to review, edit, and send.",
-        'Sent replies are paired with the inquiry in RAG; detected fact changes update knowledge, while style edits update the stylebook.',
-        'New drafts search LightRAG and the recipient stylebook for relevant context.',
-      ],
-      problem: [
-        'The brand and order shared mailboxes get inquiries about brand onboarding, group buys (time-limited sales run by an influencer), partnerships, and proposal reviews.',
-        "Replies must state company facts (terms, past agreements, contacts) correctly. The first version used hybrid vector and full-text search; within days I moved to LightRAG (Neo4j + pgvector) to connect companies, contacts, and past requests as relations.",
-        'LLM drafts can slip in unsupported sentences. They had to be filtered out before a person saw the draft.',
-      ],
-      constraints: [
-        'Nothing is sent without human approval. The system stops at the draft, and a person sends it.',
-        'To prevent out-of-memory errors, deploys use stop-first, so every deploy drops responses for about 40 seconds (Docker Swarm).',
-        'Several internal systems share one knowledge hub. Load from one consumer must not stall the others.',
-      ],
-      judgments: [
-        {
-          choice: 'Create the Gmail draft first and let a person send it',
-          why: "These emails go out under the company's name, and a wrong one can't be taken back. So the draft goes into the assignee's Gmail, and staff edit and send it.",
-        },
-        {
-          choice: 'Instead of more prompt tuning, verifiers catch problems and force a rewrite',
-          why: 'Concrete claims are extracted from the draft, and rule checkers plus an LLM verifier compare them against the evidence. Unsupported claims trigger a rewrite; if they remain, the draft is rejected.',
-        },
-        {
-          choice: 'Save edited sent mail as correction knowledge',
-          why: "Only emails a person actually sent count as confirmed facts; AI drafts are excluded as a source. The inquiry/reply pair is stored, detected fact changes update RAG correction knowledge, and style edits update the stylebook.",
-        },
-        {
-          choice: 'Search load is split by consumer',
-          why: 'Each workspace gets its own connection pool, graph traversal is narrower, and the sales partner matching path is pinned to naive mode.',
-        },
-      ],
-      systemSteps: [
-        { title: 'Intake', points: ['Every 5 minutes, n8n pulls new Gmail messages incrementally and calls email-agent parsing.'] },
-        {
-          title: 'Classification and search',
-          points: [
-            'A classifier sorts the intent. Then it picks a workspace and searches LightRAG (Neo4j + PostgreSQL/pgvector).',
-            'If the evidence is thin, it rewrites the query and searches again (at most 2 rewritten queries).',
-          ],
-        },
-        {
-          title: 'Draft, with grounding enforced',
-          points: ['Extract concrete claims from the draft (up to 6)', 'Rule checkers plus an LLM verifier compare them against the evidence', 'Unsupported claims trigger a rewrite', 'If they remain, the draft is rejected'],
-        },
-        {
-          title: 'Gmail draft',
-          points: ["The draft goes into the assignee's Gmail, and staff review, edit, and send it themselves."],
-        },
-        {
-          title: 'Feedback from sent mail',
-          points: [
-            'A persistent cursor scans sent mail and compares it with the original draft.',
-            'The inquiry/reply pair and template are stored in RAG; detected fact changes update correction knowledge. Style edits update the stylebook, and new drafts search both.',
-          ],
-        },
-        {
-          title: 'Internal knowledge hub',
-          points: [
-            'Internal systems share the same 13 LightRAG workspaces.',
-            'Vendor support (brands and sales partners): through agent-company knowledge-mcp. Influencer CS uses it too.',
-            'Spark: calls email-agent search directly and rejects workspaces outside the allowlist (fail-closed).',
-            'brand-tool sales partner matching: calls the knowledge hub search API in naive (vector) mode',
-          ],
-        },
-      ],
-      results: [
-        "Staff no longer write each inquiry reply from a blank screen; they edit a draft that comes with evidence and send it. It is still in use on the brand and order shared mailboxes.",
-        'What staff edit and send feeds into the next draft for a similar email. The goal is that nobody has to make the same edit twice.',
-        'Vendor support, influencer CS, Spark, and sales partner matching share 13 LightRAG workspaces.',
-        'On 2026-08-18 I changed CI/CD. Only images that pass a pytest gate get deployed.',
-        'The database moved from Supabase cloud to self-hosting on the VM (PostgREST).',
-      ],
-      limits: [
-        'After the switch to Agentic RAG, draft quality regressed. I found the cause in the commit history (a missing rerank step). There is no measurement of the effect after the fix.',
-        'The draft path ran only on the fallback without any error, so the problem stayed hidden (first incident below).',
-      ],
-      incidents: [
-        {
-          title: 'The draft path ran on a different model than configured (cleaned up 2026-08-02)',
-          symptom: 'Drafts were configured for the Claude path, but the API key was empty, so every call threw an exception and only the Gemini fallback ran.',
-          cause: 'The fallback accepted requests without raising any error, so results looked normal even with the primary model dead.',
-          fix: 'On 08-02 I made drafts call Gemini directly and removed the Claude attempt and the fallback structure.',
-        },
-        {
-          title: 'The shared knowledge hub overloaded twice (2026-07-10, 08-12)',
-          symptom:
-            'On 07-10, 8 workspaces shared one connection pool. Constant queries from the influencer CS bot took the whole pool, and even sales partner matching searches returned 500. On 08-12, Neo4j overload warnings kept repeating.',
-          cause: 'The shared pool, plus the default top_k=40, which swept a wide part of the graph on every query.',
-          fix: 'I split it into a connection pool per workspace (07-10) and lowered top_k to 8 (08-12).',
-          guard: "The heavy sales partner matching path is pinned to naive mode, which doesn't traverse the graph.",
-        },
-        {
-          title: 'Sent-mail learning lost data on every deploy (fixed 2026-08-29)',
-          symptom: 'Some sent emails never made it into learning, and with no alert, nobody noticed.',
-          cause:
-            'When the time-window scan overlapped with the no-response window during a deploy, that stretch was lost for good. I counted it from 2 weeks of nginx access logs: 48 of 1,943 requests failed (2.5%), and the longest gap lost about 68 minutes of mail.',
-          fix: 'I switched to a persistent cursor that remembers only the last successful point.',
-          guard: 'I applied the findings from a cross review.',
-        },
-      ],
-      stack: ['Python', 'FastAPI', 'asyncio', 'LightRAG', 'Neo4j', 'PostgreSQL + pgvector', 'PostgREST', 'Vertex AI Gemini 2.5 Flash', 'Gemini embeddings (3072 dimensions)', 'Claude (draft path, added 2026-04, removed 08-02)', 'n8n', 'Gmail API', 'Slack', 'Docker Swarm', 'GitHub Actions', 'pytest', 'Pyright (strict)'],
-      scale: [
-        '1,418 commits (excluding merges, org repository, first commit 2026-03-31 to last commit 09-02). The busiest month was August (449 commits).',
-        '44,877 lines of product code + 28,254 lines of tests (Python)',
-        '26 API routers, 85 endpoints',
-        '13 LightRAG workspaces',
-      ],
-      architectureImages: [{ src: '/images/v3/email-agent-en.png', alt: 'Email agent pipeline' }],
+      "id": "ss-worktool",
+      "slug": "ss-worktool",
+      "reelFlow": [{"label": "Catalog · partner pool", "note": ""}, {"label": "LLM candidates", "note": ""}, {"label": "Staff confirms", "note": ""}],
+      "logo": "/images/logo7.png",
+      "status": "live",
+            "koOnly": true,
+      "title": "Internal Work Tool · Pricing, Matching, Personalized KakaoTalk",
+      "shortTitle": "Internal Work Tool",
+      "subtitle": "Code calculates every price; the LLM only returns candidates and the fields to change.",
+      "headline": {
+        "value": "43",
+        "label": "price-calculation test cases"
+      },
+      "diagram": {
+        "src": "/images/v3/diagram-ss-worktool.png",
+        "alt": "Internal Work Tool architecture diagram (Korean labels)"
+      }
     },
     {
-      id: 'company-os',
-      slug: 'company-os',
-      logo: '/images/logo6.png',
-      status: 'live',
-      title: 'Spark · Work OS — an internal operations platform where agents run safely',
-      shortTitle: 'Spark · Work OS',
-      period: '2026-05 to present',
-      role: ROLE,
-      chain: 'brand-tool (Spark screen, lookup APIs) → agent-company (Paperclip fork — Work OS gateway, Spark, Tool Registry, MCP) → email-agent (knowledge search) + 4 work databases (read-only roles)',
-      oneLiner: 'Staff ask questions of 4 work databases in plain language and get answers with sources.',
-      tldr: [
-        'In Spark, the first item in the work tool\'s top menu, staff ask 4 work databases questions in plain language and get answers with sources.',
-        "Databases are queried only through read-only roles, and the server looks up the requester's role in the database again.",
-        'Action tools are registered in Tool Registry, which defaults to dry run; what actually runs after approval today is creating an issue or pausing a tool.',
-      ],
-      problem: [
-        "The work data staff use was split across 4 databases: the work tool, personalized KakaoTalk campaigns, vendor support (brands and sales partners), and Paperclip. KakaoTalk is Korea's dominant messenger.",
-        'The email agent, DM bot, and n8n that were already running each worked on their own.',
-        'As of 2026-05-20, the agent platform was installed but had 0 registered agents.',
-      ],
-      constraints: [
-        "I use Paperclip's issues, approvals, heartbeats, and UI as they are upstream, and built the staff screen separately in brand-tool.",
-        "External sends (KakaoTalk, email) can't be undone. They must go out once, and only if approved.",
-        "Agents send SQL straight to internal databases. A single code guard wasn't enough to trust.",
-      ],
-      judgments: [
-        {
-          choice: 'No Temporal or LangGraph',
-          why:
-            "The first plan was a 5-layer stack with Temporal, LangGraph, LiteLLM, and MCP. With 0 agents, that stack only adds operating cost. I split the work instead: tasks are issues, triggers are n8n, reasoning is Claude Code agents, and simple processing is FastAPI services. I wrote this into the repository's CLAUDE.md ban list.",
-        },
-        {
-          choice: 'Models are chosen by the type of work',
-          why:
-            'I removed Anthropic models from LiteLLM for cost reasons (2026-06-06). High-volume paths like Spark, vendor support, and influencer CS go through LiteLLM → Gemini 2.5 Flash. Some issue handling is done by Claude Code agents.',
-        },
-        {
-          choice: 'Execution defaults to dry run',
-          why:
-            'The company-wide switch WORKOS_EXECUTION_LIVE=false is the default. Only tools with their own live toggle turned on actually execute. That let me lay down the full execution path first and then turn tools on one at a time.',
-        },
-        {
-          choice: 'Spark evals store the expected answer as SQL',
-          why:
-            'The expected answer is recomputed on every run, because an answer like "19 this week" is wrong a day later. Each case runs 3 times and is judged by majority vote, and the 8 cases are based on measured failures and incidents.',
-        },
-        {
-          choice: 'Observability only where it gets used',
-          why: 'On 2026-07-18 I removed Langfuse because "nobody has looked at it in 2 months." I restored it on 08-03 and rewired it with a cost callback on 08-29, and now use it to track Vertex costs.',
-        },
-      ],
-      systemSteps: [
-        {
-          title: 'Spark screen',
-          points: ['Staff ask in Spark, the first item in the work tool\'s top menu (login lands on the product main page). brand-tool relays the request to agent-company over SSE.'],
-        },
-        {
-          title: 'Work OS gateway (agent-company, GCP VM)',
-          points: ['The Paperclip server recomputes the role at the gateway. It ignores any role in the request body and looks it up in the database in order: email → user → company membership.'],
-        },
-        {
-          title: 'Spark core',
-          points: [
-            'It runs router → tool loop → synthesis. The model is Gemini via LiteLLM.',
-            '6 work tool lookup APIs: product search, matching, best sellers, proposal totals, group-buy totals, allowlist lookup',
-            'run_sql: queries each of the 4 work databases through a read-only role',
-            'knowledge-mcp knowledge search',
-            'email-agent search: rejects any workspace outside the allowlist (fail-closed).',
-          ],
-        },
-        {
-          title: 'Sources',
-          points: ['Answers come with sources, and the screen shows "searched" and "queried" separately. The catalog of usable tools is filtered by persona first.'],
-        },
-        {
-          title: 'Approval and execution',
-          points: [
-            'Proposed actions from Spark, creating an issue or pausing a tool, are saved as approval rows, and a person approves them on a confirmation card inside Spark chat.',
-            'Right before execution, six checks run in order: not registered → kill switch → blocked → role → approval row rechecked in the database → idempotency key.',
-            'What actually runs after approval is those two internal writes. The 4 external-send tools are at the register-and-record stage, and vendor support sends go to their own send queue, not through this gate.',
-          ],
-        },
-      ],
-      results: [
-        'Staff no longer ask someone or dig through several systems for a number; they ask Spark in plain language and get an answer with sources. It is in production as the first item in the work tool top menu.',
-        'Tool Registry has 20 tools registered (read-only 13, internal write 3, external send 4, as of 2026-09-23). What actually runs after approval is creating an issue or pausing a tool.',
-        'Human approval happens inside Spark chat. I hid the separate approval inbox from the menu on 2026-07-19 and moved approvals into in-chat confirmation cards on 07-23.',
-        'Commerce research (Spark request → review collection through a staff Chrome extension → VOC Excel and PDF) is built and passed E2E validation (2026-09-09). Nobody uses it in daily work yet.',
-      ],
-      limits: [
-        "I run Spark evals by hand, and the result files aren't kept in the repository.",
-        'Many of the agents defined in code have only a prompt and no evidence of ever running. What runs every day is vendor support, influencer CS, Spark, and the monitoring and briefing services.',
-      ],
-      incidents: [
-        {
-          title: 'Agent SQL queries are blocked in two layers (2026-08-27)',
-          symptom: 'Agents send SQL straight to company databases. I designed it assuming code-side settings alone cannot block everything.',
-          fix: 'A blocklist of risky functions, a new connection per query, a cost cap, a 500-row/100KB limit, and a 10-second limit.',
-          guard: "Final enforcement lives in the database's read-only role. If a code guard is bypassed, the role still blocks as the second layer.",
-        },
-      ],
-      stack: ['TypeScript', 'Express', 'Drizzle', 'React', 'Python', 'FastAPI', 'MCP', 'LiteLLM', 'Vertex AI Gemini 2.5 Flash', 'Claude Code CLI', 'Postgres', 'PostgREST', 'nginx', 'Langfuse', 'n8n', 'Docker Compose', 'GitHub Actions', 'GCP VM'],
-      scale: [
-        '4,319 commits by me (excluding merges and upstream, agent-company, 2026-05-16 to 09-23)',
-        'This case (Work OS gateway, Spark, Tool Registry, commerce research) is 120 new files and 27,506 lines inside the Paperclip server (51 test files with 12,880 lines included, as of 2026-09-23).',
-        'Most of my code in the same repository is KakaoTalk work automation. The 8 KakaoTalk-related paths add up to 181K lines (same basis).',
-        '4 MCP servers I built (knowledge-mcp, paperclip-mcp, Spark MCP, vendor wiki MCP) + 1 third-party integration (2026-09-23)',
-      ],
-      architectureImages: [{ src: '/images/v3/company-os-en.png', alt: 'Spark · Work OS architecture' }],
+      "id": "email-agent",
+      "slug": "email-agent",
+      "reelFlow": [{"label": "Sent mail · chat wiki · PDFs", "note": ""}, {"label": "LLM planner", "note": ""}, {"label": "Drafts · answers", "note": ""}],
+      "logo": "/images/logo8.png",
+      "status": "live",
+            "koOnly": true,
+      "title": "LightRAG Knowledge Hub · Email Agent",
+      "shortTitle": "Knowledge Hub · Email Agent",
+      "subtitle": "Four agents search one shared knowledge hub, and only evidence-backed email drafts reach the staff draft folder.",
+      "headline": {
+        "value": "13",
+        "label": "knowledge workspaces"
+      },
+      "diagram": {
+        "src": "/images/v3/diagram-email-agent.png",
+        "alt": "Knowledge Hub · Email Agent architecture diagram (Korean labels)"
+      }
     },
     {
-      id: 'field-fleet',
-      slug: 'field-fleet',
-      logo: '/images/logo9.png',
-      status: 'live',
-      statusNote: 'the Instagram DM extension paused after July and has been running again since October',
-      title: "Staff PC deployment and operations — doing on staff PCs what the server can't, safely",
-      shortTitle: 'Staff PC deployment · ops infrastructure',
-      period: '2026-02 to present (Instagram DM extension 2026-02 onward, KakaoTalk tools 2026-05 onward)',
-      role: ROLE,
-      chain:
-        'kakaocli (staff Macs) · Windows collector → agent-company (installation host, relay, workers, sender, VM compose) → brand-tool (seller-finder jobs, worker keys) · email-agent (a stack on the same VM)',
-      oneLiner: 'KakaoTalk and Instagram work that has no official API runs on staff PCs.',
-      tldr: [
-        'KakaoTalk and Instagram work that the server is blocked from runs on staff Macs and Windows PCs, and I can shut it off remotely.',
-        'One-line install, per-tool auto-update, and a key issued per PC mean no database keys live on the PCs.',
-        'The day the server database hit its plan limit and stopped, I stood up the same API (PostgREST) on the VM, left the database access code unchanged, swapped only the connection settings, and recovered the same day.',
-      ],
-      problem: [
-        "Instagram cold DMs and personal KakaoTalk chats have no official API. KakaoTalk is Korea's dominant messenger.",
-        "Vendor rooms, where inquiries from vendors (brands and sales partners) arrive, lived in staff members' personal KakaoTalk.",
-        'Instagram blocks data center IPs (per the design doc). When we collected Coupang data, I tested moving the work to a server, and every attempt failed.',
-        "So the place where the work could happen was the staff's Macs and Windows PCs.",
-      ],
-      constraints: [
-        'No official API. The tools have to drive the KakaoTalk app and the browser directly.',
-        'Every PC is different. Macs and Windows are mixed, some PCs have no admin rights, and KakaoTalk updates break the collection method.',
-        'Account risk. Instagram accounts belong to real people, and if two PCs hold one account, their sessions keep pushing each other out.',
-        "I couldn't put company database keys on the PCs.",
-      ],
-      judgments: [
-        {
-          choice: 'Staff PCs as automation nodes',
-          why: "The server is blocked from Instagram and KakaoTalk work, so the work runs on people's own accounts and PCs, and I can shut it off remotely. KakaoTalk collection covers only chats after install, on the PCs where it's installed.",
-        },
-        { choice: 'Per-device credentials and worker keys', why: 'I dropped the shared secret. Each PC gets its own key, issued and revoked separately.' },
-        {
-          choice: 'Version = sha256 of the release zip, and the updater never touches device registration',
-          why:
-            'On 09-16 I confirmed that "making people reinstall doesn\'t work in practice." I dropped auto-deploying the Coupang research extension from our own server, because not a single PC had it installed, and bundled the extension into the CS installer instead.',
-        },
-        {
-          choice: 'Windows KakaoTalk collection is a read-only scan of process memory',
-          why: "It doesn't inject code into the KakaoTalk process, and it doesn't rely on fixed addresses that change with every build. That makes it less sensitive to KakaoTalk auto-updates.",
-        },
-        {
-          choice: 'Deploy only images and source built from the deploy commit',
-          why: 'If the CI image is missing, the deploy fails and does not fall back to :latest ("Running code from a commit you didn\'t deploy is worse than a failure"). The personalized KakaoTalk campaign worker is swapped only when 0 sends are in progress.',
-        },
-      ],
-      systemSteps: [
-        {
-          title: 'Install (agent-company installation host)',
-          points: ['Staff install the tool bundle with a one-line command from the install page (bash on Mac, PowerShell on Windows). Most of it installs without admin rights. Only Macs missing the developer tools, Homebrew, or Node ask for a password, once. The seller-finder installer never uses admin rights.'],
-        },
-        {
-          title: 'Register (agent-company server · brand-tool)',
-          points: ['The installer receives and stores a per-device credential. Seller finder uses a one-time install token to get a per-PC key, and the server stores only its sha256.'],
-        },
-        {
-          title: 'Work (staff PCs)',
-          points: [
-            'Mac: kakaocli detects local data changes, and the relay sends them to the server.',
-            'Windows: the collector scans KakaoTalk process memory read-only.',
-            'Seller-finder worker: picks up jobs created by brand-tool and runs them in a headless browser. Seller finder looks for influencer sellers who run group buys.',
-            'Personalized campaign send worker (Mac): picks up the campaign queue created in brand-tool and sends it with kakaocli.',
-            'Kakao CS Copilot (MV3): reads messages arriving in the KakaoTalk channel admin web without depending on the page layout, and fills in the draft box.',
-            'Open chat announcement sending: a VM cron job fills the queue, and a Mac sends.',
-          ],
-        },
-        {
-          title: 'Update (zip + sha256 on the installation host)',
-          points: ['Each tool has its own schedule. The seller-finder worker updates between jobs, the Mac KakaoTalk relay once a day, and the Coupang research extension 3 times a day.'],
-        },
-        {
-          title: 'Monitoring',
-          points: ['Workers report the hash of the running code to the server, and the relay reports its app version. On Windows, a 1-minute watchdog restarts the collector. A monitoring cron job that runs after the send deadline watches open chat sends.'],
-        },
-        {
-          title: 'Server',
-          points: ['The business web app (Next.js) runs on Vercel; FastAPI services, databases, and the LLM proxy run on one GCP VM. agent-company and brand-tool share one deploy lock.'],
-        },
-      ],
-      results: [
-        'The seller collector program deployed to 11 staff PCs (Mac and Windows), with a one-line install and auto-update',
-        '9 seller-finder worker PCs (2026-09-18). I turned 1 Windows PC off on purpose.',
-        'The Instagram DM extension paused in July and has been running again since 2026-10.',
-      ],
-      limits: [
-        "The Windows KakaoTalk collector doesn't follow the update rule above yet. It has no auto-updater, so new versions arrive by reinstalling. That's the next task.",
-        "Collection-gap monitoring is OFF by default in code. It sends alerts only after it's turned on.",
-      ],
-      incidents: [
-        {
-          title: "The work tool's whole API stopped when the cloud database hit its transfer limit (2026-08-20)",
-          symptom: "brand-tool's dedicated cloud database went over its data transfer limit, and every API call was blocked.",
-          cause: 'The plan limit of the managed cloud database.',
-          fix: 'A full search confirmed that all 27 API routes used only the REST protocol. I stood up the same API with Postgres + PostgREST + nginx on the VM, left the database access code unchanged, swapped only the connection settings, and migrated and recovered the same day (Edge Functions were ported to app routes).',
-          guard: 'All 4 databases moved to self-hosting the same way (08-06 to 08-25; this one on 08-20). The code stayed; only the connection settings changed.',
-        },
-        {
-          title: 'Open chat sends that went out only halfway',
-          symptom: 'On the first send (09-07), one room got the photo but not the text. On 09-19 to 21, all 6 sends (2 rooms × 3 days) failed, and nobody noticed.',
-          cause:
-            'The upload wait was a fixed delay that never checked for completion. I proved it by lining up KakaoTalk\'s local record timestamps with the logs: a 0.6-second gap. The three days of failures turned out to be a "no KakaoTalk main window" state, found after I ruled out a permissions theory.',
-          fix: 'kakaocli confirms delivery and resends only the missing text. If the window is missing, it restarts the KakaoTalk app and retries 1 time, and only after confirming nothing was sent.',
-          guard: 'Slack alerts that include the failure reason, and a monitoring cron job that runs after the send deadline.',
-        },
-        {
-          title: 'Two devices holding the same resource (the most frequent type)',
-          symptom: 'Automatic proposal sending alternated between success and failure (07-29). The vendor support panel list flickered every 15 to 25 seconds (09-22).',
-          cause: 'A development Mac picked up the same queue as the dedicated remote Mac, and two devices read the same KakaoTalk account, so their unread counts overwrote each other.',
-          fix: 'On any Mac other than the designated one, the send poller exits right away. A 0 unread count that arrives within 30 seconds after the count just went up is ignored.',
-          guard: 'For seller finder, the server enforces "one Instagram account per PC, and the most recent login wins."',
-        },
-      ],
-      stack: ['JavaScript / Node.js', 'Chrome Extension MV3', 'Chrome DevTools Protocol', 'Swift (macOS)', 'Python', 'Bash', 'PowerShell', 'launchd', 'Playwright', 'Docker', 'Docker Compose', 'Docker Swarm', 'nginx', 'GitHub Actions', 'GCP VM', 'PostgreSQL', 'PostgREST'],
-      scale: [
-        'Seller collector program on 11 staff PCs (Mac and Windows)',
-        '1,445 commits to staff PC tools — 6 folders (installation host, seller-finder worker, CS Copilot, broadcast extension, Coupang extension, collector), excluding merges (as of 2026-09-23)',
-        'kakaocli fork: 81 commits by me on top of the original MIT project; Swift code grew from 3,904 to 6,595 lines (net +2,691) (2026-09-08)',
-      ],
-      architectureImages: [{ src: '/images/v3/field-fleet-en.png', alt: 'Staff PC deployment and ops infrastructure' }],
+      "id": "agent-platform",
+      "slug": "agent-platform",
+      "reelFlow": [{"label": "Request", "note": ""}, {"label": "Hermes dispatcher", "note": ""}, {"label": "Publisher", "note": ""}],
+      "logo": "/images/logo6.png",
+      "status": "live",
+            "koOnly": true,
+      "title": "Agent Platform · Spark",
+      "shortTitle": "Agent Platform · Spark",
+      "subtitle": "Every request starts as a work order from the CEO agent, and the server, not the prompt, controls delegation and tool execution.",
+      "headline": {
+        "value": "109",
+        "label": "shared skills"
+      },
+      "diagram": {
+        "src": "/images/v3/diagram-agent-platform.png",
+        "alt": "Agent Platform · Spark architecture diagram (Korean labels)"
+      }
     },
+    {
+      "id": "content-autopilot",
+      "slug": "content-autopilot",
+      "reelFlow": [{"label": "Request", "note": ""}, {"label": "Render · QA", "note": ""}, {"label": "Publish gate", "note": "manual by default"}],
+      "logo": "/images/v3/diagram-content-autopilot.png",
+      "status": "staged",
+            "koOnly": true,
+      "title": "Content Autopilot",
+      "shortTitle": "Content Autopilot",
+      "subtitle": "Reels go from request to a rendered 9:16 MP4 and human approval inside the staff screen; real social posting is still simulated.",
+      "headline": {
+        "value": "~300",
+        "label": "test files"
+      },
+      "diagram": {
+        "src": "/images/v3/diagram-content-autopilot.png",
+        "alt": "Content Autopilot architecture diagram (Korean labels)"
+      }
+    },
+    {
+      "id": "field-fleet",
+      "slug": "field-fleet",
+      "reelFlow": [{"label": "Staff Mac · Windows", "note": "one-line install"}, {"label": "VM", "note": "PostgREST + nginx"}, {"label": "Watch cron · Slack", "note": ""}],
+      "logo": "/images/logo9.png",
+      "status": "live",
+            "koOnly": true,
+      "title": "Staff PC Deployment · Operations",
+      "shortTitle": "Staff PC Fleet",
+      "subtitle": "KakaoTalk and Instagram work that has no official API runs on 11 staff PCs, installed with one command and operated from the server.",
+      "headline": {
+        "value": "11",
+        "label": "staff PCs"
+      },
+      "diagram": {
+        "src": "/images/v3/diagram-field-fleet.png",
+        "alt": "Staff PC Fleet architecture diagram (Korean labels)"
+      }
+    }
   ],
   howIBuild: {
     title: 'How I Build with AI',
@@ -797,36 +282,6 @@ const en = {
       { title: 'Turn things off with a switch', lesson: 'I count real usage first, then shut things down by switching them off and keeping the files.' },
     ],
   },
-  before: {
-    title: 'Before · 2024–2025',
-    intro: 'These project pages are in Korean.',
-    projects: [
-      {
-        route: '/projects/project5',
-        logo: '/images/logo5.png',
-        title: 'We:Review',
-        period: 'Aug–Oct 2025 · intern',
-        oneLiner: 'OCR + LLM receipt verification',
-        connection: '→ My first job moving repetitive review work to machines. It led straight to the ops automation at StyleSeller.',
-      },
-      {
-        route: '/projects/project4',
-        logo: '/images/logo4.png',
-        title: 'FitChecker',
-        period: 'Nov–Dec 2024',
-        oneLiner: 'LangChain AI home-training chatbot (RAG recommendations)',
-        connection: '→ My first RAG and agent work, and the starting point for knowledge-grounded agents.',
-      },
-      {
-        route: '/projects/project3',
-        logo: '/images/logo3.png',
-        title: 'Briefify',
-        period: 'Oct–Nov 2024',
-        oneLiner: 'Image and document translate/summarize web service',
-        connection: '→ My first hands-on AI pipeline, chaining OCR, summarization, and translation models (Tesseract, T5, NLLB).',
-      },
-    ],
-  },
   about: {
     title: 'About Me',
     photo: '/images/img.jpg',
@@ -840,7 +295,7 @@ const en = {
     ],
     nowTitle: 'Now',
     now: [
-      'The vendor support chatbot answers tagged questions in real partner rooms. Questions it cannot answer go to the person in charge with the conversation.',
+      'The vendor support chatbot answers only tagged questions in real partner rooms, without hand-off. Amounts, percentages, and brand names in each answer are checked against the evidence and rewritten when they do not match.',
       'I am adding monitoring that catches failures that stop silently. In early October I changed a health check that reported "healthy" even when the database had stopped, so it now checks the database too.',
       'I upgraded the cost tracking tool (Langfuse) to a new version (10-04).',
     ],
@@ -866,12 +321,10 @@ const en = {
       { period: '2025-11 – present', org: 'StyleSeller · PL (business team)', summary: 'Design, build, and run the internal AI work systems', kind: 'tech' },
       { period: '2025-08 – 2025-10', org: 'We:Review (Welead) · intern', summary: 'Built an OCR + LLM receipt review pipeline', kind: 'tech' },
       { period: '2025-05 – 2025-07', org: 'Korea IT Business Promotion Association', summary: 'Generative AI developer training program', kind: 'tech' },
-      { period: '2024-10 – 2024-12', org: 'HiMedia Academy · AI course', summary: 'AI projects with industry mentors (Briefify, FitChecker)', kind: 'tech' },
+      { period: '2024-10 – 2024-12', org: 'HiMedia Academy · AI course', summary: 'AI projects with industry mentors (LangChain RAG chatbot, OCR and translation pipeline)', kind: 'tech' },
       { period: '2024-04 – 2024-10', org: 'HiMedia Academy · full-stack course', summary: 'Spring Boot and Vue.js team projects; collaboration and version control', kind: 'tech', careerChange: true },
-      { period: '2022-06 – 2024-02', org: 'Monte Kids · English teacher', summary: 'Personalized lessons and self-directed learning design', kind: 'pre' },
+      { period: '2018-08 – 2024-02', org: 'Monte Kids · Btop Kinder · Jungsang Academy · English teacher', summary: 'Lesson design, teaching materials, and parent consultations', kind: 'pre' },
       { period: '2021-02 – 2023-06', org: 'Academic Credit Bank System · Business Administration', summary: 'Business administration degree program', kind: 'pre' },
-      { period: '2021-03 – 2022-05', org: 'Pots&Pans · English teacher', summary: 'Immersion lessons and tracking learning outcomes', kind: 'pre' },
-      { period: '2018-08 – 2020-09', org: 'JLS (Jungsang Language School) · teacher', summary: 'Interactive lesson design and communication with parents', kind: 'pre' },
       { period: '2015-03 – 2018-02', org: 'Jeonwon Daycare Center · operations manager', summary: 'Staff management and day-to-day operations', kind: 'pre' },
       { period: '2008-03 – 2012-02', org: 'Cheongju University · B.A. in Law', summary: 'Law major', kind: 'pre' },
     ],
@@ -889,7 +342,7 @@ const en = {
             title: 'AI / Agent',
             items: [
               { id: 'llm-agent', label: 'Tool-calling agents' },
-              { id: 'mcp', label: '4 MCP servers I built' },
+              { id: 'mcp', label: 'MCP servers I built' },
               { id: 'rag', label: 'GraphRAG (LightRAG · Neo4j · pgvector)' },
               { id: 'litellm', label: 'LiteLLM proxy (Gemini path)' },
               { id: 'hitl', label: 'Execution gate (Tool Registry: dry run, approval row recheck)' },
@@ -963,21 +416,13 @@ const en = {
             id: 'ai-course',
             title: 'AI course',
             items: [
-              { id: 'langchain', label: 'LangChain' },
-              { id: 'rag-course', label: 'RAG (FitChecker)' },
-              { id: 'model-pipeline', label: 'Tesseract · T5 · NLLB model pipeline (Briefify)' },
+              { id: 'rag-course', label: 'LangChain RAG chatbot' },
+              { id: 'model-pipeline', label: 'OCR and translation pipeline' },
             ],
           },
         ],
       },
     ],
-  },
-  legacyProjects: {
-    project1: { title: 'JeonJikSi', route: '/projects/project1' },
-    project2: { title: 'Flux', route: '/projects/project2' },
-    project3: { title: 'Briefify', route: '/projects/project3' },
-    project4: { title: 'FitChecker', route: '/projects/project4' },
-    project5: { title: 'We:Review', route: '/projects/project5' },
   },
 };
 

@@ -11,31 +11,25 @@ test('renders the English portfolio hero and accessible showreel controls', () =
   );
 
   expect(screen.getByRole('heading', { name: /Jinhee Mok/ })).toBeInTheDocument();
-  expect(screen.getByText(/AI parses the catalog\. Code owns the price/)).toBeInTheDocument();
-  const projectTranscript = document.querySelector('.project-transcript').textContent;
-  expect(projectTranscript).toContain('I turn repetitive office work into AI systems that run every day.');
-  expect(projectTranscript).toContain('Gemini reads PDFs, images, slides, spreadsheets, and URLs');
-  expect(projectTranscript).toContain('AI edits requested fields. Code recalculates every price.');
-  expect(projectTranscript).toContain('verified with 43 unit tests, some cross-checked against real sheet values');
-  expect(projectTranscript).toContain('An LLM scores 30 candidates at a time; 5+/10 qualifies for staff review.');
-  expect(projectTranscript).toContain('A failed CRM lookup is never a confirmed zero.');
-  expect(projectTranscript).toContain('Substitutes require a successful empty result, not a failed lookup.');
-  expect(projectTranscript).toContain('500+ recipients · approval hold');
-  expect(projectTranscript).toContain('one account per PC, capped actions, no automated DMs.');
-  expect(document.querySelector('.proof-number strong').textContent).toBe('43');
-  expect([...document.querySelectorAll('.scene-caption strong')][0].textContent).toContain('01 · SUPPLIER CATALOG');
-  expect([...document.querySelectorAll('.scene-caption strong')][2].textContent).toContain('03 · SALES-PARTNER MATCHING');
-  expect([...document.querySelectorAll('.scene-caption strong')][4].textContent).toContain('05 · DEPLOYMENT');
-  expect(projectTranscript).toContain('9 seller-finder PCs · 1 off');
-  expect(document.querySelector('.brandtool-window').textContent).toContain('Proposal feature');
-  expect(document.querySelector('.brandtool-window').textContent).toContain('work tool');
-  expect(document.querySelector('.brandtool-window').textContent).toContain('work tool · Proposals');
-  expect(document.querySelector('.brandtool-window').textContent).toContain('Vendor version');
-  expect(document.querySelector('.brandtool-window').textContent).toContain('Seller version');
-  expect(document.querySelector('.film-stage').textContent).not.toContain('brand-tool');
+  expect(screen.getByText(/I build AI work systems that staff use every day/)).toBeInTheDocument();
+  const captions = [...document.querySelectorAll('.scene-caption strong')].map((n) => n.textContent);
+  expect(captions).toEqual([
+    'Status Board',
+    'Vendor CS Agent',
+    'Internal Work Tool',
+    'Knowledge Hub · Email Agent',
+    'Agent Platform · Spark',
+    'Content Autopilot',
+    'Staff PC Fleet',
+  ]);
+  expect(document.querySelectorAll('.caption-state')[6].textContent).toBe('07 / 07');
+  expect(document.querySelector('.film-stage').textContent).not.toMatch(/[가-힣]/);
   expect(screen.getByRole('link', { name: 'Email me' })).toHaveAttribute('href', 'mailto:jinheemok815@gmail.com');
-  expect(screen.getByText('unit tests verifying price calculation')).toBeInTheDocument();
-  expect(screen.getByText('sellers sent personalized KakaoTalk messages in one day')).toBeInTheDocument();
+  expect(screen.getByText('shared skills used by all agents')).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: 'Career description (PDF)' })).toHaveAttribute(
+    'href',
+    '/files/career-description-en.pdf'
+  );
 
   fireEvent.click(screen.getByRole('button', { name: 'Pause' }));
   expect(screen.getByRole('button', { name: 'Resume' })).toHaveAttribute('aria-pressed', 'true');
@@ -50,7 +44,7 @@ test('renders the English portfolio hero and accessible showreel controls', () =
   expect(screen.getByRole('button', { name: 'Replay' })).toBeInTheDocument();
 });
 
-test('keeps the Korean hero copy and résumé link on the Korean route', () => {
+test('shows seven Korean case slides, the new stats, and the résumé link on the Korean route', () => {
   render(
     <MemoryRouter initialEntries={['/']}>
       <App />
@@ -58,31 +52,27 @@ test('keeps the Korean hero copy and résumé link on the Korean route', () => {
   );
 
   expect(screen.getByRole('heading', { name: /목진희/ })).toBeInTheDocument();
-  expect(screen.getByText(/상품은 AI가 읽고, 가격은 코드가 책임집니다/)).toBeInTheDocument();
-  const projectTranscript = document.querySelector('.project-transcript').textContent;
-  expect(projectTranscript).toContain('현업의 반복 업무를 매일 돌아가는 AI 시스템으로 바꿉니다.');
-  expect(projectTranscript).toContain('PDF·이미지·PPT·엑셀·URL을 Gemini가 읽어 상품 후보로 뽑고');
-  expect(projectTranscript).toContain('AI는 요청 필드만 수정. 가격은 코드가 재계산.');
-  expect(projectTranscript).toContain('테스트 43개로 검증했습니다(일부는 실제 상품의 시트 값과 대조).');
-  expect(projectTranscript).toContain('LLM이 30개씩 0~10점 판정하고, 5점 이상을 직원이 검토합니다.');
-  expect(projectTranscript).toContain('CRM 조회 실패를 ‘결과 0건’으로 보지 않습니다.');
-  expect(projectTranscript).toContain('대체 상품은 CRM 조회가 성공하고 0건일 때만 붙입니다.');
-  expect(projectTranscript).toContain('500명 이상 · 승인 대기');
-  expect(projectTranscript).toContain('계정당 PC 1대, 행동 상한, 자동 DM 없음.');
-  expect(document.querySelector('.proof-number strong').textContent).toBe('43');
-  expect([...document.querySelectorAll('.scene-caption strong')][0].textContent).toContain('01 · 공급사 카탈로그');
-  expect([...document.querySelectorAll('.scene-caption strong')][2].textContent).toContain('03 · 판매 파트너사 매칭');
-  expect([...document.querySelectorAll('.scene-caption strong')][4].textContent).toContain('05 · 배포와 운영');
-  expect(projectTranscript).toContain('셀러찾기 PC 9대 · 1대 중지');
-  expect(document.querySelector('.brandtool-window').textContent).toContain('제안서 기능');
-  expect(document.querySelector('.brandtool-window').textContent).toContain('업무툴 · 제안서');
-  expect(document.querySelector('.film-stage').textContent).not.toContain('brand-tool');
-  expect(document.querySelector('.intro').textContent).toContain('현업의 반복 업무를 매일 돌아가는 AI 시스템으로');
-  expect(screen.getByText('가격 계산 검증 테스트')).toBeInTheDocument();
-  expect(screen.getByText('하루에 보낸 셀러 맞춤 카톡')).toBeInTheDocument();
+  expect(screen.getByText('직원이 매일 쓰는 AI 업무 시스템을 만들고, 사람이 확정하는 구조로 운영합니다')).toBeInTheDocument();
+  const captions = [...document.querySelectorAll('.scene-caption strong')].map((n) => n.textContent);
+  expect(captions).toEqual([
+    '현황판',
+    '벤더 CS 에이전트',
+    '사내 업무툴',
+    'LightRAG 지식 허브·메일 에이전트',
+    '에이전트 플랫폼·Spark',
+    '콘텐츠 오토파일럿',
+    '직원 PC 배포·운영',
+  ]);
+  expect(document.querySelector('.scene--0 .project-title').textContent).toBe(
+    '상대 한 곳을 고르면 카톡·메일·주문서가 한 달력에, 352곳의 거래 단계가 한 화면에 보입니다'
+  );
+  expect(document.querySelector('.film-stage').textContent).not.toContain('카탈로그에서');
+  const values = [...document.querySelectorAll('.metric-value')].map((n) => n.textContent);
+  expect(values).toEqual(['352곳', '109개', '13개', '11대']);
+  expect(screen.getByText('에이전트가 같이 쓰는 공용 스킬')).toBeInTheDocument();
   expect(screen.getByRole('link', { name: '경력기술서 (PDF)' })).toHaveAttribute(
     'href',
-    '/resume/Career_Jinhee_Mok_KO.pdf'
+    '/files/career-description-ko.pdf'
   );
 });
 
@@ -95,7 +85,7 @@ test('organizes the Korean How I Build page into balanced, readable cards', () =
 
   expect(screen.getByRole('heading', { level: 1, name: 'How I Build with AI' })).toBeInTheDocument();
   expect(screen.getByText('설계·개발·운영 담당. 코드는 Claude Code로 쓰고, 아키텍처·규칙·검증·롤아웃은 직접 판단했습니다.')).toBeInTheDocument();
-  expect(screen.getByText(/네 저장소의 본인 커밋은 합 7,276개입니다/)).toBeInTheDocument();
+  expect(screen.getByText(/네 저장소 본인 커밋 합계는 7,276개입니다/)).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: '하네스 — 에이전트 실수를 규칙으로 막기' })).toBeInTheDocument();
   expect(document.querySelectorAll('.harness-grid article')).toHaveLength(6);
   expect(screen.getByRole('heading', { name: 'CLAUDE.md·규칙 파일' })).toBeInTheDocument();

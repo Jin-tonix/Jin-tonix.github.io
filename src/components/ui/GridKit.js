@@ -14,19 +14,6 @@ export const PortfolioGrid = styled.div`
   }
 `;
 
-export const SmallPortfolioGrid = styled(PortfolioGrid)`
-  /* 카드 수가 적어도 위 StyleSeller 카드와 같은 폭을 유지 */
-  grid-template-columns: repeat(5, 1fr);
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (max-width: 480px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-`;
-
 export const ProjectBoxWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -34,8 +21,6 @@ export const ProjectBoxWrapper = styled.div`
   width: 100%;
   text-align: center;
 `;
-
-export const SmallProjectBoxWrapper = styled(ProjectBoxWrapper)``;
 
 export const ProjectBox = styled(Link)`
   width: 100%;
@@ -61,8 +46,6 @@ export const ProjectBox = styled(Link)`
   }
 `;
 
-export const SmallProjectBox = styled(ProjectBox)``;
-
 export const Description = styled.div`
   margin-top: 8px;
   font-size: 15px;
@@ -72,14 +55,6 @@ export const Description = styled.div`
   @media (max-width: 768px) {
     font-size: 13px;
   }
-`;
-
-export const Connection = styled.div`
-  margin-top: 2px;
-  font-size: 13px;
-  color: ${color.gold};
-  text-align: center;
-  opacity: 0.9;
 `;
 
 // 카드 아래 TL;DR 첫 줄

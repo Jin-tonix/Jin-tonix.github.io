@@ -24,14 +24,15 @@ const esc = (s) =>
 const contentOf = (lang) => (lang === 'en' ? en : ko);
 const sitePath = (koPath, lang) => new URL(canonicalUrl(koPath, lang)).pathname;
 
-// JS 없이 읽히는 본문 요약 (noscript). 사례는 한 줄 소개·TL;DR·주요 사항까지
+// JS 없이 읽히는 본문 요약 (noscript). 사례는 부제·배경·기술 하이라이트 제목까지
 function noscriptBody(content, koPath, lang, meta) {
   const parts = [`<h1>${esc(meta.heading)}</h1>`, `<p>${esc(meta.description)}</p>`];
   const m = koPath.match(/^\/projects\/([^/]+)$/);
   const c = m && content.cases.find((x) => x.slug === m[1]);
   if (c) {
-    // TL;DR 첫 줄이 한 줄 소개라 oneLiner 는 따로 넣지 않는다
-    const lines = [].concat(c.tldr || [], c.highlights || []);
+    if (c.background) parts.push(`<p>${esc(c.background)}</p>`);
+    const lines = (c.highlights || []).map((h) => `${h.title} ${h.text}`.replace(/\*\*|`/g, ''));
+    if (c.headline) lines.push(`${c.headline.value} ${c.headline.label}`);
     if (lines.length) parts.push(`<ul>${lines.map((l) => `<li>${esc(l)}</li>`).join('')}</ul>`);
   }
   const links = allRoutes(content).map((p) => {

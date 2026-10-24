@@ -1,29 +1,22 @@
-// Projects 페이지 — StyleSeller case grid(맨 위) -> System Map -> Before 2024-2025 grid
+// Projects 페이지 — StyleSeller case grid(맨 위) -> System Map
 import React from 'react';
 import { useLang } from '../lang/LangContext';
 import SystemMap from '../components/ui/SystemMap';
 import StatusBadge from '../components/ui/StatusBadge';
 import imgAttrs from '../components/ui/imgAttrs';
-import PageShell, { Section, SectionTitle, SectionIntro } from '../components/ui/PageShell';
+import PageShell, { Section, SectionTitle } from '../components/ui/PageShell';
 import {
   PortfolioGrid,
-  SmallPortfolioGrid,
   ProjectBoxWrapper,
-  SmallProjectBoxWrapper,
   ProjectBox,
-  SmallProjectBox,
   Description,
-  Connection,
   CardSummary,
   CardStatus,
 } from '../components/ui/GridKit';
 
-// TL;DR 첫 줄 (문자열 하나여도 받는다)
-const firstTldr = (tldr) => (Array.isArray(tldr) ? tldr[0] : tldr);
-
 export default function ProjectsPage() {
   const { content, withPrefix, lang } = useLang();
-  const { nav, systemMap, cases, before } = content;
+  const { nav, systemMap, cases } = content;
 
   return (
     <PageShell title={nav.projects}>
@@ -41,7 +34,7 @@ export default function ProjectsPage() {
                   <StatusBadge status={c.status} lang={lang} />
                 </CardStatus>
               )}
-              {firstTldr(c.tldr) && <CardSummary>{firstTldr(c.tldr)}</CardSummary>}
+              {c.subtitle && <CardSummary>{c.subtitle}</CardSummary>}
             </ProjectBoxWrapper>
           ))}
         </PortfolioGrid>
@@ -51,21 +44,6 @@ export default function ProjectsPage() {
         <SystemMap systemMap={systemMap} withPrefix={withPrefix} />
       </Section>
 
-      <Section>
-        <SectionTitle>{before.title}</SectionTitle>
-        {before.intro && <SectionIntro>{before.intro}</SectionIntro>}
-        <SmallPortfolioGrid>
-          {before.projects.map((p) => (
-            <SmallProjectBoxWrapper key={p.route}>
-              <SmallProjectBox to={withPrefix(p.route)}>
-                <img src={p.logo} {...imgAttrs(p.logo)} alt={p.title} />
-              </SmallProjectBox>
-              <Description>{p.title}</Description>
-              <Connection>{p.connection}</Connection>
-            </SmallProjectBoxWrapper>
-          ))}
-        </SmallPortfolioGrid>
-      </Section>
     </PageShell>
   );
 }

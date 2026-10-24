@@ -84,11 +84,3 @@ export const SectionTitle = styled.h2`
   font-weight: ${font.weight.subhead};
   margin: 0 0 16px;
 `;
-
-export const SectionIntro = styled.p`
-  color: ${color.muted};
-  font-size: ${font.size.md};
-  line-height: ${font.bodyLineHeight};
-  max-width: ${font.proseMaxWidth};
-  margin: 0 0 16px;
-`;

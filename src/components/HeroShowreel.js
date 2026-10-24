@@ -3,43 +3,40 @@ import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import { color, font } from './ui/tokens';
 
-const revealCatalog = keyframes`
-  0% { opacity: 0; transform: translateY(12px); }
-  1%, 21% { opacity: 1; transform: translateY(0); }
-  23%, 100% { opacity: 0; transform: translateY(-10px); }
-`;
+// 쇼릴 — 사례 7개를 4초씩 차례로 보여준다
+const SLIDE_COUNT = 7;
+const SLIDE_SECONDS = 4;
+const REEL_SECONDS = SLIDE_COUNT * SLIDE_SECONDS;
 
-const revealPricing = keyframes`
-  0%, 23% { opacity: 0; transform: translateY(12px); }
-  25%, 42% { opacity: 1; transform: translateY(0); }
-  44%, 100% { opacity: 0; transform: translateY(-10px); }
-`;
-
-const revealMatching = keyframes`
-  0%, 42% { opacity: 0; transform: translateY(12px); }
-  44%, 61% { opacity: 1; transform: translateY(0); }
-  63%, 100% { opacity: 0; transform: translateY(-10px); }
-`;
-
-const revealOutreach = keyframes`
-  0%, 61% { opacity: 0; transform: translateY(12px); }
-  63%, 80% { opacity: 1; transform: translateY(0); }
-  82%, 100% { opacity: 0; transform: translateY(-10px); }
-`;
-
-const revealFleet = keyframes`
-  0%, 80% { opacity: 0; transform: translateY(12px); }
-  82%, 100% { opacity: 1; transform: translateY(0); }
-`;
+// i 번째 장면이 제 구간에서만 보이게 하는 keyframes (마지막 장면은 끝까지 남는다)
+const revealAt = (i) => {
+  const step = 100 / SLIDE_COUNT;
+  const start = +(i * step).toFixed(2);
+  const end = +((i + 1) * step).toFixed(2);
+  if (i === 0) {
+    return keyframes`
+      0% { opacity: 0; transform: translateY(12px); }
+      1%, ${end - 2}% { opacity: 1; transform: translateY(0); }
+      ${end}%, 100% { opacity: 0; transform: translateY(-10px); }
+    `;
+  }
+  if (i === SLIDE_COUNT - 1) {
+    return keyframes`
+      0%, ${start}% { opacity: 0; transform: translateY(12px); }
+      ${start + 2}%, 100% { opacity: 1; transform: translateY(0); }
+    `;
+  }
+  return keyframes`
+    0%, ${start}% { opacity: 0; transform: translateY(12px); }
+    ${start + 2}%, ${end - 2}% { opacity: 1; transform: translateY(0); }
+    ${end}%, 100% { opacity: 0; transform: translateY(-10px); }
+  `;
+};
+const REVEALS = Array.from({ length: SLIDE_COUNT }, (_, i) => revealAt(i));
 
 const moveProgress = keyframes`
   from { transform: scaleX(0); }
   to { transform: scaleX(1); }
-`;
-
-const interfaceEnter = keyframes`
-  from { opacity: 0; transform: translateY(8px) scale(0.99); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
 `;
 
 const Hero = styled.section`
@@ -277,30 +274,38 @@ const Hero = styled.section`
     flex-direction: column;
     justify-content: center;
     padding: clamp(16px, 2vw, 25px);
-    animation-duration: 20s;
+    animation-duration: ${REEL_SECONDS}s;
     animation-fill-mode: both;
     animation-iteration-count: 1;
     animation-timing-function: ease;
   }
 
-  .scene--catalog {
-    animation-name: ${revealCatalog};
+  .scene--0 {
+    animation-name: ${REVEALS[0]};
   }
 
-  .scene--pricing {
-    animation-name: ${revealPricing};
+  .scene--1 {
+    animation-name: ${REVEALS[1]};
   }
 
-  .scene--matching {
-    animation-name: ${revealMatching};
+  .scene--2 {
+    animation-name: ${REVEALS[2]};
   }
 
-  .scene--outreach {
-    animation-name: ${revealOutreach};
+  .scene--3 {
+    animation-name: ${REVEALS[3]};
   }
 
-  .scene--fleet {
-    animation-name: ${revealFleet};
+  .scene--4 {
+    animation-name: ${REVEALS[4]};
+  }
+
+  .scene--5 {
+    animation-name: ${REVEALS[5]};
+  }
+
+  .scene--6 {
+    animation-name: ${REVEALS[6]};
   }
 
   .scene-caption {
@@ -338,19 +343,11 @@ const Hero = styled.section`
     max-width: 620px;
     margin: 0;
     color: var(--reel-ink);
-    font-size: clamp(1.35rem, 2.15vw, 2rem);
+    font-size: clamp(1.1rem, 1.65vw, 1.55rem);
     font-weight: 650;
-    line-height: 1.12;
-    letter-spacing: -0.055em;
+    line-height: 1.3;
+    letter-spacing: -0.03em;
     text-wrap: balance;
-  }
-
-  .project-summary {
-    max-width: 590px;
-    margin: 7px 0 12px;
-    color: #c6c4ba;
-    font-size: 12px;
-    line-height: 1.55;
     word-break: keep-all;
   }
 
@@ -446,275 +443,6 @@ const Hero = styled.section`
     animation: ${moveProgress} 2s ease-in-out infinite alternate;
   }
 
-  .project-visual--brandtool {
-    display: block;
-    padding: 8px;
-    background:
-      radial-gradient(ellipse at 75% 0%, rgba(255, 215, 0, 0.12), transparent 55%),
-      #22231f;
-  }
-
-  .brandtool-window {
-    position: relative;
-    z-index: 1;
-    display: grid;
-    grid-template-columns: minmax(92px, 0.22fr) minmax(0, 1fr);
-    min-height: 156px;
-    height: 100%;
-    overflow: hidden;
-    border: 1px solid rgba(32, 33, 29, 0.18);
-    background: #f3f1e9;
-    color: #282923;
-    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
-    animation: ${interfaceEnter} 800ms ease-out both;
-  }
-
-  .brandtool-rail {
-    padding: 12px 9px;
-    background: #292b26;
-    color: #f2f0e7;
-  }
-
-  .brandtool-wordmark {
-    display: block;
-    margin-bottom: 12px;
-    color: var(--reel-gold);
-    font-size: 9px;
-    font-weight: 750;
-    letter-spacing: 0.04em;
-  }
-
-  .brandtool-menu-label {
-    display: block;
-    margin: 9px 0 5px;
-    color: #92938b;
-    font-size: 7px;
-    letter-spacing: 0.04em;
-  }
-
-  .brandtool-menu {
-    display: grid;
-    gap: 3px;
-    color: #c9c9c0;
-    font-size: 8px;
-  }
-
-  .brandtool-menu span {
-    padding: 4px 5px;
-  }
-
-  .brandtool-menu .is-current {
-    border-left: 2px solid var(--reel-gold);
-    background: rgba(255, 215, 0, 0.12);
-    color: #fff9d3;
-  }
-
-  .brandtool-main {
-    min-width: 0;
-    padding: 10px 14px 11px;
-  }
-
-  .brandtool-breadcrumb {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 5px;
-    color: #73746c;
-    font-size: 7px;
-  }
-
-  .brandtool-breadcrumb strong {
-    color: #3c3d35;
-  }
-
-  .brandtool-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 10px;
-    margin-top: 7px;
-    color: #282923;
-    font-size: 13px;
-    font-weight: 750;
-    letter-spacing: -0.04em;
-  }
-
-  .brandtool-heading small {
-    color: #7b7c72;
-    font-size: 7px;
-    font-weight: 550;
-    letter-spacing: 0.02em;
-  }
-
-  .brandtool-tabs {
-    display: flex;
-    gap: 13px;
-    margin-top: 7px;
-    border-bottom: 1px solid #d9d7cd;
-    color: #73746c;
-    font-size: 8px;
-  }
-
-  .brandtool-tabs span {
-    padding: 0 2px 5px;
-  }
-
-  .brandtool-tabs .is-current {
-    border-bottom: 2px solid #8e7816;
-    color: #37372e;
-    font-weight: 700;
-  }
-
-  .brandtool-workspace {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(106px, 0.65fr);
-    gap: 8px;
-    margin-top: 8px;
-  }
-
-  .brandtool-editor,
-  .brandtool-history {
-    min-width: 0;
-    padding: 7px 8px;
-    border: 1px solid #dedcd1;
-    background: #fffef9;
-  }
-
-  .brandtool-editor > small,
-  .brandtool-history > small {
-    display: block;
-    color: #797a71;
-    font-size: 7px;
-  }
-
-  .brandtool-editor > strong {
-    display: block;
-    margin-top: 4px;
-    color: #33342d;
-    font-size: 9px;
-  }
-
-  .brandtool-calculation {
-    display: flex;
-    justify-content: space-between;
-    gap: 5px;
-    margin-top: 6px;
-    padding-top: 5px;
-    border-top: 1px solid #e6e4da;
-    color: #74756c;
-    font-size: 7px;
-  }
-
-  .brandtool-calculation b {
-    color: #766314;
-    font-weight: 700;
-  }
-
-  .brandtool-history > span {
-    display: block;
-    margin-top: 5px;
-    color: #404139;
-    font-size: 7px;
-  }
-
-  .brandtool-history > span::before {
-    display: inline-block;
-    width: 5px;
-    height: 5px;
-    margin-right: 5px;
-    border-radius: 50%;
-    background: #9b8321;
-    content: '';
-  }
-
-  .visual-chat-bubble {
-    width: fit-content;
-    max-width: 100%;
-    padding: 7px 9px;
-    border-radius: 8px 8px 8px 2px;
-    background: rgba(255, 215, 0, 0.12);
-    color: var(--reel-ink);
-    font-size: 9px;
-  }
-
-  .visual-chat-bubble + .visual-chat-bubble {
-    margin-left: auto;
-    border-radius: 8px 8px 2px 8px;
-    background: rgba(242, 240, 231, 0.1);
-  }
-
-  .visual-file-stack {
-    display: flex;
-    gap: 5px;
-  }
-
-  .visual-file-stack i {
-    width: 22px;
-    height: 28px;
-    border: 1px solid rgba(242, 240, 231, 0.3);
-    border-top: 3px solid var(--reel-gold);
-    background: rgba(242, 240, 231, 0.06);
-    transform: rotate(-5deg);
-  }
-
-  .visual-file-stack i:nth-child(2) {
-    transform: translateY(3px) rotate(5deg);
-  }
-
-  .visual-file-stack i:nth-child(3) {
-    transform: translateY(1px) rotate(1deg);
-  }
-
-  .visual-databases {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4px;
-  }
-
-  .visual-databases i {
-    height: 13px;
-    border: 1px solid rgba(255, 215, 0, 0.35);
-    border-radius: 50%;
-    background: rgba(255, 215, 0, 0.08);
-  }
-
-  .visual-pcs {
-    display: grid;
-    grid-template-columns: repeat(4, 13px);
-    gap: 5px;
-  }
-
-  .visual-pcs i {
-    width: 13px;
-    height: 10px;
-    border: 1px solid rgba(242, 240, 231, 0.46);
-    border-bottom-width: 3px;
-    background: rgba(242, 240, 231, 0.08);
-  }
-
-  .visual-pcs i:nth-child(-n + 8) {
-    border-color: rgba(255, 215, 0, 0.6);
-    background: rgba(255, 215, 0, 0.18);
-  }
-
-  .visual-pcs i:nth-child(9) {
-    opacity: 0.35;
-  }
-
-  .brandtool-case-count {
-    display: block;
-    margin-top: 4px;
-    color: #766314;
-    font-size: clamp(20px, 2vw, 28px);
-    font-weight: 750;
-    line-height: 1;
-    letter-spacing: -0.05em;
-  }
-
-  .project-proof {
-    display: none;
-  }
-
   .timeline {
     position: absolute;
     right: 0;
@@ -730,7 +458,7 @@ const Hero = styled.section`
     transform: scaleX(0);
     transform-origin: left center;
     background: var(--reel-gold);
-    animation: ${moveProgress} 20s linear both;
+    animation: ${moveProgress} ${REEL_SECONDS}s linear both;
   }
 
   .film-foot {
@@ -958,13 +686,7 @@ const Hero = styled.section`
     }
 
     .project-title {
-      font-size: clamp(1.08rem, 5.4vw, 1.45rem);
-    }
-
-    .project-summary {
-      margin: 5px 0 7px;
-      font-size: 9px;
-      line-height: 1.35;
+      font-size: clamp(0.95rem, 4.2vw, 1.15rem);
     }
 
     .scene {
@@ -980,134 +702,6 @@ const Hero = styled.section`
       min-height: 85px;
       margin-top: 3px;
       padding: 7px;
-    }
-
-    .project-visual--brandtool {
-      padding: 4px;
-    }
-
-    .brandtool-window {
-      display: none;
-    }
-
-    .project-proof {
-      display: flex;
-      min-height: inherit;
-      align-items: center;
-      gap: 12px;
-      padding: 6px 12px;
-    }
-
-    .proof-number {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .proof-number strong {
-      color: var(--reel-gold);
-      font-size: 24px;
-      line-height: 1;
-    }
-
-    .proof-number span,
-    .proof-copy {
-      color: #d6d4ca;
-      font-size: 9px;
-      line-height: 1.3;
-    }
-
-    .proof-copy {
-      padding-left: 12px;
-      border-left: 1px solid rgba(242, 240, 231, 0.22);
-    }
-
-    .brandtool-window {
-      grid-template-columns: 60px minmax(0, 1fr);
-      min-height: 83px;
-    }
-
-    .brandtool-rail {
-      padding: 6px 4px;
-    }
-
-    .brandtool-wordmark {
-      margin-bottom: 5px;
-      font-size: 6px;
-    }
-
-    .brandtool-menu-label {
-      margin: 4px 0 2px;
-      font-size: 5px;
-    }
-
-    .brandtool-menu {
-      gap: 1px;
-      font-size: 6px;
-    }
-
-    .brandtool-menu span {
-      padding: 3px 2px;
-    }
-
-    .brandtool-main {
-      padding: 5px 6px;
-    }
-
-    .brandtool-breadcrumb {
-      gap: 3px;
-      font-size: 5px;
-    }
-
-    .brandtool-heading {
-      margin-top: 3px;
-      font-size: 9px;
-    }
-
-    .brandtool-heading small,
-    .brandtool-editor > small,
-    .brandtool-history > small {
-      font-size: 5px;
-    }
-
-    .brandtool-tabs {
-      gap: 8px;
-      margin-top: 3px;
-      font-size: 6px;
-    }
-
-    .brandtool-tabs span {
-      padding-bottom: 3px;
-    }
-
-    .brandtool-workspace {
-      grid-template-columns: minmax(0, 1fr) minmax(70px, 0.65fr);
-      gap: 4px;
-      margin-top: 4px;
-    }
-
-    .brandtool-editor,
-    .brandtool-history {
-      padding: 3px 4px;
-    }
-
-    .brandtool-editor > strong,
-    .brandtool-history > span,
-    .brandtool-calculation {
-      font-size: 6px;
-    }
-
-    .brandtool-editor > strong {
-      margin-top: 2px;
-    }
-
-    .brandtool-calculation {
-      margin-top: 3px;
-      padding-top: 2px;
-    }
-
-    .brandtool-history > span {
-      margin-top: 3px;
     }
 
     .visual-track {
@@ -1131,16 +725,6 @@ const Hero = styled.section`
 
     .visual-arrow {
       font-size: 15px;
-    }
-
-    .visual-pcs {
-      grid-template-columns: repeat(4, 9px);
-      gap: 3px;
-    }
-
-    .visual-pcs i {
-      width: 9px;
-      height: 7px;
     }
 
     .film-head {
@@ -1287,13 +871,6 @@ const Hero = styled.section`
       height: 120px;
     }
 
-    .project-summary {
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      overflow: hidden;
-    }
-
     .film-head,
     .film-foot {
       min-height: 28px;
@@ -1323,12 +900,6 @@ const Hero = styled.section`
       font-size: 13px;
     }
 
-    .project-summary {
-      margin: 3px 0 4px;
-      font-size: 8px;
-      line-height: 1.25;
-    }
-
     .project-visual {
       min-height: 56px;
       margin-top: 2px;
@@ -1350,123 +921,8 @@ const Hero = styled.section`
       font-size: 7px;
     }
 
-    .visual-card small,
-    .project-visual--brandtool {
+    .visual-card small {
       padding: 4px;
-    }
-
-    .project-proof {
-      gap: 6px;
-      padding: 4px;
-    }
-
-    .proof-number {
-      gap: 5px;
-    }
-
-    .proof-number strong {
-      font-size: 19px;
-    }
-
-    .proof-number span,
-    .proof-copy {
-      font-size: 9px;
-    }
-
-    .proof-copy {
-      padding-left: 6px;
-    }
-
-    .brandtool-window {
-      grid-template-columns: 57px minmax(0, 1fr);
-      min-height: 70px;
-    }
-
-    .brandtool-rail {
-      padding: 6px 4px;
-    }
-
-    .brandtool-wordmark {
-      margin-bottom: 5px;
-      font-size: 6px;
-    }
-
-    .brandtool-menu-label {
-      margin: 4px 0 2px;
-      font-size: 5px;
-    }
-
-    .brandtool-menu {
-      gap: 1px;
-      font-size: 6px;
-    }
-
-    .brandtool-menu span {
-      padding: 3px 2px;
-    }
-
-    .brandtool-main {
-      padding: 5px 6px;
-    }
-
-    .brandtool-breadcrumb {
-      gap: 3px;
-      font-size: 5px;
-    }
-
-    .brandtool-heading {
-      margin-top: 3px;
-      font-size: 9px;
-    }
-
-    .brandtool-heading small,
-    .brandtool-editor > small,
-    .brandtool-history > small {
-      font-size: 5px;
-    }
-
-    .brandtool-tabs {
-      gap: 8px;
-      margin-top: 3px;
-      font-size: 6px;
-    }
-
-    .brandtool-tabs span {
-      padding-bottom: 3px;
-    }
-
-    .brandtool-workspace {
-      grid-template-columns: minmax(0, 1fr) minmax(70px, 0.65fr);
-      gap: 4px;
-      margin-top: 4px;
-    }
-
-    .brandtool-editor,
-    .brandtool-history {
-      padding: 3px 4px;
-    }
-
-    .brandtool-editor > strong,
-    .brandtool-history > span,
-    .brandtool-calculation {
-      font-size: 6px;
-    }
-
-    .brandtool-editor > strong {
-      margin-top: 2px;
-    }
-
-    .brandtool-calculation {
-      margin-top: 3px;
-      padding-top: 2px;
-    }
-
-    .brandtool-history > span {
-      margin-top: 3px;
-    }
-
-    .brandtool-case-count {
-      font-size: 14px;
     }
 
     .metrics {
@@ -1490,8 +946,7 @@ const Hero = styled.section`
 
   @media (prefers-reduced-motion: reduce) {
     .scene,
-    .timeline-fill,
-    .brandtool-window {
+    .timeline-fill {
       animation: none !important;
     }
 
@@ -1500,7 +955,7 @@ const Hero = styled.section`
       transform: none;
     }
 
-    .scene--catalog {
+    .scene--0 {
       opacity: 1;
     }
 
@@ -1521,58 +976,9 @@ const Hero = styled.section`
 const copy = {
   en: {
     top: 'AI Engineer · from workflow to production',
-    chapter: 'Five AI + automation workflows for commerce ops',
-    hook: 'AI parses the catalog. Code owns the price.',
+    chapter: 'Seven AI systems in daily use',
     solo: 'AI ENGINEER · DESIGN → BUILD → OPERATE',
     company: 'StyleSeller · commerce operations for influencer-led brand sales',
-    catalogOverline: '01 · SUPPLIER CATALOG · PDF / IMAGE / SPREADSHEET',
-    catalogTitle: 'Turn supplier files into structured product listings.',
-    catalogSummary: 'Gemini reads PDFs, images, slides, spreadsheets, and URLs to extract product candidates, options, prices, and photos for staff to confirm in the work tool.',
-    catalogInput: 'Supplier files',
-    catalogModel: 'Gemini · catalog parser',
-    catalogOutput: 'Products · options · prices',
-    pricingOverline: '02 · PROPOSALS INSIDE THE WORK TOOL',
-    pricingTitle: 'AI edits requested fields. Code recalculates every price.',
-    pricingSummary: 'I moved Google Sheet pricing formulas into the vendor and seller proposal flows, verified with 43 unit tests, some cross-checked against real sheet values.',
-    pricingProof: 'unit tests for price calculation',
-    pricingScale: '18 staff work screens (excl. login, 2026-09-23)',
-    matchingOverline: '03 · SALES-PARTNER MATCHING · RULES + SEARCH',
-    matchingTitle: 'Find sales partners likely to run a group buy.',
-    matchingSummary: 'Combine sales, category, inquiry, and proposal rules with knowledge search. An LLM scores 30 candidates at a time; 5+/10 qualifies for staff review.',
-    matchingInputs: ['Sales history', 'Categories', 'Inquiries', 'Past proposals'],
-    matchingRank: 'LLM · candidate scoring',
-    matchingResult: 'Staff reviews matches',
-    outreachOverline: '04 · CRM-PERSONALIZED KAKAOTALK',
-    outreachTitle: 'A failed CRM lookup is never a confirmed zero.',
-    outreachSummary: "A colleague's CRM picks products from KakaoTalk sales history and Instagram feed analysis; I built the automation that turns them into cards and sends them. Substitutes require a successful empty result, not a failed lookup.",
-    outreachInput: 'Sales history · Instagram feed',
-    outreachCard: 'Tailored product card',
-    outreachQueue: 'KakaoTalk send queue',
-    outreachGuard: '500+ recipients · approval hold',
-    fleetOverline: '05 · DEPLOYMENT & OPERATIONS · 11 DEVICES',
-    fleetTitle: 'Instagram seller discovery runs on employee PCs.',
-    fleetSummary: 'Instagram blocks data-center IPs, so a worker runs on an employee PC: one account per PC, capped actions, no automated DMs.',
-    fleetScale: '9 seller-finder PCs · 1 off',
-    visualSite: 'StyleSeller internal work tool',
-    visualSection: 'work tool · Proposals',
-    visualVendor: 'Vendor version',
-    visualSeller: 'Seller version',
-    visualMenu: ['Products', 'Proposals', 'Vendors', 'Sellers'],
-    visualProposalTitle: 'Proposal feature',
-    visualEdit: 'LLM · fields-to-change JSON',
-    visualPrice: 'Code · deterministic price',
-    visualVersionHistory: 'Price calculation verified with 43 tests',
-    visualHistoryLabel: 'Work records',
-    visualSendHistory: 'Created proposals · send requests',
-    visualMessage: 'Supplier PDF · image · sheet',
-    visualSeparate: 'Products · options · prices',
-    visualStaff: 'Original photos preferred',
-    visualSearch: 'Sales history · categories',
-    visualDraft: 'Knowledge search',
-    visualRecords: 'Past sales · inquiries · tags',
-    visualInstall: 'Instagram · one account',
-    visualUpdate: 'No automated DMs',
-    visualChapters: ['Catalog intake', 'Code-owned pricing', 'Partner matching', 'KakaoTalk proposals', 'Staff-PC discovery'],
     live: 'IN USE EVERY DAY',
     projects: 'Explore projects',
     pause: 'Pause',
@@ -1586,58 +992,9 @@ const copy = {
   },
   ko: {
     top: 'AI 엔지니어 · 업무 흐름부터 운영까지',
-    chapter: '커머스 운영에 쓰이는 AI·자동화 흐름 5개',
-    hook: '상품은 AI가 읽고, 가격은 코드가 책임집니다.',
+    chapter: '매일 쓰는 사내 AI 시스템 7개',
     solo: 'StyleSeller · 설계 → 개발 → 배포·운영',
     company: 'StyleSeller · 크리에이터 셀러와 브랜드의 판매를 운영하는 커머스 플랫폼',
-    catalogOverline: '01 · 공급사 카탈로그 · PDF / 이미지 / 엑셀',
-    catalogTitle: '공급사 자료에서 상품·옵션·가격 후보를 뽑습니다.',
-    catalogSummary: 'PDF·이미지·PPT·엑셀·URL을 Gemini가 읽어 상품 후보로 뽑고, 직원이 확인해 등록합니다. 상품 사진도 함께 가져옵니다.',
-    catalogInput: '공급사 자료',
-    catalogModel: 'Gemini · 카탈로그 파싱',
-    catalogOutput: '상품 · 옵션 · 가격',
-    pricingOverline: '02 · 사내 업무툴 제안 기능',
-    pricingTitle: 'AI는 요청 필드만 수정. 가격은 코드가 재계산.',
-    pricingSummary: '구글 시트 가격 수식을 업무툴의 벤더용·셀러용 제안 흐름으로 옮기고 테스트 43개로 검증했습니다(일부는 실제 상품의 시트 값과 대조).',
-    pricingProof: '테스트 43개로 검증한 가격 계산',
-    pricingScale: '직원 업무 화면 18개(로그인 제외, 2026-09-23 기준)',
-    matchingOverline: '03 · 판매 파트너사 매칭 · 규칙 + 지식 검색',
-    matchingTitle: '공동구매를 함께 열 판매 파트너사를 찾습니다.',
-    matchingSummary: '공구 이력·카테고리·문의·제안서 규칙 점수에 지식 허브 후보를 합칩니다. LLM이 30개씩 0~10점 판정하고, 5점 이상을 직원이 검토합니다.',
-    matchingInputs: ['공구 이력', '카테고리', '문의', '과거 제안'],
-    matchingRank: 'LLM · 후보별 매칭 점수',
-    matchingResult: '직원이 후보 검토',
-    outreachOverline: '04 · CRM 기반 맞춤 카카오톡',
-    outreachTitle: 'CRM 조회 실패를 ‘결과 0건’으로 보지 않습니다.',
-    outreachSummary: '동료가 만든 CRM이 카톡 판매 이력과 인스타 피드 분석으로 상품을 고르고, 저는 받아서 보내는 자동화를 만들었습니다. 대체 상품은 CRM 조회가 성공하고 0건일 때만 붙입니다.',
-    outreachInput: '판매 이력 · 인스타 피드',
-    outreachCard: '맞춤 상품 카드',
-    outreachQueue: '카카오톡 발송 큐',
-    outreachGuard: '500명 이상 · 승인 대기',
-    fleetOverline: '05 · 배포와 운영 · 직원 PC 11대',
-    fleetTitle: 'Instagram 셀러 발굴은 직원 PC에서 실행합니다.',
-    fleetSummary: 'Instagram 데이터센터 IP 차단에 맞춰 직원 PC 워커로 옮겼습니다. 계정당 PC 1대, 행동 상한, 자동 DM 없음.',
-    fleetScale: '셀러찾기 PC 9대 · 1대 중지',
-    visualSite: 'StyleSeller 사내 업무툴',
-    visualSection: '업무툴 · 제안서',
-    visualVendor: '벤더용',
-    visualSeller: '셀러용',
-    visualMenu: ['상품', '제안서', '벤더', '셀러'],
-    visualProposalTitle: '제안서 기능',
-    visualEdit: 'LLM · 수정 필드 JSON',
-    visualPrice: '코드 · 결정론적 가격 계산',
-    visualVersionHistory: '테스트 43개로 검증한 가격 계산',
-    visualHistoryLabel: '업무 기록',
-    visualSendHistory: '제안서 생성 · 발송 요청',
-    visualMessage: '공급사 PDF · 이미지 · 엑셀',
-    visualSeparate: '상품 · 옵션 · 가격',
-    visualStaff: '원본 사진 우선 사용',
-    visualSearch: '공구 이력 · 카테고리',
-    visualDraft: '지식 허브 검색',
-    visualRecords: '과거 제안 · 문의 · 태그',
-    visualInstall: 'Instagram · 계정 1개',
-    visualUpdate: '자동 DM 없음',
-    visualChapters: ['상품 등록', '코드 가격 계산', '파트너사 매칭', '카톡 제안', '직원 PC 셀러 발굴'],
     live: '매일 사용 중',
     projects: '프로젝트 자세히 보기',
     pause: '일시정지',
@@ -1651,8 +1008,39 @@ const copy = {
   },
 };
 
+// 괄호 밖 첫 쉼표 앞까지만 (뒤는 덧붙임 설명)
+const beforeOuterComma = (text) => {
+  let depth = 0;
+  for (let i = 0; i < text.length; i += 1) {
+    if (text[i] === '(') depth += 1;
+    if (text[i] === ')') depth -= 1;
+    if (text[i] === ',' && depth === 0) return text.slice(0, i).trim();
+  }
+  return text.trim();
+};
+
+// 사례 구조도 캡션(→·↔ 흐름)에서 상자 3개를 뽑는다. 영문은 content 의 reelFlow 를 쓴다
+const flowBoxes = (c) => {
+  if (c.reelFlow) return c.reelFlow;
+  const caption = c.diagramCaption || '';
+  // '·' 로 묶인 흐름이 여럿이면 단계가 가장 많은 흐름 하나
+  const flows = caption.split(' · ').map((f) => f.split(/\s*[→↔]\s*/).filter(Boolean));
+  const parts = flows.reduce((a, b) => (b.length > a.length ? b : a), []);
+  if (parts.length === 0) return [];
+  parts[parts.length - 1] = beforeOuterComma(parts[parts.length - 1]);
+  const picked = parts.length <= 3 ? parts : [parts[0], parts[Math.floor((parts.length - 1) / 2)], parts[parts.length - 1]];
+  return picked.map((part) => {
+    const m = part.match(/^([^(]+)\((.*)\)$/);
+    return m ? { label: m[1].trim(), note: m[2].trim() } : { label: part.trim(), note: '' };
+  });
+};
+
+const pad = (n) => String(n).padStart(2, '0');
+
 export default function HeroShowreel({ hero, content, lang, withPrefix }) {
   const text = copy[lang] || copy.ko;
+  const slides = content.cases.slice(0, SLIDE_COUNT);
+  const total = pad(slides.length);
   const [paused, setPaused] = useState(false);
   const [finished, setFinished] = useState(false);
   const [replayKey, setReplayKey] = useState(0);
@@ -1687,7 +1075,7 @@ export default function HeroShowreel({ hero, content, lang, withPrefix }) {
 
         <div className="hero-main">
           <div className="hero-copy">
-            <p className="hook">{text.hook}</p>
+            <p className="hook">{hero.headline}</p>
             <h1 id="home-title">
               {hero.name}
               <span className="role">{hero.title}</span>
@@ -1707,174 +1095,40 @@ export default function HeroShowreel({ hero, content, lang, withPrefix }) {
           <div className="film" role="group" aria-label={text.chapter}>
             <div className="film-head">
               <span className="film-index">StyleSeller · {text.live}</span>
-              <span>01 — 05</span>
+              <span>01 — {total}</span>
             </div>
             <div
               className={`film-stage${paused ? ' is-paused' : ''}`}
               key={replayKey}
               aria-hidden="true"
             >
-              <div className="scene scene--catalog">
-                <div className="scene-caption">
-                  <strong>{text.catalogOverline}</strong>
-                  <span className="caption-state">01 / 05</span>
-                </div>
-                <h2 className="project-title">{text.catalogTitle}</h2>
-                <p className="project-summary">{text.catalogSummary}</p>
-                <div className="project-visual">
-                  <div className="visual-track">
-                    <div className="visual-card">
-                      <div className="visual-file-stack"><i /><i /><i /></div>
-                      <strong>{text.catalogInput}</strong>
-                      <small>{text.visualMessage}</small>
+              {slides.map((c, i) => {
+                const boxes = flowBoxes(c);
+                return (
+                  <div className={`scene scene--${i}`} key={c.slug}>
+                    <div className="scene-caption">
+                      <strong>{c.shortTitle}</strong>
+                      <span className="caption-state">{pad(i + 1)} / {total}</span>
                     </div>
-                    <span className="visual-arrow" aria-hidden="true">→</span>
-                    <div className="visual-card accent">
-                      <strong>{text.catalogModel}</strong>
-                      <small>{text.visualStaff}</small>
-                    </div>
-                    <span className="visual-arrow" aria-hidden="true">→</span>
-                    <div className="visual-card">
-                      <strong>{text.catalogOutput}</strong>
-                      <small>{text.visualSeparate}</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="scene scene--pricing">
-                <div className="scene-caption">
-                  <strong>{text.pricingOverline}</strong>
-                  <span className="caption-state">02 / 05</span>
-                </div>
-                <h2 className="project-title">{text.pricingTitle}</h2>
-                <p className="project-summary">{text.pricingSummary}</p>
-                <div className="project-visual project-visual--brandtool">
-                  <div className="brandtool-window">
-                    <aside className="brandtool-rail">
-                      <strong className="brandtool-wordmark">work tool</strong>
-                      <small className="brandtool-menu-label">{text.visualSite}</small>
-                      <div className="brandtool-menu">
-                        {text.visualMenu.map((item) => (
-                          <span className={item === text.visualMenu[1] ? 'is-current' : ''} key={item}>{item}</span>
-                        ))}
-                      </div>
-                    </aside>
-                    <div className="brandtool-main">
-                      <div className="brandtool-breadcrumb">
-                        <span>{text.visualSite}</span><span>/</span><strong>{text.visualSection}</strong>
-                      </div>
-                      <div className="brandtool-heading">
-                        <span>{text.visualProposalTitle}</span>
-                        <small>{text.pricingScale}</small>
-                      </div>
-                      <div className="brandtool-tabs">
-                        <span className="is-current">{text.visualVendor}</span>
-                        <span>{text.visualSeller}</span>
-                      </div>
-                      <div className="brandtool-workspace">
-                        <div className="brandtool-editor">
-                          <small>{text.visualEdit}</small>
-                          <strong>{text.visualPrice}</strong>
-                          <div className="brandtool-calculation">
-                            <span>{text.visualVersionHistory}</span><b>↻</b>
-                          </div>
-                        </div>
-                        <div className="brandtool-history">
-                          <small>{text.visualHistoryLabel}</small>
-                          <strong className="brandtool-case-count">43</strong>
-                          <span>{text.pricingProof}</span>
-                          <span>{text.visualSendHistory}</span>
+                    <h2 className="project-title">{c.subtitle}</h2>
+                    {boxes.length > 0 && (
+                      <div className="project-visual">
+                        <div className="visual-track">
+                          {boxes.map((box, j) => (
+                            <React.Fragment key={box.label}>
+                              {j > 0 && <span className="visual-arrow" aria-hidden="true">→</span>}
+                              <div className={`visual-card${j === 1 ? ' accent' : ''}`}>
+                                <strong>{box.label}</strong>
+                                {box.note && <small>{box.note}</small>}
+                              </div>
+                            </React.Fragment>
+                          ))}
                         </div>
                       </div>
-                    </div>
+                    )}
                   </div>
-                  <div className="project-proof">
-                    <span className="proof-number">
-                      <strong>43</strong>
-                      <span>{text.pricingProof}</span>
-                    </span>
-                    <span className="proof-copy">{text.pricingScale}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="scene scene--matching">
-                <div className="scene-caption">
-                  <strong>{text.matchingOverline}</strong>
-                  <span className="caption-state">03 / 05</span>
-                </div>
-                <h2 className="project-title">{text.matchingTitle}</h2>
-                <p className="project-summary">{text.matchingSummary}</p>
-                <div className="project-visual">
-                  <div className="visual-track">
-                    <div className="visual-card">
-                      <div className="visual-databases">{text.matchingInputs.map((source) => <i key={source} title={source} />)}</div>
-                      <strong>{text.visualRecords}</strong>
-                    </div>
-                    <span className="visual-arrow" aria-hidden="true">→</span>
-                    <div className="visual-card accent">
-                      <strong>{text.matchingRank}</strong>
-                      <small>{text.visualDraft}</small>
-                    </div>
-                    <span className="visual-arrow" aria-hidden="true">→</span>
-                    <div className="visual-card">
-                      <strong>{text.matchingResult}</strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="scene scene--outreach">
-                <div className="scene-caption">
-                  <strong>{text.outreachOverline}</strong>
-                  <span className="caption-state">04 / 05</span>
-                </div>
-                <h2 className="project-title">{text.outreachTitle}</h2>
-                <p className="project-summary">{text.outreachSummary}</p>
-                <div className="project-visual">
-                  <div className="visual-track">
-                    <div className="visual-card">
-                      <strong>{text.outreachInput}</strong>
-                      <small>{text.visualSearch}</small>
-                    </div>
-                    <span className="visual-arrow" aria-hidden="true">→</span>
-                    <div className="visual-card accent">
-                      <strong>{text.outreachCard}</strong>
-                    </div>
-                    <span className="visual-arrow" aria-hidden="true">→</span>
-                    <div className="visual-card">
-                      <strong>{text.outreachQueue}</strong>
-                      <small>{text.outreachGuard}</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="scene scene--fleet">
-                <div className="scene-caption">
-                  <strong>{text.fleetOverline}</strong>
-                  <span className="caption-state">05 / 05</span>
-                </div>
-                <h2 className="project-title">{text.fleetTitle}</h2>
-                <p className="project-summary">{text.fleetSummary}</p>
-                <div className="project-visual">
-                  <div className="visual-track">
-                    <div className="visual-card">
-                      <strong>{text.visualInstall}</strong>
-                    </div>
-                    <span className="visual-arrow" aria-hidden="true">→</span>
-                    <div className="visual-card accent">
-                      <strong>{text.fleetScale}</strong>
-                      <div className="visual-pcs">{Array.from({ length: 9 }, (_, index) => <i key={index} />)}</div>
-                    </div>
-                    <span className="visual-arrow" aria-hidden="true">→</span>
-                    <div className="visual-card">
-                      <strong>{text.visualUpdate}</strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                );
+              })}
 
               <div className="timeline">
                 <div className="timeline-fill" onAnimationEnd={finish} />
@@ -1882,8 +1136,8 @@ export default function HeroShowreel({ hero, content, lang, withPrefix }) {
             </div>
             <div className="film-foot">
               <div className="chapter-list" aria-hidden="true">
-                {text.visualChapters.map((chapter, index) => (
-                  <span key={chapter}>{String(index + 1).padStart(2, '0')} {chapter}</span>
+                {slides.map((c, i) => (
+                  <span key={c.slug}>{pad(i + 1)} {c.shortTitle}</span>
                 ))}
               </div>
               <div className="controls">
@@ -1909,14 +1163,12 @@ export default function HeroShowreel({ hero, content, lang, withPrefix }) {
           ))}
         </dl>
         <ul className="sr-only project-transcript">
-          <li>{text.catalogOverline}: {text.catalogTitle} {text.catalogSummary} {text.catalogOutput}</li>
-          <li>{text.pricingOverline}: {text.pricingTitle} {text.pricingSummary} {text.pricingProof}</li>
-          <li>{text.matchingOverline}: {text.matchingTitle} {text.matchingSummary} {text.matchingInputs.join(', ')}.</li>
-          <li>{text.outreachOverline}: {text.outreachTitle} {text.outreachSummary} {text.outreachGuard}</li>
-          <li>{text.fleetOverline}: {text.fleetTitle} {text.fleetSummary} {text.fleetScale}</li>
+          {slides.map((c, i) => (
+            <li key={c.slug}>{pad(i + 1)} {c.shortTitle}: {c.subtitle}</li>
+          ))}
           <li>{hero.intro} {hero.company}</li>
           {hero.metrics.map((metric) => (
-            <li key={metric.label}>{metric.value} {metric.label}. {metric.basis}</li>
+            <li key={metric.label}>{metric.value} {metric.label}</li>
           ))}
         </ul>
         <span className="sr-only" aria-live="polite" aria-atomic="true">{announcement}</span>

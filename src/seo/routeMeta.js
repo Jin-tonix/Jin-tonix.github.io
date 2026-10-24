@@ -6,20 +6,20 @@ const DEFAULT_IMAGE = '/images/hero-bg.jpg';
 
 // 옛 slug·옛 /projects/project6~9 → 새 case slug
 export const LEGACY_SLUG_REDIRECT = {
-  project6: 'company-os',
+  project6: 'agent-platform',
   project7: 'ss-worktool',
   project8: 'email-agent',
   project9: 'field-fleet',
   'sales-pipeline': 'ss-worktool',
+  'company-os': 'agent-platform',
 };
 
 // 옛 한국어 기준 경로 → 새 경로 (SPA Navigate 와 정적 리다이렉트 스텁이 함께 쓴다)
 export const LEGACY_ROUTE_REDIRECT = {
   '/build': '/how-i-build',
+  // 옛 We:Review 페이지 — 사례에서 빠져 첫 화면으로 보낸다
+  '/projects/project5': '/',
 };
-
-// 옛 한국어 전용 프로젝트 페이지
-export const LEGACY_PAGE_SLUGS = ['project1', 'project2', 'project3', 'project4', 'project5'];
 
 const clip = (text, max = 160) => {
   const flat = String(text || '').replace(/\s+/g, ' ').trim();
@@ -50,7 +50,6 @@ export function allRoutes(content) {
     '/how-i-build',
     '/projects',
     ...content.cases.map((c) => `/projects/${c.slug}`),
-    ...LEGACY_PAGE_SLUGS.map((s) => `/projects/${s}`),
   ];
 }
 
@@ -76,25 +75,12 @@ export function routeMeta(content, koPath) {
 
   const c = content.cases.find((x) => x.slug === slug);
   if (c) {
-    const tldr = Array.isArray(c.tldr) ? c.tldr.join(' ') : c.tldr;
-    const firstImage = c.architectureImages && c.architectureImages[0] && c.architectureImages[0].src;
     return {
       title: withOwner(c.shortTitle),
-      description: clip(tldr || c.oneLiner),
-      image: firstImage || base.image,
+      description: clip(c.subtitle),
+      image: (c.diagram && c.diagram.src) || base.image,
       heading: c.title,
       type: 'article',
-    };
-  }
-
-  const legacy = content.legacyProjects && content.legacyProjects[slug];
-  if (legacy) {
-    const card = (content.before.projects || []).find((p) => p.route === `/projects/${slug}`);
-    return {
-      ...base,
-      title: withOwner(legacy.title),
-      description: clip(card ? card.oneLiner : legacy.title),
-      heading: legacy.title,
     };
   }
   return base;

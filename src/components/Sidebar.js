@@ -99,14 +99,6 @@ const SidebarMain = styled.nav`
         color: ${color.gold};
       }
     }
-
-    .extra-group-label {
-      color: ${color.muted};
-      font-size: clamp(0.6em, 1vw, 0.75em);
-      margin-top: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
   }
 
   .social-links {
@@ -236,7 +228,7 @@ export default function Sidebar() {
   const location = useLocation();
   // 프로젝트 하위 페이지를 보는 동안에는 목록을 열어 둔다 — Projects 를 다시 누르거나 다른 상위 메뉴로 가면 닫힌다
   const [showExtraMenu, setShowExtraMenu] = useState(() => /\/projects/.test(location.pathname));
-  const { nav, cases, before } = content;
+  const { nav, cases } = content;
   // 모바일 상단 바의 메뉴 펼침 — 페이지를 옮기면 닫는다
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -305,12 +297,6 @@ export default function Sidebar() {
                   {c.shortTitle}
                 </NavLink>
               ))}
-              <div className="extra-group-label">{before.title}</div>
-              {before.projects.map((p) => (
-                <NavLink key={p.route} to={withPrefix(p.route)}>
-                  {p.title}
-                </NavLink>
-              ))}
             </div>
           )}
 
@@ -331,7 +317,7 @@ export default function Sidebar() {
             <FontAwesomeIcon icon={faEnvelope} /> <span className="label">Email</span>
           </a>
           <div className="updated" style={{ marginTop: '10px', fontSize: 'clamp(0.6em, 1.1vw, 0.75em)', color: color.muted, textAlign: 'center' }}>
-            Last Updated: 2026.10.05
+            Last Updated: 2026.10.24
           </div>
         </div>
       </div>
