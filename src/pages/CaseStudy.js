@@ -42,7 +42,15 @@ const LABELS = {
     footer: '회사 비공개 저장소 · 수치는 git 기록·운영 기록 기준(측정일 표기)',
   },
   en: {
+    background: 'Background',
+    stack: 'Tech stack',
+    scale: 'Scale',
+    flow: 'How it works',
     architecture: 'Architecture',
+    screens: 'Screens',
+    highlights: 'Technical highlights',
+    status: 'Status, judgment, limits',
+    decisions: 'What I decided',
     openFull: 'Open full size ↗',
     swipeHint: 'Swipe the diagram sideways, or tap to open it at full size.',
     koNote: 'Full write-up is in Korean.',
@@ -201,7 +209,7 @@ export default function CaseStudy() {
                   <Figure key={s.label}>
                     <div className="scroll">
                       <a href={s.image} target="_blank" rel="noopener noreferrer" title={t.openFull}>
-                        <img src={s.image} {...imgAttrs(s.image)} alt={`${s.label} 캡처`} />
+                        <img src={s.image} {...imgAttrs(s.image)} alt={lang === 'en' ? `${s.label} screenshot` : `${s.label} 캡처`} />
                       </a>
                     </div>
                     <figcaption>

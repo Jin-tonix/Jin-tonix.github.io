@@ -187,7 +187,13 @@ const ko = {
     experience: [
       { period: '2025.11 – 현재', org: 'StyleSeller 비즈니스 부서 PL', summary: '사내 AI·자동화', kind: 'tech' },
       { period: '2025.08 – 10', org: 'We:Review 인턴', summary: 'OCR+LLM 영수증 검수 자동화', kind: 'tech' },
-      { period: '2024', org: '하이미디어아카데미', summary: 'LangChain RAG 챗봇, OCR·번역 파이프라인', kind: 'tech', careerChange: true },
+      { period: '2025.05 – 07', org: '한국IT비즈니스진흥협회', summary: '생성형 AI 개발자 양성 과정', kind: 'tech' },
+      { period: '2024.10 – 12', org: '하이미디어아카데미 · AI 과정', summary: '현업 멘토와 AI 프로젝트 (LangChain RAG 챗봇, OCR·번역 파이프라인)', kind: 'tech' },
+      { period: '2024.04 – 10', org: '하이미디어아카데미 · 풀스택 과정', summary: 'Spring Boot·Vue.js 팀 프로젝트, 협업과 버전 관리', kind: 'tech', careerChange: true },
+      { period: '2021.02 – 2023.06', org: '학점은행제 · 경영학', summary: '경영학 학위 과정', kind: 'pre' },
+      { period: '2018.08 – 2024.02', org: '몬테키즈어학원 · 비탑킨더 · 정상어학원 · 영어 강사', summary: '수업 설계, 교안 제작, 학부모 상담', kind: 'pre' },
+      { period: '2015.03 – 2018.02', org: '전원어린이집 · 운영실장', summary: '직원 관리와 일상 운영', kind: 'pre' },
+      { period: '2008.03 – 2012.02', org: '청주대학교 · 법학과', summary: '법학 전공', kind: 'pre' },
     ],
   },
   skills: {

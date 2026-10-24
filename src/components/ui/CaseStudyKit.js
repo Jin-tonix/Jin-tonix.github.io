@@ -62,7 +62,7 @@ export const Subtitle = styled.p`
 // 기간·역할·저장소 줄
 export const MetaList = styled.dl`
   display: grid;
-  grid-template-columns: 64px minmax(0, 1fr);
+  grid-template-columns: max-content minmax(0, 1fr);
   gap: 8px 16px;
   margin: 0 0 8px;
   padding: 16px 18px;

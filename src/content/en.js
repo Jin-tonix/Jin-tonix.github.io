@@ -1,4 +1,6 @@
 // 영문 콘텐츠 — ko.js 와 같은 사실을 영어로 쓴다 (원고: portfolio-research/v3/content/*.en.md)
+import casesEn from './cases.en.js';
+
 const en = {
   lang: 'en',
   nav: {
@@ -90,141 +92,7 @@ const en = {
       },
     ],
   },
-  cases: [
-    {
-      "id": "status-board",
-      "slug": "status-board",
-      "reelFlow": [{"label": "KakaoTalk · email · Slack", "note": ""}, {"label": "Masking · LLM extraction", "note": "agent-company"}, {"label": "Staff confirms", "note": ""}],
-      "logo": "/images/v3/status-board-screen-a.jpg",
-      "status": "live",
-            "koOnly": true,
-      "title": "Status Board · Operations Ledger",
-      "shortTitle": "Status Board",
-      "subtitle": "Pick one counterpart and its KakaoTalk chats, emails, and order sheets land on one calendar, while the deal stages of 352 counterparts fit on one screen.",
-      "headline": {
-        "value": "352",
-        "label": "counterparts on the board"
-      },
-      "diagram": {
-        "src": "/images/v3/diagram-status-board.png",
-        "alt": "Status Board architecture diagram (Korean labels)"
-      }
-    },
-    {
-      "id": "vendor-cs",
-      "slug": "vendor-cs",
-      "reelFlow": [{"label": "Staff-PC collection", "note": ""}, {"label": "Knowledge hub search", "note": ""}, {"label": "Mac send · delivery check", "note": ""}],
-      "logo": "/images/v2/logo10.png",
-      "status": "live",
-            "koOnly": true,
-      "title": "Vendor CS Agent",
-      "shortTitle": "Vendor CS Agent",
-      "subtitle": "A KakaoTalk chatbot that answers only tagged vendor questions, without hand-off, and checks every amount and brand against the evidence and rewrites the answer when they do not match.",
-      "headline": {
-        "value": "107",
-        "label": "test files"
-      },
-      "diagram": {
-        "src": "/images/v3/diagram-vendor-cs.png",
-        "alt": "Vendor CS Agent architecture diagram (Korean labels)"
-      }
-    },
-    {
-      "id": "ss-worktool",
-      "slug": "ss-worktool",
-      "reelFlow": [{"label": "Catalog · partner pool", "note": ""}, {"label": "LLM candidates", "note": ""}, {"label": "Staff confirms", "note": ""}],
-      "logo": "/images/logo7.png",
-      "status": "live",
-            "koOnly": true,
-      "title": "Internal Work Tool · Pricing, Matching, Personalized KakaoTalk",
-      "shortTitle": "Internal Work Tool",
-      "subtitle": "Code calculates every price; the LLM only returns candidates and the fields to change.",
-      "headline": {
-        "value": "43",
-        "label": "price-calculation test cases"
-      },
-      "diagram": {
-        "src": "/images/v3/diagram-ss-worktool.png",
-        "alt": "Internal Work Tool architecture diagram (Korean labels)"
-      }
-    },
-    {
-      "id": "email-agent",
-      "slug": "email-agent",
-      "reelFlow": [{"label": "Sent mail · chat wiki · PDFs", "note": ""}, {"label": "LLM planner", "note": ""}, {"label": "Drafts · answers", "note": ""}],
-      "logo": "/images/logo8.png",
-      "status": "live",
-            "koOnly": true,
-      "title": "LightRAG Knowledge Hub · Email Agent",
-      "shortTitle": "Knowledge Hub · Email Agent",
-      "subtitle": "Four agents search one shared knowledge hub, and only evidence-backed email drafts reach the staff draft folder.",
-      "headline": {
-        "value": "13",
-        "label": "knowledge workspaces"
-      },
-      "diagram": {
-        "src": "/images/v3/diagram-email-agent.png",
-        "alt": "Knowledge Hub · Email Agent architecture diagram (Korean labels)"
-      }
-    },
-    {
-      "id": "agent-platform",
-      "slug": "agent-platform",
-      "reelFlow": [{"label": "Request", "note": ""}, {"label": "Hermes dispatcher", "note": ""}, {"label": "Publisher", "note": ""}],
-      "logo": "/images/logo6.png",
-      "status": "live",
-            "koOnly": true,
-      "title": "Agent Platform · Spark",
-      "shortTitle": "Agent Platform · Spark",
-      "subtitle": "Every request starts as a work order from the CEO agent, and the server, not the prompt, controls delegation and tool execution.",
-      "headline": {
-        "value": "109",
-        "label": "shared skills"
-      },
-      "diagram": {
-        "src": "/images/v3/diagram-agent-platform.png",
-        "alt": "Agent Platform · Spark architecture diagram (Korean labels)"
-      }
-    },
-    {
-      "id": "content-autopilot",
-      "slug": "content-autopilot",
-      "reelFlow": [{"label": "Request", "note": ""}, {"label": "Render · QA", "note": ""}, {"label": "Publish gate", "note": "manual by default"}],
-      "logo": "/images/v3/diagram-content-autopilot.png",
-      "status": "staged",
-            "koOnly": true,
-      "title": "Content Autopilot",
-      "shortTitle": "Content Autopilot",
-      "subtitle": "Reels go from request to a rendered 9:16 MP4 and human approval inside the staff screen; real social posting is still simulated.",
-      "headline": {
-        "value": "~300",
-        "label": "test files"
-      },
-      "diagram": {
-        "src": "/images/v3/diagram-content-autopilot.png",
-        "alt": "Content Autopilot architecture diagram (Korean labels)"
-      }
-    },
-    {
-      "id": "field-fleet",
-      "slug": "field-fleet",
-      "reelFlow": [{"label": "Staff Mac · Windows", "note": "one-line install"}, {"label": "VM", "note": "PostgREST + nginx"}, {"label": "Watch cron · Slack", "note": ""}],
-      "logo": "/images/logo9.png",
-      "status": "live",
-            "koOnly": true,
-      "title": "Staff PC Deployment · Operations",
-      "shortTitle": "Staff PC Fleet",
-      "subtitle": "KakaoTalk and Instagram work that has no official API runs on 11 staff PCs, installed with one command and operated from the server.",
-      "headline": {
-        "value": "11",
-        "label": "staff PCs"
-      },
-      "diagram": {
-        "src": "/images/v3/diagram-field-fleet.png",
-        "alt": "Staff PC Fleet architecture diagram (Korean labels)"
-      }
-    }
-  ],
+  cases: casesEn,
   howIBuild: {
     title: 'How I Build with AI',
     intro:
