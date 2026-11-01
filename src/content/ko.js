@@ -38,7 +38,7 @@ const ko = {
     casesTitle: 'StyleSeller 사례 7개',
     glanceTitle: '한눈에 보기',
     glanceIntro:
-      'StyleSeller(크리에이터 셀러와 브랜드의 판매를 운영하는 커머스 플랫폼) 비즈니스 부서에서 PL(프로젝트 리더)로 일합니다. 직원이 손으로 반복하던 거래처 기록 정리와 응대를 AI 에이전트(도구를 직접 쓰는 AI)와 자동화로 옮겨 운영합니다. 2026-10-24 기준 현황판은 거래 상대 수백 곳을 첫 연락부터 정산까지 단계별로 보여 주고, 벤더 CS 챗봇은 근거를 찾은 질문에만 답합니다. 코드는 Claude Code에 많이 맡기고, 무엇을 만들지, 어디까지 켜 둘지, 결과가 맞는지는 제가 정하고 확인합니다.',
+      'StyleSeller(크리에이터 셀러와 브랜드의 판매를 운영하는 커머스 플랫폼) 비즈니스 부서에서 PL(프로젝트 리더)로 일합니다. 직원이 손으로 반복하던 거래처 기록 정리와 응대를 AI 에이전트(도구를 직접 쓰는 AI)와 자동화로 옮겨 운영합니다. 2026-10-24 기준 현황판은 거래 상대 수백 곳을 첫 연락부터 정산까지 단계별로 보여 주고, 벤더 CS 챗봇은 근거를 찾은 질문에만 답합니다. 코드는 Claude Code에 많이 맡기고, 무엇을 만들지, 어디까지 켜 둘지, 결과가 맞는지는 제가 정하고 확인합니다. 에이전트 플랫폼 사례에는 후속 개선인 Jev 스킬 라우터 고도화(132건 중 90.15%, 비용 약 1/10)를 함께 적었습니다.',
   },
   systemMap: {
     title: 'System Map',
@@ -80,7 +80,7 @@ const ko = {
       },
       {
         name: '지식',
-        desc: 'LightRAG(Neo4j + pgvector) 워크스페이스 13개(email-agent). 벤더 CS는 knowledge-mcp로, Spark는 email-agent 검색을 직접, brand-tool 판매 파트너사 매칭은 벡터(naive) 검색으로 씁니다.',
+        desc: 'LightRAG(Neo4j + pgvector) 워크스페이스 13개(email-agent). 벤더 CS는 지식 MCP 서버로, Spark는 email-agent 검색을 직접, brand-tool 판매 파트너사 매칭은 벡터(naive) 검색으로 씁니다.',
       },
       {
         name: '현장',
@@ -123,7 +123,7 @@ const ko = {
       {
         title: '코드를 한 번도 부르지 않는 테스트 (2026-09-22)',
         points: [
-          '벤더 CS 카드가 영영 안 닫히는 버그를 고쳤습니다. 그 배선을 지키던 테스트(TC-V)는 손으로 만든 dict만 확인하고 실제 함수를 부르지 않았습니다.',
+          '벤더 CS 카드가 영영 안 닫히는 버그를 고쳤습니다. 그 배선을 지키던 테스트는 손으로 만든 dict만 확인하고 실제 함수를 부르지 않았습니다.',
           '그래서 배선을 바꿔도 초록이었습니다.',
           '실제 코드를 태우는 테스트로 바꾸고, 메시지 처리 경로를 직접 도는 통합 테스트를 더했습니다.',
         ],
@@ -158,7 +158,7 @@ const ko = {
     tagline: '반복 업무를 AI 시스템으로 바꾸는 AI 에이전트 엔지니어 목진희입니다.',
     paragraphs: [
       '법학을 전공하고 학점은행제로 경영학 학위도 땄고, 어린이집 운영실장과 영어 강사로 일했습니다. 2024년 하이미디어아카데미에서 개발을 배웠고, We:Review 인턴 때 OCR과 LLM으로 영수증 검수를 자동화하면서 지금 하는 일, 곧 현업의 반복 업무를 AI로 줄이는 일의 출발점이 됐습니다.',
-      'StyleSeller에는 2025년 11월에 들어왔습니다. 지금은 카톡 거래처 대화 수집과 챗봇, 메일 답장 초안, 사내 업무툴, 직원 PC 배포를 맡고 있습니다.',
+      'StyleSeller에는 2025년 11월에 들어왔습니다. 셀러 DM 자동화로 시작해 지금은 벤더 CS, 사내 업무툴, 메일 에이전트·지식 허브, 에이전트 플랫폼(Spark·Work OS), 직원 PC 배포를 만들고 운영합니다. 코드는 Claude Code에 많이 맡기지만, 실제 직원 PC에서 돌려 보기 전에는 끝났다고 하지 않습니다.',
       '현업 요구는 실무자가 쓰던 값과 한 칸씩 대조해 규칙으로 옮깁니다. 시스템은 후보와 제안까지만 내고, 확정은 직원이 하게 설계합니다. 사고가 나면 원인과 고친 내용을 날짜와 함께 남깁니다.',
     ],
     nowTitle: 'Now',
@@ -213,13 +213,15 @@ const ko = {
               { id: 'jev', label: 'Jev 스킬 추천기' },
               { id: 'hitl', label: '도구 실행 승인 게이트' },
               { id: 'litellm', label: 'Gemini Flash 계열(LiteLLM 경유)' },
+              { id: 'mcp', label: 'MCP 서버 4개 · Tool calling' },
+              { id: 'claude-code', label: 'Claude Code' },
             ],
           },
           {
             id: 'rag-llmops',
             title: 'RAG·LLM Ops',
             items: [
-              { id: 'rag', label: 'LightRAG 1.5.6 지식 허브' },
+              { id: 'rag', label: 'LightRAG 1.5.6 지식 허브(Neo4j·pgvector)' },
               { id: 'litellm-cap', label: 'LiteLLM 비용 상한' },
               { id: 'langfuse', label: 'Langfuse 4.50 추적' },
             ],
@@ -229,8 +231,9 @@ const ko = {
             title: 'Backend',
             items: [
               { id: 'python', label: 'Python 3.12·FastAPI·Pydantic v2' },
+              { id: 'ts', label: 'TypeScript' },
               { id: 'nextjs', label: 'Next.js 16.2' },
-              { id: 'node', label: 'Express 5' },
+              { id: 'node', label: 'Node.js·Express 5' },
             ],
           },
           {
@@ -250,6 +253,12 @@ const ko = {
               { id: 'device-keys', label: '기기별 키' },
               { id: 'nginx', label: 'VM·nginx' },
               { id: 'docker', label: '커밋 이미지 배포' },
+              { id: 'chrome-ext', label: 'Chrome Extension MV3' },
+              { id: 'playwright', label: 'Playwright·CDP' },
+              { id: 'swift', label: 'Swift(kakaocli 포크)' },
+              { id: 'n8n', label: 'n8n' },
+              { id: 'gh-actions', label: 'GitHub Actions' },
+              { id: 'gcp', label: 'GCP VM' },
             ],
           },
         ],
@@ -275,7 +284,7 @@ const ko = {
             title: 'AI 과정',
             items: [
               { id: 'rag-course', label: 'LangChain RAG 챗봇' },
-              { id: 'model-pipeline', label: 'OCR·번역 파이프라인' },
+              { id: 'model-pipeline', label: 'OCR·번역 파이프라인(Tesseract·T5·NLLB)' },
             ],
           },
         ],

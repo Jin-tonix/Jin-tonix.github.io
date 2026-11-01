@@ -39,7 +39,7 @@ const en = {
     ],
     casesTitle: 'Seven StyleSeller cases',
     glanceTitle: 'At a glance',
-    glanceIntro: 'Seven systems I designed, built, and run at StyleSeller. Full case write-ups are in Korean.',
+    glanceIntro: 'Seven systems I designed, built, and run at StyleSeller, plus one follow-up: the Jev skill router upgrade (90.15% on 132 questions, about 1/10 the cost), written up inside the Agent Platform case.',
   },
   systemMap: {
     title: 'System Map',
@@ -81,7 +81,7 @@ const en = {
       },
       {
         name: 'Knowledge',
-        desc: 'LightRAG (Neo4j + pgvector) with 13 workspaces (email-agent). Vendor support reaches it through knowledge-mcp, Spark calls email-agent search directly, and brand-tool sales partner matching uses vector (naive) search.',
+        desc: 'LightRAG (Neo4j + pgvector) with 13 workspaces (email-agent). Vendor support reaches it through a knowledge MCP server, Spark calls email-agent search directly, and brand-tool sales partner matching uses vector (naive) search.',
       },
       {
         name: 'Field',
@@ -124,7 +124,7 @@ const en = {
       {
         title: 'A test that never called the code (2026-09-22)',
         points: [
-          'I fixed a bug where vendor support cards never closed. The test guarding that wiring (TC-V) checked only a hand-built dict and never called the real function.',
+          'I fixed a bug where vendor support cards never closed. The test guarding that wiring checked only a hand-built dict and never called the real function.',
           'So it stayed green even when the wiring changed.',
           'I replaced it with a test that runs the real code, and added an integration test that walks the message-handling path.',
         ],
@@ -213,7 +213,8 @@ const en = {
             title: 'AI / Agent',
             items: [
               { id: 'llm-agent', label: 'Tool-calling agents' },
-              { id: 'mcp', label: 'MCP servers I built' },
+              { id: 'mcp', label: '4 MCP servers I built' },
+              { id: 'jev', label: 'Jev skill router' },
               { id: 'rag', label: 'GraphRAG (LightRAG · Neo4j · pgvector)' },
               { id: 'litellm', label: 'LiteLLM proxy (Gemini path)' },
               { id: 'hitl', label: 'Execution gate (Tool Registry: dry run, approval row recheck)' },
@@ -288,7 +289,7 @@ const en = {
             title: 'AI course',
             items: [
               { id: 'rag-course', label: 'LangChain RAG chatbot' },
-              { id: 'model-pipeline', label: 'OCR and translation pipeline' },
+              { id: 'model-pipeline', label: 'OCR and translation pipeline (Tesseract, T5, NLLB)' },
             ],
           },
         ],
