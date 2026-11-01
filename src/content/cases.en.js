@@ -7,7 +7,7 @@ const casesEn = [
     "status": "live",
     "title": "Status Board · Operations Ledger",
     "shortTitle": "Status Board",
-    "subtitle": "Pick one counterpart and its KakaoTalk, email, and order sheets land on one calendar; the deal stage of all 352 counterparts fits on one screen",
+    "subtitle": "Pick one counterpart and its KakaoTalk, email, and order sheets land on one calendar; the deal stage of hundreds of counterparts fits on one screen",
     "meta": [
       {
         "label": "Period",
@@ -19,10 +19,10 @@ const casesEn = [
       },
       {
         "label": "Repositories",
-        "value": "Status Board commits: about 100 in brand-tool + about 50 in agent-company"
+        "value": "Status Board commits: about 150 combined across 2 internal repositories"
       }
     ],
-    "background": "Conversations with counterparts are split across KakaoTalk rooms, the order@ mailbox, and Slack, and Excel order sheets arrive separately as email attachments. The Status Board summarizes these records per day and places them in date order on a per-counterpart calendar. Pick one brand, vendor, or seller, and every record exchanged with that counterpart comes together on one screen. The Communication Status tab shows where each of the 352 counterparts stands, from first contact to settlement. Records the rules could not match, and stages that are unclear, are decided by staff.",
+    "background": "Conversations with counterparts are split across KakaoTalk rooms, the order mailbox, and Slack, and Excel order sheets arrive separately as email attachments. The Status Board summarizes these records per day and places them in date order on a per-counterpart calendar. Pick one brand, vendor, or seller, and every record exchanged with that counterpart comes together on one screen. The Communication Status tab shows where each of hundreds of counterparts stands, from first contact to settlement. Records the rules could not match, and stages that are unclear, are decided by staff.",
     "stack": [
       "Next.js 16.2·React 19.2·Tailwind 4·Vitest 4",
       "Python 3.12·Pydantic v2",
@@ -30,12 +30,12 @@ const casesEn = [
       "Gemini Flash family (via LiteLLM)"
     ],
     "scale": [
-      "Communication Status: first contact 46, proposal 119, negotiation 9, contract 16, in progress 162, settlement 0 (2026-10-24)",
-      "352 counterparts = 147 brands + 135 vendors + 70 sellers (2026-10-24)",
-      "Roughly 100–200 records per weekday, 421 awaiting counterpart matching (2026-10-24)"
+      "Communication Status share by stage: first contact 13.1%, proposal 33.8%, negotiation 2.6%, contract 4.5%, in progress 46.0%, settlement 0% (2026-10-24)",
+      "Hundreds of counterparts = 42% brands + 38% vendors + 20% sellers (2026-10-24)",
+      "Roughly 100–200 records per weekday, hundreds awaiting counterpart matching (2026-10-24)"
     ],
     "flow": [
-      "KakaoTalk comes in 3 times a day (09:15·13:00·17:55), order@ email every 5 minutes, and Slack through a generic connector. However many times the same record arrives, the ledger keeps it once.",
+      "KakaoTalk comes in 3 times a day (09:15·13:00·17:55), the order mailbox every 5 minutes, and Slack through a generic connector. However many times the same record arrives, the ledger keeps it once.",
       "Newsletters are filtered out by rules before any LLM call. In order-sheet tables, columns such as recipient are located and buyer names are masked. If a phrase the summary cites as evidence is not in the original text, the summary is discarded.",
       "Counterpart matching uses rules only, no LLM. It checks email thread, business registration number, KakaoTalk room, email, phone, domain, account code, and alias, in that order. If keys disagree, the record goes to Unclassified.",
       "In-progress deals are built by grouping KakaoTalk contract signals and email signals under a counterpart·target·round key. A stage is applied automatically when the rule evidence is clear; the rest go to 'awaiting review' for staff to decide.",
@@ -45,7 +45,7 @@ const casesEn = [
       "src": "/images/v3/diagram-status-board-en.png",
       "alt": "Status Board architecture diagram"
     },
-    "diagramCaption": "KakaoTalk·email·Slack → agent-company (masking, LLM extraction, check against original text) → idempotent intake (stored once no matter how many times it arrives) → brand-tool ledger (RLS, rule matching) → staff review",
+    "diagramCaption": "KakaoTalk·email·Slack → the server (masking, LLM extraction, check against original text) → idempotent intake (stored once no matter how many times it arrives) → the work-tool ledger (RLS, rule matching) → staff review",
     "screens": [
       {
         "label": "Screen A",
@@ -54,7 +54,7 @@ const casesEn = [
       },
       {
         "label": "Screen B",
-        "text": "Communication Status. Shows counterpart counts per stage (first contact 46 to in progress 162) and 'awaiting review' proposals; staff click apply or reject.",
+        "text": "Communication Status. Shows the share of counterparts per stage (first contact 13% to in progress 46%) and 'awaiting review' proposals; staff click apply or reject.",
         "image": "/images/v3/status-board-screen-b.jpg"
       },
       {
@@ -64,7 +64,7 @@ const casesEn = [
       },
       {
         "label": "Screen D",
-        "text": "Counterpart matching. Staff attach the 421 records that could not be matched automatically to a counterpart. Records from the same room and the same thread are attached along with them, and those keys are used for later matching.",
+        "text": "Counterpart matching. Staff attach the hundreds of records that could not be matched automatically to a counterpart. Records from the same room and the same thread are attached along with them, and those keys are used for later matching.",
         "image": null
       }
     ],
@@ -80,7 +80,7 @@ const casesEn = [
       },
       {
         "title": "Shared chatbot shown as the contact person (2026-10-23).",
-        "text": "The shared chatbot's name ended up in the contact-person field for 64 counterparts. The top 5 most active speakers in a KakaoTalk room were taken as contacts, and the chatbot was among them. Now only company email accounts (@styleseller.co.kr) count as contacts; if there is none, the contact from the account profile is used."
+        "text": "The shared chatbot's name ended up in the contact-person field for 64 counterparts. The top 5 most active speakers in a KakaoTalk room were taken as contacts, and the chatbot was among them. Now only company email accounts (@sample-corp.co.kr) count as contacts; if there is none, the contact from the account profile is used."
       }
     ],
     "highlights": [
@@ -119,7 +119,7 @@ const casesEn = [
     ],
     "status3": [
       "In production. The 6 tabs, KakaoTalk·email·Slack intake, and the 18:05 summary batch are running (checked on the production screens on 2026-10-24).",
-      "Python, TS, and SQL share one golden file for name and phone normalization. CI runs the tests under `__tests__/content` on PGlite as the real app role; UI tests run outside CI.",
+      "Python, TS, and SQL share one golden file for name and phone normalization. CI runs content-verification tests on PGlite as the real app role; UI tests run outside CI.",
       "Limits: I have not measured the share of 'awaiting review' proposals that staff applied, i.e. proposal accuracy. The server does not recheck evidence phrases; it trusts the checks on the intake side.",
       "If I did it again: I would ship a test that calls each new DB function as the app role. The 107 rejected summaries on 10-23 would have been caught before deploy by that one test."
     ],
@@ -135,7 +135,7 @@ const casesEn = [
       },
       {
         "label": "Masking · LLM extraction",
-        "note": "agent-company"
+        "note": "server"
       },
       {
         "label": "Staff confirms",
@@ -166,13 +166,13 @@ const casesEn = [
       },
       {
         "label": "Repositories",
-        "value": "agent-company (vendor agent), kakaocli fork, CS Copilot extension and local sender"
+        "value": "the server (vendor agent), kakaocli fork, CS Copilot extension and local sender"
       }
     ],
     "background": "KakaoTalk has no official API, so a server alone cannot read or send counterpart conversations. Staff PCs collect the conversations and upload them to the server, and replies also go out from staff Macs. The server agent writes answers by searching per-counterpart records and the LightRAG knowledge hub (graph RAG over entities and relations, 13 workspaces). Since 2026-09-02 it no longer asks follow-up questions and answers only tagged questions, with no handoff. In exchange, it checks amounts, percentages, and brands against the evidence, and if they do not match it searches again and rewrites.",
     "stack": [
       "macOS kakaocli fork (Swift)",
-      "Windows read-only memory collector (Python)",
+      "Windows read-only collector (Python)",
       "Python 3.12",
       "Gemini Flash family (via LiteLLM)",
       "LightRAG 1.5.6",
@@ -186,8 +186,8 @@ const casesEn = [
     "flow": [
       "On Mac, kakaocli reads only what comes after the last logId in the KakaoTalk DB. On Windows, a collector that only reads memory uploads it. The position advances only after the server answers with 2xx.",
       "The server drops the same message if it arrives again within 15 seconds. It stores records in per-counterpart ledgers, Sheets, and Drive, and twice a day (09:30, 18:10) compiles them into a wiki that goes into the knowledge hub.",
-      "The counterpart ID or name in the room name is checked against the brand-tool list of counterparts to serve. If no counterpart is found on the list, it does not answer.",
-      "It accepts only questions tagged @스타일셀러_AI. The regex only detects the tag; the model does the search and writes the answer. Other counterparts' names are masked as [다른 벤더].",
+      "The counterpart ID or name in the room name is checked against the work tool's list of counterparts to serve. If no counterpart is found on the list, it does not answer.",
+      "It accepts only questions tagged @회사_AI. The regex only detects the tag; the model does the search and writes the answer. Other counterparts' names are masked as [다른 벤더].",
       "Amounts, percentages, and brands in the draft are checked against the evidence, and on a mismatch it searches again and rewrites. The reply is sent from a staff Mac, and delivery is confirmed by whether the KakaoTalk DB count went up."
     ],
     "diagram": {
@@ -214,7 +214,7 @@ const casesEn = [
     "highlights": [
       {
         "title": "A similar name does not decide the counterpart.",
-        "text": "The '(2670)' at the start of a room name is read as the ID. If the name part points better to a different vendor, at jamo similarity 0.80 or higher, it is treated as an ID typo and blocked. Without an ID, only a single name that is an exact match or a containment match is accepted. Sharing just a common suffix already scored 0.81–0.88, so I dropped fuzzy matching."
+        "text": "The '(1234)' at the start of a room name is read as the ID. If the name part points better to a different vendor, at jamo similarity 0.80 or higher, it is treated as an ID typo and blocked. Without an ID, only a single name that is an exact match or a containment match is accepted. Sharing just a common suffix already scored 0.81–0.88, so I dropped fuzzy matching."
       },
       {
         "title": "One message came in 51 times.",
@@ -294,7 +294,7 @@ const casesEn = [
       },
       {
         "label": "Repositories",
-        "value": "brand-tool, agent-company (staff PC worker)"
+        "value": "the work tool, the server (staff PC worker)"
       }
     ],
     "background": "Pricing lived in Google Sheets formulas, and every proposal was reconciled by hand. When I moved those formulas into code, I added tests that compare each field against the sheet values for real products. In catalog product extraction and sales partner matching, the LLM only produces candidates. Registering and reviewing them is the staff's job. For personalized KakaoTalk, a CRM built by a colleague decides each seller's recommendations; I built the send automation that takes those targets and sends.",
@@ -342,11 +342,11 @@ const casesEn = [
     "highlights": [
       {
         "title": "I defined which fields the LLM may change.",
-        "text": "If the LLM back-calculates a request like \"set seller earnings to 1500\", other amounts shift too. So the 6 computed values, such as supply price and earnings, are blocked from the edit list. For such requests, it only points to the input values that need to change. If asked to change only the margin rate, it does not return the sale price."
+        "text": "If the LLM back-calculates a request like \"set seller earnings to 1000\", other amounts shift too. So the 6 computed values, such as supply price and earnings, are blocked from the edit list. For such requests, it only points to the input values that need to change. If asked to change only the margin rate, it does not return the sale price."
       },
       {
         "title": "I ported the sheet formulas down to the rounding units.",
-        "text": "Partner supply price rounds up to the nearest 10 won, and the payment fee is 3.96%. I added tests that compare each field for 2 real products in the sheet (BAWANG at 30,190 won, among others). The tests also check two properties: changing the split ratio leaves total profit unchanged, and the two shares always sum to total profit."
+        "text": "Partner supply price rounds up, and the payment fee is fixed in code. I added tests that compare each field for 2 real products in the sheet (a sample product at 30,000 won, among others). The tests also check two properties: changing the split ratio leaves total profit unchanged, and the two shares always sum to total profit."
       },
       {
         "title": "It looks for the original photo inside the PDF first.",
@@ -376,7 +376,7 @@ const casesEn = [
     "status3": [
       "In operation. Personalized KakaoTalk is sent from the UI (261 people on 2026-09-22), and scheduled sends go out from the server every minute. Per-slot on/off values live in the DB.",
       "Judgment call: after a server gap, job cancellation waits 3 more minutes. I judged that being 3 minutes late is cheaper than cancelling by mistake.",
-      "Limits: brand-tool CI runs only some of the tests. I have not measured how well match scores agree with what staff actually pick.",
+      "Limits: the work tool's CI runs only some of the tests. I have not measured how well match scores agree with what staff actually pick.",
       "If I did it again: I would make CI run the full test suite and make the 43 pricing test cases a deploy gate."
     ],
     "decisions": [
@@ -418,11 +418,11 @@ const casesEn = [
       },
       {
         "label": "Role",
-        "value": "Design: workspace registry, search-planning and evidence-judgment stages, draft verification order / Implementation: email-agent server, checkers, sent-mail learning cursor / Operations: drafts-folder rollout, incident analysis and recovery"
+        "value": "Design: workspace registry, search-planning and evidence-judgment stages, draft verification order / Implementation: mail agent server, checkers, sent-mail learning cursor / Operations: drafts-folder rollout, incident analysis and recovery"
       },
       {
         "label": "Repositories",
-        "value": "email-agent"
+        "value": "the mail agent"
       }
     ],
     "background": "Vendor CS, influencer CS, Spark, and sales partner matching share one LightRAG knowledge hub (13 workspaces). It is a RAG store: for each question it finds material first and answers with it attached. Every workspace carries a description, owner, channel, and sensitivity level, and a write to an unknown workspace fails immediately. For inquiries to the shared mailbox, it puts an evidence-backed reply draft in the owner's Gmail drafts folder. Staff do the sending.",
@@ -457,7 +457,7 @@ const casesEn = [
     "incidents": [
       {
         "title": "Missing rerank (2026-06-19~07-23).",
-        "text": "On 06-18 we switched to agentic RAG (the LLM plans the search). From the next day, the CEO email draft edit rate (share of drafts edited before sending) rose from 37% to 82%. Tracing back through the commit history showed the rerank step had been dropped in the switch. I restored it on 07-23."
+        "text": "On 06-18 we switched to agentic RAG (the LLM plans the search). From the next day, the quality of CEO email drafts dropped. Tracing back through the commit history showed the rerank step had been dropped in the switch. I restored it on 07-23."
       },
       {
         "title": "Search overload (07-10, 08-12).",
@@ -506,7 +506,7 @@ const casesEn = [
       "Reply drafts go no further than the owner's Gmail drafts folder. Sending is up to staff, and since 2026-08-18 only images that passed pytest are deployed.",
       "Attachment extraction runs in a `python -I` child process with a 20-second limit and at most 2 at once. A chunk that fails 3 times is skipped from the next ingest on.",
       "Limits: the 18 search eval cases check only workspace selection. Search hit rate, evidence match, and the effect after restoring rerank have not been measured.",
-      "If I did it again: I would add evidence-match scoring to the eval set first. That would have caught the missing rerank before the edit rate climbed to 82%."
+      "If I did it again: I would add evidence-match scoring to the eval set first. That would have caught the missing rerank before draft quality dropped."
     ],
     "decisions": [
       "The LLM planner decides where to search; code decides the search mode. I did not let agents pick the mode.",
@@ -547,14 +547,14 @@ const casesEn = [
       },
       {
         "label": "Role",
-        "value": "Design: work order, delegation guards, tool gate structure. Implementation: Spark SQL, single-use approvals, LiteLLM spend cap, Jev (a router that shortlists skill candidates) integration. Verification and operations: writing eval sets and VM deployment. I used AI coding tools; I set the scope and checked the results myself"
+        "value": "Design: work order, delegation guards, tool gate structure. Implementation: shared tool and skill library integration, single-use approvals, LiteLLM spend cap, Jev router integration. Verification and operations: writing eval sets and VM deployment. I used AI coding tools; I set the scope and checked the results myself"
       },
       {
         "label": "Repositories",
-        "value": "agent-company (Paperclip fork), agent-skills, services/*"
+        "value": "internal repo (Paperclip fork), skills folder, service code"
       }
     ],
-    "background": "An internal platform where agents hand issues to each other to get work done. I forked Paperclip (an open-source agent issue tracker) and attached company features as HTTP services under services/ instead of putting them in the core. The only exceptions are Work OS (an app for work status, approvals, and run history) and Spark. Staff use Spark to query 4 business DBs read-only, and hand work to the CEO agent. Long delegation chains change the request, and a single tool call can lead to spending money or external exposure. So the controls live in server code, not in prompts.",
+    "background": "An internal platform where agents hand issues to each other to get work done. I forked Paperclip (an open-source agent issue tracker) and attached company features as HTTP services outside the core, under a services folder, instead of putting them in the core. The only exceptions are Work OS (an app for work status, approvals, and run history) and Spark. Staff use Spark to query 4 business DBs read-only, and hand work to the CEO agent. Long delegation chains change the request, and a single tool call can lead to spending money or external exposure. So the controls live in server code, not in prompts.",
     "stack": [
       "Paperclip fork (Express 5, Drizzle, PostgreSQL)",
       "MCP SDK 1.29",
@@ -572,21 +572,21 @@ const casesEn = [
       "Jev rollout at 100% (content, Spark, Hermes, 2026-10-24)"
     ],
     "flow": [
-      "Requests from Spark, Slack, and the brand tool all go to the CEO agent. Only structured brand-tool requests go straight to the content orchestrator, and they still leave a work order record.",
+      "Requests from Spark, Slack, and the brand tool all go to the CEO agent. Only structured requests from the brand tool go straight to the content orchestrator, and they still leave a work order record.",
       "The CEO writes work order v1. It holds the original text as an attachment with its sha256, the goal, completion criteria, constraints, and whether approval is required.",
       "A Hermes dispatcher reporting directly to the CEO assigns it to one of at most 10 department heads. The server caps delegation depth at 2 and delegations per work order at 5, and blocks A→B→A bounce-backs. Turning it off falls back to direct delegation by the CEO.",
-      "Workers pick from the 109 shared skills themselves and open the skill body. Jev shortlists 12 with BM25 (a keyword search ranking formula), then passes the top 3 as hints only. If it fails, work continues without hints.",
+      "Jev scores all 109 shared skills for fit and shortlists the top 5, and Gemini picks one skill from that shortlist. If Jev fails or times out, it is skipped and Gemini picks directly from the full list.",
       "Tools run through a 6-stage gate and human approval. Publishing goes through the Publisher gateway (a single service dedicated to publishing). The default is manual, and the DB enforces one post per account per day."
     ],
     "diagram": {
       "src": "/images/v3/diagram-agent-platform-en.png",
       "alt": "Agent Platform·Spark architecture diagram"
     },
-    "diagramCaption": "Request → CEO work order → Hermes dispatcher → department heads·workers (Jev hints) → tool gate·human approval → Publisher; every LLM call goes through LiteLLM",
+    "diagramCaption": "Request → CEO work order → Hermes dispatcher → department heads·workers (Jev shortlist→Gemini pick) → tool gate·human approval → Publisher; every LLM call goes through LiteLLM",
     "screens": [
       {
         "label": "Screen:",
-        "text": "A Spark answer. Question titles and counterpart names are masked, and each answer carries its source tool (summarize_groupbuys)",
+        "text": "A Spark answer. Question titles and counterpart names are masked, and each answer carries the name of its source tool",
         "image": "/images/v3/spark-screen.png"
       }
     ],
@@ -602,7 +602,7 @@ const casesEn = [
       },
       {
         "title": "Jev call path blocked (2026-10-23).",
-        "text": "The existing Jev call path was blocked. I added an adapter that only matches the response format and sent calls to a lightweight model. The code in the 3 routers stayed the same. Past the free quota, it does not fall over to paid; it proceeds without hints."
+        "text": "The existing Jev call path was blocked. I added an adapter that only matches the response format and sent calls to a lightweight model. The code in the 3 routers stayed the same."
       }
     ],
     "highlights": [
@@ -615,8 +615,8 @@ const casesEn = [
         "text": "Plugins can only observe after an issue is created, so I changed the server core. Depth 2, 5 per work order, no A→B→A. Depth is counted by walking up the actual parent issues, not read from a column whose value can be changed. A 6th delegation and forged depth are rejected in tests."
       },
       {
-        "title": "Jev gives hints; it does not choose.",
-        "text": "It shortlists 12 with BM25, compares the top 3, and inserts them as hints. The worker makes the choice. On failure, timeout, or an open circuit breaker (300 seconds after 2 failures), the whole hint block is dropped. Rollout targets are split by the first 8 characters of a sha256."
+        "title": "Jev shortlists; Gemini picks.",
+        "text": "Jev scores all 109 skills and shortlists the top 5, then Gemini picks 1 from that shortlist. On failure, timeout, or an open circuit breaker (300 seconds after 2 failures), Jev is skipped and Gemini picks directly from the full list. Rollout targets are split by the first 8 characters of a sha256."
       },
       {
         "title": "An approval is used exactly once.",
@@ -643,11 +643,12 @@ const casesEn = [
       "In production. The company-wide tool execution switch is off by default, and each tool is turned on separately. user_id is sent to Langfuse as an HMAC pseudonym.",
       "Evaluation (with the model in use at measurement time): on 69 questions with known answers, Jev candidate recall (share of cases where the answer is among the candidates) is 85.5% at top 1 and 91.3% at top 3 (2026-10-24). Median latency is about 1.09 seconds.",
       "Limits: evals run manually, not in CI, and the Spark eval has only 8 cases with reference SQL. I did not measure whether Jev hints actually changed task outcomes.",
-      "If I did it again: I would check manifests against tool registration rows in CI. The 10-24 outage only surfaced at boot, but it could have been caught before merge."
+      "If I did it again: I would check manifests against tool registration rows in CI. The 10-24 outage only surfaced at boot, but it could have been caught before merge.",
+      "Follow-up (2026-10-25 to 10-30): I upgraded a router that uses the same Jev rules (115 skills) and measured a final accuracy of 90.15% (119 of 132) on questions it had never seen before — a different metric from the BM25 candidate recall above. It went into production on 10-29 and was applied to the Hermes agent. Filtering with Jev first and passing only the top 5 to Gemini cut Gemini's cost by about 1/10 with similar accuracy (in the same direction as SkillRouter, arXiv 2603.22455). The real win was less the accuracy number itself than the process of catching answer-key errors, a fake skill, and an inflated score along the way."
     ],
     "decisions": [
       "I chose a full index over per-role skill bundles. On a 57-case selection set both scored the same accuracy, 0.947 (p=1.0). But the bundle approach missed skills that only get used when called by name. The cost difference over 66 cases was 27 KRW.",
-      "The dispatcher assigns work; the worker picks the skill. I did not make Jev the selector, because work must not stop when Jev stops.",
+      "The dispatcher assigns work; Jev shortlists the skill and Gemini picks it. If Jev fails, Gemini still picks directly from the full list, so work does not stop. The worker never picks the skill — Gemini always does.",
       "Controls sit where they still hold if the model ignores them. The loop guard, single-use approval, and paid cap all live in the server and DB."
     ],
     "reelFlow": [
@@ -688,17 +689,17 @@ const casesEn = [
       },
       {
         "label": "Repositories",
-        "value": "content-orchestrator, hermes-content-agent, video-studio, brand-tool(/sscrew/contents)"
+        "value": "the orchestrator, the content agent, the video renderer, the work tool (content screen)"
       }
     ],
     "background": "Staff request a Reel in the work tool at /sscrew/contents, review the preview, approve it, and schedule the release. Generation costs money, and posting means public exposure. So every default is set to 'don't do it'. Posting is manual, recurring automations run as dry-run (they only simulate execution), and paid generation is off. Code drives the stage progression.",
     "stack": [
       "Paperclip sub-issues",
-      "content-orchestrator (state machine with no LLM)",
+      "the orchestrator (state machine with no LLM)",
       "Hermes and the Gemini Flash family (via LiteLLM)",
       "image-service",
       "TTS",
-      "video-studio",
+      "the video renderer",
       "HyperFrames (a tool that renders video from HTML)",
       "ffprobe",
       "Google Drive",
@@ -706,14 +707,14 @@ const casesEn = [
       "Supabase (PostgreSQL)"
     ],
     "scale": [
-      "About 120k lines across 3 services, about 300 test files",
+      "About 122k lines across 3 services, 617 test files (orchestrator 135, Hermes agent 396, video renderer 86)",
       "Production canary verified through saving a 1080×1920 MP4 to Drive (2026-10)",
       "0 live SNS posts. One post per account per day is enforced by the DB; the publish gate caps at 10 per day (2026-10-24)"
     ],
     "flow": [
       "Staff request a Reel, or run a saved automation (immediate, one-time scheduled, or recurring).",
       "A pure function in the orchestrator computes only the next action. An executor applies it to the Paperclip sub-issues to advance the stage.",
-      "A Hermes agent writes the research, script, and prompts. video-studio renders a 9:16 MP4 from a HyperFrames template.",
+      "A Hermes agent writes the research, script, and prompts. The video renderer renders a 9:16 MP4 from a HyperFrames template.",
       "Versions that pass the QA gate are saved to Drive with a checksum. A human approves from the preview; anything pending for more than 7 days expires.",
       "Posting is manual by default. Staff download the MP4, copy the caption, and click 'Posted'. The 'AI-generated content' label and the frame marker are added automatically."
     ],
@@ -773,7 +774,7 @@ const casesEn = [
       }
     ],
     "status3": [
-      "This is a simulation. There are no live SNS posts; the production canary confirmed up to saving the MP4 to Drive (2026-10).",
+      "This new production path is technically done, but details like its prompts are still being tuned. Content made on this path has no live SNS posting record; the production canary confirmed only as far as saving the MP4 to Drive (2026-10). Existing videos are already posted live through a separate path that only swaps captions and hashtags per account to post the same video to multiple accounts at once.",
       "Approval expiry is handled by a daily 03:00 KST cron in this order: reject, cancel the issue, close the row. Even if the issue cancel fails, the row is closed so the same failure doesn't repeat.",
       "Limits: product fact checking is only prompt rules, and registering a new Instagram token needs developer setup. With no live posts, results like view counts haven't been measured.",
       "If I did it again: I'd add a code check that compares product facts such as price and bundle contents against the product DB. Right now, if the model breaks a rule, a human has to catch it in the preview."
@@ -798,7 +799,7 @@ const casesEn = [
       }
     ],
     "headline": {
-      "value": "~300",
+      "value": "617",
       "label": "test files"
     }
   },
@@ -821,7 +822,7 @@ const casesEn = [
       },
       {
         "label": "Repositories",
-        "value": "agent-company, kakaocli fork"
+        "value": "internal repo, kakaocli fork"
       }
     ],
     "background": "KakaoTalk and Instagram have no official API a server can call. So the work had to run on staff Macs and Windows PCs. Install is a one-line command, auth is a per-device key, and updates run on an automatic schedule per tool. I also run the servers myself. On 2026-08-20 a cloud DB quota stopped every work-tool API; I stood up the same API on a VM and restored service that day.",
@@ -829,7 +830,7 @@ const casesEn = [
       "macOS bash and Windows PowerShell installers",
       "launchd and Task Scheduler",
       "Node workers",
-      "Python memory collector (Windows)",
+      "Python collector (Windows)",
       "kakaocli fork (Swift)",
       "VM Postgres+PostgREST+nginx",
       "SSE (server-pushed events) push hub",
@@ -842,7 +843,7 @@ const casesEn = [
       "Full work-tool API outage restored the same day (2026-08-20)"
     ],
     "flow": [
-      "Staff install with a one-line command. Mac uses bash, Windows uses PowerShell, and most installs need no admin rights.",
+      "Staff install with a one-line command. Mac uses bash, Windows uses PowerShell.",
       "Registering with a one-time install token returns a per-device key. The server keeps only the sha256 of the token and the key.",
       "Each tool has its own auto-update interval, and update times are spread across PCs. Only the Windows collector is replaced by reinstalling.",
       "Queue jobs are picked up only by the assigned device. A pickup is a single conditional UPDATE, so two devices cannot grab the same job.",
@@ -884,7 +885,7 @@ const casesEn = [
       },
       {
         "title": "On Windows, KakaoTalk memory is only read.",
-        "text": "The KakaoTalk 26.8 update moved frida's (an app hooking tool) hook points, and the DB key could not be recovered either (measured on 2026-09-15). Messages were still in memory as plaintext JSON. The collector opens only `PROCESS_VM_READ`. With no injection, KakaoTalk does not crash and no admin rights are needed."
+        "text": "The KakaoTalk 26.8 update moved frida's (an app hooking tool) hook points, and the DB key could not be recovered either (measured on 2026-09-15). Messages were still in memory as plaintext JSON. The collector opens only `PROCESS_VM_READ`. With no injection, KakaoTalk does not crash."
       },
       {
         "title": "Send success is checked in the DB, not by exit code.",

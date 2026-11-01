@@ -23,7 +23,7 @@ const en = {
     company:
       'StyleSeller is a commerce platform that operates sales for creator sellers and brands.',
     metrics: [
-      { value: '352', label: 'counterparts tracked stage by stage on the status board' },
+      { value: 'Hundreds', label: 'of counterparts tracked stage by stage on the status board' },
       { value: '109', label: 'shared skills used by all agents' },
       { value: '13', label: 'knowledge-hub workspaces shared by 4 agents' },
       { value: '11', label: 'staff PCs deployed with a one-line install' },
@@ -59,7 +59,7 @@ const en = {
     examples: [
       'Example: one vendor support message goes from a staff Mac (collection) → the agent server (should we answer this partner?) → the work tool (the list of partners to serve) and the knowledge hub (search), then back to a staff Mac to be sent.',
       'Example: one Spark question goes from the work tool → the agent server → the work tool API, the work databases, and knowledge hub search.',
-      'Example: the status board summarizes records from KakaoTalk rooms, order@ mail, Slack, and emailed order sheets by day, links them to a counterpart by fixed rules, and puts them on that counterpart\'s calendar. Staff resolve what it cannot link.',
+      'Example: the status board summarizes records from KakaoTalk rooms, the order mailbox, Slack, and emailed order sheets by day, links them to a counterpart by fixed rules, and puts them on that counterpart\'s calendar. Staff resolve what it cannot link.',
     ],
     nodes: [
       { id: 'status-board', label: '① Status board · ledger', caseId: 'status-board' },
