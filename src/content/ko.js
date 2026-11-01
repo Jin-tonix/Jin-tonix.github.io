@@ -49,10 +49,10 @@ const ko = {
     imageAlt: 'StyleSeller 운영 시스템 지도. 사례 7개의 입력, 에이전트, 지식, 직원 PC와 사람 승인 단계',
     reposTitle: '저장소별 역할',
     repos: [
-      { name: 'brand-tool', role: '직원이 쓰는 업무툴, 판매 파트너사·상품 데이터' },
-      { name: 'agent-company', role: '에이전트·서버·직원 PC 배포' },
-      { name: 'email-agent', role: '공용 메일함 답장 초안 + 사내 지식 허브' },
-      { name: 'kakaocli', role: '직원 맥의 카톡 수집·발송' },
+      { name: '업무툴 저장소', role: '직원이 쓰는 업무툴, 판매 파트너사·상품 데이터' },
+      { name: '에이전트 플랫폼 저장소', role: '에이전트·서버·직원 PC 배포' },
+      { name: '메일 에이전트 저장소', role: '공용 메일함 답장 초안 + 사내 지식 허브' },
+      { name: '카톡 수집·발송 도구(kakaocli 포크)', role: '직원 맥의 카톡 수집·발송' },
       { name: 'n8n (자체 호스팅, 저장소 아님)', role: '메일 인입·상품 동기화 호출·매칭 판정 트리거' },
     ],
     examples: [
@@ -72,7 +72,7 @@ const ko = {
     layers: [
       {
         name: '사람 접점',
-        desc: '업무툴(brand-tool, 현황판·가격·매칭·맞춤카톡·Spark 화면) · Kakao CS Copilot 확장(MV3) · Slack(브리핑·요약). 사람 통제는 세 곳에 있습니다. Spark 채팅 안 승인 카드(실행 직전 승인 기록을 DB에서 다시 확인), 맞춤카톡 500명 이상 승인 대기, 벤더 CS 챗봇의 방 단위 허용 목록입니다.',
+        desc: '업무툴(현황판·가격·매칭·맞춤카톡·Spark 화면) · Kakao CS Copilot 확장(MV3) · Slack(브리핑·요약). 사람 통제는 세 곳에 있습니다. Spark 채팅 안 승인 카드(실행 직전 승인 기록을 DB에서 다시 확인), 맞춤카톡 500명 이상 승인 대기, 벤더 CS 챗봇의 방 단위 허용 목록입니다.',
       },
       {
         name: '에이전트',
@@ -80,7 +80,7 @@ const ko = {
       },
       {
         name: '지식',
-        desc: 'LightRAG(Neo4j + pgvector) 워크스페이스 13개(email-agent). 벤더 CS는 지식 MCP 서버로, Spark는 email-agent 검색을 직접, brand-tool 판매 파트너사 매칭은 벡터(naive) 검색으로 씁니다.',
+        desc: 'LightRAG(Neo4j + pgvector) 워크스페이스 13개(메일 에이전트 저장소). 벤더 CS는 지식 MCP 서버로, Spark는 지식 허브 검색을 직접, 업무툴 판매 파트너사 매칭은 벡터(naive) 검색으로 씁니다.',
       },
       {
         name: '현장',
@@ -88,7 +88,7 @@ const ko = {
       },
       {
         name: '데이터·인프라',
-        desc: '업무 웹(Next.js)은 Vercel에서, 에이전트 서비스와 DB·LLM 프록시 등 컨테이너 60개는 GCP VM 한 대(4코어, 메모리 17GB)의 Docker에서 운영합니다(2026-10-25 실측, Compose·Swarm, 자체 호스팅 Postgres·PostgREST). 모델 호출은 LiteLLM으로 모으고 Langfuse로 비용을 봅니다. 배포 락은 agent-company·brand-tool이 함께 씁니다.',
+        desc: '업무 웹(Next.js)은 Vercel에서, 에이전트 서비스와 DB·LLM 프록시 등 컨테이너 60개는 GCP VM 한 대(4코어, 메모리 17GB)의 Docker에서 운영합니다(2026-10-25 실측, Compose·Swarm, 자체 호스팅 Postgres·PostgREST). 모델 호출은 LiteLLM으로 모으고 Langfuse로 비용을 봅니다. 배포 락은 에이전트 플랫폼과 업무툴 저장소가 함께 씁니다.',
       },
     ],
   },
@@ -98,11 +98,11 @@ const ko = {
     intro:
       '설계·개발·운영 담당. 코드는 Claude Code로 쓰고, 아키텍처·규칙·검증·롤아웃은 직접 판단했습니다.',
     introDetail:
-      'Claude 공동작성 트레일러가 있는 커밋은 agent-company 3,646 · brand-tool 1,122 · email-agent 988개입니다(merge 제외, 2026-09-23 기준, email-agent는 마지막 커밋 09-02). 네 저장소 본인 커밋 합계는 7,276개입니다(merge 제외, 2026-09-23 집계). Claude Code 세션 여러 개를 병렬로 돌려 씁니다. 에이전트가 틀리는 것을 전제로 둡니다. 아래 "AI가 틀렸고 제가 잡은 사례"가 그 기록입니다.',
+      'Claude 공동작성 트레일러가 있는 커밋은 에이전트 플랫폼 3,646 · 업무툴 1,122 · 메일 에이전트 988개입니다(merge 제외, 2026-09-23 기준, 메일 에이전트는 마지막 커밋 09-02). 네 저장소 본인 커밋 합계는 7,276개입니다(merge 제외, 2026-09-23 집계). Claude Code 세션 여러 개를 병렬로 돌려 씁니다. 에이전트가 틀리는 것을 전제로 둡니다. 아래 "AI가 틀렸고 제가 잡은 사례"가 그 기록입니다.',
     image: null,
     loopTitle: '작업 루프',
     loop: [
-      { step: '설계 문서', desc: '문제·제약·대안을 먼저 씁니다. 설계 문서 77개(brand-tool·agent-company·email-agent 합, 2026-09-23 기준).' },
+      { step: '설계 문서', desc: '문제·제약·대안을 먼저 씁니다. 설계 문서 77개(사내 저장소 3곳 합, 2026-09-23 기준).' },
       { step: '실행 계획', desc: '단계와 단계별 검증 방법을 적습니다. 실행 계획 127개(같은 기준).' },
       { step: '테스트 먼저', desc: '재현 테스트를 쓰고 구현합니다.' },
       { step: '교차 리뷰', desc: '서로 다른 출처의 에이전트 두 개가 따로 리뷰합니다. 한 커밋에서 적대적 리뷰로 실결함 6개를 잡은 기록이 있습니다(2026-09-09).' },
@@ -138,7 +138,7 @@ const ko = {
       {
         title: '근거 없는 수치를 쓴 분석 보고서 (2026-09-23)',
         points: [
-          '서브에이전트가 email-agent 저장소를 분석한 보고서에 근거 없는 가용률 수치가 들어 있었습니다.',
+          '서브에이전트가 메일 에이전트 저장소를 분석한 보고서에 근거 없는 가용률 수치가 들어 있었습니다.',
           '저장소 전체를 검색해 그 수치의 출처가 없음을 확인하고, 쓰지 않았습니다.',
         ],
       },
@@ -172,16 +172,16 @@ const ko = {
       { month: '2025.11', text: '입사, 부서 업무 익히기' },
       { month: '2025.12~2026.01', text: '업무 자동화 시작' },
       { month: '2026.02', text: 'Instagram DM 자동화 첫 커밋(02-08), 크롬 확장으로 전환(02-27)' },
-      { month: '2026.03', text: 'brand-tool 첫 커밋 — 구글 시트 가격표를 옮긴 가격 계산기와 제안서(03-31)' },
-      { month: '2026.04', text: 'email-agent에 LightRAG 지식 그래프 도입(04-03), 공급사 카탈로그 AI 파싱' },
-      { month: '2026.05', text: 'agent-company 착수(05-16, Paperclip 포크), 카톡 CS 크롬 확장(05-24)' },
+      { month: '2026.03', text: '업무툴 첫 커밋 — 구글 시트 가격표를 옮긴 가격 계산기와 제안서(03-31)' },
+      { month: '2026.04', text: '메일 에이전트에 LightRAG 지식 그래프 도입(04-03), 공급사 카탈로그 AI 파싱' },
+      { month: '2026.05', text: '에이전트 플랫폼 착수(05-16, Paperclip 포크), 카톡 CS 크롬 확장(05-24)' },
       { month: '2026.06', text: 'LiteLLM에서 Claude를 빼고 Gemini로(06-06), 벤더 CS 백엔드 시작(06-29)' },
       { month: '2026.07', text: 'Spark·Work OS 착수(07-18~19), 지식 허브를 여러 워크스페이스로 확장(07-10)' },
       { month: '2026.08', text: '클라우드 DB 한도 초과로 업무툴 API가 멈춘 날 VM에 같은 API를 세워 당일 복구(08-20), 맞춤카톡 시작(08-24)' },
       { month: '2026.09', text: '직원 PC 11대 한 줄 설치 배포(09-16), 셀러찾기 워커 9대 운영(09-18)' },
       { month: '2026.10', text: '조용한 장애 감시 강화, Langfuse 업그레이드' },
     ],
-    repoPeriods: '저장소별 기간: brand-tool 2026.03~ · email-agent 2026.03~(마지막 커밋 09-02) · agent-company 2026.05~ · kakaocli 2026.06~09 · Instagram DM 2026.02~(마지막 커밋 07-01)',
+    repoPeriods: '저장소별 기간: 업무툴 2026.03~ · 메일 에이전트 2026.03~(마지막 커밋 09-02) · 에이전트 플랫폼 2026.05~ · kakaocli 포크 2026.06~09 · Instagram DM 확장 2026.02~(마지막 커밋 07-01)',
     experienceTitle: 'Journey',
     experienceLead: '법학 전공에서 AI 에이전트 엔지니어까지',
     careerChangeLabel: 'Career Change',

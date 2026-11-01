@@ -572,7 +572,7 @@ const casesEn = [
       "Jev fully applied (content, Spark, Hermes, as of 2026-10-30)"
     ],
     "flow": [
-      "Requests from Spark, Slack, and the brand tool all go to the CEO agent. Only structured requests from the brand tool go straight to the content orchestrator, and they still leave a work order record.",
+      "Requests from Spark, Slack, and the work tool all go to the CEO agent. Only structured requests from the work tool go straight to the content orchestrator, and they still leave a work order record.",
       "The CEO writes work order v1. It holds the original text as an attachment with its sha256, the goal, completion criteria, constraints, and whether approval is required.",
       "An overall orchestrator reporting directly to the CEO (the Hermes dispatcher) assigns it to one of at most 10 department heads, such as the Supervisor and fix agents. The server caps delegation depth at 2 and delegations per work order at 5, and blocks A→B→A bounce-backs. Turning it off falls back to direct delegation by the CEO. Work that goes to the content department head is handed on again to the content orchestrator, a separate service.",
       "Jev scores every one of the 100-odd shared skills for fit and shortlists the top 5, and Gemini picks one skill from that shortlist. If Jev fails or times out, it is skipped and Gemini picks directly from the full list.",

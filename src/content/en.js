@@ -50,10 +50,10 @@ const en = {
     imageAlt: 'Map of the StyleSeller operating system: inputs, agents, knowledge, staff PCs, and human approval across the 7 cases',
     reposTitle: 'What each repository does',
     repos: [
-      { name: 'brand-tool', role: 'The work tool staff use; sales partner and product data' },
-      { name: 'agent-company', role: 'Agents, servers, and staff PC deployment' },
-      { name: 'email-agent', role: 'Reply drafts for the shared mailboxes + internal knowledge hub' },
-      { name: 'kakaocli', role: 'KakaoTalk collection and sending on staff Macs' },
+      { name: 'Work tool repository', role: 'The work tool staff use; sales partner and product data' },
+      { name: 'Agent platform repository', role: 'Agents, servers, and staff PC deployment' },
+      { name: 'Email agent repository', role: 'Reply drafts for the shared mailboxes + internal knowledge hub' },
+      { name: 'KakaoTalk collect-and-send tool (kakaocli fork)', role: 'KakaoTalk collection and sending on staff Macs' },
       { name: 'n8n (self-hosted, not a repository)', role: 'Triggers for mail intake, product sync calls, and match judging' },
     ],
     examples: [
@@ -73,7 +73,7 @@ const en = {
     layers: [
       {
         name: 'People',
-        desc: 'The work tool (brand-tool: status board, pricing, matching, campaign, and Spark screens) · the Kakao CS Copilot extension (MV3) · Slack (briefings and summaries). Human control sits in three places: approval cards inside Spark chat (the approval record is rechecked in the database right before execution), a hold queue for personalized KakaoTalk campaigns with 500 or more recipients, and a per-room allowlist for the vendor support chatbot.',
+        desc: 'The work tool (status board, pricing, matching, campaign, and Spark screens) · the Kakao CS Copilot extension (MV3) · Slack (briefings and summaries). Human control sits in three places: approval cards inside Spark chat (the approval record is rechecked in the database right before execution), a hold queue for personalized KakaoTalk campaigns with 500 or more recipients, and a per-room allowlist for the vendor support chatbot.',
       },
       {
         name: 'Agents',
@@ -81,7 +81,7 @@ const en = {
       },
       {
         name: 'Knowledge',
-        desc: 'LightRAG (Neo4j + pgvector) with 13 workspaces (email-agent). Vendor support reaches it through a knowledge MCP server, Spark calls email-agent search directly, and brand-tool sales partner matching uses vector (naive) search.',
+        desc: 'LightRAG (Neo4j + pgvector) with 13 workspaces (in the email agent repository). Vendor support reaches it through a knowledge MCP server, Spark calls knowledge hub search directly, and work tool sales partner matching uses vector (naive) search.',
       },
       {
         name: 'Field',
@@ -89,7 +89,7 @@ const en = {
       },
       {
         name: 'Data and infra',
-        desc: 'The business web app (Next.js) runs on Vercel; 60 containers (agent services, databases, the LLM proxy, and more) run in Docker on one GCP VM with 4 cores and 17 GB of memory (counted 2026-10-25; Compose and Swarm, self-hosted Postgres and PostgREST). Model calls go through LiteLLM, and Langfuse tracks cost. agent-company and brand-tool share one deploy lock.',
+        desc: 'The business web app (Next.js) runs on Vercel; 60 containers (agent services, databases, the LLM proxy, and more) run in Docker on one GCP VM with 4 cores and 17 GB of memory (counted 2026-10-25; Compose and Swarm, self-hosted Postgres and PostgREST). Model calls go through LiteLLM, and Langfuse tracks cost. The agent platform and work tool repositories share one deploy lock.',
       },
     ],
   },
@@ -99,11 +99,11 @@ const en = {
     intro:
       'Design, build, and operations. I write code with Claude Code; architecture, rules, verification, and rollout decisions are mine.',
     introDetail:
-      'Commits with a Claude co-author trailer: agent-company 3,646 · brand-tool 1,122 · email-agent 988 (excluding merges, as of 2026-09-23; the last email-agent commit was 09-02). My own commits across the four repositories total 7,276 (excluding merges, counted 2026-09-23). I run several Claude Code sessions in parallel. I assume the agents will make mistakes. The section "Where the AI was wrong and I caught it" below is the record.',
+      'Commits with a Claude co-author trailer: agent platform 3,646 · work tool 1,122 · email agent 988 (excluding merges, as of 2026-09-23; the last email agent commit was 09-02). My own commits across the four repositories total 7,276 (excluding merges, counted 2026-09-23). I run several Claude Code sessions in parallel. I assume the agents will make mistakes. The section "Where the AI was wrong and I caught it" below is the record.',
     image: null,
     loopTitle: 'Work loop',
     loop: [
-      { step: 'Design doc', desc: 'I write down the problem, constraints, and alternatives first. 77 design docs (brand-tool, agent-company, and email-agent combined, as of 2026-09-23).' },
+      { step: 'Design doc', desc: 'I write down the problem, constraints, and alternatives first. 77 design docs (3 internal repositories combined, as of 2026-09-23).' },
       { step: 'Execution plan', desc: 'I list the steps and how to verify each one. 127 execution plans (same basis).' },
       { step: 'Test first', desc: 'I write a reproduction test, then implement.' },
       { step: 'Cross review', desc: 'Two agents from different sources review the change separately. In one commit, adversarial review caught 6 real defects (2026-09-09).' },
@@ -139,7 +139,7 @@ const en = {
       {
         title: 'An analysis report with an unsupported number (2026-09-23)',
         points: [
-          "A sub-agent's analysis report on the email-agent repository included an uptime figure with no source.",
+          "A sub-agent's analysis report on the email agent repository included an uptime figure with no source.",
           'I searched the whole repository, confirmed the figure had no source, and left it out.',
         ],
       },
@@ -175,16 +175,16 @@ const en = {
       { month: '2025-11', text: 'Joined, learned the team\'s work' },
       { month: '2025-12 to 2026-01', text: 'Started automating team work' },
       { month: '2026-02', text: 'First commit on Instagram DM automation (02-08), moved it to a Chrome extension (02-27)' },
-      { month: '2026-03', text: 'First brand-tool commit — a pricing calculator and proposals moved over from a Google Sheet price sheet (03-31)' },
-      { month: '2026-04', text: 'Added a LightRAG knowledge graph to email-agent (04-03); AI parsing of supplier catalogs' },
-      { month: '2026-05', text: 'Started agent-company (05-16, Paperclip fork); KakaoTalk CS Chrome extension (05-24)' },
+      { month: '2026-03', text: 'First work tool commit — a pricing calculator and proposals moved over from a Google Sheet price sheet (03-31)' },
+      { month: '2026-04', text: 'Added a LightRAG knowledge graph to the email agent (04-03); AI parsing of supplier catalogs' },
+      { month: '2026-05', text: 'Started the agent platform (05-16, Paperclip fork); KakaoTalk CS Chrome extension (05-24)' },
       { month: '2026-06', text: 'Removed Claude from LiteLLM and moved to Gemini (06-06); started the vendor support backend (06-29)' },
       { month: '2026-07', text: 'Started Spark and Work OS (07-18 to 07-19); expanded the knowledge hub to multiple workspaces (07-10)' },
       { month: '2026-08', text: 'Moved the work tool database to self-hosting in a single day (08-20); started personalized KakaoTalk campaigns (08-24)' },
       { month: '2026-09', text: 'Seller collector program on 11 staff PCs; seller-finder workers on staff PCs' },
       { month: '2026-10', text: 'Stronger monitoring for silent failures; Langfuse upgrade' },
     ],
-    repoPeriods: 'Active period per repository: brand-tool 2026-03 onward · email-agent 2026-03 onward (last commit 09-02) · agent-company 2026-05 onward · kakaocli 2026-06 to 09 · Instagram DM 2026-02 onward (last commit 07-01)',
+    repoPeriods: 'Active period per repository: work tool 2026-03 onward · email agent 2026-03 onward (last commit 09-02) · agent platform 2026-05 onward · kakaocli fork 2026-06 to 09 · Instagram DM extension 2026-02 onward (last commit 07-01)',
     experienceTitle: 'Journey',
     experienceLead: 'From a law degree to AI Engineer (Agents & Automation)',
     careerChangeLabel: 'Career Change',
@@ -260,7 +260,7 @@ const en = {
               { id: 'gh-actions', label: 'GitHub Actions' },
               { id: 'gcp', label: 'GCP VM' },
               { id: 'nginx', label: 'nginx' },
-              { id: 'zero-downtime', label: 'Zero-downtime swap deploy script (for the brand-tool move to the VM)' },
+              { id: 'zero-downtime', label: 'Zero-downtime swap deploy script (for the work tool move to the VM)' },
               { id: 'n8n', label: 'n8n' },
               { id: 'git', label: 'Git' },
               { id: 'github', label: 'GitHub' },
