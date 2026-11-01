@@ -346,7 +346,7 @@ const casesEn = [
       },
       {
         "title": "I ported the sheet formulas down to the rounding units.",
-        "text": "Partner supply price rounds up, and the payment fee is fixed in code. I added tests that compare each field for 2 real products in the sheet (a sample product at 30,000 won, among others). The tests also check two properties: changing the split ratio leaves total profit unchanged, and the two shares always sum to total profit."
+        "text": "Partner supply price rounds up, and the fee rate is fixed in code. I added tests that compare each field for 2 real products in the sheet (a sample product at 30,000 won, among others). The tests also check two properties: changing the split ratio leaves total profit unchanged, and the two shares always sum to total profit."
       },
       {
         "title": "It looks for the original photo inside the PDF first.",
