@@ -64,11 +64,11 @@ test('shows seven Korean case slides, the new stats, and the résumé link on th
     '직원 PC 배포·운영',
   ]);
   expect(document.querySelector('.scene--0 .project-title').textContent).toBe(
-    '상대 한 곳을 고르면 카톡·메일·주문서가 한 달력에, 352곳의 거래 단계가 한 화면에 보입니다'
+    '상대 한 곳을 고르면 카톡·메일·주문서가 한 달력에, 수백 곳의 거래 단계가 한 화면에 보입니다'
   );
   expect(document.querySelector('.film-stage').textContent).not.toContain('카탈로그에서');
   const values = [...document.querySelectorAll('.metric-value')].map((n) => n.textContent);
-  expect(values).toEqual(['352곳', '109개', '13개', '11대']);
+  expect(values).toEqual(['수백 곳', '100여 개', '13개', '11대']);
   expect(screen.getByText('에이전트가 같이 쓰는 공용 스킬')).toBeInTheDocument();
   expect(screen.getByRole('link', { name: '경력기술서 (PDF)' })).toHaveAttribute(
     'href',

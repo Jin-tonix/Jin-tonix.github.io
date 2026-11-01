@@ -143,7 +143,7 @@ const casesEn = [
       }
     ],
     "headline": {
-      "value": "352",
+      "value": "Hundreds",
       "label": "counterparts on the board"
     }
   },
@@ -169,7 +169,7 @@ const casesEn = [
         "value": "the server (vendor agent), kakaocli fork, CS Copilot extension and local sender"
       }
     ],
-    "background": "KakaoTalk has no official API, so a server alone cannot read or send counterpart conversations. Staff PCs collect the conversations and upload them to the server, and replies also go out from staff Macs. The server agent writes answers by searching per-counterpart records and the LightRAG knowledge hub (graph RAG over entities and relations, 13 workspaces). Since 2026-09-02 it no longer asks follow-up questions and answers only tagged questions, with no handoff. In exchange, it checks amounts, percentages, and brands against the evidence, and if they do not match it searches again and rewrites.",
+    "background": "Staff PCs collect the conversations and upload them to the server, and replies also go out from staff Macs. The server agent writes answers by searching per-counterpart records and the LightRAG knowledge hub (graph RAG over entities and relations, 13 workspaces). Since 2026-09-02 it no longer asks follow-up questions and answers only tagged questions, with no handoff. In exchange, it checks amounts, percentages, and brands against the evidence, and if they do not match it searches again and rewrites.",
     "stack": [
       "macOS kakaocli fork (Swift)",
       "Windows read-only collector (Python)",
@@ -184,7 +184,7 @@ const casesEn = [
       "Tests: counterpart gate 20, evidence judgment 16, liveness markers 30, Mac Swift 34, Windows Python 72"
     ],
     "flow": [
-      "On Mac, kakaocli reads only what comes after the last logId in the KakaoTalk DB. On Windows, a collector that only reads memory uploads it. The position advances only after the server answers with 2xx.",
+      "On Mac, kakaocli reads only what comes after the last logId in the KakaoTalk DB. On Windows, a read-only collector uploads it. It moves on only after the server answers with 2xx.",
       "The server drops the same message if it arrives again within 15 seconds. It stores records in per-counterpart ledgers, Sheets, and Drive, and twice a day (09:30, 18:10) compiles them into a wiki that goes into the knowledge hub.",
       "The counterpart ID or name in the room name is checked against the work tool's list of counterparts to serve. If no counterpart is found on the list, it does not answer.",
       "It accepts only questions tagged @회사_AI. The regex only detects the tag; the model does the search and writes the answer. Other counterparts' names are masked as [다른 벤더].",
@@ -238,7 +238,7 @@ const casesEn = [
       },
       {
         "title": "The checkpoint moves only after 2xx.",
-        "text": "The Windows collector only reads KakaoTalk process memory with VM_READ access; it does no injection or hooking. The uploader moves the offset only after receiving 2xx. 422 and 413 are skipped; on 5xx or 429 it stops without committing and uploads again on the next run."
+        "text": "The uploader moves the offset only after receiving 2xx. 422 and 413 are skipped; on 5xx or 429 it stops without committing and uploads again on the next run."
       },
       {
         "title": "The processing path leaves its own liveness markers.",
@@ -568,14 +568,14 @@ const casesEn = [
     ],
     "scale": [
       "About 5,000 of my own commits (excluding merges and upstream), about 2,200 test files (2026-10-24)",
-      "109 shared skills, 66 trigger eval files (1,282 sentences), 67 tool manifests",
+      "100-odd shared skills, 66 trigger eval files (1,282 sentences), 67 tool manifests",
       "Jev rollout at 100% (content, Spark, Hermes, 2026-10-24)"
     ],
     "flow": [
       "Requests from Spark, Slack, and the brand tool all go to the CEO agent. Only structured requests from the brand tool go straight to the content orchestrator, and they still leave a work order record.",
       "The CEO writes work order v1. It holds the original text as an attachment with its sha256, the goal, completion criteria, constraints, and whether approval is required.",
-      "A Hermes dispatcher reporting directly to the CEO assigns it to one of at most 10 department heads. The server caps delegation depth at 2 and delegations per work order at 5, and blocks A→B→A bounce-backs. Turning it off falls back to direct delegation by the CEO.",
-      "Jev scores all 109 shared skills for fit and shortlists the top 5, and Gemini picks one skill from that shortlist. If Jev fails or times out, it is skipped and Gemini picks directly from the full list.",
+      "A Hermes dispatcher reporting directly to the CEO assigns it to one of at most 10 department heads. The server caps delegation depth at 2 and delegations per work order at 5, and blocks A→B→A bounce-backs. Turning it off falls back to direct delegation by the CEO. Work that goes to the content department head is handed on again to the content orchestrator, a separate service.",
+      "Jev scores every one of the 100-odd shared skills for fit and shortlists the top 5, and Gemini picks one skill from that shortlist. If Jev fails or times out, it is skipped and Gemini picks directly from the full list.",
       "Tools run through a 6-stage gate and human approval. Publishing goes through the Publisher gateway (a single service dedicated to publishing). The default is manual, and the DB enforces one post per account per day."
     ],
     "diagram": {
@@ -597,7 +597,7 @@ const casesEn = [
         "text": "A new Spark tool was missing its DB registration row, so the boot check failed and every Spark call was rejected. I built it to block when the check fails, and it did exactly that. After recovering with a restart, I added a rule that every tool's registration row ships as a migration, plus a regression test."
       },
       {
-        "title": "Reclaiming a job mid-render (2026-10-24, #627).",
+        "title": "Reclaiming a job mid-render (2026-10-24).",
         "text": "The server reaper treated a video job running past 5 minutes as stalled and reclaimed it, and the result that arrived 7 min 40 s later was rejected with 409. I made the job send a heartbeat every 120 seconds and stop once the issue deadline passes. Jobs that are really stuck still get reclaimed. In production I confirmed heartbeats received (200) and 0 reclaims."
       },
       {
@@ -616,7 +616,7 @@ const casesEn = [
       },
       {
         "title": "Jev shortlists; Gemini picks.",
-        "text": "Jev scores all 109 skills and shortlists the top 5, then Gemini picks 1 from that shortlist. On failure, timeout, or an open circuit breaker (300 seconds after 2 failures), Jev is skipped and Gemini picks directly from the full list. Rollout targets are split by the first 8 characters of a sha256."
+        "text": "Jev scores every one of the 100-odd skills and shortlists the top 5, then Gemini picks 1 from that shortlist. On failure, timeout, or an open circuit breaker (300 seconds after 2 failures), Jev is skipped and Gemini picks directly from the full list. Rollout targets are split by the first 8 characters of a sha256."
       },
       {
         "title": "An approval is used exactly once.",
@@ -627,7 +627,7 @@ const casesEn = [
         "text": "Input hash, preview hash, requester, run ID, and expiry are bundled as canonical JSON and signed with HMAC-SHA256. Write access to the DB is not enough to pass without the key. The key contains no timestamp, so model retries do not multiply approvals."
       },
       {
-        "title": "Spark SQL opens a new connection per query.",
+        "title": "Spark DB lookups open a new connection per query.",
         "text": "A read-only role alone was not enough. One set_config call lifts the timeout and read-only mode, and a reused connection hands that state to the next person. After filtering 23 dangerous functions, semicolons, and writing CTEs, it opens 1 connection and closes it when done."
       },
       {
@@ -644,7 +644,7 @@ const casesEn = [
       "Evaluation (with the model in use at measurement time): on 69 questions with known answers, Jev candidate recall (share of cases where the answer is among the candidates) is 85.5% at top 1 and 91.3% at top 3 (2026-10-24). Median latency is about 1.09 seconds.",
       "Limits: evals run manually, not in CI, and the Spark eval has only 8 cases with reference SQL. I did not measure whether Jev hints actually changed task outcomes.",
       "If I did it again: I would check manifests against tool registration rows in CI. The 10-24 outage only surfaced at boot, but it could have been caught before merge.",
-      "Follow-up (2026-10-25 to 10-30): I upgraded a router that uses the same Jev rules (115 skills) and measured a final accuracy of 90.15% (119 of 132) on questions it had never seen before — a different metric from the BM25 candidate recall above. It went into production on 10-29 and was applied to the Hermes agent. Filtering with Jev first and passing only the top 5 to Gemini cut Gemini's cost by about 1/10 with similar accuracy (in the same direction as SkillRouter, arXiv 2603.22455). The real win was less the accuracy number itself than the process of catching answer-key errors, a fake skill, and an inflated score along the way."
+      "Follow-up (2026-10-25 to 10-30): I upgraded a router that uses the same Jev rules (115 skills) and measured a final accuracy of 90.15% (119 of 132) on questions it had never seen before — a different metric from the BM25 candidate recall above. It went into production on 10-29 and was applied to the Hermes agent. On the same 132 questions, filtering with Jev first and passing only the top 5 to Gemini also scored 90.15% (119), close to Gemini alone, and because Gemini reads far fewer skills its cost is estimated at about 1/10 (in the same direction as SkillRouter, arXiv 2603.22455). The real win was less the accuracy number itself than the process of catching answer-key errors, a fake skill, and an inflated score along the way."
     ],
     "decisions": [
       "I chose a full index over per-role skill bundles. On a 57-case selection set both scored the same accuracy, 0.947 (p=1.0). But the bundle approach missed skills that only get used when called by name. The cost difference over 66 cases was 27 KRW.",
@@ -666,7 +666,7 @@ const casesEn = [
       }
     ],
     "headline": {
-      "value": "109",
+      "value": "100+",
       "label": "shared skills"
     }
   },
@@ -692,7 +692,7 @@ const casesEn = [
         "value": "the orchestrator, the content agent, the video renderer, the work tool (content screen)"
       }
     ],
-    "background": "Staff request a Reel in the work tool at /sscrew/contents, review the preview, approve it, and schedule the release. Generation costs money, and posting means public exposure. So every default is set to 'don't do it'. Posting is manual, recurring automations run as dry-run (they only simulate execution), and paid generation is off. Code drives the stage progression.",
+    "background": "Staff request a Reel on the work tool's content screen, review the preview, approve it, and schedule the release. Generation costs money, and posting means public exposure. So every default is set to 'don't do it'. Posting is manual, recurring automations run as dry-run (they only simulate execution), and paid generation is off. Code drives the stage progression.",
     "stack": [
       "Paperclip sub-issues",
       "the orchestrator (state machine with no LLM)",
@@ -709,7 +709,7 @@ const casesEn = [
     "scale": [
       "About 122k lines across 3 services, 617 test files (orchestrator 135, Hermes agent 396, video renderer 86)",
       "Production canary verified through saving a 1080×1920 MP4 to Drive (2026-10)",
-      "0 live SNS posts. One post per account per day is enforced by the DB; the publish gate caps at 10 per day (2026-10-24)"
+      "0 live SNS posts from the new production path. One post per account per day is enforced by the DB; the publish gate caps at 10 per day (2026-10-24)"
     ],
     "flow": [
       "Staff request a Reel, or run a saved automation (immediate, one-time scheduled, or recurring).",
@@ -776,12 +776,12 @@ const casesEn = [
     "status3": [
       "This new production path is technically done, but details like its prompts are still being tuned. Content made on this path has no live SNS posting record; the production canary confirmed only as far as saving the MP4 to Drive (2026-10). Existing videos are already posted live through a separate path that only swaps captions and hashtags per account to post the same video to multiple accounts at once.",
       "Approval expiry is handled by a daily 03:00 KST cron in this order: reject, cancel the issue, close the row. Even if the issue cancel fails, the row is closed so the same failure doesn't repeat.",
-      "Limits: product fact checking is only prompt rules, and registering a new Instagram token needs developer setup. With no live posts, results like view counts haven't been measured.",
+      "Limits: product fact checking is only prompt rules, and registering a new Instagram token needs developer setup. This path has no live posts yet, so results like view counts haven't been measured.",
       "If I did it again: I'd add a code check that compares product facts such as price and bundle contents against the product DB. Right now, if the model breaks a rule, a human has to catch it in the preview."
     ],
     "decisions": [
       "A state machine with no LLM drives stage progression. The LLM only writes research, scripts, and prompts. If the model picked the next stage, every rerun would give a different result.",
-      "On failure, it closes instead of retrying automatically. Anything that costs money or goes public, a human clicks again.",
+      "Apart from one format repair and one re-render with the default template, it closes on failure instead of retrying automatically. Anything that costs money or goes public, a human clicks again.",
       "Posting defaults to manual, and the daily cap lives in a DB index, not in app config."
     ],
     "reelFlow": [
@@ -810,7 +810,7 @@ const casesEn = [
     "status": "live",
     "title": "Staff PC Deployment · Operations",
     "shortTitle": "Staff PC Fleet",
-    "subtitle": "KakaoTalk and Instagram work has no official API, so I ship it to 11 staff PCs with a one-line install and run it there (as registered on 2026-09-16)",
+    "subtitle": "I ship KakaoTalk and Instagram work to 11 staff PCs with a one-line install and run it there (as registered on 2026-09-16)",
     "meta": [
       {
         "label": "Period",
@@ -884,8 +884,8 @@ const casesEn = [
         "text": "If every device updates in the same minute, there is no window to pull a bad release. Mac real-time sync picks only a random minute within 14:00, and keeps that minute across reinstalls. The Windows CS tool downloads at a random time between 09:00 and 18:59, and tries once more 2 minutes after logon."
       },
       {
-        "title": "On Windows, KakaoTalk memory is only read.",
-        "text": "The KakaoTalk 26.8 update moved frida's (an app hooking tool) hook points, and the DB key could not be recovered either (measured on 2026-09-15). Messages were still in memory as plaintext JSON. The collector opens only `PROCESS_VM_READ`. With no injection, KakaoTalk does not crash."
+        "title": "On Windows, KakaoTalk uses a read-only collector.",
+        "text": "The collector opens read access only and never writes."
       },
       {
         "title": "Send success is checked in the DB, not by exit code.",

@@ -24,7 +24,7 @@ const en = {
       'StyleSeller is a commerce platform that operates sales for creator sellers and brands.',
     metrics: [
       { value: 'Hundreds', label: 'of counterparts tracked stage by stage on the status board' },
-      { value: '109', label: 'shared skills used by all agents' },
+      { value: '100+', label: 'shared skills used by all agents' },
       { value: '13', label: 'knowledge-hub workspaces shared by 4 agents' },
       { value: '11', label: 'staff PCs deployed with a one-line install' },
     ],
@@ -77,7 +77,7 @@ const en = {
       },
       {
         name: 'Agents',
-        desc: 'I forked Paperclip, an open-source agent platform, and built Work OS, Spark, and Tool Registry (an execution gate) on top of it. Work that people hand off reaches the CEO agent as a work order and is assigned; workers pick what they need from 109 shared skills (Jev only hints at three candidates). What runs every day is status board collection and summaries, vendor support collection and logging, influencer CS, Spark, and monitoring and briefing services. Model calls go through a single LiteLLM proxy.',
+        desc: 'I forked Paperclip, an open-source agent platform, and built Work OS, Spark, and Tool Registry (an execution gate) on top of it. Work that people hand off reaches the CEO agent as a work order, and an overall orchestrator reporting to the CEO (the Hermes dispatcher) hands it out to department heads and workers such as the Supervisor and fix agents. Work routed to the content department is picked up by the content orchestrator, a separate service. For the skill, Jev scores every one of the 100-odd shared skills and narrows them to the top 5, and Gemini makes the final pick of 1. If Jev fails, Gemini picks directly from the full list. What runs every day is status board collection and summaries, vendor support collection and logging, influencer CS, Spark, and monitoring and briefing services. Model calls go through a single LiteLLM proxy.',
       },
       {
         name: 'Knowledge',
@@ -85,7 +85,7 @@ const en = {
       },
       {
         name: 'Field',
-        desc: 'The seller collector program runs on 11 staff PCs (Mac and Windows), with a one-line install and auto-update. Beyond that: kakaocli on Macs, a read-only memory-scan collector on Windows, and Chrome extensions. Auto-update on a per-tool schedule, and a key per device.',
+        desc: 'The seller collector program runs on 11 staff PCs (Mac and Windows), with a one-line install and auto-update. Beyond that: kakaocli on Macs, a read-only collector on Windows, and Chrome extensions. Auto-update on a per-tool schedule, and a key per device.',
       },
       {
         name: 'Data and infra',
