@@ -569,13 +569,13 @@ const casesEn = [
     "scale": [
       "About 5,000 of my own commits (excluding merges and upstream), about 2,200 test files (2026-10-24)",
       "100-odd shared skills, 66 trigger eval files (1,282 sentences), 67 tool manifests",
-      "Jev fully applied (content, Spark, Hermes, as of 2026-10-30)"
+      "BM25+Jev+Gemini hybrid fully applied (content, Spark, Hermes)"
     ],
     "flow": [
       "Requests from Spark, Slack, and the work tool all go to the CEO agent. Only structured requests from the work tool go straight to the content orchestrator, and they still leave a work order record.",
       "The CEO writes work order v1. It holds the original text as an attachment with its sha256, the goal, completion criteria, constraints, and whether approval is required.",
       "An overall orchestrator reporting directly to the CEO (the Hermes dispatcher) assigns it to one of at most 10 department heads, such as the Supervisor and fix agents. The server caps delegation depth at 2 and delegations per work order at 5, and blocks A→B→A bounce-backs. Turning it off falls back to direct delegation by the CEO. Work that goes to the content department head is handed on again to the content orchestrator, a separate service.",
-      "Jev scores every one of the 100-odd shared skills for fit and shortlists the top 5, and Gemini picks one skill from that shortlist. If Jev fails or times out, it is skipped and Gemini picks directly from the full list.",
+      "BM25 shortlists candidates from the 100-odd shared skills, Jev re-filters them by gate and fit score, and Gemini picks one skill from that shortlist. If Jev fails or times out, it is skipped and Gemini picks directly from the full list.",
       "Tools run through a 6-stage gate and human approval. Publishing goes through the Publisher gateway (a single service dedicated to publishing). The default is manual, and the DB enforces one post per account per day."
     ],
     "diagram": {
@@ -616,7 +616,7 @@ const casesEn = [
       },
       {
         "title": "Jev shortlists; Gemini picks.",
-        "text": "Jev scores every one of the 100-odd skills and shortlists the top 5, then Gemini picks 1 from that shortlist. On failure, timeout, or an open circuit breaker (300 seconds after 2 failures), Jev is skipped and Gemini picks directly from the full list. Rollout targets are split by the first 8 characters of a sha256."
+        "text": "BM25 shortlists candidates from the 100-odd skills, Jev re-filters them by gate and fit score, then Gemini picks 1 from that shortlist. On failure, timeout, or an open circuit breaker (300 seconds after 2 failures), Jev is skipped and Gemini picks directly from the full list. Rollout targets are split by the first 8 characters of a sha256."
       },
       {
         "title": "An approval is used exactly once.",
@@ -644,7 +644,7 @@ const casesEn = [
       "Evaluation (with the model in use at measurement time): on 69 questions with known answers, Jev candidate recall (share of cases where the answer is among the candidates) is 85.5% at top 1 and 91.3% at top 3 (2026-10-24). Median latency is about 1.09 seconds.",
       "Limits: evals run manually, not in CI, and the Spark eval has only 8 cases with reference SQL. I did not measure whether Jev hints actually changed task outcomes.",
       "If I did it again: I would check manifests against tool registration rows in CI. The 10-24 outage only surfaced at boot, but it could have been caught before merge.",
-      "Follow-up · Jev skill router upgrade (10-25 to 10-30): **119 of 132, 90.15%** correct on questions it had never seen (a different metric from the BM25 candidate recall above). As of 10-30 it is fully applied to the Hermes agent. Letting Jev filter first and Gemini pick matches Gemini alone on accuracy, and because Gemini reads far fewer skills, **cost is about 1/10** (estimated from public pricing). Jev is a judge model that returns probabilities instead of text, so it is fast and cheap (measured median 360 ms).",
+      "Follow-up · Jev skill router upgrade (10-25 to 10-30): **119 of 132, 90.15%** correct on questions it had never seen (a different metric from the BM25 candidate recall above). It is fully applied to the Hermes agent. Letting BM25 shortlist and Jev re-filter before Gemini picks matches Gemini alone on accuracy, and because Gemini reads far fewer skills, **cost is about 1/10** (estimated from public pricing). Jev is a judge model that returns probabilities instead of text, so it is fast and cheap (measured median 360 ms).",
       "Fixing the measurement: before chasing accuracy, I fixed how it was measured. I found answer-key errors (5 of 6 'false positives' were actually correct), scores that were inflated only on the already-seen test set, and a fake skill that existed only in the test folder, removed them, and re-ran 222 cases. Along the way the number changed four times, 83.3% → 88.9% → 94.4% → 90.15%, and I kept every before-and-after figure. Experiments replayed saved answers within quota, with zero rate-limit (429) errors.",
       "Jev limits: some questions still have two valid answers. There was no step to update labels when the catalog grows, which produced 10 label errors; automatic label checks are still only a proposal."
     ],
