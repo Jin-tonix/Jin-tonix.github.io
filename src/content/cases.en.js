@@ -569,7 +569,6 @@ const casesEn = [
     "scale": [
       "About 5,000 of my own commits (excluding merges and upstream), about 2,200 test files (2026-10-24)",
       "100-odd shared skills, 66 trigger eval files (1,282 sentences), 67 tool manifests",
-      "BM25+Jev+Gemini hybrid fully applied (content, Spark, Hermes)"
     ],
     "flow": [
       "Requests from Spark, Slack, and the work tool all go to the CEO agent. Only structured requests from the work tool go straight to the content orchestrator, and they still leave a work order record.",
@@ -615,7 +614,7 @@ const casesEn = [
         "text": "Plugins can only observe after an issue is created, so I changed the server core. Depth 2, 5 per work order, no A→B→A. Depth is counted by walking up the actual parent issues, not read from a column whose value can be changed. A 6th delegation and forged depth are rejected in tests."
       },
       {
-        "title": "Jev shortlists; Gemini picks.",
+        "title": "BM25 shortlists; Jev re-filters; Gemini picks.",
         "text": "BM25 shortlists candidates from the 100-odd skills, Jev re-filters them by gate and fit score, then Gemini picks 1 from that shortlist. On failure, timeout, or an open circuit breaker (300 seconds after 2 failures), Jev is skipped and Gemini picks directly from the full list. Rollout targets are split by the first 8 characters of a sha256."
       },
       {
@@ -650,7 +649,7 @@ const casesEn = [
     ],
     "decisions": [
       "I chose a full index over per-role skill bundles. On a 57-case selection set both scored the same accuracy, 0.947 (p=1.0). But the bundle approach missed skills that only get used when called by name. The cost difference over 66 cases was 27 KRW.",
-      "The dispatcher assigns work; Jev shortlists the skill and Gemini picks it. If Jev fails, Gemini still picks directly from the full list, so work does not stop. The worker never picks the skill — Gemini always does.",
+      "The dispatcher assigns work; BM25 shortlists candidates, Jev re-filters them, and Gemini picks the skill. If Jev fails, Gemini still picks directly from the full list, so work does not stop. The worker never picks the skill — Gemini always does.",
       "Controls sit where they still hold if the model ignores them. The loop guard, single-use approval, and paid cap all live in the server and DB.",
       "I set the bar for turning the Jev router on before testing: clearly better on unseen questions, with no rise in false positives. A comparison setting gained only +1.5 pp and got answers wrong by detouring to a skill with fit as low as 0.22, so I left it off."
     ],
