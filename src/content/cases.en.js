@@ -24,7 +24,7 @@ const casesEn = [
     ],
     "background": "Conversations with counterparts are split across KakaoTalk rooms, the order mailbox, and Slack, and Excel order sheets arrive separately as email attachments. The Status Board summarizes these records per day and places them in date order on a per-counterpart calendar. Pick one brand, vendor, or seller, and every record exchanged with that counterpart comes together on one screen. The Communication Status tab shows where each of hundreds of counterparts stands, from first contact to settlement. Records the rules could not match, and stages that are unclear, are decided by staff.",
     "stack": [
-      "Next.js 16.2·React 19.2·Tailwind 4·Vitest 4",
+      "React 19.2·Tailwind 4·Vitest 4",
       "Python 3.12·Pydantic v2",
       "Postgres RLS (DB rules that limit who can see each row)",
       "Gemini Flash family (via LiteLLM)"
@@ -247,7 +247,6 @@ const casesEn = [
     ],
     "status3": [
       "Since 2026.06, intake, ledger and wiki compilation, and answers to tagged questions have been running. Replies that staff send directly in a room are learned right away, and older answers to the same question are marked as superseded by the new one and demoted in search.",
-      "Measured: the resend was 51 requests for 1 real message, and during the AX hang 31 of 147 sends failed. Answer accuracy and rewrite rate after the 09-02 switch were not measured.",
       "Vendor and influencer CS calls are excluded from the company daily cost cap. The Windows collector has no auto-updater, so new builds are deployed by reinstalling.",
       "If I did it again: I would put auto-update and the cutoff date into the first build of the Windows collector. The 09-16 flood of past conversations came from an old collector build, and there was no way to fix it except reinstalling."
     ],
@@ -299,7 +298,7 @@ const casesEn = [
     ],
     "background": "Pricing lived in Google Sheets formulas, and every proposal was reconciled by hand. When I moved those formulas into code, I added tests that compare each field against the sheet values for real products. In catalog product extraction and sales partner matching, the LLM only produces candidates. Registering and reviewing them is the staff's job. For personalized KakaoTalk, a CRM built by a colleague decides each seller's recommendations; I built the send automation that takes those targets and sends.",
     "stack": [
-      "Next.js 16.2·React 19.2·Tailwind 4·Vitest 4",
+      "React 19.2·Tailwind 4·Vitest 4",
       "Postgres+PostgREST (a REST server that exposes tables directly)",
       "Gemini Flash family (via LiteLLM)",
       "Knowledge hub RAG search (finds material and attaches it to the answer)",
@@ -373,12 +372,7 @@ const casesEn = [
         "text": "Checking the install token and marking it used are combined into a single conditional UPDATE, so two PCs cannot register with the same token at the same time. If the same Instagram account is on two PCs, the one that logged in more recently wins. The server's job-assignment function follows the same rule. The daily action volume is redrawn within a range every morning."
       }
     ],
-    "status3": [
-      "In operation. Personalized KakaoTalk is sent from the UI (261 people on 2026-09-22), and scheduled sends go out from the server every minute. Per-slot on/off values live in the DB.",
-      "Judgment call: after a server gap, job cancellation waits 3 more minutes. I judged that being 3 minutes late is cheaper than cancelling by mistake.",
-      "Limits: the work tool's CI runs only some of the tests. I have not measured how well match scores agree with what staff actually pick.",
-      "If I did it again: I would make CI run the full test suite and make the 43 pricing test cases a deploy gate."
-    ],
+    "status3": [],
     "decisions": [
       "Amounts are not left to the LLM. Code ported from the sheet computes them, and the LLM only returns input values to change.",
       "RAG search is used only to widen the candidate set. Companies outside the existing partner pool cannot get in.",
@@ -504,7 +498,6 @@ const casesEn = [
     ],
     "status3": [
       "Reply drafts go no further than the owner's Gmail drafts folder. Sending is up to staff, and since 2026-08-18 only images that passed pytest are deployed.",
-      "Attachment extraction runs in a `python -I` child process with a 20-second limit and at most 2 at once. A chunk that fails 3 times is skipped from the next ingest on.",
       "Limits: the 18 search eval cases check only workspace selection. Search hit rate, evidence match, and the effect after restoring rerank have not been measured.",
       "If I did it again: I would add evidence-match scoring to the eval set first. That would have caught the missing rerank before draft quality dropped."
     ],
@@ -641,7 +634,6 @@ const casesEn = [
     "status3": [
       "In production. The company-wide tool execution switch is off by default, and each tool is turned on separately. user_id is sent to Langfuse as an HMAC pseudonym.",
       "Evaluation (with the model in use at measurement time): on 69 questions with known answers, Jev candidate recall (share of cases where the answer is among the candidates) is 85.5% at top 1 and 91.3% at top 3 (2026-10-24). Median latency is about 1.09 seconds.",
-      "Limits: evals run manually, not in CI, and the Spark eval has only 8 cases with reference SQL. I did not measure whether Jev hints actually changed task outcomes.",
       "If I did it again: I would check manifests against tool registration rows in CI. The 10-24 outage only surfaced at boot, but it could have been caught before merge.",
       "Follow-up · Jev skill router upgrade (10-25 to 10-30): **119 of 132, 90.15%** correct on questions it had never seen (a different metric from the BM25 candidate recall above). It is fully applied to the Hermes agent. Letting BM25 shortlist and Jev re-filter before Gemini picks matches Gemini alone on accuracy, and because Gemini reads far fewer skills, **cost is about 1/10** (estimated from public pricing). Jev is a judge model that returns probabilities instead of text, so it is fast and cheap (measured median 360 ms).",
       "Fixing the measurement: before chasing accuracy, I fixed how it was measured. I found answer-key errors (5 of 6 'false positives' were actually correct), scores that were inflated only on the already-seen test set, and a fake skill that existed only in the test folder, removed them, and re-ran 222 cases. Along the way the number changed four times, 83.3% → 88.9% → 94.4% → 90.15%, and I kept every before-and-after figure. Experiments replayed saved answers within quota, with zero rate-limit (429) errors.",

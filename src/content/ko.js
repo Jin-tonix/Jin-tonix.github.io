@@ -88,7 +88,7 @@ const ko = {
       },
       {
         name: '데이터·인프라',
-        desc: '업무 웹(Next.js)은 Vercel에서, 에이전트 서비스와 DB·LLM 프록시 등 컨테이너 60개는 GCP VM 한 대(4코어, 메모리 17GB)의 Docker에서 운영합니다(2026-10-25 실측, Compose·Swarm, 자체 호스팅 Postgres·PostgREST). 모델 호출은 LiteLLM으로 모으고 Langfuse로 비용을 봅니다. 배포 락은 에이전트 플랫폼과 업무툴 저장소가 함께 씁니다.',
+        desc: '업무 웹은 Vercel에서, 에이전트 서비스와 DB·LLM 프록시 등 컨테이너 60개는 GCP VM 한 대(4코어, 메모리 17GB)의 Docker에서 운영합니다(2026-10-25 실측, Compose·Swarm, 자체 호스팅 Postgres·PostgREST). 모델 호출은 LiteLLM으로 모으고 Langfuse로 비용을 봅니다. 배포 락은 에이전트 플랫폼과 업무툴 저장소가 함께 씁니다.',
       },
     ],
   },
@@ -232,7 +232,6 @@ const ko = {
             items: [
               { id: 'python', label: 'Python 3.12·FastAPI·Pydantic v2' },
               { id: 'ts', label: 'TypeScript' },
-              { id: 'nextjs', label: 'Next.js 16.2' },
               { id: 'node', label: 'Node.js·Express 5' },
             ],
           },
