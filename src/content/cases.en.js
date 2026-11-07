@@ -31,7 +31,6 @@ const casesEn = [
     ],
     "scale": [
       "Communication Status share by stage: first contact 13.1%, proposal 33.8%, negotiation 2.6%, contract 4.5%, in progress 46.0%, settlement 0% (2026-10-24)",
-      "Hundreds of counterparts = 42% brands + 38% vendors + 20% sellers (2026-10-24)",
       "Roughly 100–200 records per weekday, hundreds awaiting counterpart matching (2026-10-24)"
     ],
     "flow": [
@@ -39,7 +38,7 @@ const casesEn = [
       "Newsletters are filtered out by rules before any LLM call. In order-sheet tables, columns such as recipient are located and buyer names are masked. If a phrase the summary cites as evidence is not in the original text, the summary is discarded.",
       "Counterpart matching uses rules only, no LLM. It checks email thread, business registration number, KakaoTalk room, email, phone, domain, account code, and alias, in that order. If keys disagree, the record goes to Unclassified.",
       "In-progress deals are built by grouping KakaoTalk contract signals and email signals under a counterpart·target·round key. A stage is applied automatically when the rule evidence is clear; the rest go to 'awaiting review' for staff to decide.",
-      "Every day at 18:05, summaries for up to 300 counterparts are rewritten in 3–6 lines. If spend passes ₩2,000 for the day or the cost ledger cannot be read, that day's batch stops."
+      "Every day at 18:05, summaries for up to 500+ counterparts are rewritten in 3–6 lines. If spend passes ₩2,000 for the day or the cost ledger cannot be read, that day's batch stops."
     ],
     "diagram": {
       "src": "/images/v3/diagram-status-board-en.png",
@@ -567,7 +566,7 @@ const casesEn = [
       "Requests from Spark, Slack, and the work tool all go to the CEO agent. Only structured requests from the work tool go straight to the content orchestrator, and they still leave a work order record.",
       "The CEO writes work order v1. It holds the original text as an attachment with its sha256, the goal, completion criteria, constraints, and whether approval is required.",
       "An overall orchestrator reporting directly to the CEO (the Hermes dispatcher) assigns it to one of at most 10 department heads, such as the Supervisor and fix agents. The server caps delegation depth at 2 and delegations per work order at 5, and blocks A→B→A bounce-backs. Turning it off falls back to direct delegation by the CEO. Work that goes to the content department head is handed on again to the content orchestrator, a separate service.",
-      "BM25 shortlists candidates from the 100-odd shared skills, Jev re-filters them by gate and fit score, and Gemini picks one skill from that shortlist. If Jev fails or times out, it is skipped and Gemini picks directly from the full list.",
+      "BM25 search pulls candidates from all shared skills, the judge model Jev checks gating and fit, and Gemini makes the final pick of one skill. If Jev fails or times out, it is skipped and Gemini picks directly from the full list.",
       "Tools run through a 6-stage gate and human approval. Publishing goes through the Publisher gateway (a single service dedicated to publishing). The default is manual, and the DB enforces one post per account per day."
     ],
     "diagram": {
@@ -608,7 +607,7 @@ const casesEn = [
       },
       {
         "title": "BM25 shortlists; Jev re-filters; Gemini picks.",
-        "text": "BM25 shortlists candidates from the 100-odd skills, Jev re-filters them by gate and fit score, then Gemini picks 1 from that shortlist. On failure, timeout, or an open circuit breaker (300 seconds after 2 failures), Jev is skipped and Gemini picks directly from the full list. Rollout targets are split by the first 8 characters of a sha256."
+        "text": "BM25 search pulls candidates from all skills, the judge model Jev checks gating and fit, then Gemini makes the final pick of 1. On failure, timeout, or an open circuit breaker (300 seconds after 2 failures), Jev is skipped and Gemini picks directly from the full list. Rollout targets are split by the first 8 characters of a sha256."
       },
       {
         "title": "An approval is used exactly once.",
@@ -635,13 +634,13 @@ const casesEn = [
       "In production. The company-wide tool execution switch is off by default, and each tool is turned on separately. user_id is sent to Langfuse as an HMAC pseudonym.",
       "Evaluation (with the model in use at measurement time): on 69 questions with known answers, Jev candidate recall (share of cases where the answer is among the candidates) is 85.5% at top 1 and 91.3% at top 3 (2026-10-24). Median latency is about 1.09 seconds.",
       "If I did it again: I would check manifests against tool registration rows in CI. The 10-24 outage only surfaced at boot, but it could have been caught before merge.",
-      "Follow-up · Jev skill router upgrade (10-25 to 10-30): **119 of 132, 90.15%** correct on questions it had never seen (a different metric from the BM25 candidate recall above). It is fully applied to the Hermes agent. Letting BM25 shortlist and Jev re-filter before Gemini picks matches Gemini alone on accuracy, and because Gemini reads far fewer skills, **cost is about 1/10** (estimated from public pricing). Jev is a judge model that returns probabilities instead of text, so it is fast and cheap (measured median 360 ms).",
+      "Follow-up · Jev skill router upgrade (10-25 to 10-30): **119 of 132, 90.15%** correct on questions it had never seen (a different metric from the BM25 candidate recall above). It is fully applied to the sub-agents that Hermes assigns work to. Letting BM25 shortlist and Jev re-filter before Gemini picks matches Gemini alone on accuracy, and because Gemini reviews 5 skills instead of 115, **cost is about 1/10** (estimated from public pricing). Jev is a judge model that returns probabilities instead of text, so it is fast and cheap (measured median 360 ms).",
       "Fixing the measurement: before chasing accuracy, I fixed how it was measured. I found answer-key errors (5 of 6 'false positives' were actually correct), scores that were inflated only on the already-seen test set, and a fake skill that existed only in the test folder, removed them, and re-ran 222 cases. Along the way the number changed four times, 83.3% → 88.9% → 94.4% → 90.15%, and I kept every before-and-after figure. Experiments replayed saved answers within quota, with zero rate-limit (429) errors.",
       "Jev limits: some questions still have two valid answers. There was no step to update labels when the catalog grows, which produced 10 label errors; automatic label checks are still only a proposal."
     ],
     "decisions": [
       "I chose a full index over per-role skill bundles. On a 57-case selection set both scored the same accuracy, 0.947 (p=1.0). But the bundle approach missed skills that only get used when called by name. The cost difference over 66 cases was 27 KRW.",
-      "The dispatcher assigns work; BM25 shortlists candidates, Jev re-filters them, and Gemini picks the skill. If Jev fails, Gemini still picks directly from the full list, so work does not stop. The worker never picks the skill — Gemini always does.",
+      "The dispatcher assigns work; BM25 shortlists candidates, Jev re-filters them, and Gemini picks the skill. If Jev fails, Gemini still picks directly from the full list, so work does not stop. The worker never picks the skill; Gemini always does.",
       "Controls sit where they still hold if the model ignores them. The loop guard, single-use approval, and paid cap all live in the server and DB.",
       "I set the bar for turning the Jev router on before testing: clearly better on unseen questions, with no rise in false positives. A comparison setting gained only +1.5 pp and got answers wrong by detouring to a skill with fit as low as 0.22, so I left it off."
     ],

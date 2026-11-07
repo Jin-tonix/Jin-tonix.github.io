@@ -76,7 +76,7 @@ const ko = {
       },
       {
         name: '에이전트',
-        desc: '오픈소스 에이전트 플랫폼 Paperclip을 포크해 그 위에 Work OS·Spark·Tool Registry(실행 게이트)를 새로 만들었습니다. 사람이 맡긴 일은 CEO 에이전트가 작업지시서로 받고, CEO 직속 전체 오케스트레이터(Hermes 디스패처)가 Supervisor·수정(fix) 에이전트 같은 부서장과 작업자에게 나눠 줍니다. 콘텐츠 부서로 간 일은 별도 서비스인 콘텐츠 오케스트레이터가 이어받습니다. 쓸 스킬은 Jev가 공용 스킬 100여 개를 전수 채점해 상위 5개로 거르고, Gemini가 그중 1개를 고릅니다. Jev가 실패하면 Gemini가 전체 목록에서 바로 고릅니다. 매일 도는 것은 현황판 수집·요약, 벤더 CS 수집·기록, 인플루언서 CS, Spark, 감시·브리핑 서비스입니다. 모델 호출은 LiteLLM 프록시 한 곳으로 모았습니다.',
+        desc: '오픈소스 에이전트 플랫폼 Paperclip을 포크해 그 위에 Work OS·Spark·Tool Registry(실행 게이트)를 새로 만들었습니다. 사람이 맡긴 일은 CEO 에이전트가 작업지시서로 받고, CEO 직속 전체 오케스트레이터(Hermes 디스패처)가 Supervisor·수정(fix) 에이전트 같은 부서장과 작업자에게 나눠 줍니다. 콘텐츠 부서로 간 일은 별도 서비스인 콘텐츠 오케스트레이터가 이어받습니다. Hermes가 일을 맡긴 하위 에이전트는 BM25 검색으로 전체 스킬 중 후보를 먼저 추리고, 판정 모델 Jev가 게이트와 적합도를 판단한 뒤 Gemini가 최종 선택하는 방식으로 스킬을 고릅니다. Gemini가 확인하는 스킬은 115개에서 5개로 줄었고, 신규 질문 132건 평가에서 정답률 90.15%입니다. Jev가 실패하면 Gemini가 전체 목록에서 바로 고릅니다. 매일 도는 것은 현황판 수집·요약, 벤더 CS 수집·기록, 인플루언서 CS, Spark, 감시·브리핑 서비스입니다. 모델 호출은 LiteLLM 프록시 한 곳으로 모았습니다.',
       },
       {
         name: '지식',
@@ -210,7 +210,7 @@ const ko = {
             title: 'AI/Agent',
             items: [
               { id: 'llm-agent', label: 'Paperclip·Hermes 에이전트' },
-              { id: 'jev', label: 'Jev 스킬 추천기' },
+              { id: 'jev', label: 'Jev 스킬 라우터' },
               { id: 'hitl', label: '도구 실행 승인 게이트' },
               { id: 'litellm', label: 'Gemini Flash 계열(LiteLLM 경유)' },
               { id: 'mcp', label: 'MCP 서버 4개 · Tool calling' },

@@ -78,7 +78,7 @@ const en = {
       },
       {
         name: 'Agents',
-        desc: 'I forked Paperclip, an open-source agent platform, and built Work OS, Spark, and Tool Registry (an execution gate) on top of it. Work that people hand off reaches the CEO agent as a work order, and an overall orchestrator reporting to the CEO (the Hermes dispatcher) hands it out to department heads and workers such as the Supervisor and fix agents. Work routed to the content department is picked up by the content orchestrator, a separate service. For the skill, Jev scores every one of the 100-odd shared skills and narrows them to the top 5, and Gemini makes the final pick of 1. If Jev fails, Gemini picks directly from the full list. What runs every day is status board collection and summaries, vendor support collection and logging, influencer CS, Spark, and monitoring and briefing services. Model calls go through a single LiteLLM proxy.',
+        desc: 'I forked Paperclip, an open-source agent platform, and built Work OS, Spark, and Tool Registry (an execution gate) on top of it. Work that people hand off reaches the CEO agent as a work order, and an overall orchestrator reporting to the CEO (the Hermes dispatcher) hands it out to department heads and workers such as the Supervisor and fix agents. Work routed to the content department is picked up by the content orchestrator, a separate service. Sub-agents that Hermes assigns work to pick a skill this way: BM25 search pulls candidates from all skills, the judge model Jev checks gating and fit, and Gemini makes the final pick. Gemini now reviews 5 skills instead of 115, and the router scored 90.15% on a 132-case evaluation of new questions. If Jev fails, Gemini picks directly from the full list. What runs every day is status board collection and summaries, vendor support collection and logging, influencer CS, Spark, and monitoring and briefing services. Model calls go through a single LiteLLM proxy.',
       },
       {
         name: 'Knowledge',
@@ -212,7 +212,7 @@ const en = {
             title: 'AI / Agent',
             items: [
               { id: 'llm-agent', label: 'Paperclip · Hermes agents' },
-              { id: 'jev', label: 'Jev skill recommender' },
+              { id: 'jev', label: 'Jev skill router' },
               { id: 'hitl', label: 'Tool execution approval gate' },
               { id: 'litellm', label: 'Gemini Flash family (via LiteLLM)' },
               { id: 'mcp', label: '4 MCP servers · tool calling' },

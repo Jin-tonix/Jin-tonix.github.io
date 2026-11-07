@@ -312,17 +312,17 @@ export default function Sidebar() {
               <FontAwesomeIcon icon={faFilePdf} /> <span className="label">{nav.portfolio.label}</span>
             </a>
           )}
-          <a href="https://github.com/Jin-tonix" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
-            <FontAwesomeIcon icon={faGithub} /> <span className="label">GitHub</span>
+          <a href="mailto:jinheemok815@gmail.com" aria-label="Email">
+            <FontAwesomeIcon icon={faEnvelope} /> <span className="label">Email</span>
           </a>
           <a href="https://www.linkedin.com/in/jin-tonix" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon icon={faLinkedin} /> <span className="label">LinkedIn</span>
           </a>
-          <a href="mailto:jinheemok815@gmail.com" aria-label="Email">
-            <FontAwesomeIcon icon={faEnvelope} /> <span className="label">Email</span>
+          <a href="https://github.com/Jin-tonix" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon icon={faGithub} /> <span className="label">GitHub</span>
           </a>
           <div className="updated" style={{ marginTop: '10px', fontSize: 'clamp(0.6em, 1.1vw, 0.75em)', color: color.muted, textAlign: 'center' }}>
-            Last Updated: 2026.10.25
+            Last Updated: 2026.11.07
           </div>
         </div>
       </div>
