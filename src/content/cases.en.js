@@ -221,7 +221,7 @@ const casesEn = [
       },
       {
         "title": "Numbers and brands are checked in code.",
-        "text": "Amounts and percentages in the draft are normalized (Korean shorthand '3만원' becomes 30000 KRW). Values not in the retrieved evidence, and words one character off from an evidence brand, are flagged as violations. If the LLM judgment fails or is ambiguous, it counts as no evidence. When a violation is found, it searches again with the reason attached and rewrites."
+        "text": "Amounts and percentages in the draft are normalized (Korean shorthand '3만원' becomes 30000 KRW). Values not in the retrieved evidence, and words one character off from an evidence brand, are flagged as violations. If the judgment fails or is ambiguous, it counts as no evidence. When a violation is found, it searches again with the reason attached and rewrites."
       },
       {
         "title": "'Sent' is written only when it is true.",
@@ -402,7 +402,7 @@ const casesEn = [
     "logo": "/images/logo8.png",
     "status": "live",
     "title": "LightRAG Knowledge Hub · Email Agent",
-    "shortTitle": "Knowledge Hub · Email Agent",
+    "shortTitle": "LightRAG Knowledge Hub · Email Agent",
     "subtitle": "Shared search with evidence checks before email drafts reach the assigned staff member.",
     "meta": [
       {
@@ -615,7 +615,7 @@ const casesEn = [
       },
       {
         "title": "Write approvals sign the preview.",
-        "text": "Input hash, preview hash, requester, run ID, and expiry are bundled as canonical JSON and signed with HMAC-SHA256. Write access to the DB is not enough to pass without the key. The key contains no timestamp, so model retries do not multiply approvals."
+        "text": "Input hash, preview hash, requester, run ID, and expiry are bundled as canonical JSON and signed with HMAC-SHA256. Write access to the DB is not enough to pass without the key. The dedup key contains no timestamp, so model retries do not multiply approvals."
       },
       {
         "title": "Spark DB lookups open a new connection per query.",

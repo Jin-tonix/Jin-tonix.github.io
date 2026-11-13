@@ -187,7 +187,7 @@ const en = {
     experienceLead: 'From a law major to AI agent engineer',
     careerChangeLabel: 'Career Change',
     experience: [
-      { period: '2025-11 – present', org: 'StyleSeller · PL (business team)', summary: 'Internal AI and automation', kind: 'tech' },
+      { period: '2025-11 – present', org: 'StyleSeller · AI & Automation PL', summary: 'Internal AI and automation', kind: 'tech' },
       { period: '2025-08 – 2025-10', org: 'We:Review (Welead) · intern', summary: 'Built an OCR + LLM receipt review pipeline', kind: 'tech' },
       { period: '2025-05 – 2025-07', org: 'Korea IT Business Promotion Association', summary: 'Generative AI developer training program', kind: 'tech' },
       { period: '2024-10 – 2024-12', org: 'HiMedia Academy · AI course', summary: 'AI projects with industry mentors (LangChain RAG chatbot, OCR and translation pipeline)', kind: 'tech' },

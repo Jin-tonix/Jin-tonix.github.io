@@ -614,7 +614,7 @@ const Hero = styled.section`
     }
 
     .topline span:last-child {
-      text-align: right;
+      display: none;
     }
 
     .hero-main {
