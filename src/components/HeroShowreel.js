@@ -173,7 +173,7 @@ const Hero = styled.section`
     max-width: 590px;
     margin: 8px 0 0;
     color: var(--reel-muted);
-    font-size: 10px;
+    font-size: 11px;
     line-height: 1.45;
     word-break: keep-all;
   }
@@ -237,7 +237,7 @@ const Hero = styled.section`
     gap: 16px;
     padding: 0 17px;
     color: var(--reel-muted);
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -315,7 +315,7 @@ const Hero = styled.section`
     align-items: center;
     margin-bottom: 12px;
     color: var(--reel-muted);
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.13em;
     text-transform: uppercase;
@@ -333,7 +333,7 @@ const Hero = styled.section`
   .project-overline {
     margin: 0 0 7px;
     color: var(--reel-gold);
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.13em;
     text-transform: uppercase;
@@ -411,14 +411,14 @@ const Hero = styled.section`
 
   .visual-card strong {
     color: var(--reel-ink);
-    font-size: clamp(10px, 1vw, 13px);
+    font-size: clamp(11px, 1vw, 13px);
     line-height: 1.35;
     word-break: keep-all;
   }
 
   .visual-card small {
     color: var(--reel-muted);
-    font-size: 9px;
+    font-size: 11px;
     line-height: 1.35;
     word-break: keep-all;
   }
@@ -464,7 +464,7 @@ const Hero = styled.section`
   .film-foot {
     min-height: 43px;
     border-top: 1px solid var(--reel-line);
-    font-size: 9px;
+    font-size: 11px;
   }
 
   .chapter-list {
@@ -580,6 +580,19 @@ const Hero = styled.section`
       font-size: 11px;
     }
 
+    .chapter-list {
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+
+    .chapter-list span {
+      white-space: normal;
+    }
+
+    .controls {
+      flex-shrink: 0;
+    }
+
     .metric + .metric {
       padding-left: 12px;
     }
@@ -596,8 +609,8 @@ const Hero = styled.section`
 
     .topline {
       margin-bottom: 12px;
-      font-size: 11px;
-      letter-spacing: 0.1em;
+      font-size: 10px;
+      letter-spacing: 0.04em;
     }
 
     .topline span:last-child {
@@ -720,7 +733,7 @@ const Hero = styled.section`
     }
 
     .visual-card small {
-      font-size: 9px;
+      font-size: 10px;
     }
 
     .visual-arrow {
@@ -737,7 +750,7 @@ const Hero = styled.section`
       min-height: 34px;
       gap: 6px;
       padding: 0 8px;
-      font-size: 9px;
+      font-size: 10px;
     }
 
     .chapter-list {
@@ -746,7 +759,7 @@ const Hero = styled.section`
     }
 
     .chapter-list span {
-      font-size: 9px;
+      font-size: 10px;
     }
 
     .controls {
@@ -756,7 +769,7 @@ const Hero = styled.section`
     .controls button {
       min-height: 25px;
       padding: 0 5px;
-      font-size: 9px;
+      font-size: 10px;
     }
 
     .metrics {
@@ -918,7 +931,7 @@ const Hero = styled.section`
     }
 
     .visual-card strong {
-      font-size: 9px;
+      font-size: 10px;
     }
 
     .visual-card small {
@@ -944,7 +957,7 @@ const Hero = styled.section`
     }
   }
 
-  &[data-lang='en'] .intro {
+  &[data-lang] .intro {
     display: block;
     overflow: visible;
     -webkit-line-clamp: unset;
@@ -967,7 +980,7 @@ const Hero = styled.section`
       padding-bottom: 20px;
     }
 
-    &[data-lang='en'] .intro {
+    &[data-lang] .intro {
       font-size: 14px;
       line-height: 1.5;
     }

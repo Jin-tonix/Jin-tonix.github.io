@@ -85,7 +85,7 @@ const SidebarMain = styled.nav`
 
     a {
       color: ${color.muted};
-      font-size: clamp(0.68em, 1.15vw, 0.9em);
+      font-size: clamp(0.78em, 1.15vw, 0.9em);
       text-decoration: none;
       font-weight: ${font.weight.body};
       transition: color 0.2s ease;
@@ -130,7 +130,7 @@ const SidebarMain = styled.nav`
     display: flex;
     gap: 6px;
     align-items: center;
-    font-size: clamp(0.7em, 1.2vw, 0.85em);
+    font-size: clamp(0.78em, 1.2vw, 0.85em);
     color: ${color.muted};
 
     button {
@@ -321,7 +321,7 @@ export default function Sidebar() {
           <a href="https://github.com/Jin-tonix" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon icon={faGithub} /> <span className="label">GitHub</span>
           </a>
-          <div className="updated" style={{ marginTop: '10px', fontSize: 'clamp(0.6em, 1.1vw, 0.75em)', color: color.muted, textAlign: 'center' }}>
+          <div className="updated" style={{ marginTop: '10px', fontSize: 'clamp(0.7em, 1.1vw, 0.75em)', color: color.muted, textAlign: 'center' }}>
             Last Updated: 2026.11.13
           </div>
         </div>

@@ -38,7 +38,7 @@ const casesEn = [
       "Newsletters are filtered out by rules before any LLM call. In order-sheet tables, columns such as recipient are located and buyer names are masked. If a phrase the summary cites as evidence is not in the original text, the summary is discarded.",
       "Counterpart matching uses rules only, no LLM. It checks email thread, business registration number, KakaoTalk room, email, phone, domain, account code, and alias, in that order. If keys disagree, the record goes to Unclassified.",
       "In-progress deals are built by grouping KakaoTalk contract signals and email signals under a business partner·target·round key. A stage is applied automatically when the rule evidence is clear; the rest go to 'awaiting review' for staff to decide.",
-      "Every day at 18:05, summaries for up to up to around 500 business partners are rewritten in 3–6 lines. If spend passes KRW 2,000 for the day or the cost ledger cannot be read, that day's batch stops."
+      "Every day at 18:05, summaries for up to around 500 business partners are rewritten in 3–6 lines. If spend passes KRW 2,000 for the day or the cost ledger cannot be read, that day's batch stops."
     ],
     "diagram": {
       "src": "/images/v3/diagram-status-board-en.png",
@@ -168,7 +168,7 @@ const casesEn = [
         "value": "the server (vendor agent), kakaocli fork, CS Copilot extension and local sender"
       }
     ],
-    "background": "Partner conversations live on staff computers, but the agent needs shared records to answer consistently. I connected local collection, a server ledger and the knowledge hub, then returned replies through a staff Mac. Since September 2, the agent answers tagged questions without follow-up questions or a human handoff step. Since September 2, it answers tagged questions without follow-up questions or a human handoff step. Code checks amounts, percentages and brands against retrieved evidence before delivery.",
+    "background": "Partner conversations live on staff computers, but the agent needs shared records to answer consistently. I connected local collection, a server ledger and the knowledge hub, then returned replies through a staff Mac. Since September 2, the agent answers tagged questions without follow-up questions or a human handoff step. Code checks amounts, percentages and brands against retrieved evidence before delivery.",
     "stack": [
       "macOS kakaocli fork (Swift)",
       "Windows read-only collector (Python)",
@@ -221,7 +221,7 @@ const casesEn = [
       },
       {
         "title": "Numbers and brands are checked in code.",
-        "text": "Amounts and percentages in the draft are normalized ('3만원' is 30000원). Values not in the retrieved evidence, and words one character off from an evidence brand, are flagged as violations. If the LLM judgment fails or is ambiguous, it counts as no evidence. When a violation is found, it searches again with the reason attached and rewrites."
+        "text": "Amounts and percentages in the draft are normalized (Korean shorthand '3만원' becomes 30000 KRW). Values not in the retrieved evidence, and words one character off from an evidence brand, are flagged as violations. If the LLM judgment fails or is ambiguous, it counts as no evidence. When a violation is found, it searches again with the reason attached and rewrites."
       },
       {
         "title": "'Sent' is written only when it is true.",
@@ -250,7 +250,7 @@ const casesEn = [
       "If I did it again: I would put auto-update and the cutoff date into the first build of the Windows collector. The 09-16 flood of past conversations came from an old collector build, and there was no way to fix it except reinstalling."
     ],
     "decisions": [
-      "On 2026-09-02 I turned off follow-up questions and changed it to answer only tagged questions, with no human handoff step. In exchange, number and brand checks are done in code, not left to the LLM. The old handoff branch stays in the code, guarded by tests.",
+      "On 2026-09-02 I turned off follow-up questions and changed it to answer every tagged question, with no human handoff step. In exchange, number and brand checks are done in code, not left to the LLM. The old handoff branch stays in the code, guarded by tests.",
       "The regex handles only tag detection, and judgment went to the model. The approach where the regex also did the blocking was removed on 2026-08-30.",
       "I took fuzzy matching out of business partner checks. Not answering is better than answering in someone else's room because a name looked similar."
     ],
@@ -355,7 +355,7 @@ const casesEn = [
         "text": "If LLM parsing returns 0 items, the UI does not show an empty screen; a rule-based parser re-reads the same file. Images inside the file are attached to products in order. Icons under 750 bytes are not counted as product photos and are discarded."
       },
       {
-        "title": "RAG can only add candidates, not create new ones.",
+        "title": "RAG only widens candidates within the existing partner pool.",
         "text": "Rule scores are assigned by category, group-buy history, product requests, and proposals, in that order, and the results of a 4-sentence RAG query are added as a union. IDs returned by RAG are accepted only if they are in the existing partner pool. This logic used to live in n8n; I moved it into code so it could be tested with vitest."
       },
       {
@@ -563,7 +563,7 @@ const casesEn = [
       "109 shared skills (October 24, 2026), 66 trigger eval files (1,282 sentences), 67 tool manifests"
     ],
     "flow": [
-      "Requests from Spark, Slack, and the work tool all go to the CEO agent. Only structured requests from the work tool go straight to the content orchestrator, and they still leave a work order record.",
+      "Work requests from Spark, Slack and the work tool go to the CEO agent. Only structured requests from the work tool go straight to the content orchestrator, and they still leave a work order record.",
       "The CEO writes work order v1. It holds the original text as an attachment with its sha256, the goal, completion criteria, constraints, and whether approval is required.",
       "An overall orchestrator reporting directly to the CEO (the Hermes dispatcher) assigns it to one of at most 10 department heads, such as Supervisor, campaigns, ads, content, build, review and deploy. The server caps delegation depth at 2 and delegations per work order at 5, and blocks A→B→A bounce-backs. Turning it off falls back to direct delegation by the CEO. Work that goes to the content department head is handed on again to the content orchestrator, a separate service.",
       "BM25 search pulls candidates from all shared skills, the judge model Jev checks gating and fit, and Gemini makes the final pick of one skill. If Jev fails or times out, it is skipped and Gemini picks directly from the full list.",
@@ -576,7 +576,7 @@ const casesEn = [
     "diagramCaption": "Preserve the request → Assign work → Select a skill → Execute through gates",
     "screens": [
       {
-        "label": "Screen:",
+        "label": "Screen",
         "text": "A Spark answer. Question titles and business partner names are masked, and each answer carries the name of its source tool",
         "image": "/images/v3/spark-screen.png"
       }
@@ -634,7 +634,7 @@ const casesEn = [
       "In production. The company-wide tool execution switch is off by default, and each tool is turned on separately. user_id is sent to Langfuse as an HMAC pseudonym.",
       "Evaluation (with the model in use at measurement time): on 69 questions with known answers, candidate recall (share of cases where the answer is among the candidates) is 85.5% at top 1 and 91.3% at top 3 (2026-10-24). Median latency is about 1.09 seconds.",
       "If I did it again: I would check manifests against tool registration rows in CI. The 10-24 outage only surfaced at boot, but it could have been caught before merge.",
-      "Follow-up · Jev Skill Router Upgrade (October 25–30): **119/132 correct (90.15%)** in final skill selection. The 132 questions were new when introduced and were subsequently reused during tuning. This is a different metric from candidate recall above. The router is rolled out to Hermes sub-agents. BM25 and Jev reduce Gemini's review from 115 skills to 5, yielding an **estimated 90% cost reduction**, calculated from published unit prices and reduced input. Jev's measured median response time was 360ms. If it fails or times out, Gemini selects from the full list.",
+      "Follow-up · Jev Skill Router Upgrade (October 25–30): **119/132 correct (90.15%)** in final skill selection. The 132 questions were new when introduced and were subsequently reused during tuning. This is a different metric from candidate recall above. The router is rolled out to Hermes sub-agents. The catalog grew from 109 skills (Oct 24) to 115 at test time; BM25 and Jev reduce Gemini's review from 115 skills to 5, yielding an **estimated 90% cost reduction**, calculated from published unit prices and reduced input. Jev's measured median response time was 360ms. If it fails or times out, Gemini selects from the full list.",
       "Checking the evaluation: five of six flagged false positives were answer-key errors. I also found gains limited to questions used during tuning and a fake skill that existed only in the test folder. After removing it, I reran 222 cases. The successive results—83.3%, 88.9%, 94.4% and 90.15%—come from corrected labels and changing sets, so they are not a clean before-and-after accuracy curve. Saved-answer comparisons stayed within quota, with no rate-limit errors.",
       "Jev limits: some questions still have two valid answers. There was no step to update labels when the catalog grows, which produced 10 label errors; automatic label checks are still only a proposal."
     ],
@@ -642,7 +642,7 @@ const casesEn = [
       "I chose a full index over per-role skill bundles. On a 57-case selection set both scored the same accuracy, 0.947 (p=1.0). But the bundle approach missed skills that only get used when called by name. The cost difference over 66 cases was 27 KRW.",
       "The dispatcher assigns work; BM25 shortlists candidates, Jev re-filters them, and Gemini picks the skill. If Jev fails, Gemini still picks directly from the full list, so work does not stop. The worker never picks the skill; Gemini always does.",
       "Controls sit where they still hold if the model ignores them. The loop guard, single-use approval, and paid cap all live in the server and DB.",
-      "I set the bar for turning the Jev router on before testing: clearly better on unseen questions, with no rise in false positives. A comparison setting gained only +1.5 pp and got answers wrong by detouring to a skill with fit as low as 0.22, so I left it off."
+      "I set the bar for turning the Jev router on before testing: on unseen questions, selection no worse than the full-list approach, no more wrong skill picks, and lower cost. A comparison setting gained only +1.5 pp and got answers wrong by detouring to a skill with fit as low as 0.22, so I left it off."
     ],
     "reelFlow": [
       {
@@ -702,7 +702,7 @@ const casesEn = [
     "scale": [
       "About 122k lines across 3 services, 617 test files (orchestrator 135, Hermes agent 396, video renderer 86)",
       "Production canary verified through saving a 1080×1920 MP4 to Drive (2026-10)",
-      "0 live SNS posts from the new production path. One post per account per day is enforced by the DB; the publish gate caps at 10 per day (2026-10-24)"
+      "0 live SNS posts from the new production path. One post per account per day is enforced by the DB; the publish gate caps all accounts combined at 10 posts per day (2026-10-24)"
     ],
     "flow": [
       "Staff request a Reel, or run a saved automation (immediate, one-time scheduled, or recurring).",
@@ -802,7 +802,7 @@ const casesEn = [
     "logo": "/images/logo9.png",
     "status": "live",
     "title": "Staff PC Deployment · Operations",
-    "shortTitle": "Staff PC Fleet",
+    "shortTitle": "Staff PC Deployment",
     "subtitle": "Shipping and operating tools on staff Macs and Windows PCs, then staying responsible after installation.",
     "meta": [
       {
@@ -874,7 +874,7 @@ const casesEn = [
       },
       {
         "title": "Update times differ per PC.",
-        "text": "If every device updates in the same minute, there is no window to pull a bad release. Mac real-time sync picks only a random minute within 14:00, and keeps that minute across reinstalls. The Windows CS tool downloads at a random time between 09:00 and 18:59, and tries once more 2 minutes after logon."
+        "text": "If every device updates in the same minute, there is no window to pull a bad release. Mac real-time sync picks a fixed random minute within the 14:00 hour, and keeps that minute across reinstalls. The Windows CS tool downloads at a random time between 09:00 and 18:59, and tries once more 2 minutes after logon."
       },
       {
         "title": "On Windows, KakaoTalk uses a read-only collector.",
