@@ -78,7 +78,7 @@ const en = {
       },
       {
         name: 'Agents',
-        desc: 'I forked Paperclip, an open-source agent platform, and built Work OS, Spark, and Tool Registry (an execution gate) on top of it. Work that people hand off reaches the CEO agent as a work order, and an overall orchestrator reporting to the CEO (the Hermes dispatcher) hands it out to department heads and workers such as the Supervisor and fix agents. Work routed to the content department is picked up by the content orchestrator, a separate service. Sub-agents that Hermes assigns work to pick a skill this way: BM25 search pulls candidates from all skills, the judge model Jev checks gating and fit, and Gemini makes the final pick. Gemini now reviews 5 skills instead of 115, and the router scored 90.15% on a 132-question evaluation (new when introduced, later reused during tuning). If Jev fails, Gemini picks directly from the full list. What runs every day is status board collection and summaries, vendor support collection and logging, influencer CS, Spark, and monitoring and briefing services. Model calls go through a single LiteLLM proxy.',
+        desc: 'I forked Paperclip, an open-source agent platform, and built Work OS, Spark, and Tool Registry (an execution gate) on top of it. Work that people hand off reaches the CEO agent as a work order, and an overall orchestrator reporting to the CEO (the Hermes dispatcher) hands it out to department heads and workers such as Supervisor, campaigns, ads, content, build, review and deploy. Work routed to the content department is picked up by the content orchestrator, a separate service. Sub-agents that Hermes assigns work to pick a skill this way: BM25 search pulls candidates from all skills, the judge model Jev checks gating and fit, and Gemini makes the final pick. Gemini now reviews 5 skills instead of 115, and the router scored 90.15% on a 132-question evaluation (new when introduced, later reused during tuning). If Jev fails, Gemini picks directly from the full list. What runs every day is status board collection and summaries, vendor support collection and logging, influencer CS, Spark, and monitoring and briefing services. Model calls go through a single LiteLLM proxy.',
       },
       {
         name: 'Knowledge',
@@ -109,7 +109,7 @@ const en = {
       { step: 'Test first', desc: 'I write a reproduction test, then implement.' },
       { step: 'Cross review', desc: 'Two agents from different sources review the change separately. In one commit, adversarial review caught 6 real defects (2026-09-09).' },
       { step: 'Real-device check', desc: 'I check on real PCs and real screens, and turn features on in stages, starting with a test room and one person.' },
-      { step: 'Deploy check', desc: 'I deploy only images and source tagged with the deploy commit sha (never falling back to :latest), then check the running code directly after the deploy.' },
+      { step: 'Deploy check', desc: 'I deploy only images and source tagged with the deploy commit sha (never falling back to :latest); a missing image stops the deploy.' },
     ],
     harnessTitle: 'Checks that turn agent mistakes into repeatable safeguards',
     harness: [
@@ -149,7 +149,6 @@ const en = {
     incidents: [
       { title: 'Green tests ≠ correct wiring', lesson: 'If no test goes through a branch, even a missing import stays green. I start the real process and run it through the catch path too.' },
       { title: "Not finding it once doesn't mean it isn't there", lesson: 'Before I report that something is missing, I recheck the time range, what I searched, and the entry and exit points.' },
-      { title: 'Judge by the running code', lesson: 'After a deploy, I check the code that is actually running.' },
       { title: 'No irreversible bulk conversions', lesson: 'I change code to accept both the old and new formats.' },
       { title: 'Turn things off with a switch', lesson: 'I count real usage first, then shut things down by switching them off and keeping the files.' },
     ],

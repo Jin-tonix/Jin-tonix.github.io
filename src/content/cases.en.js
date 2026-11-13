@@ -38,7 +38,7 @@ const casesEn = [
       "Newsletters are filtered out by rules before any LLM call. In order-sheet tables, columns such as recipient are located and buyer names are masked. If a phrase the summary cites as evidence is not in the original text, the summary is discarded.",
       "Counterpart matching uses rules only, no LLM. It checks email thread, business registration number, KakaoTalk room, email, phone, domain, account code, and alias, in that order. If keys disagree, the record goes to Unclassified.",
       "In-progress deals are built by grouping KakaoTalk contract signals and email signals under a business partner·target·round key. A stage is applied automatically when the rule evidence is clear; the rest go to 'awaiting review' for staff to decide.",
-      "Every day at 18:05, summaries for up to up to around 500 business partners are rewritten in 3–6 lines. If spend passes ₩2,000 for the day or the cost ledger cannot be read, that day's batch stops."
+      "Every day at 18:05, summaries for up to up to around 500 business partners are rewritten in 3–6 lines. If spend passes KRW 2,000 for the day or the cost ledger cannot be read, that day's batch stops."
     ],
     "diagram": {
       "src": "/images/v3/diagram-status-board-en.png",
@@ -186,7 +186,7 @@ const casesEn = [
       "On Mac, kakaocli reads only what comes after the last logId in the KakaoTalk DB. On Windows, a read-only collector uploads it. It moves on only after the server answers with 2xx.",
       "The server drops the same message if it arrives again within 15 seconds. It stores records in per-partner ledgers, Sheets, and Drive, and twice a day (09:30, 18:10) compiles them into a wiki that goes into the knowledge hub.",
       "The business partner ID or name in the room name is checked against the work tool's list of business partners to serve. If no business partner is found on the list, it does not answer.",
-      "It accepts only questions tagged @회사_AI. The regex only detects the tag; the model does the search and writes the answer. Other business partners' names are masked as [다른 벤더].",
+      "It accepts only questions tagged @company_AI. The regex only detects the tag; the model does the search and writes the answer. Other business partners' names are masked as [other vendor].",
       "Amounts, percentages, and brands in the draft are checked against the evidence, and on a mismatch it searches again and rewrites. The reply is sent from a staff Mac, and delivery is confirmed by whether the KakaoTalk DB count went up."
     ],
     "diagram": {
@@ -229,7 +229,7 @@ const casesEn = [
       },
       {
         "title": "Other business partners' cases are masked.",
-        "text": "If a vendor name other than the current business partner appears in search results, it is replaced with [다른 벤더], and the model is told that the replacement happened. All 11 Spark tools that query company-wide data are blocked in external rooms. The vendor name passed to the product recommendation lookup is set by the server, not the model."
+        "text": "If a vendor name other than the current business partner appears in search results, it is replaced with [other vendor], and the model is told that the replacement happened. All 11 Spark tools that query company-wide data are blocked in external rooms. The vendor name passed to the product recommendation lookup is set by the server, not the model."
       },
       {
         "title": "Delivery is counted from the KakaoTalk DB.",
@@ -360,7 +360,7 @@ const casesEn = [
       },
       {
         "title": "Automatic sends and UI sends use the same rules.",
-        "text": "The server assembler loads the same product-selection and template modules as the UI, so the same person never gets different products. A CRM lookup failure and 0 results are handled separately. Only on 0 results does it fill in popular products. The new-seller card is built only once. On 09-22, when a card was built for each person, the renderer returned 980 HTTP 500 errors."
+        "text": "The server assembler loads the same product-selection and template modules as the UI, so the same person never gets different products. A CRM lookup failure and 0 results are handled separately. Only on 0 results does it fill in popular products. The new-seller card is built only once."
       },
       {
         "title": "Scheduled sends go out a little every minute, without overlapping.",
@@ -565,7 +565,7 @@ const casesEn = [
     "flow": [
       "Requests from Spark, Slack, and the work tool all go to the CEO agent. Only structured requests from the work tool go straight to the content orchestrator, and they still leave a work order record.",
       "The CEO writes work order v1. It holds the original text as an attachment with its sha256, the goal, completion criteria, constraints, and whether approval is required.",
-      "An overall orchestrator reporting directly to the CEO (the Hermes dispatcher) assigns it to one of at most 10 department heads, such as the Supervisor and fix agents. The server caps delegation depth at 2 and delegations per work order at 5, and blocks A→B→A bounce-backs. Turning it off falls back to direct delegation by the CEO. Work that goes to the content department head is handed on again to the content orchestrator, a separate service.",
+      "An overall orchestrator reporting directly to the CEO (the Hermes dispatcher) assigns it to one of at most 10 department heads, such as Supervisor, campaigns, ads, content, build, review and deploy. The server caps delegation depth at 2 and delegations per work order at 5, and blocks A→B→A bounce-backs. Turning it off falls back to direct delegation by the CEO. Work that goes to the content department head is handed on again to the content orchestrator, a separate service.",
       "BM25 search pulls candidates from all shared skills, the judge model Jev checks gating and fit, and Gemini makes the final pick of one skill. If Jev fails or times out, it is skipped and Gemini picks directly from the full list.",
       "Tools run through a 6-stage gate and human approval. Publishing goes through the Publisher gateway (a single service dedicated to publishing). The default is manual, and the DB enforces one post per account per day."
     ],
@@ -592,8 +592,8 @@ const casesEn = [
         "text": "The server reaper treated a video job running past 5 minutes as stalled and reclaimed it, and the result that arrived 7 min 40 s later was rejected with 409. I made the job send a heartbeat every 120 seconds and stop once the issue deadline passes. Jobs that are really stuck still get reclaimed. In production I confirmed heartbeats received (200) and 0 reclaims."
       },
       {
-        "title": "Jev call path blocked (2026-10-23).",
-        "text": "The existing Jev call path was blocked. I added an adapter that only matches the response format and sent calls to a lightweight model. The code in the 3 routers stayed the same."
+        "title": "Made the Jev router lightweight (2026-10-23).",
+        "text": "For speed and a lighter footprint, I moved the Jev router onto a lightweight model. An adapter only matches the response format, so the existing router code stayed unchanged."
       }
     ],
     "highlights": [
@@ -725,7 +725,7 @@ const casesEn = [
       },
       {
         "title": "Paid generation and recurring automations.",
-        "text": "The paid backend defaults to False. Recurring automations default to dry-run and are released only when the value is exactly \"false\". Before starting, they read the company's ₩30,000-per-day ledger, and hold if it can't be read. The cap is clamped with min() so env can't raise it."
+        "text": "The paid backend defaults to False. Recurring automations default to dry-run and are released only when the value is exactly \"false\". Before starting, they read the company's KRW 30,000-per-day ledger, and hold if it can't be read. The cap is clamped with min() so env can't raise it."
       },
       {
         "title": "Instagram auto-DM.",
@@ -899,7 +899,7 @@ const casesEn = [
     ],
     "status3": [
       "In production. The 11 staff PCs and 9 seller-finder workers are counts as registered on 2026-09-16 and 09-18; later counts are not recorded here.",
-      "The most frequent incident was two devices holding the same resource (07-29, 09-22). So device assignment is the default.",
+      "The most frequent incident was two devices holding the same resource (07-29). So device assignment is the default.",
       "Limits: the Windows collector has no auto-updater and is replaced by reinstalling. The collection-gap alert is off by default.",
       "If I did it again: I would give the Windows collector a zip hash updater from day one. The 09-16 incident grew because old-version PCs never received the client fix."
     ],
