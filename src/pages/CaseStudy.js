@@ -20,6 +20,7 @@ import {
   Headline,
   KoNote,
   Footer,
+  CaseNav,
 } from '../components/ui/CaseStudyKit';
 import StatusBadge from '../components/ui/StatusBadge';
 import imgAttrs from '../components/ui/imgAttrs';
@@ -49,8 +50,8 @@ const LABELS = {
     architecture: 'Architecture',
     screens: 'Screens',
     highlights: 'Technical highlights',
-    status: 'Status, judgment, limits',
-    decisions: 'What I decided',
+    status: 'Current status and limits',
+    decisions: 'Design choices',
     openFull: 'Open full size ↗',
     swipeHint: 'Swipe the diagram sideways, or tap to open it at full size.',
     koNote: 'Full write-up is in Korean.',
@@ -149,6 +150,15 @@ export default function CaseStudy() {
     <PageWrapper>
       <Container>
         <CaseHeader c={c} lang={lang} />
+        {lang === 'en' && (
+          <CaseNav aria-label="Case study sections">
+            <a href="#case-background">Overview</a>
+            <a href="#case-architecture">Diagram</a>
+            <a href="#case-incidents">Incidents</a>
+            <a href="#case-highlights">Engineering</a>
+            <a href="#case-decisions">Design choices</a>
+          </CaseNav>
+        )}
         <MetaList>
           {c.meta.map((row) => (
             <React.Fragment key={row.label}>
@@ -158,7 +168,7 @@ export default function CaseStudy() {
           ))}
         </MetaList>
 
-        <Block>
+        <Block id="case-background" style={{ scrollMarginTop: '110px' }}>
           <h2>{t.background}</h2>
           <p>{c.background}</p>
         </Block>
@@ -194,7 +204,7 @@ export default function CaseStudy() {
           </ol>
         </Block>
 
-        <Block>
+        <Block id="case-architecture" style={{ scrollMarginTop: '110px' }}>
           <h2>{t.architecture}</h2>
           <Diagram diagram={c.diagram} caption={c.diagramCaption} t={t} />
         </Block>
@@ -232,7 +242,7 @@ export default function CaseStudy() {
           </Block>
         )}
 
-        <Block>
+        <Block id="case-incidents" style={{ scrollMarginTop: '110px' }}>
           <h2>{c.incidentsTitle}</h2>
           <IncidentList>
             {c.incidents.map((item) => (
@@ -246,7 +256,7 @@ export default function CaseStudy() {
           </IncidentList>
         </Block>
 
-        <Block>
+        <Block id="case-highlights" style={{ scrollMarginTop: '110px' }}>
           <h2>{t.highlights}</h2>
           <HighlightGrid>
             {c.highlights.map((h, i) => (
@@ -276,7 +286,7 @@ export default function CaseStudy() {
           </Block>
         )}
 
-        <Block>
+        <Block id="case-decisions" style={{ scrollMarginTop: '110px' }}>
           <h2>{t.decisions}</h2>
           <ul>
             {c.decisions.map((d) => (

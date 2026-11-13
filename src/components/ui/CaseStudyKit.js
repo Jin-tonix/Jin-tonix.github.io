@@ -163,6 +163,37 @@ export const SkillsList = styled.ul`
 `;
 
 // 구조도 — 폭이 좁은 화면에서는 틀 안에서만 옆으로 밀어 본다 (페이지 전체는 가로로 넘치지 않는다)
+export const CaseNav = styled.nav`
+  position: sticky;
+  top: 12px;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px;
+  margin: 0 0 24px;
+  background: ${color.bg};
+  border: 1px solid ${color.line};
+  border-radius: ${layout.radius};
+
+  a {
+    padding: 6px 10px;
+    color: ${color.gold};
+    font-size: ${font.size.sm};
+    text-decoration: none;
+    border-radius: 4px;
+  }
+
+  a:hover, a:focus-visible {
+    background: ${color.surface};
+    outline: 1px solid ${color.gold};
+  }
+
+  @media (max-width: 768px) {
+    position: static;
+  }
+`;
+
 export const Figure = styled.figure`
   margin: 0;
   min-width: 0;

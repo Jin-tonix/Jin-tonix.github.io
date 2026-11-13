@@ -40,6 +40,10 @@ for (const file of walk(imagesDir).sort()) {
   let size = null;
   if (ext === '.png') size = pngSize(buf);
   else if (ext === '.jpg' || ext === '.jpeg') size = jpegSize(buf);
+  else if (ext === '.svg') {
+    const match = buf.toString('utf8').match(/viewBox="([\d.]+) ([\d.]+) ([\d.]+) ([\d.]+)"/);
+    if (match) size = { width: Number(match[3]), height: Number(match[4]) };
+  }
   if (size) sizes[`/${path.relative(publicDir, file).split(path.sep).join('/')}`] = [size.width, size.height];
 }
 

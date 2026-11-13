@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 960" role="img" aria-labelledby="title desc">
+  <title id="title">How the seven StyleSeller projects connect</title>
+  <desc id="desc">KakaoTalk, email, Slack and the work tool feed five workflows, supported by the knowledge hub and staff PC deployment. Approval rules differ by workflow.</desc>
+  <style>text{font-family:Arial,sans-serif;fill:#e7ecec;font-size:23px}.head{font-size:32px;font-weight:bold}.label{font-size:24px;font-weight:bold;fill:#ffd351}.note{font-size:21px;fill:#c6cecf}.card{fill:#282c30;stroke:#657477;stroke-width:2}.support{fill:#263c3c;stroke:#6ca9a1;stroke-width:2}.line{stroke:#ffd351;stroke-width:3;fill:none}</style>
+  <rect width="1200" height="960" fill="#1d2226"/>
+  <text x="35" y="55" class="head">StyleSeller · How the systems connect</text>
+  <text x="35" y="90" class="note">Project numbers match the links on the website. Figures are dated snapshots.</text>
+  <rect x="35" y="120" width="1130" height="85" rx="12" class="card"/>
+  <text x="60" y="156" class="label">Work arrives through</text>
+  <text x="60" y="187">KakaoTalk rooms · shared mailboxes · Slack · the internal work tool</text>
+  <path d="M600 209v35m-9-10 9 10 9-10" class="line"/>
+  <g transform="translate(35 260)">
+    <rect width="216" height="225" rx="12" class="card"/>
+    <text x="15" y="35" class="label">1 · Status board</text>
+    <text x="15" y="78">Collect records</text><text x="15" y="112">Link partners</text><text x="15" y="146">Summarize deals</text><text x="15" y="193" class="note">Staff review gaps</text>
+  </g>
+  <g transform="translate(265 260)">
+    <rect width="216" height="225" rx="12" class="card"/>
+    <text x="15" y="35" class="label">2 · Vendor CS</text>
+    <text x="15" y="78">Tagged questions</text><text x="15" y="112">Evidence checks</text><text x="15" y="146">Mac delivery</text><text x="15" y="193" class="note">Enabled rooms only</text>
+  </g>
+  <g transform="translate(495 260)">
+    <rect width="216" height="225" rx="12" class="card"/>
+    <text x="15" y="35" class="label">3 · Work tool</text>
+    <text x="15" y="78">Price calculations</text><text x="15" y="112">Catalog candidates</text><text x="15" y="146">Partner matching</text><text x="15" y="193" class="note">Staff review results</text>
+  </g>
+  <g transform="translate(725 260)">
+    <rect width="216" height="225" rx="12" class="card"/>
+    <text x="15" y="35" class="label">5 · Spark</text>
+    <text x="15" y="78">CEO work order</text><text x="15" y="112">Hermes assignment</text><text x="15" y="146">Gated tool calls</text><text x="15" y="193" class="note">Jev → Gemini pick</text>
+  </g>
+  <g transform="translate(955 260)">
+    <rect width="210" height="225" rx="12" class="card"/>
+    <text x="15" y="35" class="label">6 · Content</text>
+    <text x="15" y="78">Request a Reel</text><text x="15" y="112">Render and QA</text><text x="15" y="146">Preview approval</text><text x="15" y="193" class="note">Publishing staged</text>
+  </g>
+  <rect x="35" y="520" width="1130" height="115" rx="12" class="support"/>
+  <text x="60" y="558" class="label">4 · Shared knowledge hub and email agent</text>
+  <text x="60" y="592">13 workspaces support vendor CS, influencer CS, Spark and partner matching.</text>
+  <text x="60" y="622" class="note">Email drafts are checked against evidence; the assigned staff member sends them.</text>
+  <rect x="35" y="660" width="1130" height="115" rx="12" class="support"/>
+  <text x="60" y="698" class="label">7 · Staff PC deployment and operations</text>
+  <text x="60" y="732">11 registered PCs · one-line install · per-device keys · local collection and delivery</text>
+  <text x="60" y="762" class="note">Mac tools and Windows CS auto-update; the separate Windows collector needs reinstalling.</text>
+  <rect x="35" y="800" width="1130" height="125" rx="12" class="card"/>
+  <text x="60" y="837" class="label">Shared infrastructure and controls</text>
+  <text x="60" y="873">GCP VM · PostgreSQL/PostgREST · Docker · LiteLLM · Langfuse · n8n</text>
+  <text x="60" y="908" class="note">Approval requirements, cost caps and rollout switches are defined per workflow.</text>
+</svg>

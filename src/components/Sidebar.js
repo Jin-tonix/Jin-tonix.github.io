@@ -322,7 +322,7 @@ export default function Sidebar() {
             <FontAwesomeIcon icon={faGithub} /> <span className="label">GitHub</span>
           </a>
           <div className="updated" style={{ marginTop: '10px', fontSize: 'clamp(0.6em, 1.1vw, 0.75em)', color: color.muted, textAlign: 'center' }}>
-            Last Updated: 2026.11.07
+            Last Updated: 2026.11.13
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ const en = {
     skills: 'Skills',
     projects: 'Projects',
     build: 'How I Build',
-    resume: { label: 'Career description', href: '/files/career-description-en.pdf' },
+    resume: { label: 'Career History', href: '/files/career-description-en.pdf' },
     portfolio: { label: 'Portfolio (PDF)', href: '/files/portfolio-en.pdf' },
     langSwitchLabel: 'KO',
     koOnlyNote: 'Korean only',
@@ -17,13 +17,13 @@ const en = {
   hero: {
     name: 'Jinhee Mok',
     title: 'AI Engineer',
-    headline: 'I build AI work systems that staff use every day, and design them so people make the final call.',
+    headline: 'I turn day-to-day business problems into AI tools that staff can use and trust.',
     intro:
-      "PL in StyleSeller's business team. I connect AI to KakaoTalk, email, and the internal work tool, and I decide how far each one is switched on and how it is verified.",
+      "I lead AI and automation projects in StyleSeller's business team. I work from the team's needs through design, implementation and deployment, then stay involved to investigate failures and improve the tools.",
     company:
       'StyleSeller is a commerce platform that operates sales for creator sellers and brands.',
     metrics: [
-      { value: 'Hundreds', label: 'of counterparts tracked stage by stage on the status board' },
+      { value: 'Hundreds', label: 'of business partners tracked on the status board' },
       { value: '100+', label: 'shared skills used by all agents' },
       { value: '13', label: 'knowledge-hub workspaces shared by 4 agents' },
       { value: '11', label: 'staff PCs deployed with a one-line install' },
@@ -40,13 +40,13 @@ const en = {
     casesTitle: 'Seven StyleSeller cases',
     glanceTitle: 'At a glance',
     glanceIntro:
-      'I work as a PL (project lead) in the business team at StyleSeller, a commerce platform that operates sales for creator sellers and brands. I move the counterpart record-keeping and replies that staff used to repeat by hand into AI agents (AI that uses tools directly) and automation, and I run them. As of 2026-10-24, the status board shows hundreds of counterparts stage by stage, from first contact to settlement, and the vendor CS chatbot answers only the questions it found evidence for. Claude Code writes much of the code; what to build, how much of it stays switched on, and whether the results are right are mine to decide and check. The Agent Platform case also covers a follow-up improvement, the Jev skill router upgrade (90.15% on 132 questions, about 1/10 the cost).',
+      'I build and operate tools for partner support, shared knowledge, pricing, content and staff computers. I use Claude Code for much of the implementation, while I define the scope, check the results and decide what to roll out. The cases below describe what I built, the failures I investigated and the limits that remain. In the Jev router follow-up, final skill selection scored 119/132 (90.15%). Reducing the skills Gemini reviews from 115 to 5 yields an estimated 90% cost reduction, calculated from unit prices and reduced input.',
   },
   systemMap: {
     title: 'System Map',
     intro:
-      'How the 7 cases connect. Work arrives through KakaoTalk rooms, mailboxes, Slack, and the work tool, agents handle it, and shared knowledge and staff PCs support them. Staff approve anything that writes, sends, or publishes. Click a number to jump to that case.',
-    image: '/images/v3/system-map-en.png',
+      'How the seven systems connect: work arrives through KakaoTalk, email, Slack and the work tool; agents use shared knowledge and run tasks on staff PCs. Controls differ by workflow: email stays in drafts, Spark write tools require approval, and the vendor bot can answer tagged questions automatically in enabled rooms. Select a number to explore a case.',
+    image: '/images/v3/system-map-en.svg',
     zoomHint: 'Tap to enlarge',
     imageAlt: 'Map of the StyleSeller operating system: inputs, agents, knowledge, staff PCs, and human approval across the 7 cases',
     reposTitle: 'What each repository does',
@@ -60,7 +60,7 @@ const en = {
     examples: [
       'Example: one vendor support message goes from a staff Mac (collection) → the agent server (should we answer this partner?) → the work tool (the list of partners to serve) and the knowledge hub (search), then back to a staff Mac to be sent.',
       'Example: one Spark question goes from the work tool → the agent server → the work tool API, the work databases, and knowledge hub search.',
-      'Example: the status board summarizes records from KakaoTalk rooms, the order mailbox, Slack, and emailed order sheets by day, links them to a counterpart by fixed rules, and puts them on that counterpart\'s calendar. Staff resolve what it cannot link.',
+      'Example: the status board summarizes records from KakaoTalk rooms, the order mailbox, Slack, and emailed order sheets by day, links them to a business partner by fixed rules, and puts them on that business partner\'s calendar. Staff resolve what it cannot link.',
     ],
     nodes: [
       { id: 'status-board', label: '① Status board · ledger', caseId: 'status-board' },
@@ -78,7 +78,7 @@ const en = {
       },
       {
         name: 'Agents',
-        desc: 'I forked Paperclip, an open-source agent platform, and built Work OS, Spark, and Tool Registry (an execution gate) on top of it. Work that people hand off reaches the CEO agent as a work order, and an overall orchestrator reporting to the CEO (the Hermes dispatcher) hands it out to department heads and workers such as the Supervisor and fix agents. Work routed to the content department is picked up by the content orchestrator, a separate service. Sub-agents that Hermes assigns work to pick a skill this way: BM25 search pulls candidates from all skills, the judge model Jev checks gating and fit, and Gemini makes the final pick. Gemini now reviews 5 skills instead of 115, and the router scored 90.15% on a 132-case evaluation of new questions. If Jev fails, Gemini picks directly from the full list. What runs every day is status board collection and summaries, vendor support collection and logging, influencer CS, Spark, and monitoring and briefing services. Model calls go through a single LiteLLM proxy.',
+        desc: 'I forked Paperclip, an open-source agent platform, and built Work OS, Spark, and Tool Registry (an execution gate) on top of it. Work that people hand off reaches the CEO agent as a work order, and an overall orchestrator reporting to the CEO (the Hermes dispatcher) hands it out to department heads and workers such as the Supervisor and fix agents. Work routed to the content department is picked up by the content orchestrator, a separate service. Sub-agents that Hermes assigns work to pick a skill this way: BM25 search pulls candidates from all skills, the judge model Jev checks gating and fit, and Gemini makes the final pick. Gemini now reviews 5 skills instead of 115, and the router scored 90.15% on a 132-question evaluation (new when introduced, later reused during tuning). If Jev fails, Gemini picks directly from the full list. What runs every day is status board collection and summaries, vendor support collection and logging, influencer CS, Spark, and monitoring and briefing services. Model calls go through a single LiteLLM proxy.',
       },
       {
         name: 'Knowledge',
@@ -86,7 +86,7 @@ const en = {
       },
       {
         name: 'Field',
-        desc: 'The seller collector program runs on 11 staff PCs (Mac and Windows), with a one-line install and auto-update. Beyond that: kakaocli on Macs, a read-only collector on Windows, and Chrome extensions. Auto-update on a per-tool schedule, and a key per device.',
+        desc: 'The deployment snapshot records 11 staff Macs and Windows PCs (September 16, 2026). Tools use a one-line install and a key per device. Mac tools and the Windows CS tool update on separate schedules; the Windows read-only collector is a separate program and still requires reinstalling.',
       },
       {
         name: 'Data and infra',
@@ -98,9 +98,9 @@ const en = {
   howIBuild: {
     title: 'How I Build with AI',
     intro:
-      'Design, build, and operations. I write code with Claude Code; architecture, rules, verification, and rollout decisions are mine.',
+      'I use Claude Code to implement changes, while I own the architecture, business rules, verification and rollout decisions.',
     introDetail:
-      'Commits with a Claude co-author trailer: agent platform 3,646 · work tool 1,122 · email agent 988 (excluding merges, as of 2026-09-23; the last email agent commit was 09-02). My own commits across the four repositories total 7,276 (excluding merges, counted 2026-09-23). I run several Claude Code sessions in parallel. I assume the agents will make mistakes. The section "Where the AI was wrong and I caught it" below is the record.',
+      'I run several Claude Code sessions in parallel and review their work with the expectation that they will make mistakes. As of September 23, 2026, 3,646 agent-platform commits, 1,122 work-tool commits and 988 email-agent commits carried a Claude co-author trailer. My commits across four repositories totaled 7,276, excluding merges. These counts describe the workflow; the cases below show how I verify its results.',
     image: null,
     loopTitle: 'Work loop',
     loop: [
@@ -111,7 +111,7 @@ const en = {
       { step: 'Real-device check', desc: 'I check on real PCs and real screens, and turn features on in stages, starting with a test room and one person.' },
       { step: 'Deploy check', desc: 'I deploy only images and source tagged with the deploy commit sha (never falling back to :latest), then check the running code directly after the deploy.' },
     ],
-    harnessTitle: 'Harness — turning agent mistakes into rules',
+    harnessTitle: 'Checks that turn agent mistakes into repeatable safeguards',
     harness: [
       'CLAUDE.md and rule files: type hints, Pyright/tsc, RLS, secrets, and language rules are completion gates.',
       'Ops notes: I write down lessons so the next session doesn\'t repeat the same mistake. Example: "Green tests ≠ correct wiring."',
@@ -157,17 +157,17 @@ const en = {
   about: {
     title: 'About Me',
     photo: '/images/img.jpg',
-    tagline: "I'm Jinhee Mok, an AI agent engineer who turns repetitive work into AI systems.",
+    tagline: "I'm Jinhee Mok. I build and operate AI tools for everyday business work.",
     paragraphs: [
       'I majored in law, later earned a business administration degree through the Academic Credit Bank System, and worked as a daycare operations manager and an English teacher. In 2024 I learned software development at HiMedia Academy, and during my We:Review internship I automated receipt review with OCR and an LLM. That became the starting point for what I do now: cutting repetitive work in the business with AI.',
-      "I joined StyleSeller in November 2025. I started with seller DM automation, and now I build and run vendor support, the internal work tool, the email agent and knowledge hub, the agent platform (Spark · Work OS), and staff PC deployment. Claude Code writes a lot of my code, but I don't call anything done until it has run on a real staff PC.",
-      'I turn what the business needs into rules by checking them, cell by cell, against the values staff were already using. The systems stop at candidates and suggestions; staff make the final call. When something breaks, I write down the cause and the fix, with the date.',
+      "I joined StyleSeller in November 2025. I began with seller DM automation and went on to build vendor support, the work tool, the knowledge hub and email agent, Spark and Work OS, and staff PC deployment. I use Claude Code for implementation and verify changes through tests, production checks and real-device checks where the workflow runs on staff PCs.",
+      'I turn business needs into explicit rules and check calculations against the values staff already use. Pricing and catalog workflows leave reviewable candidates for staff; the vendor support bot can answer tagged questions automatically after evidence checks. When a system fails, I record what happened, why it happened and what I changed.',
     ],
-    nowTitle: 'Now',
+    nowTitle: 'Latest recorded work · October 2026',
     now: [
-      'The vendor support chatbot answers only tagged questions in real partner rooms, without hand-off. Amounts, percentages, and brand names in each answer are checked against the evidence and rewritten when they do not match.',
-      'I am adding monitoring that catches failures that stop silently. In early October I changed a health check that reported "healthy" even when the database had stopped, so it now checks the database too.',
-      'I upgraded the cost tracking tool (Langfuse) to a new version (10-04).',
+      'Vendor support answers tagged questions in enabled partner rooms, with no follow-up questions or human handoff step. Amounts, percentages and brands are checked against the retrieved evidence.',
+      'The October 2026 work includes database-aware health checks and start/result markers that help detect stalled processing.',
+      'The Jev router improvement is rolled out to Hermes sub-agents. It scored 119/132 on the evaluation and reduces the skill list Gemini reviews from 115 to 5.',
     ],
     timelineTitle: 'StyleSeller month by month',
     timeline: [
@@ -181,7 +181,7 @@ const en = {
       { month: '2026-07', text: 'Started Spark and Work OS (07-18 to 07-19); expanded the knowledge hub to multiple workspaces (07-10)' },
       { month: '2026-08', text: 'When a cloud DB quota overrun stopped the work tool API, I stood up the same API on a VM and restored service the same day (08-20); started personalized KakaoTalk campaigns (08-24)' },
       { month: '2026-09', text: 'Rolled out a one-line install to 11 staff PCs (09-16); seller-finder workers running on 9 PCs (09-18)' },
-      { month: '2026-10', text: 'Stronger monitoring for silent failures; Langfuse upgrade' },
+      { month: '2026-10', text: 'Built the status board; verified the new video render path; improved the Jev router and its evaluation; strengthened monitoring' },
     ],
     repoPeriods: 'Active period per repository: work tool 2026-03 onward · email agent 2026-03 onward (last commit 09-02) · agent platform 2026-05 onward · kakaocli fork 2026-06 to 09 · Instagram DM extension 2026-02 onward (last commit 07-01)',
     experienceTitle: 'Journey',
@@ -194,7 +194,7 @@ const en = {
       { period: '2024-10 – 2024-12', org: 'HiMedia Academy · AI course', summary: 'AI projects with industry mentors (LangChain RAG chatbot, OCR and translation pipeline)', kind: 'tech' },
       { period: '2024-04 – 2024-10', org: 'HiMedia Academy · full-stack course', summary: 'Spring Boot and Vue.js team projects; collaboration and version control', kind: 'tech', careerChange: true },
       { period: '2021-02 – 2023-06', org: 'Academic Credit Bank System · Business Administration', summary: 'Business administration degree program', kind: 'pre' },
-      { period: '2018-08 – 2024-02', org: 'Monte Kids · Btop Kinder · Jungsang Academy · English teacher', summary: 'Lesson design, teaching materials, and parent consultations', kind: 'pre' },
+      { period: '2018-08 – 2024-02', org: 'Jeongsang Language School · Pots&Pans · Montekids English Academy · English teacher', summary: 'Lesson design, teaching materials, and parent consultations', kind: 'pre' },
       { period: '2015-03 – 2018-02', org: 'Jeonwon Daycare Center · operations manager', summary: 'Staff management and day-to-day operations', kind: 'pre' },
       { period: '2008-03 – 2012-02', org: 'Cheongju University · B.A. in Law', summary: 'Law major', kind: 'pre' },
     ],

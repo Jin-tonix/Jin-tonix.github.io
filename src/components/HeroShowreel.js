@@ -944,6 +944,35 @@ const Hero = styled.section`
     }
   }
 
+  &[data-lang='en'] .intro {
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+  }
+
+  &[data-lang='en'] .metric-label {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 768px) {
+    &[data-lang='en'] {
+      height: auto;
+      min-height: calc(100svh - var(--topbar-height));
+      align-items: flex-start;
+    }
+
+    &[data-lang='en'] .hero-inner {
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    &[data-lang='en'] .intro {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .scene,
     .timeline-fill {
@@ -976,10 +1005,10 @@ const Hero = styled.section`
 const copy = {
   en: {
     top: 'AI Engineer · from workflow to production',
-    chapter: 'Seven AI systems in daily use',
+    chapter: 'Seven projects · from workflow to production',
     solo: 'AI ENGINEER · DESIGN → BUILD → OPERATE',
     company: 'StyleSeller · commerce operations for influencer-led brand sales',
-    live: 'IN USE EVERY DAY',
+    live: 'BUILD · DEPLOY · OPERATE',
     projects: 'Explore projects',
     pause: 'Pause',
     resume: 'Resume',
@@ -1066,7 +1095,7 @@ export default function HeroShowreel({ hero, content, lang, withPrefix }) {
   };
 
   return (
-    <Hero aria-labelledby="home-title">
+    <Hero aria-labelledby="home-title" data-lang={lang}>
       <div className="hero-inner">
         <div className="topline">
           <span className="topline-mark">{text.top}</span>
@@ -1085,8 +1114,8 @@ export default function HeroShowreel({ hero, content, lang, withPrefix }) {
             <p className="company">{text.company}</p>
             <div className="actions">
               <a className="primary" href="mailto:jinheemok815@gmail.com">{text.email}</a>
-              <a href={content.nav.resume.href} target="_blank" rel="noopener noreferrer">
-                {content.nav.resume.label} (PDF)
+              <a href={lang === 'en' ? content.nav.portfolio.href : content.nav.resume.href} target="_blank" rel="noopener noreferrer">
+                {lang === 'en' ? content.nav.portfolio.label : `${content.nav.resume.label} (PDF)`}
               </a>
               <Link className="projects" to={withPrefix('/projects')}>{text.projects}</Link>
             </div>
