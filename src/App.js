@@ -38,6 +38,10 @@ function App() {
           <Route path="/en/projects/:slug" element={<CaseStudy />} />
           <Route path="/en/how-i-build" element={<HowIBuild />} />
           <Route path="/en/build" element={<Navigate to="/en/how-i-build" replace />} />
+
+          {/* 없는 주소는 빈 화면 대신 각 언어의 첫 화면으로 보낸다 */}
+          <Route path="/en/*" element={<Navigate to="/en" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
     </div>

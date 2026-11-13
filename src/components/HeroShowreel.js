@@ -596,7 +596,7 @@ const Hero = styled.section`
 
     .topline {
       margin-bottom: 12px;
-      font-size: 9px;
+      font-size: 11px;
       letter-spacing: 0.1em;
     }
 
@@ -630,7 +630,7 @@ const Hero = styled.section`
 
     .solo {
       margin-top: 8px;
-      font-size: 9px;
+      font-size: 11px;
     }
 
     .intro {
@@ -651,7 +651,7 @@ const Hero = styled.section`
     .actions a {
       min-height: 34px;
       padding: 0 9px;
-      font-size: 10px;
+      font-size: 12px;
     }
 
     .film-stage {
@@ -662,13 +662,13 @@ const Hero = styled.section`
     .film-head {
       min-height: 42px;
       padding: 0 12px;
-      font-size: 9px;
+      font-size: 11px;
     }
 
     .film-foot {
       min-height: 41px;
       padding: 0 10px;
-      font-size: 8px;
+      font-size: 10px;
     }
 
     .chapter-list {
@@ -682,7 +682,7 @@ const Hero = styled.section`
     .controls button {
       min-height: 29px;
       padding: 0 6px;
-      font-size: 8px;
+      font-size: 10px;
     }
 
     .project-title {
@@ -695,7 +695,7 @@ const Hero = styled.section`
 
     .scene-caption {
       margin-bottom: 6px;
-      font-size: 8px;
+      font-size: 10px;
     }
 
     .project-visual {
@@ -716,11 +716,11 @@ const Hero = styled.section`
     }
 
     .visual-card strong {
-      font-size: 8px;
+      font-size: 10px;
     }
 
     .visual-card small {
-      font-size: 7px;
+      font-size: 9px;
     }
 
     .visual-arrow {
@@ -730,14 +730,14 @@ const Hero = styled.section`
     .film-head {
       min-height: 34px;
       padding: 0 10px;
-      font-size: 8px;
+      font-size: 10px;
     }
 
     .film-foot {
       min-height: 34px;
       gap: 6px;
       padding: 0 8px;
-      font-size: 7px;
+      font-size: 9px;
     }
 
     .chapter-list {
@@ -746,7 +746,7 @@ const Hero = styled.section`
     }
 
     .chapter-list span {
-      font-size: 7px;
+      font-size: 9px;
     }
 
     .controls {
@@ -756,7 +756,7 @@ const Hero = styled.section`
     .controls button {
       min-height: 25px;
       padding: 0 5px;
-      font-size: 7px;
+      font-size: 9px;
     }
 
     .metrics {
@@ -785,7 +785,7 @@ const Hero = styled.section`
     .metric-label {
       min-height: 0;
       margin-top: 4px;
-      font-size: 9px;
+      font-size: 11px;
     }
   }
 
@@ -864,7 +864,7 @@ const Hero = styled.section`
     .actions a {
       min-height: 29px;
       padding: 0 7px;
-      font-size: 9px;
+      font-size: 11px;
     }
 
     .film-stage {
@@ -918,7 +918,7 @@ const Hero = styled.section`
     }
 
     .visual-card strong {
-      font-size: 7px;
+      font-size: 9px;
     }
 
     .visual-card small {
@@ -940,7 +940,7 @@ const Hero = styled.section`
     }
 
     .metric-label {
-      font-size: 8px;
+      font-size: 10px;
     }
   }
 

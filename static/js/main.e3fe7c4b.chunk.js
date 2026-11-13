@@ -999,7 +999,7 @@
 
     .topline {
       margin-bottom: 12px;
-      font-size: 9px;
+      font-size: 11px;
       letter-spacing: 0.1em;
     }
 
@@ -1033,7 +1033,7 @@
 
     .solo {
       margin-top: 8px;
-      font-size: 9px;
+      font-size: 11px;
     }
 
     .intro {
@@ -1054,7 +1054,7 @@
     .actions a {
       min-height: 34px;
       padding: 0 9px;
-      font-size: 10px;
+      font-size: 12px;
     }
 
     .film-stage {
@@ -1065,13 +1065,13 @@
     .film-head {
       min-height: 42px;
       padding: 0 12px;
-      font-size: 9px;
+      font-size: 11px;
     }
 
     .film-foot {
       min-height: 41px;
       padding: 0 10px;
-      font-size: 8px;
+      font-size: 10px;
     }
 
     .chapter-list {
@@ -1085,7 +1085,7 @@
     .controls button {
       min-height: 29px;
       padding: 0 6px;
-      font-size: 8px;
+      font-size: 10px;
     }
 
     .project-title {
@@ -1098,7 +1098,7 @@
 
     .scene-caption {
       margin-bottom: 6px;
-      font-size: 8px;
+      font-size: 10px;
     }
 
     .project-visual {
@@ -1119,11 +1119,11 @@
     }
 
     .visual-card strong {
-      font-size: 8px;
+      font-size: 10px;
     }
 
     .visual-card small {
-      font-size: 7px;
+      font-size: 9px;
     }
 
     .visual-arrow {
@@ -1133,14 +1133,14 @@
     .film-head {
       min-height: 34px;
       padding: 0 10px;
-      font-size: 8px;
+      font-size: 10px;
     }
 
     .film-foot {
       min-height: 34px;
       gap: 6px;
       padding: 0 8px;
-      font-size: 7px;
+      font-size: 9px;
     }
 
     .chapter-list {
@@ -1149,7 +1149,7 @@
     }
 
     .chapter-list span {
-      font-size: 7px;
+      font-size: 9px;
     }
 
     .controls {
@@ -1159,7 +1159,7 @@
     .controls button {
       min-height: 25px;
       padding: 0 5px;
-      font-size: 7px;
+      font-size: 9px;
     }
 
     .metrics {
@@ -1188,7 +1188,7 @@
     .metric-label {
       min-height: 0;
       margin-top: 4px;
-      font-size: 9px;
+      font-size: 11px;
     }
   }
 
@@ -1267,7 +1267,7 @@
     .actions a {
       min-height: 29px;
       padding: 0 7px;
-      font-size: 9px;
+      font-size: 11px;
     }
 
     .film-stage {
@@ -1321,7 +1321,7 @@
     }
 
     .visual-card strong {
-      font-size: 7px;
+      font-size: 9px;
     }
 
     .visual-card small {
@@ -1343,7 +1343,7 @@
     }
 
     .metric-label {
-      font-size: 8px;
+      font-size: 10px;
     }
   }
 
@@ -2244,5 +2244,5 @@
       margin-bottom: 42px;
     }
   }
-`;function Ct(){const{content:e}=u(),{howIBuild:t}=e;return i.a.createElement(At,{title:t.title,lead:i.a.createElement(i.a.Fragment,null,i.a.createElement("span",{className:"page-lead-primary"},t.intro),i.a.createElement("span",{className:"page-lead-detail"},t.introDetail))},i.a.createElement(Z,null,i.a.createElement(ee,null,t.loopTitle),i.a.createElement(vt,null,t.loop.map(e=>i.a.createElement(yt,{key:e.step},i.a.createElement("strong",null,e.step),i.a.createElement("p",null,e.desc))))),i.a.createElement(Z,null,i.a.createElement(ee,null,t.harnessTitle),i.a.createElement(Et,{className:"harness-grid"},t.harness.map(e=>{const{title:t,description:a}=(e=>{const t=e.indexOf(":");return-1===t?{title:e,description:""}:{title:e.slice(0,t),description:e.slice(t+1).trim()}})(e);return i.a.createElement(St,{key:e},i.a.createElement("h3",null,t),a&&i.a.createElement("p",null,a))}))),t.aiWrong&&i.a.createElement(Z,null,i.a.createElement(ee,null,t.aiWrongTitle),i.a.createElement(It,{className:"caught-grid"},t.aiWrong.map(e=>i.a.createElement(Lt,{key:e.title},i.a.createElement("h3",null,e.title),i.a.createElement("ul",null,e.points.map(e=>i.a.createElement("li",{key:e},e))))))),i.a.createElement(Z,null,i.a.createElement(ee,null,t.incidentsTitle),i.a.createElement(Tt,{className:"lessons-grid"},t.incidents.map(e=>i.a.createElement(Pt,{key:e.title},i.a.createElement("h4",null,e.title),i.a.createElement("p",null,e.lesson))))))}var $t=function(){return i.a.createElement("div",{className:"App"},i.a.createElement(W,null),i.a.createElement(J,null),i.a.createElement(R,null),i.a.createElement("div",{className:"main-content"},i.a.createElement(s.d,null,i.a.createElement(s.b,{path:"/",element:i.a.createElement(Ae,null)}),i.a.createElement(s.b,{path:"/about",element:i.a.createElement(ce,null)}),i.a.createElement(s.b,{path:"/skills",element:i.a.createElement(ke,null)}),i.a.createElement(s.b,{path:"/projects",element:i.a.createElement(Xe,null)}),i.a.createElement(s.b,{path:"/projects/:slug",element:i.a.createElement(kt,null)}),i.a.createElement(s.b,{path:"/how-i-build",element:i.a.createElement(Ct,null)}),i.a.createElement(s.b,{path:"/build",element:i.a.createElement(s.a,{to:"/how-i-build",replace:!0})}),i.a.createElement(s.b,{path:"/en",element:i.a.createElement(Ae,null)}),i.a.createElement(s.b,{path:"/en/about",element:i.a.createElement(ce,null)}),i.a.createElement(s.b,{path:"/en/skills",element:i.a.createElement(ke,null)}),i.a.createElement(s.b,{path:"/en/projects",element:i.a.createElement(Xe,null)}),i.a.createElement(s.b,{path:"/en/projects/:slug",element:i.a.createElement(kt,null)}),i.a.createElement(s.b,{path:"/en/how-i-build",element:i.a.createElement(Ct,null)}),i.a.createElement(s.b,{path:"/en/build",element:i.a.createElement(s.a,{to:"/en/how-i-build",replace:!0})}))))};var Mt=e=>{e&&e instanceof Function&&a.e(3).then(a.bind(null,34)).then(t=>{let{getCLS:a,getFID:n,getFCP:i,getLCP:r,getTTFB:o}=t;a(e),n(e),i(e),r(e),o(e)})};o.a.createRoot(document.getElementById("root")).render(i.a.createElement(i.a.StrictMode,null,i.a.createElement(m.a,null,i.a.createElement($t,null)))),Mt(),"serviceWorker"in navigator&&navigator.serviceWorker.getRegistrations().then(e=>e.forEach(e=>e.unregister()))}},[[22,1,2]]]);
-//# sourceMappingURL=main.d7e6ab70.chunk.js.map
+`;function Ct(){const{content:e}=u(),{howIBuild:t}=e;return i.a.createElement(At,{title:t.title,lead:i.a.createElement(i.a.Fragment,null,i.a.createElement("span",{className:"page-lead-primary"},t.intro),i.a.createElement("span",{className:"page-lead-detail"},t.introDetail))},i.a.createElement(Z,null,i.a.createElement(ee,null,t.loopTitle),i.a.createElement(vt,null,t.loop.map(e=>i.a.createElement(yt,{key:e.step},i.a.createElement("strong",null,e.step),i.a.createElement("p",null,e.desc))))),i.a.createElement(Z,null,i.a.createElement(ee,null,t.harnessTitle),i.a.createElement(Et,{className:"harness-grid"},t.harness.map(e=>{const{title:t,description:a}=(e=>{const t=e.indexOf(":");return-1===t?{title:e,description:""}:{title:e.slice(0,t),description:e.slice(t+1).trim()}})(e);return i.a.createElement(St,{key:e},i.a.createElement("h3",null,t),a&&i.a.createElement("p",null,a))}))),t.aiWrong&&i.a.createElement(Z,null,i.a.createElement(ee,null,t.aiWrongTitle),i.a.createElement(It,{className:"caught-grid"},t.aiWrong.map(e=>i.a.createElement(Lt,{key:e.title},i.a.createElement("h3",null,e.title),i.a.createElement("ul",null,e.points.map(e=>i.a.createElement("li",{key:e},e))))))),i.a.createElement(Z,null,i.a.createElement(ee,null,t.incidentsTitle),i.a.createElement(Tt,{className:"lessons-grid"},t.incidents.map(e=>i.a.createElement(Pt,{key:e.title},i.a.createElement("h4",null,e.title),i.a.createElement("p",null,e.lesson))))))}var $t=function(){return i.a.createElement("div",{className:"App"},i.a.createElement(W,null),i.a.createElement(J,null),i.a.createElement(R,null),i.a.createElement("div",{className:"main-content"},i.a.createElement(s.d,null,i.a.createElement(s.b,{path:"/",element:i.a.createElement(Ae,null)}),i.a.createElement(s.b,{path:"/about",element:i.a.createElement(ce,null)}),i.a.createElement(s.b,{path:"/skills",element:i.a.createElement(ke,null)}),i.a.createElement(s.b,{path:"/projects",element:i.a.createElement(Xe,null)}),i.a.createElement(s.b,{path:"/projects/:slug",element:i.a.createElement(kt,null)}),i.a.createElement(s.b,{path:"/how-i-build",element:i.a.createElement(Ct,null)}),i.a.createElement(s.b,{path:"/build",element:i.a.createElement(s.a,{to:"/how-i-build",replace:!0})}),i.a.createElement(s.b,{path:"/en",element:i.a.createElement(Ae,null)}),i.a.createElement(s.b,{path:"/en/about",element:i.a.createElement(ce,null)}),i.a.createElement(s.b,{path:"/en/skills",element:i.a.createElement(ke,null)}),i.a.createElement(s.b,{path:"/en/projects",element:i.a.createElement(Xe,null)}),i.a.createElement(s.b,{path:"/en/projects/:slug",element:i.a.createElement(kt,null)}),i.a.createElement(s.b,{path:"/en/how-i-build",element:i.a.createElement(Ct,null)}),i.a.createElement(s.b,{path:"/en/build",element:i.a.createElement(s.a,{to:"/en/how-i-build",replace:!0})}),i.a.createElement(s.b,{path:"/en/*",element:i.a.createElement(s.a,{to:"/en",replace:!0})}),i.a.createElement(s.b,{path:"*",element:i.a.createElement(s.a,{to:"/",replace:!0})}))))};var Mt=e=>{e&&e instanceof Function&&a.e(3).then(a.bind(null,34)).then(t=>{let{getCLS:a,getFID:n,getFCP:i,getLCP:r,getTTFB:o}=t;a(e),n(e),i(e),r(e),o(e)})};o.a.createRoot(document.getElementById("root")).render(i.a.createElement(i.a.StrictMode,null,i.a.createElement(m.a,null,i.a.createElement($t,null)))),Mt(),"serviceWorker"in navigator&&navigator.serviceWorker.getRegistrations().then(e=>e.forEach(e=>e.unregister()))}},[[22,1,2]]]);
+//# sourceMappingURL=main.e3fe7c4b.chunk.js.map
