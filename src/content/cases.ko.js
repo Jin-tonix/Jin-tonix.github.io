@@ -476,12 +476,11 @@ const casesKo = [
     ],
     "background": "에이전트가 서로 이슈를 넘기며 일하는 사내 플랫폼입니다. Paperclip(에이전트 이슈 관리 오픈소스)을 포크했고, 회사 기능은 코어 밖 서비스 폴더 아래 HTTP 서비스로 붙였습니다. 예외는 Work OS(업무 상태·승인·실행 기록 앱)와 Spark뿐입니다. 직원은 Spark로 업무 DB 4개를 읽기 전용으로 묻고, 일은 CEO 에이전트에게 맡깁니다. 위임이 길어지면 요청이 바뀌고, 도구 하나가 돈이나 외부 노출로 이어집니다. 그래서 통제는 프롬프트가 아니라 서버 코드에 뒀습니다.",
     "stack": [
-      "Paperclip 포크(Express 5, Drizzle, PostgreSQL)",
+      "Paperclip 포크(Express 5, PostgreSQL)",
       "MCP SDK 1.29",
       "Hermes(에이전트 실행 런타임)",
       "Python 3.12와 FastAPI",
       "LiteLLM",
-      "Redis",
       "Langfuse 4.50",
       "Gemini Flash 계열(LiteLLM 경유)",
       "Jev 라우터"
@@ -555,7 +554,7 @@ const casesKo = [
       },
       {
         "title": "유료 상한 초과는 429가 아니라 403입니다.",
-        "text": "OpenAI 계열 SDK는 429와 5xx를 알아서 재시도합니다. 그래서 하루 3만원을 넘기면 403에 x-should-retry: false를 붙입니다. 장부는 KST 날짜별 Redis 키입니다. 서비스 키는 추론 경로만 부를 수 있고, 겹치는 키는 버립니다."
+        "text": "OpenAI 계열 SDK는 429와 5xx를 알아서 재시도합니다. 그래서 하루 3만원을 넘기면 403에 x-should-retry: false를 붙입니다. 장부는 KST 날짜별 키입니다. 서비스 키는 추론 경로만 부를 수 있고, 겹치는 키는 버립니다."
       }
     ],
     "status3": [
@@ -665,7 +664,7 @@ const casesKo = [
       },
       {
         "title": "장부 하나로 정책 두 가지를 지킵니다.",
-        "text": "LiteLLM과 Vertex 직접 경로가 같은 Redis 키에 비용을 더합니다. 직접 경로가 프록시 상한을 비켜 가던 구멍을 이렇게 막았습니다. 장부를 못 읽으면 개별 호출은 통과, 반복 자동화 시작은 보류입니다. 읽기는 쓰기 권한 없는 Redis 사용자로 합니다."
+        "text": "LiteLLM과 Vertex 직접 경로가 같은 키에 비용을 더합니다. 직접 경로가 프록시 상한을 비켜 가던 구멍을 이렇게 막았습니다. 장부를 못 읽으면 개별 호출은 통과, 반복 자동화 시작은 보류입니다."
       },
       {
         "title": "렌더 재시도는 마감 하나를 나눠 씁니다.",

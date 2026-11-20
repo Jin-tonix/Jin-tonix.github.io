@@ -548,12 +548,11 @@ const casesEn = [
     ],
     "background": "An agent can change the meaning of a request as it delegates work, and a tool can write data, spend money or publish content. I forked Paperclip and added Spark, Work OS and company services, with execution controls in server code. Staff use Spark to query four business databases and hand work to the CEO agent.",
     "stack": [
-      "Paperclip fork (Express 5, Drizzle, PostgreSQL)",
+      "Paperclip fork (Express 5, PostgreSQL)",
       "MCP SDK 1.29",
       "Hermes (agent execution runtime)",
       "Python 3.12 and FastAPI",
       "LiteLLM",
-      "Redis",
       "Langfuse 4.50",
       "Gemini Flash family (via LiteLLM)",
       "Jev router"
@@ -627,7 +626,7 @@ const casesEn = [
       },
       {
         "title": "Exceeding the paid cap returns 403, not 429.",
-        "text": "OpenAI-family SDKs retry 429 and 5xx on their own. So once spend passes 30,000 KRW a day, it returns 403 with x-should-retry: false. The ledger is a Redis key per KST date. Service keys can call only the inference path, and overlapping keys are discarded."
+        "text": "OpenAI-family SDKs retry 429 and 5xx on their own. So once spend passes 30,000 KRW a day, it returns 403 with x-should-retry: false. The ledger is one key per KST date. Service keys can call only the inference path, and overlapping keys are discarded."
       }
     ],
     "status3": [
@@ -755,7 +754,7 @@ const casesEn = [
       },
       {
         "title": "One ledger enforces two policies.",
-        "text": "LiteLLM and the direct Vertex path add costs to the same Redis key. That closed the gap where the direct path bypassed the proxy cap. If the ledger can't be read, individual calls pass and recurring automation starts are held. Reads use a Redis user with no write permission."
+        "text": "LiteLLM and the direct Vertex path add costs to the same key. That closed the gap where the direct path bypassed the proxy cap. If the ledger can't be read, individual calls pass and recurring automation starts are held."
       },
       {
         "title": "Render retries share one deadline.",
