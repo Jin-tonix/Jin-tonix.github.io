@@ -193,7 +193,7 @@ const en = {
       { period: '2024-10 – 2024-12', org: 'HiMedia Academy · AI course', summary: 'AI projects with industry mentors (LangChain RAG chatbot, OCR and translation pipeline)', kind: 'tech' },
       { period: '2024-04 – 2024-10', org: 'HiMedia Academy · full-stack course', summary: 'Spring Boot and Vue.js team projects; collaboration and version control', kind: 'tech', careerChange: true },
       { period: '2021-02 – 2023-06', org: 'Academic Credit Bank System · Business Administration', summary: 'Business administration degree program', kind: 'pre' },
-      { period: '2018-08 – 2024-02', org: 'Jeongsang Language School · Pots&Pans · Montekids English Academy · English teacher', summary: 'Lesson design, teaching materials, and parent consultations', kind: 'pre' },
+      { period: '2018-08 – 2024-02', org: 'Montekids', summary: 'Lesson design, teaching materials, and parent consultations', kind: 'pre' },
       { period: '2015-03 – 2018-02', org: 'Jeonwon Daycare Center · operations manager', summary: 'Staff management and day-to-day operations', kind: 'pre' },
       { period: '2008-03 – 2012-02', org: 'Cheongju University · B.A. in Law', summary: 'Law major', kind: 'pre' },
     ],
